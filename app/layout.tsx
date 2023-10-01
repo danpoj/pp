@@ -2,6 +2,8 @@ import { cn } from '@/lib/utils'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
+import { NextThemesProvider } from '@/components/providers/theme-provider'
+import ReactQueryProvider from '@/components/providers/react-query-provider'
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800', '900'] })
 
@@ -39,8 +41,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='ko'>
-      <body className={cn('antialiased', poppins.className)}>{children}</body>
+    <html lang='ko' suppressHydrationWarning>
+      <body className={cn('antialiased', poppins.className)}>
+        <NextThemesProvider attribute='class' defaultTheme='dark' enableSystem={false} storageKey='pingping'>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </NextThemesProvider>
+      </body>
     </html>
   )
 }
