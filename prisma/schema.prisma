@@ -44,6 +44,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
+  nickname String?
+
   cups         Cup[]
   itemComments ItemComment[]
   cupComments  CupComment[]
