@@ -79,4 +79,7 @@ body,
   body {
     @apply bg-background text-foreground;
   }
+  .bg-fancy {
+    @apply bg-gradient-to-r from-cyan-500 via-blue-500 to-sky-500;
+  }
 }
