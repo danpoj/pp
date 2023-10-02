@@ -6,7 +6,7 @@ import ModalProvider from '@/components/provider/modal-provider'
 
 export default function Providers({ children }: Children) {
   return (
-    <NextThemesProvider attribute='class' enableSystem={false} storageKey='pingping'>
+    <NextThemesProvider attribute='class' defaultTheme='system' enableSystem={false} storageKey='pingping'>
       <ReactQueryProvider>
         <ModalProvider>{children}</ModalProvider>
       </ReactQueryProvider>

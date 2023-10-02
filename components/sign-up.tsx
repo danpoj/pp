@@ -50,7 +50,7 @@ export default function SignUp() {
   }
 
   return (
-    <div className='flex flex-col items-center gap-2 px-6'>
+    <div className='flex flex-col items-center gap-2 px-6 pt-10 pb-2'>
       <div className='flex flex-col items-center mb-10 gap-4'>
         <div className='flex font-bold text-lg'>
           <Image alt='pingping logo' width={40} height={40} src={pingpingLogo} />
