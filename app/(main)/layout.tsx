@@ -8,7 +8,7 @@ export default async function Layout({ children }: Children) {
   return (
     <div className='h-screen'>
       <Header session={session} />
-      <main className='max-w-[92rem] mx-auto'>{children}</main>
+      <main className='w-full h-full pt-14'>{children}</main>
     </div>
   )
 }

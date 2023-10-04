@@ -29,7 +29,7 @@ export default function UserSetting({ session }: Props) {
         />
         <div aria-hidden className='absolute bg-black inset-0 rounded-full opacity-5 hidden group-hover:block' />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end' className='w-60 text-primary/60 p-2 hidden sm:block'>
+      <DropdownMenuContent align='end' className='w-72 text-primary/60 p-2 hidden sm:block'>
         <DropdownMenuLabel className='flex gap-2 items-center'>
           <Image
             src={session.user.image!}

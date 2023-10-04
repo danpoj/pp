@@ -6,12 +6,12 @@ import SignIn from '../sign-in'
 import SignUp from '../sign-up'
 
 export default function SignUpModal() {
-  const { type, isOpen, onClose } = useModal()
+  const { type, isOpen, close } = useModal()
 
   const isModalOpen = type === 'signup' && isOpen
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={onClose}>
+    <Dialog open={isModalOpen} onOpenChange={close}>
       <DialogContent>
         <SignUp />
       </DialogContent>

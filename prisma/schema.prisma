@@ -46,7 +46,9 @@ model User {
 
   nickname String?
 
-  cups         Cup[]
+  myCups    Cup[] @relation("myCups")
+  likedCups Cup[] @relation("likedCups")
+
   itemComments ItemComment[]
   cupComments  CupComment[]
 }
@@ -63,13 +65,15 @@ model Cup {
   id          String       @id @default(cuid())
   title       String
   description String
-  thumbnail   String?      @db.Text
+  thumbnail   String       @db.Text
   playCount   Int          @default(0)
   type        CupType
+  folder      String?
   items       Item[]
   comments    CupComment[]
+  likedUsers  User[]       @relation("likedCups")
 
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation("myCups", fields: [userId], references: [id])
   userId String
 
   createdAt DateTime @default(now())
@@ -77,11 +81,17 @@ model Cup {
 }
 
 model Item {
-  id          String        @id @default(cuid())
-  src         String        @db.Text
+  id          String  @id @default(cuid())
+  url         String  @db.Text
   description String?
-  winCount    Int           @default(0)
-  comments    ItemComment[]
+  width       Int?
+  height      Int?
+  publicId    String?
+  folder      String?
+
+  winCount Int @default(0)
+
+  comments ItemComment[]
 
   cup   Cup    @relation(fields: [cupId], references: [id], onDelete: Cascade)
   cupId String
