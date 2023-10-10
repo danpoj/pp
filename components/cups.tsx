@@ -16,14 +16,14 @@ type Props = {
 }
 
 export default function Cups({ initialCups }: Props) {
-  const lastWorldCupRef = useRef<HTMLElement>(null)
+  const lastCupRef = useRef<HTMLElement>(null)
   const { ref, entry } = useIntersection({
-    root: lastWorldCupRef.current,
+    root: lastCupRef.current,
     threshold: 1,
   })
 
   const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
-    ['worldcups'],
+    ['cups'],
     async ({ pageParam = 1 }) => {
       const data = await db.cup.findMany({
         skip: pageParam,
@@ -65,7 +65,12 @@ export default function Cups({ initialCups }: Props) {
           key={cup.id}
           className='rounded-lg overflow-hidden shadow-lg dark:bg-border/20 border'
         >
-          <Link href={`/worldcup/${cup.id}`} className='hover:opacity-90 transition group'>
+          <Link
+            href={`/cup/${cup.id}`}
+            target='_blank'
+            rel='noopenner noreferrer'
+            className='hover:opacity-90 transition group'
+          >
             <div className='relative w-full h-[28rem] sm:h-[18rem] overflow-hidden'>
               {cup.thumbnail ? <BlurredImage thumbnail={cup.thumbnail} title={cup.title} /> : <div>no image.</div>}
 
@@ -86,12 +91,12 @@ export default function Cups({ initialCups }: Props) {
 
             <div className='flex items-center gap-1 mt-4'>
               <Link
-                href={`/worldcup/${cup.id}/ranking`}
+                href={`/cup/${cup.id}/ranking`}
                 className={buttonVariants({ className: 'flex-1 text-xs', size: 'sm', variant: 'outline' })}
               >
                 랭킹보기 <ChevronRight className='w-4 h-4 ml-0.5' />
               </Link>
-              <ClipboardButton path={`/worldcup/${cup.id}`} />
+              <ClipboardButton path={`/cup/${cup.id}`} />
             </div>
           </div>
         </div>

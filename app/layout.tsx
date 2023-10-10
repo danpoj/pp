@@ -1,11 +1,11 @@
 import { cn } from '@/lib/utils'
 import './globals.css'
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import Providers from '@/components/provider/providers'
 import Modals from '@/components/modal/modals'
 
-const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800', '900'] })
+const inter = Inter({ subsets: ['latin'], weight: ['500', '700', '900'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.pingping.online'),
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='ko' suppressHydrationWarning>
-      <body className={cn('antialiased text-sm font-semibold', poppins.className)}>
+      <body className={cn('antialiased text-sm font-semibold', inter.className)}>
         <Providers>
           {children}
           <Modals />

@@ -1,17 +1,18 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 import { useState } from 'react'
+import { CldImage } from 'next-cloudinary'
 
 export const BlurredImage = ({ thumbnail, title }: { thumbnail: string; title: string }) => {
   const [isLoading, setIsLoading] = useState(true)
 
   return (
-    <Image
+    <CldImage
       fill
       src={thumbnail}
       alt={title}
+      quality={20}
       className={cn(
         'object-cover duration-150 ease-in-out group-hover:scale-105 group-active:scale-110',
         isLoading ? ' blur scale-105' : 'blur-0 scale-100'

@@ -18,7 +18,7 @@ export default function Header({ session }: Props) {
   const router = useRouter()
 
   return (
-    <header className='fixed w-full pl-3 pr-5 h-14 flex justify-between items-center z-50 bg-background'>
+    <header className='fixed w-full px-3 h-12 flex justify-between items-center z-50 bg-background'>
       <div className='flex items-center gap-4'>
         <PingpingLogo />
         <Button

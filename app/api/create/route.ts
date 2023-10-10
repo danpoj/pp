@@ -16,8 +16,6 @@ export const POST = async (req: NextRequest) => {
 
     const body = await req.json()
 
-    console.log(body)
-
     const { images, type, title, description } = createSchema.parse(body)
 
     const folderName = nanoid(10)
