@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { motion as m, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
 type Props = {
   cup: Prisma.CupGetPayload<{
@@ -17,56 +18,6 @@ type Props = {
     }
   }>
   cupLength: CupLength
-}
-
-const leftVariants = {
-  initial: { opacity: 0 },
-
-  animate: {
-    opacity: 1,
-    x: '-50%',
-    translateX: '-50%',
-    translateY: '-50%',
-    transition: {
-      delay: 1,
-    },
-  },
-
-  exit_center: {
-    x: '0%',
-    transition: {
-      duration: 1,
-    },
-  },
-
-  exit_hidden: {
-    display: 'none',
-  },
-}
-
-const rightVariants = {
-  initial: { opacity: 0 },
-
-  animate: {
-    opacity: 1,
-    x: '50%',
-    translateX: '50%',
-    translateY: '-50%',
-    transition: {
-      delay: 1,
-    },
-  },
-
-  exit_center: {
-    x: '0%',
-    transition: {
-      duration: 1,
-    },
-  },
-
-  exit_hidden: {
-    display: 'none',
-  },
 }
 
 export default function TournamentProgress({ cup, cupLength }: Props) {
@@ -81,7 +32,7 @@ export default function TournamentProgress({ cup, cupLength }: Props) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setClicked('INITIAL')
-    }, 1000)
+    }, 1600)
 
     return () => clearTimeout(timeout)
   }, [index])
@@ -131,76 +82,100 @@ export default function TournamentProgress({ cup, cupLength }: Props) {
         </span>
       </div>
 
-      {clicked === 'LEFT' && (
-        <m.button
-          animate={{ left: '50%', translateX: '-50%' }}
-          transition={{
-            duration: 0.2,
-          }}
-          className='flex-1 w-[50%] h-full absolute left-0'
-        >
-          <div className='w-full h-full relative'>
-            <CldImage
-              className='absolute inset-0 object-contain'
-              fill
-              src={selectedItem.current?.publicId!}
-              alt={selectedItem.current?.description || 'tournament left image'}
-              quality={30}
-              sizes='50vw'
-            />
-          </div>
-        </m.button>
-      )}
+      {clicked === 'LEFT' && <Left selectedItem={selectedItem.current!} />}
 
-      {clicked === 'RIGHT' && (
-        <m.button
-          animate={{ right: '50%', translateX: '50%' }}
-          transition={{
-            duration: 0.2,
-          }}
-          className='flex-1 w-[50%] h-full absolute right-0'
-        >
-          <div className='w-full h-full relative'>
-            <CldImage
-              className='absolute inset-0 object-contain'
-              fill
-              src={selectedItem.current?.publicId!}
-              alt={selectedItem.current?.description || 'tournament left image'}
-              quality={30}
-              sizes='50vw'
-            />
-          </div>
-        </m.button>
-      )}
+      {clicked === 'RIGHT' && <Right selectedItem={selectedItem.current!} />}
 
-      {clicked === 'INITIAL' && (
-        <>
-          <m.button onClick={onLeftClick} className='flex-1 w-[50%] h-full absolute left-0'>
-            <div className='w-full h-full relative'>
-              <CldImage
-                className='absolute inset-0 object-contain'
-                fill
-                src={items[index * 2].publicId!}
-                alt={items[index * 2].description || 'tournament left image'}
-                quality={30}
-                sizes='50vw'
-              />
-            </div>
-          </m.button>
-          <m.button onClick={onRightClick} className='flex-1 w-[50%] h-full absolute right-0'>
-            <div className='w-full h-full relative'>
-              <CldImage
-                className='absolute inset-0 object-contain'
-                fill
-                src={items[index * 2 + 1].publicId!}
-                alt={items[index * 2 + 1].description || 'tournament left image'}
-                quality={30}
-                sizes='50vw'
-              />
-            </div>
-          </m.button>
-        </>
-      )}
+      <Initial onLeftClick={onLeftClick} onRightClick={onRightClick} items={items} index={index} clicked={clicked} />
+    </div>
+  )
+}
+
+const Left = ({ selectedItem }: { selectedItem: Item }) => {
+  return (
+    <m.div
+      animate={{ left: '50%', translateX: '-50%' }}
+      transition={{
+        duration: 0.2,
+      }}
+      className='flex-1 w-[50%] h-full absolute left-0'
+    >
+      <div className='w-full h-full relative'>
+        <CldImage
+          className='absolute inset-0 object-contain'
+          fill
+          src={selectedItem?.publicId!}
+          alt={selectedItem?.description || 'tournament left image'}
+          quality={30}
+          sizes='50vw'
+        />
+      </div>
+    </m.div>
+  )
+}
+
+const Right = ({ selectedItem }: { selectedItem: Item }) => {
+  return (
+    <m.div
+      animate={{ right: '50%', translateX: '50%' }}
+      transition={{
+        duration: 0.2,
+      }}
+      className='flex-1 w-[50%] h-full absolute right-0'
+    >
+      <div className='w-full h-full relative'>
+        <CldImage
+          className='absolute inset-0 object-contain'
+          fill
+          src={selectedItem?.publicId!}
+          alt={selectedItem?.description || 'tournament left image'}
+          quality={30}
+          sizes='50vw'
+        />
+      </div>
+    </m.div>
+  )
+}
+
+const Initial = ({
+  onLeftClick,
+  onRightClick,
+  items,
+  index,
+  clicked,
+}: {
+  onLeftClick: () => void
+  onRightClick: () => void
+  items: Item[]
+  index: number
+  clicked: 'LEFT' | 'RIGHT' | 'INITIAL'
+}) => {
+  return (
+    <div className={cn('w-full h-full', clicked === 'INITIAL' ? 'opacity-100' : 'opacity-0')}>
+      <m.button onClick={onLeftClick} className='flex-1 w-[50%] h-full absolute left-0'>
+        <div className='w-full h-full relative'>
+          <CldImage
+            className='absolute inset-0 object-contain'
+            fill
+            src={items[index * 2].publicId!}
+            alt={items[index * 2].description || 'tournament left image'}
+            quality={30}
+            sizes='50vw'
+          />
+        </div>
+      </m.button>
+      <m.button onClick={onRightClick} className='flex-1 w-[50%] h-full absolute right-0'>
+        <div className='w-full h-full relative'>
+          <CldImage
+            className='absolute inset-0 object-contain'
+            fill
+            src={items[index * 2 + 1].publicId!}
+            alt={items[index * 2 + 1].description || 'tournament left image'}
+            quality={30}
+            sizes='50vw'
+          />
+        </div>
+      </m.button>
     </div>
   )
 }
