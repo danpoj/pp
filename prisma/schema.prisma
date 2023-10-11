@@ -62,16 +62,18 @@ model VerificationToken {
 }
 
 model Cup {
-  id          String       @id @default(cuid())
-  title       String
-  description String
-  thumbnail   String       @db.Text
-  playCount   Int          @default(0)
-  type        CupType
-  folder      String?
-  items       Item[]
-  comments    CupComment[]
-  likedUsers  User[]       @relation("likedCups")
+  id              String       @id @default(cuid())
+  title           String
+  description     String
+  thumbnail       String       @db.Text
+  thumbnailWidth  Int
+  thumbnailHeight Int
+  playCount       Int          @default(0)
+  type            CupType
+  folder          String?
+  items           Item[]
+  comments        CupComment[]
+  likedUsers      User[]       @relation("likedCups")
 
   user   User   @relation("myCups", fields: [userId], references: [id])
   userId String

@@ -4,15 +4,23 @@ import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import { CldImage } from 'next-cloudinary'
 
-export const BlurredImage = ({ thumbnail, title }: { thumbnail: string; title: string }) => {
+type Props = {
+  thumbnail: string
+  title: string
+  width: number
+  height: number
+}
+
+export const BlurredImage = ({ thumbnail, title, width, height }: Props) => {
   const [isLoading, setIsLoading] = useState(true)
 
   return (
     <CldImage
-      fill
       src={thumbnail}
       alt={title}
       quality={20}
+      width={width}
+      height={height}
       className={cn(
         'object-cover duration-150 ease-in-out group-hover:scale-105 group-active:scale-110',
         isLoading ? ' blur scale-105' : 'blur-0 scale-100'

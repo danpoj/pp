@@ -2,12 +2,10 @@
 
 import type { Item, Prisma } from '@prisma/client'
 import { CupLength } from './tournament'
-
 import { shuffle } from '@/lib/shuffle'
 import { CldImage } from 'next-cloudinary'
 import { useEffect, useRef, useState } from 'react'
-
-import { motion as m, AnimatePresence } from 'framer-motion'
+import { motion as m } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
@@ -22,12 +20,14 @@ type Props = {
 
 export default function TournamentProgress({ cup, cupLength }: Props) {
   const [items, setItems] = useState(() => shuffle(cup.items).slice(0, cupLength))
-  const [index, setIndex] = useState(0)
-  const selectedItems = useRef<Item[]>([])
-  const limit = useRef<number>(cupLength / 2)
-  const router = useRouter()
   const [clicked, setClicked] = useState<'LEFT' | 'RIGHT' | 'INITIAL'>('INITIAL')
+  const [index, setIndex] = useState(0)
+
+  const selectedItems = useRef<Item[]>([])
   const selectedItem = useRef<Item | null>(null)
+  const limit = useRef<number>(cupLength / 2)
+
+  const router = useRouter()
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -82,11 +82,11 @@ export default function TournamentProgress({ cup, cupLength }: Props) {
         </span>
       </div>
 
+      <Initial onLeftClick={onLeftClick} onRightClick={onRightClick} items={items} index={index} clicked={clicked} />
+
       {clicked === 'LEFT' && <Left selectedItem={selectedItem.current!} />}
 
       {clicked === 'RIGHT' && <Right selectedItem={selectedItem.current!} />}
-
-      <Initial onLeftClick={onLeftClick} onRightClick={onRightClick} items={items} index={index} clicked={clicked} />
     </div>
   )
 }
@@ -106,7 +106,7 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
           fill
           src={selectedItem?.publicId!}
           alt={selectedItem?.description || 'tournament left image'}
-          quality={30}
+          quality={10}
           sizes='50vw'
         />
       </div>
@@ -129,7 +129,7 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
           fill
           src={selectedItem?.publicId!}
           alt={selectedItem?.description || 'tournament left image'}
-          quality={30}
+          quality={10}
           sizes='50vw'
         />
       </div>
@@ -159,7 +159,7 @@ const Initial = ({
             fill
             src={items[index * 2].publicId!}
             alt={items[index * 2].description || 'tournament left image'}
-            quality={30}
+            quality={10}
             sizes='50vw'
           />
         </div>
@@ -171,7 +171,7 @@ const Initial = ({
             fill
             src={items[index * 2 + 1].publicId!}
             alt={items[index * 2 + 1].description || 'tournament left image'}
-            quality={30}
+            quality={10}
             sizes='50vw'
           />
         </div>

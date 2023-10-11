@@ -10,6 +10,7 @@ import { cupData } from '@/app/(main)/create/page'
 import { useRouter } from 'next/navigation'
 import { useModal } from '../provider/modal-provider'
 import { useConfetti } from '../provider/confetti-provider'
+import Image from 'next/image'
 
 type Props = {
   cupData: cupData
@@ -17,6 +18,7 @@ type Props = {
 
 export default function Step3({ cupData }: Props) {
   const [images, setImages] = useState<string[]>([])
+  const [isUploading, setIsUploading] = useState(false)
   const router = useRouter()
   const { open: openModal } = useModal()
   const { open: openConfetti } = useConfetti()
@@ -39,17 +41,21 @@ export default function Step3({ cupData }: Props) {
 
   const upload = async () => {
     try {
+      setIsUploading(true)
       const { data } = await axios.post('/api/create', {
         images,
         ...cupData,
       })
 
-      router.push('/')
-      router.refresh()
       openModal('create-complete', data)
       openConfetti()
+
+      router.refresh()
+      router.push('/')
     } catch (error) {
       console.log(error)
+    } finally {
+      setIsUploading(false)
     }
   }
 
@@ -76,7 +82,7 @@ export default function Step3({ cupData }: Props) {
         <div className='grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 2xl:grid-cols-8 gap-1.5 py-4 px-2'>
           {images.map((image, i) => (
             <div key={i} className='aspect-square rounded-lg overflow-hidden relative group'>
-              <img src={image} alt='preview image' className='object-cover w-full h-full' />
+              <Image fill src={image} alt='preview image' className='object-cover w-full h-full' />
               <button
                 onClick={(e) => {
                   e.stopPropagation()
@@ -98,7 +104,8 @@ export default function Step3({ cupData }: Props) {
         </span>
         <Button
           onClick={upload}
-          disabled={images.length < 8 || images.length > 100}
+          disabled={images.length < 8 || images.length > 100 || isUploading}
+          isLoading={isUploading}
           className='h-12 w-40'
           variant='blue'
         >

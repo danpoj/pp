@@ -35,28 +35,28 @@ export default function Step1({ setCurrentStep, cupData }: Props) {
           <div className='grid grid-cols-4 md:grid-cols-2 gap-0.5 h-fit'>
             <Image
               src={createPageImage1}
-              alt='create worldcup image'
+              alt='create cup image'
               width={80}
               height={80}
               className='object-cover w-[80px] h-[80px] rounded'
             />
             <Image
               src={createPageImage2}
-              alt='create worldcup image'
+              alt='create cup image'
               width={80}
               height={80}
               className='object-cover w-[80px] h-[80px] rounded'
             />
             <Image
               src={createPageImage3}
-              alt='create worldcup image'
+              alt='create cup image'
               width={80}
               height={80}
               className='object-cover w-[80px] h-[80px] rounded'
             />
             <Image
               src={createPageImage4}
-              alt='create worldcup image'
+              alt='create cup image'
               width={80}
               height={80}
               className='object-cover w-[80px] h-[80px] rounded'

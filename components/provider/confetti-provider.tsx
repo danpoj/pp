@@ -27,7 +27,7 @@ export const ConfettiProvider = ({ children }: { children: ReactNode }) => {
     >
       {isOpen && (
         <ReactConfetti
-          className='pointer-events-none z-[100]'
+          className='pointer-events-none z-50'
           numberOfPieces={500}
           recycle={false}
           onConfettiComplete={close}

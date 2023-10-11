@@ -35,6 +35,8 @@ export const POST = async (req: NextRequest) => {
         description,
         folder: folderName,
         thumbnail: cldImages[0].secure_url,
+        thumbnailWidth: cldImages[0].width,
+        thumbnailHeight: cldImages[0].height,
         userId: session.user.id,
       },
     })
