@@ -68,7 +68,7 @@ export const POST = async (req: NextRequest) => {
     })
   } catch (error) {
     if (error instanceof z.ZodError) {
-      new NextResponse('/api/create/image : request 데이터 형식이 맞지 않습니다', { status: 422 })
+      new NextResponse('/api/create/image : request 데이터 형식이 맞지 않습니다', { status: 400 })
     }
 
     return new NextResponse('/api/create/image : 이미지 업로드 실패', { status: 500 })

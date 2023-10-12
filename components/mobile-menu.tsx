@@ -33,13 +33,14 @@ export default function MobileMenu({ session }: Props) {
       <DropdownMenuContent align='end' className='w-72 text-primary/60 p-2 block sm:hidden'>
         {session ? (
           <DropdownMenuLabel className='flex gap-2 items-center'>
-            <Image
-              src={session.user.image!}
-              alt='logged in user image'
-              width={52}
-              height={52}
-              className='p-1 rounded-full border-[1.5px] border-slate-300 dark:bg-white'
-            />
+            <div className='relative w-12 h-12 rounded-full overflow-hidden'>
+              <Image
+                src={session.user.image!}
+                alt='logged in user image'
+                fill
+                className=' dark:bg-white object-cover'
+              />
+            </div>
             <span className='text-xs font-mono'>@{session.user.nickname}</span>
           </DropdownMenuLabel>
         ) : (
