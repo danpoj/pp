@@ -80,6 +80,7 @@ export default function Cups({ initialCups }: Props) {
                     title={cup.title}
                     width={cup.thumbnailWidth}
                     height={cup.thumbnailHeight}
+                    type={cup.type}
                   />
                 ) : (
                   <div>no image.</div>

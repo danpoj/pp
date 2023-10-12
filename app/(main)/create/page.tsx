@@ -4,8 +4,9 @@ import { CupType } from '@prisma/client'
 import { useRef, useState } from 'react'
 import Step1 from '@/components/create/step1'
 import Step2 from '@/components/create/step2'
-import Step3 from '@/components/create/step3'
+import Step3Image from '@/components/create/step3-image'
 import StepIcon from '@/components/create/step-icon'
+import Step3Video from '@/components/create/step3-video'
 
 export type cupData = {
   type: CupType
@@ -31,7 +32,8 @@ export default function Page() {
 
       {currentStep === 1 && <Step1 setCurrentStep={setCurrentStep} cupData={cupData} />}
       {currentStep === 2 && <Step2 setCurrentStep={setCurrentStep} cupData={cupData} />}
-      {currentStep === 3 && <Step3 cupData={cupData.current} />}
+      {currentStep === 3 && cupData.current.type === 'IMAGE' && <Step3Image cupData={cupData.current} />}
+      {currentStep === 3 && cupData.current.type === 'VIDEO' && <Step3Video cupData={cupData.current} />}
     </div>
   )
 }

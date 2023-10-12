@@ -1,13 +1,14 @@
 'use client'
 
-import type { Item, Prisma } from '@prisma/client'
-import { CupLength } from './tournament'
 import { shuffle } from '@/lib/shuffle'
-import { CldImage } from 'next-cloudinary'
-import { useEffect, useRef, useState } from 'react'
-import { motion as m } from 'framer-motion'
-import { useRouter } from 'next/navigation'
+import { updateCupPlayCountAndItemWinCount } from '@/lib/update-cup-playcount-and-item-wincount'
 import { cn } from '@/lib/utils'
+import type { Item, Prisma } from '@prisma/client'
+import { motion as m } from 'framer-motion'
+import { CldImage } from 'next-cloudinary'
+import { useRouter } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
+import { CupLength } from './tournament'
 
 type Props = {
   cup: Prisma.CupGetPayload<{
@@ -18,7 +19,7 @@ type Props = {
   cupLength: CupLength
 }
 
-export default function TournamentProgress({ cup, cupLength }: Props) {
+export default function TournamentImage({ cup, cupLength }: Props) {
   const [items, setItems] = useState(() => shuffle(cup.items).slice(0, cupLength))
   const [clicked, setClicked] = useState<'LEFT' | 'RIGHT' | 'INITIAL'>('INITIAL')
   const [index, setIndex] = useState(0)
@@ -37,12 +38,21 @@ export default function TournamentProgress({ cup, cupLength }: Props) {
     return () => clearTimeout(timeout)
   }, [index])
 
-  const onLeftClick = () => {
+  const onLeftClick = async (itemId: string) => {
     setClicked('LEFT')
     selectedItem.current = items[index * 2]
 
     if (limit.current === 1) {
-      router.push(`/cup/${cup.id}/${items[index * 2].id}`)
+      try {
+        await updateCupPlayCountAndItemWinCount({
+          cupId: cup.id,
+          itemId: itemId,
+        })
+      } catch (error) {
+        console.log('cup playcount / item wincount update failed', error)
+      } finally {
+        router.push(`/cup/${cup.id}/${items[index * 2].id}`)
+      }
     } else if (index + 1 >= limit.current) {
       selectedItems.current.push(items[index * 2])
       limit.current /= 2
@@ -55,12 +65,21 @@ export default function TournamentProgress({ cup, cupLength }: Props) {
     }
   }
 
-  const onRightClick = () => {
+  const onRightClick = async (itemId: string) => {
     setClicked('RIGHT')
     selectedItem.current = items[index * 2 + 1]
 
     if (limit.current === 1) {
-      router.push(`/cup/${cup.id}/${items[index * 2 + 1].id}`)
+      try {
+        await updateCupPlayCountAndItemWinCount({
+          cupId: cup.id,
+          itemId: itemId,
+        })
+      } catch (error) {
+        console.log('cup playcount / item wincount update failed', error)
+      } finally {
+        router.push(`/cup/${cup.id}/${items[index * 2 + 1].id}`)
+      }
     } else if (index + 1 >= limit.current) {
       selectedItems.current.push(items[index * 2 + 1])
       limit.current /= 2
@@ -85,7 +104,6 @@ export default function TournamentProgress({ cup, cupLength }: Props) {
       <Initial onLeftClick={onLeftClick} onRightClick={onRightClick} items={items} index={index} clicked={clicked} />
 
       {clicked === 'LEFT' && <Left selectedItem={selectedItem.current!} />}
-
       {clicked === 'RIGHT' && <Right selectedItem={selectedItem.current!} />}
     </div>
   )
@@ -98,7 +116,7 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
       transition={{
         duration: 0.2,
       }}
-      className='flex-1 w-[50%] h-full absolute left-0'
+      className='w-[70%] sm:w-[60%] h-full absolute left-0'
     >
       <div className='w-full h-full relative'>
         <CldImage
@@ -121,7 +139,7 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
       transition={{
         duration: 0.2,
       }}
-      className='flex-1 w-[50%] h-full absolute right-0'
+      className='w-[70%] sm:w-[60%] h-full absolute right-0'
     >
       <div className='w-full h-full relative'>
         <CldImage
@@ -144,15 +162,18 @@ const Initial = ({
   index,
   clicked,
 }: {
-  onLeftClick: () => void
-  onRightClick: () => void
+  onLeftClick: (itemId: string) => void
+  onRightClick: (itemId: string) => void
   items: Item[]
   index: number
   clicked: 'LEFT' | 'RIGHT' | 'INITIAL'
 }) => {
   return (
     <div className={cn('w-full h-full', clicked === 'INITIAL' ? 'opacity-100' : 'opacity-0')}>
-      <m.button onClick={onLeftClick} className='flex-1 w-[50%] h-full absolute left-0'>
+      <button
+        onClick={() => onLeftClick(items[index * 2].id)}
+        className='w-full h-1/2 top-0 sm:w-[50%] sm:h-full sm:left-0 absolute'
+      >
         <div className='w-full h-full relative'>
           <CldImage
             className='absolute inset-0 object-contain'
@@ -163,8 +184,11 @@ const Initial = ({
             sizes='50vw'
           />
         </div>
-      </m.button>
-      <m.button onClick={onRightClick} className='flex-1 w-[50%] h-full absolute right-0'>
+      </button>
+      <button
+        onClick={() => onRightClick(items[index * 2 + 1].id)}
+        className='w-full h-1/2 bottom-0 sm:w-[50%] sm:h-full sm:right-0 absolute'
+      >
         <div className='w-full h-full relative'>
           <CldImage
             className='absolute inset-0 object-contain'
@@ -175,7 +199,7 @@ const Initial = ({
             sizes='50vw'
           />
         </div>
-      </m.button>
+      </button>
     </div>
   )
 }

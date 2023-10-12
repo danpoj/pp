@@ -3,10 +3,10 @@
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog'
 import { DialogTitle } from '@radix-ui/react-dialog'
 import { ChevronRight } from 'lucide-react'
-import { CldImage } from 'next-cloudinary'
 import { ClipboardWithLink } from '../clipboard-with-link'
 import { useModal } from '../provider/modal-provider'
 import { Button } from '../ui/button'
+import Image from 'next/image'
 
 export default function CreateCompleteModal() {
   const { type, isOpen, close, data } = useModal()
@@ -21,7 +21,7 @@ export default function CreateCompleteModal() {
         </DialogHeader>
         <div className=''>
           <div className='relative h-60 mx-auto rounded overflow-hidden'>
-            <CldImage fill src={data?.thumbnail!} quality={20} alt={data?.title!} className='object-contain' />
+            <Image fill src={data?.thumbnail!} quality={20} alt={data?.title!} className='object-contain' />
           </div>
           <div className='px-4 mt-2'>
             <p className='text-lg truncate text-primary/70'>{data?.title}</p>

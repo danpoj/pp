@@ -25,7 +25,7 @@ export type ExtendedCup = Prisma.CupGetPayload<{
   }
 }>
 
-export default function ImageCupRanking(cup: ExtendedCup) {
+export default function CupRanking(cup: ExtendedCup) {
   const router = useRouter()
 
   return (
@@ -37,7 +37,12 @@ export default function ImageCupRanking(cup: ExtendedCup) {
             key={item.id}
             className='rounded overflow-hidden relative h-[24rem] sm:h-full sm:w-1/3'
           >
-            <CldImage src={item.publicId!} alt='cup image' fill className='object-contain' quality={20} />
+            {cup.type === 'IMAGE' && (
+              <CldImage src={item.publicId!} alt='cup image' fill className='object-contain' quality={20} />
+            )}
+            {cup.type === 'VIDEO' && (
+              <Image src={item.videoThumbnail!} alt='cup image' fill className='object-contain' quality={20} />
+            )}
             <div
               className={cn(
                 'tracking-tighter flex gap-2 items-center absolute right-2 top-2 px-3 py-1 rounded pointer-events-none text-white backdrop-blur-sm',
@@ -62,7 +67,12 @@ export default function ImageCupRanking(cup: ExtendedCup) {
             key={item.id}
             className='rounded overflow-hidden relative shrink-0 h-full aspect-square'
           >
-            <CldImage src={item.publicId!} alt='cup image' fill className='object-contain' quality={20} />
+            {cup.type === 'IMAGE' && (
+              <CldImage src={item.publicId!} alt='cup image' fill className='object-contain' quality={20} />
+            )}
+            {cup.type === 'VIDEO' && (
+              <Image src={item.videoThumbnail!} alt='cup image' fill className='object-contain' quality={20} />
+            )}
             <div
               className={cn(
                 'tracking-tighter flex gap-2 items-center absolute right-2 top-2 px-3 py-1 rounded pointer-events-none text-white bg-black'

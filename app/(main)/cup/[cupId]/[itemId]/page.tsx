@@ -2,6 +2,7 @@ import { ClipboardWithLink } from '@/components/clipboard-with-link'
 // import ImageCommentForm from '@/components/image-comment-form'
 import ImageResult from '@/components/image-result'
 import PlayConfetti from '@/components/play-confetti'
+import { Player } from '@/components/player'
 import RankingButton from '@/components/ranking-button'
 import { Separator } from '@/components/ui/separator'
 import db from '@/lib/db'
@@ -35,10 +36,13 @@ export default async function Page({ params }: Props) {
   return (
     <div className='h-full max-w-6xl mx-auto p-2 flex flex-col lg:flex-row lg:justify-center lg:items-center lg:gap-6 relative'>
       <PlayConfetti />
-      {
-        image.cup.type === 'IMAGE' ? <ImageResult src={image.publicId!} description={image.description} /> : null
-        // <YoutubeResultContainer src={image.src} />
-      }
+      {image.cup.type === 'IMAGE' ? (
+        <ImageResult src={image.publicId!} description={image.description} />
+      ) : (
+        <div className='relative w-full h-[24rem] shrink-0 lg:shrink lg:h-full rounded-xl overflow-hidden'>
+          <Player url={image.url} width='100%' height='100%' />
+        </div>
+      )}
 
       <div className='my-4 h-full lg:w-[30rem] lg:shrink-0 pr-2'>
         <h1 className='text-2xl font-extrabold text-primary/80 tracking-tight'>{image.cup.title}</h1>

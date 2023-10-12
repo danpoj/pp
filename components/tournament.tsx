@@ -3,7 +3,8 @@
 import type { Prisma } from '@prisma/client'
 import { useState } from 'react'
 import TournamentLanding from './tournament-landing'
-import TournamentProgress from './tournament-progress'
+import TournamentImage from './tournament-image'
+import TournamentVideo from './tournament-video'
 
 type Props = {
   cup: Prisma.CupGetPayload<{
@@ -24,7 +25,10 @@ export default function Tournament({ cup }: Props) {
       {isLanding ? (
         <TournamentLanding cup={cup} cupLength={cupLength} setCupLength={setCupLength} setisLanding={setIsLanding} />
       ) : (
-        <TournamentProgress cup={cup} cupLength={cupLength} />
+        <>
+          {cup.type === 'IMAGE' && <TournamentImage cup={cup} cupLength={cupLength} />}
+          {cup.type === 'VIDEO' && <TournamentVideo cup={cup} cupLength={cupLength} />}
+        </>
       )}
     </div>
   )

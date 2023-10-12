@@ -16,7 +16,7 @@ type Props = {
   cupData: cupData
 }
 
-export default function Step3({ cupData }: Props) {
+export default function Step3Image({ cupData }: Props) {
   const [images, setImages] = useState<string[]>([])
   const [isUploading, setIsUploading] = useState(false)
   const router = useRouter()
@@ -42,7 +42,7 @@ export default function Step3({ cupData }: Props) {
   const upload = async () => {
     try {
       setIsUploading(true)
-      const { data } = await axios.post('/api/create', {
+      const { data } = await axios.post('/api/create/image', {
         images,
         ...cupData,
       })

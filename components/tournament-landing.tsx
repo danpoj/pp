@@ -1,12 +1,13 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import type { Item, Prisma } from '@prisma/client'
+import type { CupType, Item, Prisma } from '@prisma/client'
 import { Check, ChevronDown, ChevronRight } from 'lucide-react'
 import { CldImage } from 'next-cloudinary'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react'
 import { Button } from './ui/button'
 import { CupLength } from './tournament'
+import Image from 'next/image'
 
 type Props = {
   cup: Prisma.CupGetPayload<{
@@ -34,7 +35,7 @@ export default function TournamentLanding({ cup, cupLength, setCupLength, setisL
 
   return (
     <div className='h-full flex items-center justify-center relative'>
-      <ImageRotation images={cup.items.slice(0, 4)} currentIndex={currentIndex} />
+      <ImageRotation images={cup.items.slice(0, 4)} currentIndex={currentIndex} type={cup.type} />
 
       <Modal
         cupLength={cupLength}
@@ -46,21 +47,35 @@ export default function TournamentLanding({ cup, cupLength, setCupLength, setisL
   )
 }
 
-function ImageRotation({ currentIndex, images }: { images: Item[]; currentIndex: number }) {
+function ImageRotation({ currentIndex, images, type }: { images: Item[]; currentIndex: number; type: CupType }) {
   return (
     <div className='w-full h-full rounded overflow-hidden absolute'>
       {images.map((item, index) => (
-        <CldImage
-          fill
-          key={item.id}
-          src={item.publicId!}
-          alt='Framework logo'
-          quality={20}
-          className={cn(
-            'w-full h-full object-cover absolute inset-0 transition-all duration-300',
-            currentIndex === index ? 'opacity-100 transform-none' : 'opacity-0'
+        <Fragment key={item.id}>
+          {type === 'IMAGE' ? (
+            <CldImage
+              fill
+              src={item.publicId!}
+              alt='Framework logo'
+              quality={20}
+              className={cn(
+                'w-full h-full object-cover absolute inset-0 transition-all duration-300',
+                currentIndex === index ? 'opacity-100 transform-none' : 'opacity-0'
+              )}
+            />
+          ) : (
+            <Image
+              fill
+              src={item.videoThumbnail!}
+              alt='Framework logo'
+              quality={20}
+              className={cn(
+                'w-full h-full object-cover absolute inset-0 transition-all duration-300',
+                currentIndex === index ? 'opacity-100 transform-none' : 'opacity-0'
+              )}
+            />
           )}
-        />
+        </Fragment>
       ))}
     </div>
   )

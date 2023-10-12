@@ -1,4 +1,4 @@
-import ImageCupRanking from '@/components/image-cup-ranking'
+import CupRanking from '@/components/cup-ranking'
 import db from '@/lib/db'
 import { notFound } from 'next/navigation'
 
@@ -30,5 +30,9 @@ export default async function Page({ params: { cupId } }: Props) {
 
   if (!cup) return notFound()
 
-  return <div className='h-full max-w-7xl mx-auto p-2'>{cup.type === 'IMAGE' && <ImageCupRanking {...cup} />}</div>
+  return (
+    <div className='h-full max-w-7xl mx-auto p-2'>
+      <CupRanking {...cup} />
+    </div>
+  )
 }

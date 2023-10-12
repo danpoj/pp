@@ -83,13 +83,14 @@ model Cup {
 }
 
 model Item {
-  id          String  @id @default(cuid())
-  url         String  @db.Text
-  description String?
-  width       Int?
-  height      Int?
-  publicId    String?
-  folder      String?
+  id             String  @id @default(cuid())
+  url            String  @db.Text
+  description    String?
+  width          Int?
+  height         Int?
+  publicId       String?
+  folder         String?
+  videoThumbnail String?
 
   winCount Int @default(0)
 

@@ -22,7 +22,7 @@ export default function Header({ session }: Props) {
       <div className='flex items-center gap-4'>
         <PingpingLogo />
         <Button
-          className='hidden sm:block'
+          className='hidden sm:block text-xs font-bold'
           onClick={() => {
             if (!session) {
               open('signin')
@@ -31,7 +31,7 @@ export default function Header({ session }: Props) {
 
             router.push('/create')
           }}
-          variant='ghost'
+          size='sm'
         >
           월드컵 만들기
         </Button>
