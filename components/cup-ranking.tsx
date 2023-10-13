@@ -9,7 +9,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ClipboardWithLink } from './clipboard-with-link'
 import CupCommentForm from './cup-comment-form'
-import LikeButton from './like-button'
+import HeartEmoji from './heart-emoji'
 
 export type ExtendedCup = Prisma.CupGetPayload<{
   include: {
@@ -99,9 +99,12 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
             <h1 className='text-2xl font-extrabold text-primary/80 tracking-tight'>{cup.title}</h1>
             <p className='text-sm font-semiboid text-primary/70 my-2'>{cup.description}</p>
             <div className='flex gap-4 font-bold  mt-10 mb-4 items-center'>
-              <LikeButton cup={cup} session={session} className='flex gap-1' size='lg' />
               <span className='bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 bg-clip-text text-transparent'>
                 월드컵 플레이 수: {cup.playCount}회
+              </span>
+
+              <span className='flex items-center font-normal gap-1'>
+                <HeartEmoji className='fill-blue-400 stroke-blue-400' size='lg' /> 좋아요 {cup._count.likes}개
               </span>
             </div>
 

@@ -134,6 +134,7 @@ export default function Cups({ initialCups, session }: Props) {
               <div className='flex items-center gap-1'>
                 <Link
                   href={`/cup/${cup.id}/ranking`}
+                  target='_blank'
                   className={buttonVariants({ className: 'text-xs text-[11px] px-2 flex-1', size: 'sm' })}
                 >
                   랭킹보기

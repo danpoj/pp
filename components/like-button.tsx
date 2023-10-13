@@ -1,13 +1,12 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import type { Cup, Like } from '@prisma/client'
-import HeartEmoji from './heart-emoji'
-import { Button } from './ui/button'
-import { useState } from 'react'
 import axios from 'axios'
 import type { Session } from 'next-auth'
-import { cn } from '@/lib/utils'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import HeartEmoji from './heart-emoji'
+import { Button } from './ui/button'
 
 type Props = {
   cup: Cup & {
@@ -24,30 +23,24 @@ type Props = {
 }
 
 export default function LikeButton({ cup, session, className, size }: Props) {
-  const [likedCount, setLikedCount] = useState(cup._count.likes)
   const [like, setLike] = useState(cup.likes.find((like) => like.userId === session?.user.id))
+  const [likeCount, setLikeCount] = useState(cup._count.likes)
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const isLiked = !!like
 
   const onClick = async () => {
     try {
       setIsSubmitting(true)
 
-      if (like) {
-        setLikedCount((prev) => prev - 1)
-      } else {
-        setLikedCount((prev) => prev + 1)
-      }
+      const { data } = await axios.patch(`/api/cup/${cup.id}/like`, { isLiked, like })
 
-      const { data } = await axios.patch(`/api/cup/${cup.id}/like`, { like, count: likedCount })
+      if (isLiked) setLikeCount((prev) => prev - 1)
+      else setLikeCount((prev) => prev + 1)
 
       setLike(data.like)
-      setLikedCount(data.count)
     } catch (error) {
-      if (like) {
-        setLikedCount((prev) => prev + 1)
-      } else {
-        setLikedCount((prev) => prev - 1)
-      }
+      console.log(error)
     } finally {
       setIsSubmitting(false)
     }
@@ -55,8 +48,8 @@ export default function LikeButton({ cup, session, className, size }: Props) {
 
   return (
     <Button onClick={onClick} disabled={isSubmitting} variant='ghost' className={className} size='sm'>
-      <HeartEmoji size={size} className={cn(!!like ? 'fill-red-500 stroke-red-500' : 'stroke-slate-400')} />
-      <span className='text-slate-500'>{likedCount}</span>
+      <HeartEmoji size={size} className={cn(isLiked ? 'fill-red-500 stroke-red-500' : 'stroke-slate-400')} />
+      <span className='text-slate-500'>{likeCount}</span>
     </Button>
   )
 }
