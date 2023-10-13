@@ -107,10 +107,10 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
           </div>
 
           <div className='w-full mt-10'>
-            <span className='text-lg ml-1'>댓글</span>
+            <span className='text-lg ml-1'>댓글 {cup.comments.length}개</span>
             <CupCommentForm session={session} cupId={cup.id} />
 
-            <div className='flex flex-col mt-6 gap-4 w-full pr-6 mb-40'>
+            <div className='flex flex-col mt-6 gap-4 w-full pr-6 mb-20'>
               {cup.comments.length === 0 && <p className='text-xs tracking-tight'>등록된 댓글이 없습니다</p>}
 
               {cup.comments.map((comment) => (

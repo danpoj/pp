@@ -2,9 +2,9 @@
 
 import db from '@/lib/db'
 import { useIntersection } from '@mantine/hooks'
-import { Cup } from '@prisma/client'
+import { Cup, Prisma } from '@prisma/client'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { ChevronRight, YoutubeIcon } from 'lucide-react'
+import { MessageSquare, YoutubeIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
@@ -13,11 +13,15 @@ import { ClipboardButton } from './clipboard-button'
 import HeartEmoji from './heart-emoji'
 import { Button, buttonVariants } from './ui/button'
 
-type Props = {
-  initialCups: Cup[]
-}
+type CupWithCount = (Cup & {
+  _count: {
+    items: number
+    comments: number
+    likedUsers: number
+  }
+})[]
 
-export default function Cups({ initialCups }: Props) {
+export default function Cups({ initialCups }: { initialCups: CupWithCount }) {
   const lastCupRef = useRef<HTMLElement>(null)
   const { ref, entry } = useIntersection({
     root: lastCupRef.current,
@@ -29,10 +33,16 @@ export default function Cups({ initialCups }: Props) {
     async ({ pageParam = 1 }) => {
       const data = await db.cup.findMany({
         skip: pageParam,
-        take: 10,
+        take: 20,
+        orderBy: {
+          createdAt: 'desc',
+        },
+        include: {
+          _count: true,
+        },
       })
 
-      return data as Cup[]
+      return data
     },
 
     {
@@ -98,11 +108,24 @@ export default function Cups({ initialCups }: Props) {
                 )}
               </div>
             </Link>
-            <div className='h-full flex flex-col px-1 pt-2 pb-1.5 break-all'>
-              <p className='text-lg'>{cup.title}</p>
+            <div className='h-full flex flex-col px-1 pt-2 pb-1.5 break-all gap-1'>
+              <p>{cup.title}</p>
               <p className='text-xs text-primary/50 font-medium'>{cup.description}</p>
 
-              <div className='flex items-center gap-1 mt-4'>
+              <div className='my-2 flex gap-2 ml-1 font-normal'>
+                <p className='text-xs'>
+                  {cup.type === 'IMAGE' ? '이미지' : '유튜브 영상'}{' '}
+                  <span className={`${cup.type === 'IMAGE' ? 'text-blue-500' : 'text-red-500'} font-bold`}>
+                    {cup._count.items}개
+                  </span>
+                </p>
+
+                <p className='text-xs flex gap-1 items-center'>
+                  <MessageSquare className='w-3 h-3' /> 댓글 {cup._count.comments}개
+                </p>
+              </div>
+
+              <div className='flex items-center gap-1'>
                 <Link
                   href={`/cup/${cup.id}/ranking`}
                   className={buttonVariants({ className: 'text-xs text-[11px] px-2 flex-1', size: 'sm' })}
@@ -112,7 +135,7 @@ export default function Cups({ initialCups }: Props) {
                 <ClipboardButton path={`/cup/${cup.id}`} />
                 <Button variant='ghost' className='flex items-center gap-1 flex-1' size='sm'>
                   <HeartEmoji className='stroke-slate-500' />
-                  <span className='text-[11px] text-slate-500'>123</span>
+                  <span className='text-[11px] text-slate-500'>{cup._count.likedUsers}</span>
                 </Button>
               </div>
             </div>

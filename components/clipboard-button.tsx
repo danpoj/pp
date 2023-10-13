@@ -23,12 +23,12 @@ export const ClipboardButton = ({ path }: ClipboardButtonProps) => {
     <Button onClick={onCopy} className='flex-1 px-1' size='sm' variant='ghost'>
       {copied ? (
         <>
-          <span className='text-xs text-[11px]'>복사완료</span>
+          <span className='text-xs'>복사</span>
           <Check className='w-3 h-3 ml-1 hidden sm:block' />
         </>
       ) : (
         <>
-          <span className='text-xs text-[11px]'>공유하기</span>
+          <span className='text-xs'>공유</span>
           <Copy className='w-3 h-3 ml-1 hidden sm:block' />
         </>
       )}
