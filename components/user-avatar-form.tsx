@@ -2,7 +2,6 @@
 
 import { User } from '@prisma/client'
 import { Loader2, Pencil } from 'lucide-react'
-import Image from 'next/image'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Button } from './ui/button'
@@ -10,8 +9,10 @@ import { Button } from './ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
 import axios from 'axios'
+import { CldImage } from 'next-cloudinary'
 import { useRouter } from 'next/navigation'
 import { useToast } from './ui/use-toast'
+import { useConfetti } from './provider/confetti-provider'
 
 type Props = {
   user: User
@@ -24,6 +25,7 @@ export default function UserAvatarForm({ user, avatars }: Props) {
   const [open, setOpen] = useState(false)
   const router = useRouter()
   const { toast } = useToast()
+  const { open: openConfetti } = useConfetti()
 
   const { open: openFileUploader } = useDropzone({
     multiple: false,
@@ -56,6 +58,8 @@ export default function UserAvatarForm({ user, avatars }: Props) {
           color: '#ddd',
         },
       })
+
+      openConfetti()
     } catch (error) {
       console.log(error)
     } finally {
@@ -72,7 +76,7 @@ export default function UserAvatarForm({ user, avatars }: Props) {
       router.refresh()
 
       toast({
-        title: '이미지 변경 완료 🎊',
+        title: '이미지 변경 완료 🥳',
         style: {
           backgroundColor: '#111',
           color: '#ddd',
@@ -97,7 +101,7 @@ export default function UserAvatarForm({ user, avatars }: Props) {
             {isUploading ? (
               <Loader2 className='animate-spin' />
             ) : (
-              <Image fill src={user.image!} alt='user profile image' className='object-cover' />
+              <CldImage fill src={user.image!} alt='user profile image' className='object-cover' quality={20} />
             )}
 
             <span className='hidden group-hover:flex bg-black/40 inset-0 absolute rounded-full items-center justify-center'>
@@ -137,7 +141,7 @@ export default function UserAvatarForm({ user, avatars }: Props) {
               key={avatar}
               className='hover:outline hover:outline-slate-400 w-14 h-14 relative rounded-full bg-white'
             >
-              <Image src={avatar} alt='default profile image' fill className='p-3' />
+              <CldImage src={avatar} alt='default profile image' fill className='p-3' quality={20} />
             </button>
           ))}
         </PopoverContent>

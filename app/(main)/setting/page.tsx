@@ -29,10 +29,10 @@ export default async function Page() {
   const avatars = cld.resources.map((image) => image.secure_url)
 
   return (
-    <div className='h-full max-w-6xl mx-auto flex flex-col items-center pt-10'>
+    <div className='h-full max-w-6xl mx-auto flex flex-col items-center pt-20 gap-16'>
       <UserAvatarForm user={user} avatars={avatars} />
 
-      {/* <UserNicknameForm user={user} /> */}
+      <UserNicknameForm user={user} />
     </div>
   )
 }
