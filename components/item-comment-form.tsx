@@ -10,8 +10,11 @@ import { Input } from '@/components/ui/input'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { Session } from 'next-auth'
+import { useModal } from './provider/modal-provider'
 
 type Props = {
+  session: Session | null
   itemId: string
 }
 
@@ -23,7 +26,7 @@ const commentSchema = z.object({
     .max(1000, { message: '1000글자 이하의 댓글을 입력해주세요' }),
 })
 
-export default function ItemCommentForm({ itemId }: Props) {
+export default function ItemCommentForm({ itemId, session }: Props) {
   const form = useForm<z.infer<typeof commentSchema>>({
     resolver: zodResolver(commentSchema),
     defaultValues: {
@@ -32,8 +35,14 @@ export default function ItemCommentForm({ itemId }: Props) {
   })
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const { open } = useModal()
 
   const onSubmit = async (values: z.infer<typeof commentSchema>) => {
+    if (!session) {
+      open('signin')
+      return
+    }
+
     try {
       setIsSubmitting(true)
 

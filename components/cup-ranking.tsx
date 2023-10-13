@@ -9,6 +9,7 @@ import { ClipboardWithLink } from './clipboard-with-link'
 import type { Prisma } from '@prisma/client'
 import { CldImage } from 'next-cloudinary'
 import CupCommentForm from './cup-comment-form'
+import { Session } from 'next-auth'
 
 export type ExtendedCup = Prisma.CupGetPayload<{
   include: {
@@ -27,9 +28,11 @@ export type ExtendedCup = Prisma.CupGetPayload<{
       }
     }
   }
-}>
+}> & {
+  session: Session | null
+}
 
-export default function CupRanking(cup: ExtendedCup) {
+export default function CupRanking({ session, ...cup }: ExtendedCup) {
   const router = useRouter()
 
   return (
@@ -96,7 +99,7 @@ export default function CupRanking(cup: ExtendedCup) {
           <div className='my-4 h-full pr-2'>
             <h1 className='text-2xl font-extrabold text-primary/80 tracking-tight'>{cup.title}</h1>
             <p className='text-sm font-semiboid text-primary/70 my-2'>{cup.description}</p>
-            <div className='flex gap-4 font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 bg-clip-text text-transparent'>
+            <div className='flex gap-4 font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 bg-clip-text text-transparent mt-10 mb-4'>
               <span>총 월드컵 진행 수: {cup.playCount}회</span>
             </div>
 
@@ -105,7 +108,7 @@ export default function CupRanking(cup: ExtendedCup) {
 
           <div className='w-full mt-10'>
             <span className='text-lg ml-1'>댓글</span>
-            <CupCommentForm cupId={cup.id} />
+            <CupCommentForm session={session} cupId={cup.id} />
 
             <div className='flex flex-col mt-6 gap-4 w-full pr-6 mb-40'>
               {cup.comments.length === 0 && <p className='text-xs tracking-tight'>등록된 댓글이 없습니다</p>}
@@ -113,7 +116,7 @@ export default function CupRanking(cup: ExtendedCup) {
               {cup.comments.map((comment) => (
                 <div key={comment.id} className='flex flex-col gap-2 break-words'>
                   <div className='flex gap-1 items-center'>
-                    <CldImage
+                    <Image
                       src={comment.user.image!}
                       alt='user profile image'
                       width={40}

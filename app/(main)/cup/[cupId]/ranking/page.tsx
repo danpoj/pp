@@ -1,4 +1,5 @@
 import CupRanking from '@/components/cup-ranking'
+import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { notFound } from 'next/navigation'
 
@@ -33,9 +34,11 @@ export default async function Page({ params: { cupId } }: Props) {
 
   if (!cup) return notFound()
 
+  const session = await getSession()
+
   return (
     <div className='h-full max-w-7xl mx-auto p-2'>
-      <CupRanking {...cup} />
+      <CupRanking session={session} {...cup} />
     </div>
   )
 }

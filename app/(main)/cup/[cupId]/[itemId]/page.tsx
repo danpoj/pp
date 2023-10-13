@@ -5,6 +5,7 @@ import PlayConfetti from '@/components/play-confetti'
 import { Player } from '@/components/player'
 import RankingButton from '@/components/ranking-button'
 import { Separator } from '@/components/ui/separator'
+import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 
 import dayjs from 'dayjs'
@@ -36,6 +37,8 @@ export default async function Page({ params }: Props) {
     },
   })
 
+  const session = await getSession()
+
   if (!image) return null
 
   return (
@@ -52,7 +55,7 @@ export default async function Page({ params }: Props) {
       <div className='mt-4 h-full lg:w-[30rem] lg:shrink-0 pr-2'>
         <h1 className='text-2xl font-extrabold text-primary/80 tracking-tight'>{image.cup.title}</h1>
         <p className='text-sm font-semiboid text-primary/70 my-2'>{image.cup.description}</p>
-        <div className='flex gap-4 font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 bg-clip-text text-transparent'>
+        <div className='flex gap-4 font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 bg-clip-text text-transparent mt-8 mb-6'>
           <span>우승: {image.winCount}회</span>
           <span>플레이수: {image.cup.playCount}회</span>
           <span>
@@ -74,7 +77,7 @@ export default async function Page({ params }: Props) {
         <Separator className='my-4' />
 
         <div className='w-full'>
-          <ItemCommentForm itemId={image.id} />
+          <ItemCommentForm session={session} itemId={image.id} />
 
           <div className='flex flex-col mt-6 gap-2 w-full h-full lg:max-h-[20rem] overflow-scroll pr-6 pb-20 lg:pb-10'>
             {image.comments.length === 0 && <p className='text-xs tracking-tight'>등록된 댓글이 없습니다</p>}
