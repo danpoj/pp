@@ -1,6 +1,6 @@
 import { ClipboardWithLink } from '@/components/clipboard-with-link'
-// import ImageCommentForm from '@/components/image-comment-form'
 import ImageResult from '@/components/image-result'
+import ItemCommentForm from '@/components/item-comment-form'
 import PlayConfetti from '@/components/play-confetti'
 import { Player } from '@/components/player'
 import RankingButton from '@/components/ranking-button'
@@ -8,6 +8,8 @@ import { Separator } from '@/components/ui/separator'
 import db from '@/lib/db'
 
 import dayjs from 'dayjs'
+import { CldImage } from 'next-cloudinary'
+import Image from 'next/image'
 
 type Props = {
   params: {
@@ -27,6 +29,9 @@ export default async function Page({ params }: Props) {
         orderBy: {
           createdAt: 'desc',
         },
+        include: {
+          user: true,
+        },
       },
     },
   })
@@ -44,7 +49,7 @@ export default async function Page({ params }: Props) {
         </div>
       )}
 
-      <div className='my-4 h-full lg:w-[30rem] lg:shrink-0 pr-2'>
+      <div className='mt-4 h-full lg:w-[30rem] lg:shrink-0 pr-2'>
         <h1 className='text-2xl font-extrabold text-primary/80 tracking-tight'>{image.cup.title}</h1>
         <p className='text-sm font-semiboid text-primary/70 my-2'>{image.cup.description}</p>
         <div className='flex gap-4 font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 bg-clip-text text-transparent'>
@@ -69,16 +74,23 @@ export default async function Page({ params }: Props) {
         <Separator className='my-4' />
 
         <div className='w-full'>
-          {/* <ImageCommentForm imageId={image.id} /> */}
+          <ItemCommentForm itemId={image.id} />
 
-          <div className='flex flex-col mt-6 gap-2 w-full h-full lg:max-h-[20rem] overflow-scroll pr-6 mb-10'>
+          <div className='flex flex-col mt-6 gap-2 w-full h-full lg:max-h-[20rem] overflow-scroll pr-6 pb-20 lg:pb-10'>
             {image.comments.length === 0 && <p className='text-xs tracking-tight'>등록된 댓글이 없습니다</p>}
 
             {image.comments.map((comment) => (
               <div key={comment.id} className='flex flex-col gap-2 break-words'>
-                <div className='flex gap-4'>
+                <div className='flex gap-1 items-center'>
+                  <Image
+                    src={comment.user.image!}
+                    alt='user profile image'
+                    width={40}
+                    height={40}
+                    className='w-6 h-6'
+                  />
                   <span className='font-bold text-xs bg-gradient-to-r from-cyan-600 via-blue-600 to-sky-600 w-fit bg-clip-text text-transparent'>
-                    {/* @{comment.username} */}
+                    @{comment.user.nickname}
                   </span>
                   <span className='text-xs text-primary/40 tracking-tighter'>
                     {dayjs(comment.createdAt).format('YYYY.M.D')}
