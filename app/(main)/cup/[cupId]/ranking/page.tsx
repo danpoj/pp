@@ -19,6 +19,9 @@ export default async function Page({ params: { cupId } }: Props) {
         orderBy: {
           createdAt: 'desc',
         },
+        include: {
+          user: true,
+        },
       },
       items: {
         orderBy: {

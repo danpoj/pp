@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { ClipboardWithLink } from './clipboard-with-link'
 import type { Prisma } from '@prisma/client'
 import { CldImage } from 'next-cloudinary'
+import CupCommentForm from './cup-comment-form'
 
 export type ExtendedCup = Prisma.CupGetPayload<{
   include: {
@@ -15,6 +16,9 @@ export type ExtendedCup = Prisma.CupGetPayload<{
     comments: {
       orderBy: {
         createdAt: 'desc'
+      }
+      include: {
+        user: true
       }
     }
     items: {
@@ -99,19 +103,27 @@ export default function CupRanking(cup: ExtendedCup) {
             <ClipboardWithLink path={`/cup/${cup.id}`} title='월드컵 공유하기' className='flex items-center gap-2' />
           </div>
 
-          <div className='w-full'>
-            {/* <CupCommentForm cupID={cup.id} /> */}
+          <div className='w-full mt-10'>
+            <span className='text-lg ml-1'>댓글</span>
+            <CupCommentForm cupId={cup.id} />
 
             <div className='flex flex-col mt-6 gap-4 w-full pr-6 mb-40'>
               {cup.comments.length === 0 && <p className='text-xs tracking-tight'>등록된 댓글이 없습니다</p>}
 
               {cup.comments.map((comment) => (
                 <div key={comment.id} className='flex flex-col gap-2 break-words'>
-                  <div className='flex gap-4'>
+                  <div className='flex gap-1 items-center'>
+                    <CldImage
+                      src={comment.user.image!}
+                      alt='user profile image'
+                      width={40}
+                      height={40}
+                      className='w-6 h-6'
+                    />
                     <span className='font-bold text-xs bg-gradient-to-r from-cyan-600 via-blue-600 to-sky-600 w-fit bg-clip-text text-transparent'>
-                      {/* @{comment.username} */}
+                      @{comment.user.nickname}
                     </span>
-                    <span className='text-xs text-primary/40 tracking-tighter'>
+                    <span className='text-xs text-primary/40 tracking-tighter font-light'>
                       {dayjs(comment.createdAt).format('YYYY.M.D')}
                     </span>
                   </div>
