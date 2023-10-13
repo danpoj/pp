@@ -15,7 +15,7 @@ export default async function Page() {
     },
   })
 
-  console.log(initialCups[0])
+  // console.log(initialCups[0].likes)
 
   const session = await getSession()
 

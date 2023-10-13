@@ -7,6 +7,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import type { Session } from 'next-auth'
 import { cn } from '@/lib/utils'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   cup: Cup & {
@@ -22,21 +23,44 @@ type Props = {
 
 export default function LikeButton({ cup, session }: Props) {
   const [likedCount, setLikedCount] = useState(cup._count.likes)
-
-  const isLiked = cup.likes.findIndex(({ id }) => id === session?.user.id) !== -1
+  const [like, setLike] = useState(cup.likes.find((like) => like.userId === session?.user.id))
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const onClick = async () => {
     try {
-      const { data } = await axios.patch(`/api/cup/${cup.id}/like`)
+      setIsSubmitting(true)
+
+      if (like) {
+        setLikedCount((prev) => prev - 1)
+      } else {
+        setLikedCount((prev) => prev + 1)
+      }
+
+      const { data } = await axios.patch(`/api/cup/${cup.id}/like`, { like, count: likedCount })
+
+      setLike(data.like)
+      setLikedCount(data.count)
     } catch (error) {
-      console.log(error)
+      if (like) {
+        setLikedCount((prev) => prev + 1)
+      } else {
+        setLikedCount((prev) => prev - 1)
+      }
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
   return (
-    <Button onClick={onClick} variant='ghost' className='flex items-center gap-1 flex-1' size='sm'>
-      <HeartEmoji className={cn(isLiked ? 'fill-red-500 stroke-red-500' : 'stroke-slate-400')} />
-      <span className='text-[11px] text-slate-500'>{cup._count.likes}</span>
+    <Button
+      onClick={onClick}
+      disabled={isSubmitting}
+      variant='ghost'
+      className='flex items-center gap-1 flex-1'
+      size='sm'
+    >
+      <HeartEmoji className={cn(!!like ? 'fill-red-500 stroke-red-500' : 'stroke-slate-400')} />
+      <span className='text-[11px] text-slate-500'>{likedCount}</span>
     </Button>
   )
 }
