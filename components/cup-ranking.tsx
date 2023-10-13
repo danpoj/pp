@@ -1,15 +1,15 @@
 'use client'
 
 import { cn } from '@/lib/utils'
+import type { Prisma } from '@prisma/client'
 import dayjs from 'dayjs'
+import type { Session } from 'next-auth'
+import { CldImage } from 'next-cloudinary'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ClipboardWithLink } from './clipboard-with-link'
-import type { Prisma } from '@prisma/client'
-import { CldImage } from 'next-cloudinary'
 import CupCommentForm from './cup-comment-form'
-import type { Session } from 'next-auth'
+import LikeButton from './like-button'
 
 export type ExtendedCup = Prisma.CupGetPayload<{
   include: {
@@ -27,14 +27,13 @@ export type ExtendedCup = Prisma.CupGetPayload<{
         winCount: 'asc'
       }
     }
+    likes: true
   }
 }> & {
   session: Session | null
 }
 
 export default function CupRanking({ session, ...cup }: ExtendedCup) {
-  const router = useRouter()
-
   return (
     <div className='flex flex-col'>
       <div className='flex flex-col gap-1 sm:flex-row sm:h-[20rem]'>
@@ -99,8 +98,11 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
           <div className='my-4 h-full pr-2'>
             <h1 className='text-2xl font-extrabold text-primary/80 tracking-tight'>{cup.title}</h1>
             <p className='text-sm font-semiboid text-primary/70 my-2'>{cup.description}</p>
-            <div className='flex gap-4 font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 bg-clip-text text-transparent mt-10 mb-4'>
-              <span>총 월드컵 진행 수: {cup.playCount}회</span>
+            <div className='flex gap-4 font-bold  mt-10 mb-4 items-center'>
+              <LikeButton cup={cup} session={session} className='flex gap-1' size='lg' />
+              <span className='bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 bg-clip-text text-transparent'>
+                월드컵 플레이 수: {cup.playCount}회
+              </span>
             </div>
 
             <ClipboardWithLink path={`/cup/${cup.id}`} title='월드컵 공유하기' className='flex items-center gap-2' />

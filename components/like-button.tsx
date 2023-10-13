@@ -19,9 +19,11 @@ type Props = {
     likes: Like[]
   }
   session: Session | null
+  className?: string
+  size?: 'sm' | 'lg'
 }
 
-export default function LikeButton({ cup, session }: Props) {
+export default function LikeButton({ cup, session, className, size }: Props) {
   const [likedCount, setLikedCount] = useState(cup._count.likes)
   const [like, setLike] = useState(cup.likes.find((like) => like.userId === session?.user.id))
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -52,15 +54,9 @@ export default function LikeButton({ cup, session }: Props) {
   }
 
   return (
-    <Button
-      onClick={onClick}
-      disabled={isSubmitting}
-      variant='ghost'
-      className='flex items-center gap-1 flex-1'
-      size='sm'
-    >
-      <HeartEmoji className={cn(!!like ? 'fill-red-500 stroke-red-500' : 'stroke-slate-400')} />
-      <span className='text-[11px] text-slate-500'>{likedCount}</span>
+    <Button onClick={onClick} disabled={isSubmitting} variant='ghost' className={className} size='sm'>
+      <HeartEmoji size={size} className={cn(!!like ? 'fill-red-500 stroke-red-500' : 'stroke-slate-400')} />
+      <span className='text-slate-500'>{likedCount}</span>
     </Button>
   )
 }

@@ -1,6 +1,6 @@
 import { LucideProps } from 'lucide-react'
 
-export default function HeartEmoji({ className }: { className: string }) {
+export default function HeartEmoji({ className, size = 'sm' }: { className?: string; size?: 'sm' | 'lg' }) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -8,7 +8,7 @@ export default function HeartEmoji({ className }: { className: string }) {
       viewBox='0 0 24 24'
       strokeWidth={2}
       stroke='currentColor'
-      className='w-4 h-4'
+      className={size === 'sm' ? 'w-4 h-4' : 'w-6 h-6'}
     >
       <path
         className={className}

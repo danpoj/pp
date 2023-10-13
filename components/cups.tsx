@@ -139,7 +139,7 @@ export default function Cups({ initialCups, session }: Props) {
                   랭킹보기
                 </Link>
                 <ClipboardButton path={`/cup/${cup.id}`} />
-                <LikeButton cup={cup} session={session} />
+                <LikeButton cup={cup} session={session} className='flex items-center gap-1 flex-1' />
               </div>
             </div>
           </div>

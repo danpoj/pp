@@ -8,7 +8,7 @@ export default function PlayConfetti() {
 
   useEffect(() => {
     openConfetti()
-  }, [openConfetti])
+  }, [])
 
   return null
 }
