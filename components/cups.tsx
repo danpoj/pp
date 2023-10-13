@@ -84,12 +84,7 @@ export default function Cups({ initialCups, session }: Props) {
             key={cup.id}
             className='rounded-lg overflow-hidden shadow dark:bg-border/20 border'
           >
-            <Link
-              href={`/cup/${cup.id}`}
-              // target='_blank'
-              // rel='noopenner noreferrer'
-              className='hover:opacity-90 transition group'
-            >
+            <Link href={`/cup/${cup.id}`} target='_blank' className='hover:opacity-90 transition group'>
               <div className='relative overflow-hidden'>
                 {cup.thumbnail ? (
                   <BlurredImage
