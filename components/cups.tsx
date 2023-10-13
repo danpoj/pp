@@ -7,10 +7,11 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { ChevronRight, YoutubeIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
-import { BlurredImage } from './blurred-image'
-import { buttonVariants } from './ui/button'
-import { ClipboardButton } from './clipboard-button'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
+import { BlurredImage } from './blurred-image'
+import { ClipboardButton } from './clipboard-button'
+import HeartEmoji from './heart-emoji'
+import { Button, buttonVariants } from './ui/button'
 
 type Props = {
   initialCups: Cup[]
@@ -104,11 +105,15 @@ export default function Cups({ initialCups }: Props) {
               <div className='flex items-center gap-1 mt-4'>
                 <Link
                   href={`/cup/${cup.id}/ranking`}
-                  className={buttonVariants({ className: 'flex-1 text-xs', size: 'sm', variant: 'blue' })}
+                  className={buttonVariants({ className: 'text-xs text-[11px] px-2 flex-1', size: 'sm' })}
                 >
-                  랭킹보기 <ChevronRight className='w-4 h-4 ml-0.5' />
+                  랭킹보기
                 </Link>
                 <ClipboardButton path={`/cup/${cup.id}`} />
+                <Button variant='ghost' className='flex items-center gap-1 flex-1' size='sm'>
+                  <HeartEmoji className='stroke-slate-500' />
+                  <span className='text-[11px] text-slate-500'>123</span>
+                </Button>
               </div>
             </div>
           </div>
