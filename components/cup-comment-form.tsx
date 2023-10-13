@@ -9,7 +9,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useModal } from './provider/modal-provider'
-import { Session } from 'next-auth'
+import type { Session } from 'next-auth'
 
 type Props = {
   session: Session | null

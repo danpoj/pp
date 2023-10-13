@@ -9,7 +9,7 @@ import { ClipboardWithLink } from './clipboard-with-link'
 import type { Prisma } from '@prisma/client'
 import { CldImage } from 'next-cloudinary'
 import CupCommentForm from './cup-comment-form'
-import { Session } from 'next-auth'
+import type { Session } from 'next-auth'
 
 export type ExtendedCup = Prisma.CupGetPayload<{
   include: {

@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { Session } from 'next-auth'
+import type { Session } from 'next-auth'
 import { useModal } from './provider/modal-provider'
 
 type Props = {

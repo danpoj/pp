@@ -1,4 +1,5 @@
 import Cups from '@/components/cups'
+import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 
 export default async function Page() {
@@ -10,8 +11,13 @@ export default async function Page() {
     },
     include: {
       _count: true,
+      likes: true,
     },
   })
 
-  return <Cups initialCups={initialCups} />
+  console.log(initialCups[0])
+
+  const session = await getSession()
+
+  return <Cups initialCups={initialCups} session={session} />
 }

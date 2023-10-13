@@ -2,26 +2,31 @@
 
 import db from '@/lib/db'
 import { useIntersection } from '@mantine/hooks'
-import { Cup, Prisma } from '@prisma/client'
+import { Cup, Like } from '@prisma/client'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { MessageSquare, YoutubeIcon } from 'lucide-react'
+import type { Session } from 'next-auth'
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 import { BlurredImage } from './blurred-image'
 import { ClipboardButton } from './clipboard-button'
-import HeartEmoji from './heart-emoji'
-import { Button, buttonVariants } from './ui/button'
+import LikeButton from './like-button'
+import { buttonVariants } from './ui/button'
 
-type CupWithCount = (Cup & {
-  _count: {
-    items: number
-    comments: number
-    likedUsers: number
-  }
-})[]
+type Props = {
+  initialCups: (Cup & {
+    _count: {
+      items: number
+      comments: number
+      likes: number
+    }
+    likes: Like[]
+  })[]
+  session: Session | null
+}
 
-export default function Cups({ initialCups }: { initialCups: CupWithCount }) {
+export default function Cups({ initialCups, session }: Props) {
   const lastCupRef = useRef<HTMLElement>(null)
   const { ref, entry } = useIntersection({
     root: lastCupRef.current,
@@ -39,6 +44,7 @@ export default function Cups({ initialCups }: { initialCups: CupWithCount }) {
         },
         include: {
           _count: true,
+          likes: true,
         },
       })
 
@@ -80,8 +86,8 @@ export default function Cups({ initialCups }: { initialCups: CupWithCount }) {
           >
             <Link
               href={`/cup/${cup.id}`}
-              target='_blank'
-              rel='noopenner noreferrer'
+              // target='_blank'
+              // rel='noopenner noreferrer'
               className='hover:opacity-90 transition group'
             >
               <div className='relative overflow-hidden'>
@@ -133,10 +139,7 @@ export default function Cups({ initialCups }: { initialCups: CupWithCount }) {
                   랭킹보기
                 </Link>
                 <ClipboardButton path={`/cup/${cup.id}`} />
-                <Button variant='ghost' className='flex items-center gap-1 flex-1' size='sm'>
-                  <HeartEmoji className='stroke-slate-500' />
-                  <span className='text-[11px] text-slate-500'>{cup._count.likedUsers}</span>
-                </Button>
+                <LikeButton cup={cup} session={session} />
               </div>
             </div>
           </div>
