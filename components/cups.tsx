@@ -2,16 +2,16 @@
 
 import db from '@/lib/db'
 import { useIntersection } from '@mantine/hooks'
-import { Cup } from '@prisma/client'
+import type { Cup, User } from '@prisma/client'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { MessageSquare, YoutubeIcon } from 'lucide-react'
-import type { Session } from 'next-auth'
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 import { BlurredImage } from './blurred-image'
 import { ClipboardButton } from './clipboard-button'
 import { buttonVariants } from './ui/button'
+import Image from 'next/image'
 
 type Props = {
   initialCups: (Cup & {
@@ -20,6 +20,7 @@ type Props = {
       comments: number
       likes: number
     }
+    user: User
   })[]
 }
 
@@ -41,7 +42,7 @@ export default function Cups({ initialCups }: Props) {
         },
         include: {
           _count: true,
-          likes: true,
+          user: true,
         },
       })
 
@@ -110,7 +111,18 @@ export default function Cups({ initialCups }: Props) {
               <p>{cup.title}</p>
               <p className='text-xs text-primary/50 font-medium'>{cup.description}</p>
 
-              <div className='my-2 flex gap-2 ml-1 font-normal'>
+              <div className='flex items-center gap-1 my-2'>
+                <Image
+                  src={cup.user.image!}
+                  alt='cup author profile image'
+                  width={24}
+                  height={24}
+                  className='bg-white rounded-full p-0.5'
+                />
+                <span className='text-xs font-normal'>@{cup.user.nickname}</span>
+              </div>
+
+              <div className='mb-2 flex gap-2 ml-1 font-normal'>
                 <p className='text-xs'>
                   {cup.type === 'IMAGE' ? '이미지' : '유튜브 영상'}{' '}
                   <span className={`${cup.type === 'IMAGE' ? 'text-blue-500' : 'text-red-500'} font-bold`}>

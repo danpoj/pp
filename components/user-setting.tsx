@@ -6,7 +6,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { LogOut, Settings, User2 } from 'lucide-react'
+import { LogOut, MessageSquare, Settings, Swords, User2 } from 'lucide-react'
 import type { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
@@ -34,20 +34,26 @@ export default function UserSetting({ session }: Props) {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem className='py-2.5 cursor-pointer' asChild>
-          <Link href={`/my/${session.user.nickname}`}>
-            <User2 className='w-5 h-5 mr-2' /> 내 활동
+          <Link href='/my/cup'>
+            <Swords className='w-4 h-4 mr-2' /> 내 월드컵
+          </Link>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem className='py-2.5 cursor-pointer' asChild>
+          <Link href='/my/comment'>
+            <MessageSquare className='w-4 h-4 mr-2' /> 내 댓글
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem className='py-2.5 cursor-pointer' asChild>
           <Link href='/setting'>
-            <Settings className='w-5 h-5 mr-2' /> 설정
+            <User2 className='w-4 h-4 mr-2' /> 설정
           </Link>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
         <DropdownMenuItem className='py-2.5 cursor-pointer' onClick={() => signOut()}>
-          <LogOut className='w-5 h-5 mr-2' /> 로그아웃
+          <LogOut className='w-4 h-4 mr-2' /> 로그아웃
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

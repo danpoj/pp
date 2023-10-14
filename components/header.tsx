@@ -1,13 +1,14 @@
 'use client'
 
 import PingpingLogo from './pingping-logo'
-import { Button } from './ui/button'
+import { Button, buttonVariants } from './ui/button'
 import { useModal } from './provider/modal-provider'
 import { ThemeMenu } from './theme-menu'
 import type { Session } from 'next-auth'
 import { useRouter } from 'next/navigation'
 import UserSetting from './user-setting'
 import MobileMenu from './mobile-menu'
+import Link from 'next/link'
 
 type Props = {
   session: Session | null
@@ -35,6 +36,20 @@ export default function Header({ session }: Props) {
         >
           월드컵 만들기
         </Button>
+        <div className='flex ml-3 gap-1 text-xs'>
+          <Link
+            href='/my/cup'
+            className='hidden sm:flex items-center justify-center px-2 h-8 hover:bg-primary/5 rounded'
+          >
+            내 월드컵
+          </Link>
+          <Link
+            href='/my/comment'
+            className='hidden sm:flex items-center justify-center px-2 h-8 hover:bg-primary/5 rounded'
+          >
+            내 댓글
+          </Link>
+        </div>
       </div>
 
       <div className='flex items-center gap-2'>

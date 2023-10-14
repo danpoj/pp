@@ -11,6 +11,7 @@ export default async function Page() {
     },
     include: {
       _count: true,
+      user: true,
     },
   })
 
