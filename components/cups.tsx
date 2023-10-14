@@ -2,7 +2,7 @@
 
 import db from '@/lib/db'
 import { useIntersection } from '@mantine/hooks'
-import { Cup, Like } from '@prisma/client'
+import { Cup } from '@prisma/client'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { MessageSquare, YoutubeIcon } from 'lucide-react'
 import type { Session } from 'next-auth'
@@ -11,7 +11,6 @@ import { useEffect, useRef } from 'react'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 import { BlurredImage } from './blurred-image'
 import { ClipboardButton } from './clipboard-button'
-import LikeButton from './like-button'
 import { buttonVariants } from './ui/button'
 
 type Props = {
@@ -21,12 +20,10 @@ type Props = {
       comments: number
       likes: number
     }
-    likes: Like[]
   })[]
-  session: Session | null
 }
 
-export default function Cups({ initialCups, session }: Props) {
+export default function Cups({ initialCups }: Props) {
   const lastCupRef = useRef<HTMLElement>(null)
   const { ref, entry } = useIntersection({
     root: lastCupRef.current,
@@ -84,7 +81,7 @@ export default function Cups({ initialCups, session }: Props) {
             key={cup.id}
             className='rounded-lg overflow-hidden shadow dark:bg-border/20 border'
           >
-            <Link href={`/cup/${cup.id}`} target='_blank' className='hover:opacity-90 transition group'>
+            <Link href={`/cup/${cup.id}`} className='hover:opacity-90 transition group'>
               <div className='relative overflow-hidden'>
                 {cup.thumbnail ? (
                   <BlurredImage
@@ -129,13 +126,12 @@ export default function Cups({ initialCups, session }: Props) {
               <div className='flex items-center gap-1'>
                 <Link
                   href={`/cup/${cup.id}/ranking`}
-                  target='_blank'
                   className={buttonVariants({ className: 'text-xs text-[11px] px-2 flex-1', size: 'sm' })}
                 >
                   랭킹보기
                 </Link>
                 <ClipboardButton path={`/cup/${cup.id}`} />
-                <LikeButton cup={cup} session={session} className='flex items-center gap-1 flex-1' />
+                {/* <LikeButton cup={cup} session={session} className='flex items-center gap-1 flex-1' /> */}
               </div>
             </div>
           </div>

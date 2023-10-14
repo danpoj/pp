@@ -29,7 +29,6 @@ export default async function Page({ params: { cupId } }: Props) {
           winCount: 'desc',
         },
       },
-      likes: true,
     },
   })
 

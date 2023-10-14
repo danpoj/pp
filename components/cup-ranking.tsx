@@ -27,7 +27,6 @@ export type ExtendedCup = Prisma.CupGetPayload<{
         winCount: 'asc'
       }
     }
-    likes: true
   }
 }> & {
   session: Session | null
@@ -103,9 +102,9 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
                 월드컵 플레이 수: {cup.playCount}회
               </span>
 
-              <span className='flex items-center font-normal gap-1'>
+              {/* <span className='flex items-center font-normal gap-1'>
                 <HeartEmoji className='fill-blue-400 stroke-blue-400' size='lg' /> 좋아요 {cup._count.likes}개
-              </span>
+              </span> */}
             </div>
 
             <ClipboardWithLink path={`/cup/${cup.id}`} title='월드컵 공유하기' className='flex items-center gap-2' />

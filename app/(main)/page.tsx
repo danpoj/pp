@@ -11,11 +11,8 @@ export default async function Page() {
     },
     include: {
       _count: true,
-      likes: true,
     },
   })
 
-  const session = await getSession()
-
-  return <Cups initialCups={initialCups} session={session} />
+  return <Cups initialCups={initialCups} />
 }

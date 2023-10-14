@@ -7,6 +7,7 @@ import type { Session } from 'next-auth'
 import { useState } from 'react'
 import HeartEmoji from './heart-emoji'
 import { Button } from './ui/button'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   cup: Cup & {
@@ -26,6 +27,7 @@ export default function LikeButton({ cup, session, className, size }: Props) {
   const [like, setLike] = useState(cup.likes.find((like) => like.userId === session?.user.id))
   const [likeCount, setLikeCount] = useState(cup._count.likes)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter()
 
   const isLiked = !!like
 
@@ -35,8 +37,11 @@ export default function LikeButton({ cup, session, className, size }: Props) {
 
       const { data } = await axios.patch(`/api/cup/${cup.id}/like`, { isLiked, like })
 
-      if (isLiked) setLikeCount((prev) => prev - 1)
-      else setLikeCount((prev) => prev + 1)
+      if (isLiked) {
+        setLikeCount((prev) => prev - 1)
+      } else {
+        setLikeCount((prev) => prev + 1)
+      }
 
       setLike(data.like)
     } catch (error) {
