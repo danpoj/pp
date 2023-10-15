@@ -5,10 +5,11 @@ import { Button, buttonVariants } from './ui/button'
 import { useModal } from './provider/modal-provider'
 import { ThemeMenu } from './theme-menu'
 import type { Session } from 'next-auth'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import UserSetting from './user-setting'
 import MobileMenu from './mobile-menu'
 import Link from 'next/link'
+import { cn } from '@/lib/utils'
 
 type Props = {
   session: Session | null
@@ -17,6 +18,7 @@ type Props = {
 export default function Header({ session }: Props) {
   const { open } = useModal()
   const router = useRouter()
+  const path = usePathname()
 
   return (
     <header className='fixed w-full px-3 h-12 flex justify-between items-center bg-background/90 z-50 backdrop-blur-sm'>
@@ -39,13 +41,19 @@ export default function Header({ session }: Props) {
         <div className='flex ml-3 gap-1 text-xs'>
           <Link
             href='/my/cup'
-            className='hidden sm:flex items-center justify-center px-2 h-8 hover:bg-primary/5 rounded'
+            className={cn(
+              'hidden sm:flex items-center justify-center px-2 h-8 hover:bg-primary/5 rounded',
+              path === '/my/cup' && 'underline underline-offset-4'
+            )}
           >
             내 월드컵
           </Link>
           <Link
             href='/my/comment'
-            className='hidden sm:flex items-center justify-center px-2 h-8 hover:bg-primary/5 rounded'
+            className={cn(
+              'hidden sm:flex items-center justify-center px-2 h-8 hover:bg-primary/5 rounded',
+              path === '/my/comment' && 'underline underline-offset-4'
+            )}
           >
             내 댓글
           </Link>
