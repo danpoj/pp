@@ -39,24 +39,30 @@ export default function Header({ session }: Props) {
           월드컵 만들기
         </Button>
         <div className='flex ml-3 gap-1 text-xs'>
-          <Link
-            href='/my/cup'
+          <button
+            onClick={() => {
+              if (!session) open('signin')
+              router.push('/my/cup')
+            }}
             className={cn(
               'hidden sm:flex items-center justify-center px-2 h-8 hover:bg-primary/5 rounded',
               path === '/my/cup' && 'underline underline-offset-4'
             )}
           >
             내 월드컵
-          </Link>
-          <Link
-            href='/my/comment'
+          </button>
+          <button
+            onClick={() => {
+              if (!session) open('signin')
+              router.push('/my/comment')
+            }}
             className={cn(
               'hidden sm:flex items-center justify-center px-2 h-8 hover:bg-primary/5 rounded',
               path === '/my/comment' && 'underline underline-offset-4'
             )}
           >
             내 댓글
-          </Link>
+          </button>
         </div>
       </div>
 

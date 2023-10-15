@@ -31,15 +31,8 @@ export const ClipboardWithLink = ({ path, title, ...props }: ClipboardWithLinkPr
           value={origin + path}
           readOnly
         />
-        <Button onClick={onCopy} size='icon' className={cn('bg-primary/40', copied ? 'w-40' : 'w-16')}>
-          {copied ? (
-            <>
-              <span className='text-xs'>복사 완료!</span>
-              <Check className='w-4 h-4 ml-1' />
-            </>
-          ) : (
-            <Copy className='w-4 h-4' />
-          )}
+        <Button onClick={onCopy} size='icon' className={cn('bg-primary/40 w-16')}>
+          {copied ? <Check className='w-4 h-4' /> : <Copy className='w-4 h-4' />}
         </Button>
       </div>
     </div>

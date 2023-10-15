@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='ko' suppressHydrationWarning>
-      <body className={cn('antialiased text-sm font-semibold', inter.className)}>
+      <body className={cn('antialiased text-sm', inter.className)}>
         <Providers>
           {children}
           <Modals />
