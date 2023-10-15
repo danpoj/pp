@@ -22,7 +22,8 @@ export default async function Page() {
   }
 
   return (
-    <div className='min-h-full px-2 pt-10'>
+    <div className='min-h-full px-2 pt-8 max-w-4xl mx-auto'>
+      <span className='text-2xl font-semibold tracking-tighter'>내 월드컵 ({cups.length}개)</span>
       <MyCups cups={cups} />
     </div>
   )

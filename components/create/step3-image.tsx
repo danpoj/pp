@@ -1,16 +1,16 @@
 'use client'
 
-import { ChevronRight, ImagePlus, Trash2 } from 'lucide-react'
-import { useDropzone } from 'react-dropzone'
-import { Button } from '../ui/button'
-import { cn } from '@/lib/utils'
-import { useState } from 'react'
-import axios from 'axios'
 import { cupData } from '@/app/(main)/create/page'
-import { useRouter } from 'next/navigation'
-import { useModal } from '../provider/modal-provider'
-import { useConfetti } from '../provider/confetti-provider'
+import { cn } from '@/lib/utils'
+import axios from 'axios'
+import { ChevronRight, ImagePlus, Trash2 } from 'lucide-react'
 import Image from 'next/image'
+import { useState } from 'react'
+import { useDropzone } from 'react-dropzone'
+import { useConfetti } from '../provider/confetti-provider'
+import { useModal } from '../provider/modal-provider'
+import { Button } from '../ui/button'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   cupData: cupData
@@ -19,9 +19,9 @@ type Props = {
 export default function Step3Image({ cupData }: Props) {
   const [images, setImages] = useState<string[]>([])
   const [isUploading, setIsUploading] = useState(false)
-  const router = useRouter()
   const { open: openModal } = useModal()
   const { open: openConfetti } = useConfetti()
+  const router = useRouter()
 
   const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
     onDrop: (acceptedFiles, rejectedFiles) => {
@@ -48,10 +48,10 @@ export default function Step3Image({ cupData }: Props) {
       })
 
       openModal('create-complete', data)
-      openConfetti()
 
-      router.refresh()
       router.push('/')
+
+      openConfetti()
     } catch (error) {
       console.log(error)
     } finally {
