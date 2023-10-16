@@ -11,7 +11,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import axios from 'axios'
 import { CldImage } from 'next-cloudinary'
 import { useRouter } from 'next/navigation'
-import { useToast } from './ui/use-toast'
+import { toast, useToast } from './ui/use-toast'
 import { useConfetti } from './provider/confetti-provider'
 
 type Props = {
@@ -24,7 +24,7 @@ export default function UserAvatarForm({ user, avatars }: Props) {
   const [isUploading, setIsUploading] = useState(false)
   const [open, setOpen] = useState(false)
   const router = useRouter()
-  const { toast } = useToast()
+
   const { open: openConfetti } = useConfetti()
 
   const { open: openFileUploader } = useDropzone({

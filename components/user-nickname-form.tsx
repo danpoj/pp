@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input'
 import axios from 'axios'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useToast } from './ui/use-toast'
+import { toast, useToast } from './ui/use-toast'
 import { useConfetti } from './provider/confetti-provider'
 
 type Props = {
@@ -34,7 +34,7 @@ export default function UserNicknameForm({ user }: Props) {
     },
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const { toast } = useToast()
+
   const { open: openConfetti } = useConfetti()
   const router = useRouter()
 

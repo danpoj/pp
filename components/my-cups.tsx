@@ -1,16 +1,16 @@
 'use client'
 
 import { Cup, CupType } from '@prisma/client'
+import axios from 'axios'
 import dayjs from 'dayjs'
 import { MessageSquare, Pencil, Trash2, Youtube } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ClipboardWithLink } from './clipboard-with-link'
-import { Button } from './ui/button'
-import axios from 'axios'
-import { useToast } from './ui/use-toast'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { ClipboardWithLink } from './clipboard-with-link'
+import { Button } from './ui/button'
+import { toast } from './ui/use-toast'
 
 type Props = {
   cups: (Cup & {
@@ -22,13 +22,12 @@ type Props = {
 }
 
 export default function MyCups({ cups }: Props) {
-  const { toast } = useToast()
   const router = useRouter()
-  const [isDeleting, setIsDeleting] = useState(false)
+  const [isDeletingId, setIsDeletingId] = useState<string | null>(null)
 
   const onDelete = async ({ cupId, type }: { cupId: string; type: CupType }) => {
     try {
-      setIsDeleting(true)
+      setIsDeletingId(cupId)
 
       await axios.delete(`/api/cup/${cupId}`)
 
@@ -44,7 +43,7 @@ export default function MyCups({ cups }: Props) {
     } catch (error) {
       console.log(error)
     } finally {
-      setIsDeleting(false)
+      setIsDeletingId(null)
     }
   }
 
@@ -106,12 +105,12 @@ export default function MyCups({ cups }: Props) {
 
           <div className='md:ml-auto flex flex-col justify-between mt-8 md:mt-0 shrink-0'>
             <div className='flex gap-1 justify-end'>
-              <Button variant='ghost' size='sm' className='text-xs h-8 rounded'>
+              <Button onClick={() => router.push(`/cup/${cup.id}/update`)} size='sm' className='text-xs h-8 rounded'>
                 수정 <Pencil className='w-3 h-3 ml-1' />
               </Button>
               <Button
-                disabled={isDeleting}
-                isLoading={isDeleting}
+                disabled={isDeletingId === cup.id}
+                isLoading={isDeletingId === cup.id}
                 onClick={() => onDelete({ cupId: cup.id, type: cup.type })}
                 size='sm'
                 variant='destructive'

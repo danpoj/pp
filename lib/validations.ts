@@ -29,3 +29,19 @@ export const createVideoSchema = z.object({
     message: '설명은 400글자를 넘길 수 없습니다',
   }),
 })
+
+export const titleSchema = z.object({
+  title: z.string().min(1, { message: '제목을 입력해주세요' }).max(50, {
+    message: '제목은 50글자를 넘길 수 없습니다',
+  }),
+})
+
+export const descriptionSchema = z.object({
+  description: z.string().min(1, { message: '설명을 입력해주세요' }).max(400, {
+    message: '설명은 400글자를 넘길 수 없습니다',
+  }),
+})
+
+export const itemDescriptionSchema = z.object({
+  description: z.string().max(40, { message: '40글자 이하의 설명을 작성해주세요' }),
+})

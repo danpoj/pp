@@ -68,8 +68,8 @@ export default function MyComments({ user }: Props) {
               className='rounded w-[50px] h-[50px] object-cover'
             />
             <div className='flex flex-col text-xs'>
-              <span className='font-semibold'>{comment.cup.title}</span>
-              <span className='text-slate-600'>{comment.cup.description}</span>
+              <span className='font-semibold max-w-[240px] truncate sm:max-w-[460px]'>{comment.cup.title}</span>
+              <span className='text-slate-600 truncate max-w-[240px] sm:max-w-[460px]'>{comment.cup.description}</span>
             </div>
           </div>
 
