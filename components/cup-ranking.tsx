@@ -9,6 +9,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ClipboardWithLink } from './clipboard-with-link'
 import CupCommentForm from './cup-comment-form'
+import { Button } from './ui/button'
+import { Pencil, Trash2 } from 'lucide-react'
+import CupCommentDeleteButton from './cup-comment-delete-button'
 
 export type ExtendedCup = Prisma.CupGetPayload<{
   include: {
@@ -131,7 +134,7 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
                       alt='user profile image'
                       width={40}
                       height={40}
-                      className='w-6 h-6 rounded-full'
+                      className='w-6 h-6 rounded-full bg-white'
                     />
                     <span className='font-bold text-xs bg-gradient-to-r from-cyan-600 via-blue-600 to-sky-600 w-fit bg-clip-text text-transparent'>
                       @{comment.user.nickname}
@@ -139,6 +142,10 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
                     <span className='text-xs text-primary/40 tracking-tighter font-light'>
                       {dayjs(comment.createdAt).format('YYYY.M.D')}
                     </span>
+
+                    {session?.user.id === comment.userId && (
+                      <CupCommentDeleteButton cupId={comment.cupId} commentId={comment.id} />
+                    )}
                   </div>
                   <span className='text-xs w-full'>{comment.text}</span>
                 </div>

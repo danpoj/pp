@@ -27,7 +27,7 @@ export const ClipboardWithLink = ({ path, title, ...props }: ClipboardWithLinkPr
       <Label className='text-xs font-bold text-primary/70 w-fit shrink-0'>{title ?? '링크 공유하기'}</Label>
       <div className='flex items-center gap-x-2 w-full'>
         <Input
-          className='bg-primary-foreground pl-0 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 w-full text-primary/40 text-xs font-medium'
+          className='bg-primary-foreground pl-2 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 w-full text-primary/40 text-xs font-medium'
           value={origin + path}
           readOnly
         />

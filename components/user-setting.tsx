@@ -23,7 +23,7 @@ export default function UserSetting({ session }: Props) {
         <Image src={session.user.image!} alt='logged in user image' fill className='dark:bg-white object-cover' />
         <div aria-hidden className='absolute bg-black inset-0 rounded-full opacity-5 hidden group-hover:block' />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end' className='w-72 text-primary/60 p-2 hidden sm:block'>
+      <DropdownMenuContent align='end' className='w-72  p-2 hidden sm:block'>
         <DropdownMenuLabel className='flex gap-2 items-center'>
           <div className='relative w-12 h-12 rounded-full overflow-hidden'>
             <Image src={session.user.image!} alt='logged in user image' fill className=' dark:bg-white object-cover' />
@@ -33,17 +33,20 @@ export default function UserSetting({ session }: Props) {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className='py-2.5 cursor-pointer' asChild>
-          <Link href='/my/cup'>
-            <Swords className='w-4 h-4 mr-2' /> 내 월드컵
-          </Link>
-        </DropdownMenuItem>
+        <div className='flex'>
+          <DropdownMenuItem className='py-2.5 cursor-pointer flex-1 flex justify-center' asChild>
+            <Link href='/my/cup'>
+              <Swords className='w-4 h-4 mr-2' /> 내 월드컵
+            </Link>
+          </DropdownMenuItem>
 
-        <DropdownMenuItem className='py-2.5 cursor-pointer' asChild>
-          <Link href='/my/comment'>
-            <MessageSquare className='w-4 h-4 mr-2' /> 내 댓글
-          </Link>
-        </DropdownMenuItem>
+          <DropdownMenuItem className='py-2.5 cursor-pointer flex-1 flex justify-center' asChild>
+            <Link href='/my/comment'>
+              <MessageSquare className='w-4 h-4 mr-2' /> 내 댓글
+            </Link>
+          </DropdownMenuItem>
+        </div>
+
         <DropdownMenuItem className='py-2.5 cursor-pointer' asChild>
           <Link href='/setting'>
             <User2 className='w-4 h-4 mr-2' /> 설정

@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google'
 import Providers from '@/components/provider/providers'
 import Modals from '@/components/modal/modals'
 
-const inter = Inter({ subsets: ['latin'], weight: ['500', '700', '900'] })
+const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800', '900'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.pingping.online'),

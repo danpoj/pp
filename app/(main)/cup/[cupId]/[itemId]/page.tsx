@@ -1,5 +1,6 @@
 import { ClipboardWithLink } from '@/components/clipboard-with-link'
 import ImageResult from '@/components/image-result'
+import ItemCommentDeleteButton from '@/components/item-comment-delete-button'
 import ItemCommentForm from '@/components/item-comment-form'
 import PlayConfetti from '@/components/play-confetti'
 import { Player } from '@/components/player'
@@ -9,7 +10,6 @@ import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 
 import dayjs from 'dayjs'
-import { CldImage } from 'next-cloudinary'
 import Image from 'next/image'
 
 type Props = {
@@ -92,7 +92,7 @@ export default async function Page({ params }: Props) {
                     alt='user profile image'
                     width={40}
                     height={40}
-                    className='w-6 h-6 rounded-full'
+                    className='w-6 h-6 rounded-full bg-white'
                   />
                   <span className='font-bold text-xs bg-gradient-to-r from-cyan-600 via-blue-600 to-sky-600 w-fit bg-clip-text text-transparent'>
                     @{comment.user.nickname}
@@ -100,6 +100,10 @@ export default async function Page({ params }: Props) {
                   <span className='text-xs text-primary/40 tracking-tighter'>
                     {dayjs(comment.createdAt).format('YYYY.M.D')}
                   </span>
+
+                  {session?.user.id === comment.userId && (
+                    <ItemCommentDeleteButton itemId={comment.itemId} commentId={comment.id} />
+                  )}
                 </div>
                 <span className='text-xs w-full'>{comment.text}</span>
               </div>

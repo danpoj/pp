@@ -57,18 +57,18 @@ export default function MobileMenu({ session }: Props) {
         <DropdownMenuSeparator />
 
         {session && (
-          <>
-            <DropdownMenuItem className='py-2.5 cursor-pointer' asChild>
+          <div className='flex'>
+            <DropdownMenuItem className='py-2.5 cursor-pointer flex-1 flex justify-center' asChild>
               <Link href='/my/cup'>
                 <Swords className='w-4 h-4 mr-2' /> 내 월드컵
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem className='py-2.5 cursor-pointer' asChild>
+            <DropdownMenuItem className='py-2.5 cursor-pointer flex-1 flex justify-center' asChild>
               <Link href='/my/comment'>
                 <MessageSquare className='w-4 h-4 mr-2' /> 내 댓글
               </Link>
             </DropdownMenuItem>
-          </>
+          </div>
         )}
         <DropdownMenuItem className='py-2.5 cursor-pointer' asChild>
           <Link href='/setting'>

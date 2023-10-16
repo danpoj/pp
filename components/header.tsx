@@ -25,7 +25,7 @@ export default function Header({ session }: Props) {
       <div className='flex items-center gap-4'>
         <PingpingLogo />
         <Button
-          className='hidden sm:block text-xs font-bold'
+          className='hidden sm:block text-xs font-bold h-8'
           onClick={() => {
             if (!session) {
               open('signin')

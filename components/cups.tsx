@@ -4,7 +4,7 @@ import db from '@/lib/db'
 import { useIntersection } from '@mantine/hooks'
 import type { Cup, User } from '@prisma/client'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { MessageSquare, YoutubeIcon } from 'lucide-react'
+import { ArrowRight, MessageSquare, YoutubeIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
@@ -12,6 +12,7 @@ import { BlurredImage } from './blurred-image'
 import { ClipboardButton } from './clipboard-button'
 import { buttonVariants } from './ui/button'
 import Image from 'next/image'
+import { cn } from '@/lib/utils'
 
 type Props = {
   initialCups: (Cup & {
@@ -138,9 +139,9 @@ export default function Cups({ initialCups }: Props) {
               <div className='flex items-center gap-1'>
                 <Link
                   href={`/cup/${cup.id}/ranking`}
-                  className={buttonVariants({ className: 'text-xs text-[11px] px-2 flex-1', size: 'sm' })}
+                  className={cn(buttonVariants({ className: 'text-xs text-[11px] px-2 flex-1', size: 'sm' }), 'h-8')}
                 >
-                  랭킹보기
+                  랭킹보기 <ArrowRight className='w-3 h-3 ml-1' />
                 </Link>
                 <ClipboardButton path={`/cup/${cup.id}`} />
                 {/* <LikeButton cup={cup} session={session} className='flex items-center gap-1 flex-1' /> */}

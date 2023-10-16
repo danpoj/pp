@@ -58,7 +58,7 @@ export default function MyComments({ user }: Props) {
       <span className='text-lg font-bold'>월드컵 랭킹 댓글 ({user.cupComments.length}개)</span>
 
       {user.cupComments.map((comment) => (
-        <div key={comment.id} className='space-y-1 p-2 shadow rounded'>
+        <div key={comment.id} className='space-y-1 p-2 rounded'>
           <div className='flex gap-1'>
             <Image
               src={comment.cup.thumbnail}
@@ -92,7 +92,7 @@ export default function MyComments({ user }: Props) {
             <span className='text-xs w-full'>{comment.text}</span>
           </div>
 
-          <div className='space-x-1 flex justify-end'>
+          <div className='space-x-1 flex justify-end items-center pb-1'>
             <Button
               onClick={() => router.push(`/cup/${comment.cup.id}/ranking`)}
               variant='ghost'
@@ -112,18 +112,20 @@ export default function MyComments({ user }: Props) {
               isLoading={isDeletingId === comment.id}
               variant='destructive'
               size='sm'
-              className='rounded text-xs h-8'
+              className='rounded text-xs h-7'
             >
               삭제 <Trash2 className='w-3 h-3 ml-1' />
             </Button>
           </div>
+
+          <Separator />
         </div>
       ))}
 
-      <span className='text-lg font-bold mt-20'>월드컵 랭킹 댓글 ({user.itemComments.length}개)</span>
+      <span className='text-lg font-bold mt-20'>컨텐츠 결과 댓글 ({user.itemComments.length}개)</span>
       <Separator className='my-2' />
       {user.itemComments.map((comment) => (
-        <div key={comment.id} className='space-y-1 p-2 shadow rounded'>
+        <div key={comment.id} className='space-y-1 p-2 rounded'>
           <div className='flex gap-1'>
             <Image
               src={comment.item.videoThumbnail || comment.item.url}
@@ -147,9 +149,9 @@ export default function MyComments({ user }: Props) {
             <span className='text-xs w-full'>{comment.text}</span>
           </div>
 
-          <div className='space-x-1 flex justify-end'>
+          <div className='space-x-1 flex justify-end pb-1'>
             <Button
-              onClick={() => router.push(`/cup/${comment.item.id}/ranking`)}
+              onClick={() => router.push(`/cup/${comment.item.id}/${comment.itemId}`)}
               variant='ghost'
               size='sm'
               className='rounded text-xs h-8'
@@ -172,6 +174,8 @@ export default function MyComments({ user }: Props) {
               삭제 <Trash2 className='w-3 h-3 ml-1' />
             </Button>
           </div>
+
+          <Separator className='' />
         </div>
       ))}
     </div>
