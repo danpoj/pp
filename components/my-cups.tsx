@@ -49,7 +49,7 @@ export default function MyCups({ cups }: Props) {
   }
 
   return (
-    <div className=' h-full flex flex-col gap-4 mt-10'>
+    <div className=' h-full flex flex-col gap-4 mt-10 pb-20'>
       {cups.map((cup, i) => (
         <div key={cup.id} className='flex p-2 flex-col md:flex-row relative'>
           <div className='absolute top-4 left-2 font-bold px-2 rounded flex gap-1 items-center'>
@@ -106,7 +106,7 @@ export default function MyCups({ cups }: Props) {
 
           <div className='md:ml-auto flex flex-col justify-between mt-8 md:mt-0 shrink-0'>
             <div className='flex gap-1 justify-end'>
-              <Button size='sm' className='text-xs h-8 rounded'>
+              <Button variant='ghost' size='sm' className='text-xs h-8 rounded'>
                 수정 <Pencil className='w-3 h-3 ml-1' />
               </Button>
               <Button

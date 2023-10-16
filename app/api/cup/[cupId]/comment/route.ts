@@ -35,7 +35,7 @@ export const POST = async (req: NextRequest, { params: { cupId } }: PostProps) =
       },
     })
 
-    if (!dbComment) new NextResponse('/api/cup/[cupId]/comment : 댓글 생성 실패', { status: 500 })
+    if (!dbComment) new NextResponse('/api/cup/[cupId]/comment : 월드컵 댓글 생성 실패', { status: 500 })
 
     return NextResponse.json(dbComment)
   } catch (error) {
@@ -43,6 +43,6 @@ export const POST = async (req: NextRequest, { params: { cupId } }: PostProps) =
       new NextResponse('/api/cup/[cupId]/comment : request 데이터 형식이 맞지 않습니다', { status: 400 })
     }
 
-    return new NextResponse('/api/cup/[cupId]/comment : 이미지 업로드 실패', { status: 500 })
+    return new NextResponse('/api/cup/[cupId]/comment : 월드컵 댓글 생성 실패', { status: 500 })
   }
 }

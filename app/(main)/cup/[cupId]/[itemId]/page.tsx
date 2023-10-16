@@ -92,7 +92,7 @@ export default async function Page({ params }: Props) {
                     alt='user profile image'
                     width={40}
                     height={40}
-                    className='w-6 h-6'
+                    className='w-6 h-6 rounded-full'
                   />
                   <span className='font-bold text-xs bg-gradient-to-r from-cyan-600 via-blue-600 to-sky-600 w-fit bg-clip-text text-transparent'>
                     @{comment.user.nickname}
