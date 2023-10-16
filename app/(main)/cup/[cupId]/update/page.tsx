@@ -1,5 +1,4 @@
-import ImageCupUpdateForm from '@/components/image-cup-update-form'
-import VideoCupUpdateForm from '@/components/video-cup-update.form'
+import CupUpdateForm from '@/components/cup-update-form'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { redirect } from 'next/navigation'
@@ -31,7 +30,7 @@ export default async function Page({ params: { cupId } }: Props) {
   return (
     <div className='h-full max-w-5xl mx-auto p-2 pt-10'>
       <span className='text-2xl font-semibold block mb-10'>월드컵 수정하기</span>
-      {cup.type === 'IMAGE' ? <ImageCupUpdateForm cup={cup} /> : <VideoCupUpdateForm cup={cup} />}
+      <CupUpdateForm cup={cup} />
     </div>
   )
 }

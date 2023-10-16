@@ -56,7 +56,7 @@ export default function MyComments({ user }: Props) {
   return (
     <div className='h-full flex flex-col mt-10 gap-2 pb-20'>
       <span className='text-lg font-bold'>월드컵 랭킹 댓글 ({user.cupComments.length}개)</span>
-
+      <Separator className='my-2' />
       {user.cupComments.map((comment) => (
         <div key={comment.id} className='space-y-1 p-2 rounded'>
           <div className='flex gap-1'>

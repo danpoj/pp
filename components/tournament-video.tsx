@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils'
 import { Player } from './player'
 import { Button } from './ui/button'
 import { updateCupPlayCountAndItemWinCount } from '@/lib/update-cup-playcount-and-item-wincount'
+import DescriptionText from './description-text'
 
 type Props = {
   cup: Prisma.CupGetPayload<{
@@ -121,6 +122,7 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
       className='w-[50%] h-full absolute left-0'
     >
       <Player url={selectedItem.url} width='100%' height='100%' />
+      <DescriptionText description={selectedItem.description} />
     </m.div>
   )
 }
@@ -135,6 +137,7 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
       className='w-[50%] h-full absolute right-0'
     >
       <Player url={selectedItem.url} width='100%' height='100%' />
+      <DescriptionText description={selectedItem.description} />
     </m.div>
   )
 }
@@ -159,12 +162,14 @@ const Initial = ({
         <Button variant='blue' className='rounded-none w-full h-[13%]'>
           선택하기
         </Button>
+        <DescriptionText description={items[index * 2].description} />
       </div>
       <div onClick={() => onRightClick(items[index * 2 + 1].id)} className='w-[50%] h-full absolute right-0'>
         <Player url={items[index * 2 + 1].url} width='100%' height='87%' />
         <Button variant='red' className='rounded-none w-full h-[13%]'>
           선택하기
         </Button>
+        <DescriptionText description={items[index * 2 + 1].description} />
       </div>
     </div>
   )

@@ -7,8 +7,10 @@ import { ClipboardWithLink } from '../clipboard-with-link'
 import { useModal } from '../provider/modal-provider'
 import { Button } from '../ui/button'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 export default function CreateCompleteModal() {
+  const router = useRouter()
   const { type, isOpen, close, data } = useModal()
 
   const isModalOpen = type === 'create-complete' && isOpen
@@ -28,7 +30,13 @@ export default function CreateCompleteModal() {
             <p className='text-xs truncate text-primary/60 mt-2'>{data?.description}</p>
             <ClipboardWithLink path={`/cup/${data?.cupId}`} className='mt-4' />
 
-            <Button className='mt-4 w-full'>
+            <Button
+              onClick={() => {
+                router.push(`/cup/${data?.cupId}/update`)
+                close()
+              }}
+              className='mt-4 w-full'
+            >
               월드컵 설정 하러가기 <ChevronRight className='w-5 h-5' />
             </Button>
           </div>

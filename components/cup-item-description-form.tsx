@@ -12,13 +12,16 @@ import axios from 'axios'
 import { Pencil, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { Item } from '@prisma/client'
+import { CupType, Item } from '@prisma/client'
+import { toast } from './ui/use-toast'
 
 type Props = {
   item: Item
+  contentsLength: number
+  cupType: CupType
 }
 
-export default function CupItemDescriptionForm({ item }: Props) {
+export default function CupItemDescriptionForm({ item, contentsLength, cupType }: Props) {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const form = useForm<z.infer<typeof itemDescriptionSchema>>({
@@ -33,6 +36,14 @@ export default function CupItemDescriptionForm({ item }: Props) {
       setIsSubmitting(true)
 
       await axios.patch(`/api/item/${item.id}`, values)
+
+      toast({
+        title: '컨텐츠 설명 업데이트 완료',
+        style: {
+          backgroundColor: '#111',
+          color: '#ddd',
+        },
+      })
     } catch (error) {
       console.log(error)
     } finally {
@@ -70,22 +81,39 @@ export default function CupItemDescriptionForm({ item }: Props) {
         </form>
       </Form>
 
-      <CupItemDeleteButton itemId={item.id} />
+      <CupItemDeleteButton itemId={item.id} contentsLength={contentsLength} cupType={cupType} />
     </div>
   )
 }
 
-function CupItemDeleteButton({ itemId }: { itemId: string }) {
+function CupItemDeleteButton({
+  itemId,
+  contentsLength,
+  cupType,
+}: {
+  itemId: string
+  contentsLength: number
+  cupType: CupType
+}) {
   const [isDeleting, setIsDeleting] = useState(false)
   const router = useRouter()
 
   const onDelete = async () => {
+    if (contentsLength <= 8) return
+
     try {
       setIsDeleting(true)
 
-      await axios.delete(`/api/item/${itemId}`)
+      await axios.post(`/api/item/${itemId}`, {
+        cupType,
+      })
 
       router.refresh()
+
+      toast({
+        title: '컨텐츠 삭제 완료',
+        variant: 'destructive',
+      })
     } catch (error) {
       console.log(error)
     } finally {
@@ -96,7 +124,7 @@ function CupItemDeleteButton({ itemId }: { itemId: string }) {
   return (
     <Button
       onClick={() => onDelete()}
-      disabled={isDeleting}
+      disabled={isDeleting || contentsLength <= 8}
       isLoading={isDeleting}
       size='sm'
       variant='destructive'

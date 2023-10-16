@@ -9,6 +9,7 @@ import { CldImage } from 'next-cloudinary'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { CupLength } from './tournament'
+import DescriptionText from './description-text'
 
 type Props = {
   cup: Prisma.CupGetPayload<{
@@ -128,6 +129,7 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
           sizes='50vw'
         />
       </div>
+      <DescriptionText description={selectedItem.description} />
     </m.div>
   )
 }
@@ -151,6 +153,7 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
           sizes='50vw'
         />
       </div>
+      <DescriptionText description={selectedItem.description} />
     </m.div>
   )
 }
@@ -184,6 +187,7 @@ const Initial = ({
             sizes='50vw'
           />
         </div>
+        <DescriptionText description={items[index * 2].description} />
       </button>
       <button
         onClick={() => onRightClick(items[index * 2 + 1].id)}
@@ -199,6 +203,7 @@ const Initial = ({
             sizes='50vw'
           />
         </div>
+        <DescriptionText description={items[index * 2 + 1].description} />
       </button>
     </div>
   )
