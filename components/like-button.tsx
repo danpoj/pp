@@ -8,6 +8,7 @@ import { useState } from 'react'
 import HeartEmoji from './heart-emoji'
 import { Button } from './ui/button'
 import { useRouter } from 'next/navigation'
+import { useModal } from './provider/modal-provider'
 
 type Props = {
   cup: Cup & {
@@ -28,10 +29,16 @@ export default function LikeButton({ cup, session, className, size }: Props) {
   const [likeCount, setLikeCount] = useState(cup._count.likes)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const router = useRouter()
+  const { open } = useModal()
 
   const isLiked = !!like
 
   const onClick = async () => {
+    if (!session) {
+      open('signin')
+      return
+    }
+
     try {
       setIsSubmitting(true)
 
