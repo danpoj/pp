@@ -60,7 +60,7 @@ export default function Cups({ initialCups, session, isLiked = false }: Props) {
   return (
     <>
       <ResponsiveMasonry className='px-1' columnsCountBreakPoints={{ 400: 2, 720: 3, 1100: 4, 1400: 5, 1700: 6 }}>
-        <Masonry gutter='4px'>
+        <Masonry gutter='4px' className='pb-20'>
           {cups.map((cup, index) => (
             <div
               key={index}

@@ -1,9 +1,9 @@
-import { cn } from '@/lib/utils'
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter, Noto_Sans } from 'next/font/google'
-import Providers from '@/components/provider/providers'
 import Modals from '@/components/modal/modals'
+import Providers from '@/components/provider/providers'
+import { cn } from '@/lib/utils'
+import type { Metadata } from 'next'
+import { Noto_Sans } from 'next/font/google'
+import './globals.css'
 
 const notoSans = Noto_Sans({
   subsets: ['latin'],

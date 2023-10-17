@@ -18,7 +18,7 @@ type Props = {
 
 export default function CupUpdateForm({ cup }: Props) {
   return (
-    <div>
+    <div className='pb-20'>
       <CupTitleForm title={cup.title} cupId={cup.id} />
       <CupDescriptionForm description={cup.description} cupId={cup.id} />
 
