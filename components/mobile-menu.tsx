@@ -16,6 +16,7 @@ import Link from 'next/link'
 import { Button } from './ui/button'
 import { useModal } from './provider/modal-provider'
 import { useRouter } from 'next/navigation'
+import HeartEmoji from './heart-emoji'
 
 type Props = {
   session: Session | null
@@ -57,18 +58,26 @@ export default function MobileMenu({ session }: Props) {
         <DropdownMenuSeparator />
 
         {session && (
-          <div className='flex'>
-            <DropdownMenuItem className='py-2.5 cursor-pointer flex-1 flex justify-center' asChild>
-              <Link href='/my/cup'>
-                <Swords className='w-4 h-4 mr-2' /> 내 월드컵
+          <>
+            <div className='flex'>
+              <DropdownMenuItem className='py-2.5 cursor-pointer flex-1 flex justify-center' asChild>
+                <Link href='/my/cup'>
+                  <Swords className='w-4 h-4 mr-2' /> 내 월드컵
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem className='py-2.5 cursor-pointer flex-1 flex justify-center' asChild>
+                <Link href='/my/comment'>
+                  <MessageSquare className='w-4 h-4 mr-2' /> 내 댓글
+                </Link>
+              </DropdownMenuItem>
+            </div>
+
+            <DropdownMenuItem className='py-2.5 cursor-pointer flex-1 flex justify-center gap-1' asChild>
+              <Link href='/my/likes'>
+                <HeartEmoji className='w-4 h-4 fill-red-500 stroke-red-500' /> 좋아요
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem className='py-2.5 cursor-pointer flex-1 flex justify-center' asChild>
-              <Link href='/my/comment'>
-                <MessageSquare className='w-4 h-4 mr-2' /> 내 댓글
-              </Link>
-            </DropdownMenuItem>
-          </div>
+          </>
         )}
         <DropdownMenuItem className='py-2.5 cursor-pointer' asChild>
           <Link href='/setting'>

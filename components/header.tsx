@@ -95,11 +95,11 @@ export default function Header({ session }: Props) {
                 onClick={() => open('signin')}
                 variant='outline'
                 size='sm'
-                className='text-xs font-bold transition-none'
+                className='text-xs font-bold transition-none h-8'
               >
                 로그인
               </Button>
-              <Button onClick={() => open('signup')} variant='blue' size='sm' className='text-xs font-bold'>
+              <Button onClick={() => open('signup')} variant='blue' size='sm' className='text-xs font-bold h-8'>
                 회원가입
               </Button>
             </>

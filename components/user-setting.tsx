@@ -11,6 +11,7 @@ import type { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import HeartEmoji from './heart-emoji'
 
 type Props = {
   session: Session
@@ -46,6 +47,12 @@ export default function UserSetting({ session }: Props) {
             </Link>
           </DropdownMenuItem>
         </div>
+
+        <DropdownMenuItem className='py-2.5 cursor-pointer flex-1 flex justify-center gap-1' asChild>
+          <Link href='/my/likes'>
+            <HeartEmoji className='w-4 h-4 fill-red-500 stroke-red-500' /> 좋아요
+          </Link>
+        </DropdownMenuItem>
 
         <DropdownMenuItem className='py-2.5 cursor-pointer' asChild>
           <Link href='/setting'>
