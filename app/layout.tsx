@@ -1,11 +1,14 @@
 import { cn } from '@/lib/utils'
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Noto_Sans } from 'next/font/google'
 import Providers from '@/components/provider/providers'
 import Modals from '@/components/modal/modals'
 
-const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800', '900'] })
+const notoSans = Noto_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.pingping.online'),
@@ -42,7 +45,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='ko' suppressHydrationWarning>
-      <body className={cn('antialiased text-sm', inter.className)}>
+      <body className={cn('antialiased text-sm', notoSans.className)}>
         <Providers>
           {children}
           <Modals />
