@@ -13,7 +13,7 @@ import { BlurredImage } from './blurred-image'
 import { ClipboardButton } from './clipboard-button'
 import { buttonVariants } from './ui/button'
 import LikeButton from './like-button'
-import { Session } from 'next-auth'
+import type { Session } from 'next-auth'
 
 type CupWithUser = Cup & {
   _count: {
@@ -28,11 +28,12 @@ type CupWithUser = Cup & {
 type Props = {
   initialCups: CupWithUser[]
   session: Session | null
+  isLiked?: boolean
 }
 
-export default function Cups({ initialCups, session }: Props) {
+export default function Cups({ initialCups, session, isLiked = false }: Props) {
   const [cups, setCups] = useState<CupWithUser[]>(initialCups)
-  const [isFinished, setIsFinished] = useState(false)
+  const [isFinished, setIsFinished] = useState(initialCups.length < 24)
 
   const { ref, inView } = useInView({
     threshold: 1,
@@ -40,9 +41,8 @@ export default function Cups({ initialCups, session }: Props) {
 
   const getCups = async () => {
     const lastCupId = cups[cups.length - 1].id
-    console.log('fetching...')
 
-    const { data } = (await axios.get(`/api/cup?lastCupId=${lastCupId}`)) as { data: CupWithUser[] }
+    const { data } = (await axios.get(`/api/cup?lastCupId=${lastCupId}&isLiked=${isLiked}`)) as { data: CupWithUser[] }
     if (data.length === 0) {
       setIsFinished(true)
       return

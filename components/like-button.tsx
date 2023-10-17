@@ -24,7 +24,7 @@ type Props = {
 }
 
 export default function LikeButton({ cup, session, className, size }: Props) {
-  const [like, setLike] = useState(cup.likes.find((like) => like.userId === session?.user.id))
+  const [like, setLike] = useState(cup.likes?.find((like) => like.userId === session?.user.id))
   const [likeCount, setLikeCount] = useState(cup._count.likes)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const router = useRouter()

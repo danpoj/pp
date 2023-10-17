@@ -1,15 +1,15 @@
 'use client'
 
-import PingpingLogo from './pingping-logo'
-import { Button, buttonVariants } from './ui/button'
-import { useModal } from './provider/modal-provider'
-import { ThemeMenu } from './theme-menu'
+import { cn } from '@/lib/utils'
 import type { Session } from 'next-auth'
 import { usePathname, useRouter } from 'next/navigation'
-import UserSetting from './user-setting'
 import MobileMenu from './mobile-menu'
-import Link from 'next/link'
-import { cn } from '@/lib/utils'
+import PingpingLogo from './pingping-logo'
+import { useModal } from './provider/modal-provider'
+import { ThemeMenu } from './theme-menu'
+import { Button } from './ui/button'
+import UserSetting from './user-setting'
+import HeartEmoji from './heart-emoji'
 
 type Props = {
   session: Session | null
@@ -62,6 +62,19 @@ export default function Header({ session }: Props) {
             )}
           >
             내 댓글
+          </button>
+
+          <button
+            onClick={() => {
+              if (!session) open('signin')
+              router.push('/my/likes')
+            }}
+            className={cn(
+              'hidden sm:flex items-center justify-center px-2 h-8 hover:bg-primary/5 rounded gap-0.5',
+              path === '/my/likes' && 'underline underline-offset-4'
+            )}
+          >
+            <HeartEmoji className='fill-red-500 stroke-red-500 mr-1' /> 좋아요
           </button>
         </div>
       </div>
