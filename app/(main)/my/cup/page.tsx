@@ -15,10 +15,14 @@ export default async function Page() {
     include: {
       _count: true,
     },
+
+    orderBy: {
+      createdAt: 'desc',
+    },
   })
 
   if (!cups) {
-    return <div></div>
+    return <div>{/* TODO */}</div>
   }
 
   return (

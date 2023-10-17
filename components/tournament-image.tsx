@@ -5,11 +5,11 @@ import { updateCupPlayCountAndItemWinCount } from '@/lib/update-cup-playcount-an
 import { cn } from '@/lib/utils'
 import type { Item, Prisma } from '@prisma/client'
 import { motion as m } from 'framer-motion'
-import { CldImage } from 'next-cloudinary'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { CupLength } from './tournament'
 import DescriptionText from './description-text'
+import { CupLength } from './tournament'
 
 type Props = {
   cup: Prisma.CupGetPayload<{
@@ -120,12 +120,11 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
       className='w-[70%] sm:w-[60%] h-full absolute left-0'
     >
       <div className='w-full h-full relative'>
-        <CldImage
+        <Image
           className='absolute inset-0 object-contain'
           fill
-          src={selectedItem?.publicId!}
+          src={selectedItem?.url!}
           alt={selectedItem?.description || 'tournament left image'}
-          quality={10}
           sizes='50vw'
         />
       </div>
@@ -144,12 +143,11 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
       className='w-[70%] sm:w-[60%] h-full absolute right-0'
     >
       <div className='w-full h-full relative'>
-        <CldImage
+        <Image
           className='absolute inset-0 object-contain'
           fill
-          src={selectedItem?.publicId!}
+          src={selectedItem?.url!}
           alt={selectedItem?.description || 'tournament left image'}
-          quality={10}
           sizes='50vw'
         />
       </div>
@@ -178,12 +176,11 @@ const Initial = ({
         className='w-full h-1/2 top-0 sm:w-[50%] sm:h-full sm:left-0 absolute'
       >
         <div className='w-full h-full relative'>
-          <CldImage
+          <Image
             className='absolute inset-0 object-contain'
             fill
-            src={items[index * 2].publicId!}
+            src={items[index * 2].url}
             alt={items[index * 2].description || 'tournament left image'}
-            quality={10}
             sizes='50vw'
           />
         </div>
@@ -194,12 +191,11 @@ const Initial = ({
         className='w-full h-1/2 bottom-0 sm:w-[50%] sm:h-full sm:right-0 absolute'
       >
         <div className='w-full h-full relative'>
-          <CldImage
+          <Image
             className='absolute inset-0 object-contain'
             fill
-            src={items[index * 2 + 1].publicId!}
+            src={items[index * 2 + 1].url}
             alt={items[index * 2 + 1].description || 'tournament left image'}
-            quality={10}
             sizes='50vw'
           />
         </div>

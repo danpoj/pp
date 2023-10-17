@@ -35,17 +35,25 @@ export default function LikeButton({ cup, session, className, size }: Props) {
     try {
       setIsSubmitting(true)
 
-      const { data } = await axios.patch(`/api/cup/${cup.id}/like`, { isLiked, like })
-
       if (isLiked) {
         setLikeCount((prev) => prev - 1)
       } else {
         setLikeCount((prev) => prev + 1)
       }
 
+      const { data } = await axios.patch(`/api/cup/${cup.id}/like`, { isLiked, like })
+
       setLike(data.like)
+
+      router.refresh()
     } catch (error) {
       console.log(error)
+
+      if (isLiked) {
+        setLikeCount((prev) => prev + 1)
+      } else {
+        setLikeCount((prev) => prev - 1)
+      }
     } finally {
       setIsSubmitting(false)
     }
