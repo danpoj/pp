@@ -1,18 +1,14 @@
 'use client'
 
-import db from '@/lib/db'
-import { useIntersection } from '@mantine/hooks'
+import { cn } from '@/lib/utils'
 import type { Cup, User } from '@prisma/client'
-import { useInfiniteQuery } from '@tanstack/react-query'
 import { ArrowRight, MessageSquare, YoutubeIcon } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 import { BlurredImage } from './blurred-image'
 import { ClipboardButton } from './clipboard-button'
 import { buttonVariants } from './ui/button'
-import Image from 'next/image'
-import { cn } from '@/lib/utils'
 
 type Props = {
   initialCups: (Cup & {
@@ -26,60 +22,12 @@ type Props = {
 }
 
 export default function Cups({ initialCups }: Props) {
-  const lastCupRef = useRef<HTMLElement>(null)
-  const { ref, entry } = useIntersection({
-    root: lastCupRef.current,
-    threshold: 1,
-  })
-
-  const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
-    ['cups'],
-    async ({ pageParam = 1 }) => {
-      const data = await db.cup.findMany({
-        skip: pageParam,
-        take: 20,
-        orderBy: {
-          createdAt: 'desc',
-        },
-        include: {
-          _count: true,
-          user: true,
-        },
-      })
-
-      return data
-    },
-
-    {
-      getNextPageParam: (page, pages) => {
-        // if (page.isLast) {
-        //   return undefined
-        // }
-
-        return pages.length + 1
-      },
-
-      initialData: {
-        pages: [initialCups],
-        pageParams: [0],
-      },
-    }
-  )
-
-  useEffect(() => {
-    if (entry?.isIntersecting) {
-      fetchNextPage()
-    }
-  }, [fetchNextPage, entry?.isIntersecting])
-
-  const cups = data?.pages.flatMap((page) => page) ?? initialCups
-
   return (
     <ResponsiveMasonry columnsCountBreakPoints={{ 400: 2, 720: 3, 1100: 4, 1400: 5, 1700: 6 }}>
       <Masonry gutter='4px'>
-        {cups.map((cup, index) => (
+        {initialCups.map((cup, index) => (
           <div
-            ref={index === cups.length - 1 ? null : null}
+            ref={index === initialCups.length - 1 ? null : null}
             key={cup.id}
             className='rounded-lg overflow-hidden shadow dark:bg-border/20 border'
           >
@@ -150,9 +98,9 @@ export default function Cups({ initialCups }: Props) {
           </div>
         ))}
 
-        {isFetchingNextPage && (
+        {/* {isFetchingNextPage && (
           <div className='bg-primary/10 h-40 col-span-1 sm:col-span-2 md:col-span-3 xl:col-span-4 2xl:col-span-5' />
-        )}
+        )} */}
       </Masonry>
     </ResponsiveMasonry>
   )

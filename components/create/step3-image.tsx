@@ -49,6 +49,7 @@ export default function Step3Image({ cupData }: Props) {
 
       openModal('create-complete', data)
 
+      router.refresh()
       router.push('/')
 
       openConfetti()
