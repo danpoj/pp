@@ -105,7 +105,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                 </div>
               </Link>
               <div className='h-full flex flex-col px-1 pt-2 pb-1.5 break-all gap-1'>
-                <p>{cup.title}</p>
+                <p className='font-bold'>{cup.title}</p>
                 <p className='text-xs text-primary/50 font-medium'>{cup.description}</p>
 
                 <div className='flex items-center gap-1 my-2'>
