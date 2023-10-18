@@ -158,15 +158,15 @@ const Initial = ({
   return (
     <div className={cn('w-full h-full', clicked === 'INITIAL' ? 'opacity-100' : 'opacity-0')}>
       <div onClick={() => onLeftClick(items[index * 2].id)} className='w-[50%] h-full absolute left-0'>
-        <Player url={items[index * 2].url} width='100%' height='87%' />
-        <Button variant='blue' className='rounded-none w-full h-[13%]'>
+        <Player url={items[index * 2].url} width='100%' height='89%' />
+        <Button variant='blue' className='rounded-none w-full h-[11%]'>
           선택하기
         </Button>
         <DescriptionText description={items[index * 2].description} />
       </div>
       <div onClick={() => onRightClick(items[index * 2 + 1].id)} className='w-[50%] h-full absolute right-0'>
-        <Player url={items[index * 2 + 1].url} width='100%' height='87%' />
-        <Button variant='red' className='rounded-none w-full h-[13%]'>
+        <Player url={items[index * 2 + 1].url} width='100%' height='89%' />
+        <Button variant='red' className='rounded-none w-full h-[11%]'>
           선택하기
         </Button>
         <DescriptionText description={items[index * 2 + 1].description} />

@@ -41,7 +41,10 @@ export default function Header({ session }: Props) {
         <div className='flex ml-3 gap-1 text-xs'>
           <button
             onClick={() => {
-              if (!session) open('signin')
+              if (!session) {
+                open('signin')
+                return
+              }
               router.push('/my/cup')
             }}
             className={cn(
@@ -53,7 +56,10 @@ export default function Header({ session }: Props) {
           </button>
           <button
             onClick={() => {
-              if (!session) open('signin')
+              if (!session) {
+                open('signin')
+                return
+              }
               router.push('/my/comment')
             }}
             className={cn(
