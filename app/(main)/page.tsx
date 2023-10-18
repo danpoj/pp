@@ -1,3 +1,4 @@
+import { CoupangDynamicBanner1 } from '@/components/adsense/coupang-dynamic-banner'
 import Cups from '@/components/cups'
 import FilterCups from '@/components/filter-cups'
 import { getSession } from '@/lib/auth'
@@ -39,14 +40,7 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
       <div className='flex flex-col-reverse md:flex-row p-4 gap-4 md:gap-8'>
         <FilterCups />
 
-        <iframe
-          src='https://ads-partners.coupang.com/widgets.html?id=720296&template=carousel&trackingCode=AF0905237&subId=&width=680&height=140&tsource='
-          width='100%'
-          height='140'
-          frameBorder='0'
-          scrolling='no'
-          referrerPolicy='unsafe-url'
-        ></iframe>
+        <CoupangDynamicBanner1 />
       </div>
 
       <Cups initialCups={initialCups} session={session} type={type} order={order} />
