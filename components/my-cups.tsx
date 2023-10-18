@@ -66,14 +66,24 @@ export default function MyCups({ cups }: Props) {
 
           <div className='flex gap-3'>
             <Link href={`/cup/${cup.id}`} className='shrink-0'>
-              <CldImage
-                src={cup.thumbnail}
-                width={480}
-                height={480}
-                alt={cup.title}
-                className='rounded object-cover w-52 h-52'
-                quality={30}
-              />
+              {cup.type === 'IMAGE' ? (
+                <CldImage
+                  src={cup.thumbnail}
+                  width={480}
+                  height={480}
+                  alt={cup.title}
+                  className='rounded object-cover w-52 h-52'
+                  quality={30}
+                />
+              ) : (
+                <Image
+                  src={cup.thumbnail}
+                  width={480}
+                  height={480}
+                  alt={cup.title}
+                  className='rounded object-cover w-52 h-52'
+                />
+              )}
             </Link>
             <div className='flex flex-col'>
               <div className='flex flex-col justify-between h-full'>

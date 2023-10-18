@@ -4,17 +4,24 @@ import { cn } from '@/lib/utils'
 import type { Cup, Like, User } from '@prisma/client'
 import axios from 'axios'
 import { ArrowRight, Loader2, MessageSquare, YoutubeIcon } from 'lucide-react'
+import type { Session } from 'next-auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
+import { ResponsiveMasonry } from 'react-responsive-masonry'
 import { BlurredImage } from './blurred-image'
 import { ClipboardButton } from './clipboard-button'
-import { buttonVariants } from './ui/button'
 import LikeButton from './like-button'
-import type { Session } from 'next-auth'
+import { buttonVariants } from './ui/button'
+import dynamic from 'next/dynamic'
 
+const Masonry = dynamic(() => import('react-responsive-masonry'), {
+  ssr: false,
+})
+
+type Type = 'all' | 'video' | 'image'
+type Order = 'popular' | 'like' | 'newest'
 type CupWithUser = Cup & {
   _count: {
     items: number
@@ -29,9 +36,11 @@ type Props = {
   initialCups: CupWithUser[]
   session: Session | null
   isLiked?: boolean
+  type?: Type
+  order?: Order
 }
 
-export default function Cups({ initialCups, session, isLiked = false }: Props) {
+export default function Cups({ initialCups, session, isLiked = false, type = 'all', order = 'popular' }: Props) {
   const [cups, setCups] = useState<CupWithUser[]>(initialCups)
   const [isFinished, setIsFinished] = useState(initialCups.length < 24)
 
@@ -42,7 +51,10 @@ export default function Cups({ initialCups, session, isLiked = false }: Props) {
   const getCups = async () => {
     const lastCupId = cups[cups.length - 1].id
 
-    const { data } = (await axios.get(`/api/cup?lastCupId=${lastCupId}&isLiked=${isLiked}`)) as { data: CupWithUser[] }
+    const { data } = (await axios.get(
+      `/api/cup?lastCupId=${lastCupId}&isLiked=${isLiked}&type=${type}&order=${order}`
+    )) as { data: CupWithUser[] }
+
     if (data.length === 0) {
       setIsFinished(true)
       return

@@ -1,28 +1,35 @@
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
+import { getQuery } from '@/lib/get-query'
 import { NextRequest, NextResponse } from 'next/server'
+
+type Type = 'all' | 'video' | 'image'
+type Order = 'popular' | 'like' | 'newest'
 
 export const GET = async (req: NextRequest) => {
   try {
     const url = new URL(req.url)
-    const lastCupId = url.searchParams.get('lastCupId')
+    const lastCupId = url.searchParams.get('lastCupId') as string | undefined
     const isLiked = url.searchParams.get('isLiked') === 'true' || false
+    let type = url.searchParams.get('type') as Type | undefined
+    let order = url.searchParams.get('order') as Order | undefined
 
-    if (!lastCupId) return new NextResponse('/api/cup : "lastCupId" search params가 없습니다', { status: 400 })
+    if (!(type === 'all' || type === 'video' || type === 'image' || type == null)) type = 'all'
+    if (!(order === 'popular' || order === 'like' || order === 'newest' || order == null)) order = 'popular'
 
-    let cups
+    const query = getQuery({
+      lastCupId,
+      type,
+      order,
+    })
 
     if (isLiked) {
       const session = await getSession()
 
-      if (!session) return new NextResponse('/api/cup : 인증된 유저가 아닙니다', { status: 401 })
+      if (!session) return new NextResponse('Unauthorized', { status: 401 })
 
-      cups = await db.cup.findMany({
-        take: 2,
-        skip: 1,
-        cursor: {
-          id: lastCupId,
-        },
+      const cups = await db.cup.findMany({
+        ...query,
 
         where: {
           likes: {
@@ -31,34 +38,12 @@ export const GET = async (req: NextRequest) => {
             },
           },
         },
-
-        orderBy: {
-          createdAt: 'desc',
-        },
-        include: {
-          _count: true,
-          user: true,
-          likes: true,
-        },
       })
-    } else {
-      cups = await db.cup.findMany({
-        take: 2,
-        skip: 1,
-        cursor: {
-          id: lastCupId,
-        },
 
-        orderBy: {
-          createdAt: 'desc',
-        },
-        include: {
-          _count: true,
-          user: true,
-          likes: true,
-        },
-      })
+      return NextResponse.json(cups)
     }
+
+    const cups = await db.cup.findMany(query)
 
     return NextResponse.json(cups)
   } catch (error) {

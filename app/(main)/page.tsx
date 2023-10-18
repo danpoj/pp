@@ -1,23 +1,44 @@
 import Cups from '@/components/cups'
+import FilterCups from '@/components/filter-cups'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
+import { getQuery } from '@/lib/get-query'
+import { Cup, Like, User } from '@prisma/client'
+import { Suspense } from 'react'
 
-export default async function Page() {
-  const initialCups = await db.cup.findMany({
-    skip: 0,
-    take: 24,
+type Type = 'all' | 'video' | 'image'
+type Order = 'popular' | 'like' | 'newest'
+type CupWithUser = Cup & {
+  _count: {
+    items: number
+    comments: number
+    likes: number
+  }
+  user: User
+  likes: Like[]
+}
 
-    orderBy: {
-      createdAt: 'desc',
-    },
-    include: {
-      _count: true,
-      user: true,
-      likes: true,
-    },
+export default async function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
+  let type = (searchParams.type ?? 'all') as Type
+  let order = (searchParams.order ?? 'polular') as Order
+
+  if (!(type === 'all' || type === 'video' || type === 'image')) type = 'all'
+  if (!(order === 'popular' || order === 'like' || order === 'newest')) order = 'popular'
+
+  const query = getQuery({
+    type,
+    order,
   })
+
+  const initialCups = (await db.cup.findMany(query)) as CupWithUser[]
 
   const session = await getSession()
 
-  return <Cups initialCups={initialCups} session={session} />
+  return (
+    <>
+      <FilterCups />
+
+      <Cups initialCups={initialCups} session={session} type={type} order={order} />
+    </>
+  )
 }

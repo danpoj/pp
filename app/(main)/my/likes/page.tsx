@@ -1,18 +1,27 @@
 import Cups from '@/components/cups'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
-import { redirect } from 'next/navigation'
 import type { Cup, Like, User } from '@prisma/client'
+import { redirect } from 'next/navigation'
+
+type CupWithUser = Cup & {
+  _count: {
+    items: number
+    comments: number
+    likes: number
+  }
+  user: User
+  likes: Like[]
+}
 
 export default async function Page() {
   const session = await getSession()
 
   if (!session) redirect('/')
 
-  const initialCups = await db.cup.findMany({
+  const initialCups = (await db.cup.findMany({
     skip: 0,
     take: 24,
-
     where: {
       likes: {
         some: {
@@ -20,16 +29,12 @@ export default async function Page() {
         },
       },
     },
-
-    orderBy: {
-      createdAt: 'desc',
-    },
     include: {
       _count: true,
       user: true,
       likes: true,
     },
-  })
+  })) as CupWithUser[]
 
   return <Cups initialCups={initialCups} session={session} isLiked />
 }
