@@ -5,7 +5,6 @@ import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { getQuery } from '@/lib/get-query'
 import { Cup, Like, User } from '@prisma/client'
-import { Suspense } from 'react'
 
 type Type = 'all' | 'video' | 'image'
 type Order = 'popular' | 'like' | 'newest'
@@ -18,6 +17,8 @@ type CupWithUser = Cup & {
   user: User
   likes: Like[]
 }
+
+export const revalidate = 30
 
 export default async function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
   let type = (searchParams.type ?? 'all') as Type
