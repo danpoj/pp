@@ -36,7 +36,18 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
 
   return (
     <>
-      <FilterCups />
+      <div className='flex flex-col-reverse md:flex-row p-4 gap-4 md:gap-8'>
+        <FilterCups />
+
+        <iframe
+          src='https://ads-partners.coupang.com/widgets.html?id=720296&template=carousel&trackingCode=AF0905237&subId=&width=680&height=140&tsource='
+          width='100%'
+          height='140'
+          frameBorder='0'
+          scrolling='no'
+          referrerPolicy='unsafe-url'
+        ></iframe>
+      </div>
 
       <Cups initialCups={initialCups} session={session} type={type} order={order} />
     </>

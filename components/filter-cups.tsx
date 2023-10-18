@@ -29,7 +29,7 @@ export default function FilterCups() {
   }
 
   return (
-    <div className='py-6 px-2 mx-2 flex gap-6 items-center'>
+    <div className='py-6 px-2 mx-2 flex gap-6 items-center shrink-0'>
       <RadioGroup value={type}>
         <div
           onClick={() =>
