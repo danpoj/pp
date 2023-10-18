@@ -16,7 +16,6 @@ import LikeButton from './like-button'
 import { buttonVariants } from './ui/button'
 import dynamic from 'next/dynamic'
 import {
-  CoupangDynamicBanner2,
   CoupangDynamicBannerFood,
   CoupangDynamicBannerOnly,
   CoupangDynamicBannerWomen,
