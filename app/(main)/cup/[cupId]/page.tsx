@@ -50,19 +50,19 @@ export async function generateMetadata(
   }
 }
 
-export const revalidate = 30
+// export const revalidate = 30
 
-export async function generateStaticParams() {
-  const cups = await db.cup.findMany({
-    select: {
-      id: true,
-    },
-  })
+// export async function generateStaticParams() {
+//   const cups = await db.cup.findMany({
+//     select: {
+//       id: true,
+//     },
+//   })
 
-  return cups.map((cup) => ({
-    cupId: cup.id,
-  }))
-}
+//   return cups.map((cup) => ({
+//     cupId: cup.id,
+//   }))
+// }
 
 export default async function Page({ params: { cupId } }: Props) {
   const cup = await db.cup.findUnique({

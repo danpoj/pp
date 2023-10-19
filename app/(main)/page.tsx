@@ -18,8 +18,6 @@ type CupWithUser = Cup & {
   likes: Like[]
 }
 
-export const revalidate = 30
-
 export default async function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
   let type = (searchParams.type ?? 'all') as Type
   let order = (searchParams.order ?? 'polular') as Order
