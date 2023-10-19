@@ -29,7 +29,7 @@ export default async function Image({ params: { cupId } }: { params: { cupId: st
     (
       <div
         style={{
-          backgroundImage: `url("${cup?.thumbnail}")`,
+          backgroundImage: `url(${cup?.thumbnail})`,
           backgroundSize: 'contain',
 
           fontSize: 12,
