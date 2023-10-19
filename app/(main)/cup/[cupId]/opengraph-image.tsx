@@ -24,25 +24,26 @@ export default async function Image({ params: { cupId } }: { params: { cupId: st
 
   return new ImageResponse(
     cup ? (
-      <div
-        style={{
-          backgroundImage: `url('${cup?.thumbnail}')`,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundColor: '#000',
-
-          fontSize: 12,
-
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {cup?.title}
-      </div>
+      <img src={cup.thumbnail} alt={cup.title} className='w-full h-full absolute inset-0 object-cover' />
     ) : (
+      //   <div
+      //     style={{
+      //       backgroundImage: `url('${cup?.thumbnail}')`,
+      //       backgroundSize: 'contain',
+      //       backgroundRepeat: 'no-repeat',
+      //       backgroundColor: '#000',
+
+      //       fontSize: 12,
+
+      //       width: '100%',
+      //       height: '100%',
+      //       display: 'flex',
+      //       alignItems: 'center',
+      //       justifyContent: 'center',
+      //     }}
+      //   >
+      //     {cup?.title}
+      //   </div>
       <div
         style={{
           fontSize: 12,
