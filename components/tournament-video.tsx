@@ -119,7 +119,7 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
       transition={{
         duration: 0.2,
       }}
-      className='w-[50%] h-full absolute left-0'
+      className='w-[80%] aspect-video absolute left-0'
     >
       <Player url={selectedItem.url} width='100%' height='100%' />
       <DescriptionText description={selectedItem.description} />
@@ -134,7 +134,7 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
       transition={{
         duration: 0.2,
       }}
-      className='w-[50%] h-full absolute right-0'
+      className='w-[80%] aspect-video absolute right-0'
     >
       <Player url={selectedItem.url} width='100%' height='100%' />
       <DescriptionText description={selectedItem.description} />
@@ -157,16 +157,26 @@ const Initial = ({
 }) => {
   return (
     <div className={cn('w-full h-full', clicked === 'INITIAL' ? 'opacity-100' : 'opacity-0')}>
-      <div onClick={() => onLeftClick(items[index * 2].id)} className='w-[50%] h-full absolute left-0'>
-        <Player url={items[index * 2].url} width='100%' height='89%' />
-        <Button variant='blue' className='rounded-none w-full h-[11%]'>
+      <div
+        onClick={() => onLeftClick(items[index * 2].id)}
+        className='w-full h-[50%] sm:w-[50%] sm:h-full absolute top-0 sm:left-0'
+      >
+        <div className='w-full h-[84%] sm:h-[89%]'>
+          <Player url={items[index * 2].url} width='100%' height='100%' />
+        </div>
+        <Button variant='blue' className='rounded-none w-full h-[16%] sm:h-[11%]'>
           선택하기
         </Button>
         <DescriptionText description={items[index * 2].description} />
       </div>
-      <div onClick={() => onRightClick(items[index * 2 + 1].id)} className='w-[50%] h-full absolute right-0'>
-        <Player url={items[index * 2 + 1].url} width='100%' height='89%' />
-        <Button variant='red' className='rounded-none w-full h-[11%]'>
+      <div
+        onClick={() => onRightClick(items[index * 2 + 1].id)}
+        className='w-full h-[50%] sm:w-[50%] sm:h-full absolute bottom-0 sm:right-0'
+      >
+        <div className='w-full h-[84%] sm:h-[89%]'>
+          <Player url={items[index * 2 + 1].url} width='100%' height='100%' />
+        </div>
+        <Button variant='red' className='rounded-none w-full h-[16%] sm:h-[11%]'>
           선택하기
         </Button>
         <DescriptionText description={items[index * 2 + 1].description} />

@@ -21,7 +21,7 @@ export default function Tournament({ cup }: Props) {
   const [cupLength, setCupLength] = useState<CupLength>(8)
 
   return (
-    <div className='h-full w-full'>
+    <div className='h-full max-h-full w-full'>
       {isLanding ? (
         <TournamentLanding cup={cup} cupLength={cupLength} setCupLength={setCupLength} setisLanding={setIsLanding} />
       ) : (
