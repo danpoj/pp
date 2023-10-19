@@ -8,7 +8,7 @@ export const size = {
   height: 630,
 }
 
-export const contentType = 'image/gif'
+export const contentType = 'image/png'
 
 // Image generation
 export default async function Image({ params: { cupId } }: { params: { cupId: string } }) {
@@ -28,6 +28,8 @@ export default async function Image({ params: { cupId } }: { params: { cupId: st
         style={{
           backgroundImage: `url('${cup?.thumbnail}')`,
           backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundColor: '#000',
 
           fontSize: 12,
 
