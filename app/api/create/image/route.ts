@@ -6,6 +6,8 @@ import { nanoid } from 'nanoid'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
+export const config = { api: { bodyParser: { sizeLimit: '1000mb' } } }
+
 export const POST = async (req: NextRequest) => {
   try {
     const session = await getSession()
