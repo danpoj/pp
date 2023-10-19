@@ -23,6 +23,7 @@ export const POST = async (req: NextRequest) => {
     const promises = images.map((image) =>
       cloudinary.uploader.upload(image, {
         folder: `cup/${folderName}`,
+        // transformation: [{ quality: 50 }],
       })
     )
 
