@@ -10,6 +10,8 @@ import Link from 'next/link'
 import { ClipboardWithLink } from './clipboard-with-link'
 import CupCommentDeleteButton from './cup-comment-delete-button'
 import CupCommentForm from './cup-comment-form'
+import { useConfetti } from './provider/confetti-provider'
+import { useEffect } from 'react'
 
 export type ExtendedCup = Prisma.CupGetPayload<{
   include: {
@@ -34,6 +36,12 @@ export type ExtendedCup = Prisma.CupGetPayload<{
 }
 
 export default function CupRanking({ session, ...cup }: ExtendedCup) {
+  const { open: openConfetti } = useConfetti()
+
+  useEffect(() => {
+    openConfetti()
+  }, [])
+
   return (
     <div className='flex flex-col'>
       <div className='flex flex-col gap-1 sm:flex-row sm:h-[20rem]'>
