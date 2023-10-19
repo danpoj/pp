@@ -76,8 +76,11 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
 
   return (
     <>
-      <ResponsiveMasonry className='px-1' columnsCountBreakPoints={{ 0: 1, 440: 2, 720: 3, 1100: 4, 1400: 5, 1700: 6 }}>
-        <Masonry gutter='4px' className='pb-20'>
+      <ResponsiveMasonry
+        className='px-1 w-full'
+        columnsCountBreakPoints={{ 0: 1, 440: 2, 720: 3, 1100: 4, 1400: 5, 1700: 6 }}
+      >
+        <Masonry gutter='4px' className='pb-20 w-full'>
           {cups.map((cup, index) => {
             if (index % 8 === 0) {
               const i = Math.floor(Math.random() * 3)

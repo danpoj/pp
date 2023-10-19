@@ -34,7 +34,7 @@ export default function TournamentLanding({ cup, cupLength, setCupLength, setisL
   }, [])
 
   return (
-    <div className='h-full flex items-center justify-center relative'>
+    <div className='h-full flex items-center justify-center relative w-full'>
       <ImageRotation images={cup.items.slice(0, 4)} currentIndex={currentIndex} type={cup.type} />
 
       <Modal

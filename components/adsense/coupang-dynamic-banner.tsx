@@ -13,7 +13,7 @@ export function CoupangDynamicBanner1() {
 
 export function CoupangDynamicBannerWomen() {
   return (
-    <div className='rounded-lg overflow-hidden dark:bg-border/20 border'>
+    <div className='rounded-lg overflow-hidden dark:bg-border/20 border w-full'>
       <iframe
         src='https://ads-partners.coupang.com/widgets.html?id=720306&template=carousel&trackingCode=AF0905237&subId=&width=300&height=300&tsource='
         width='100%'
@@ -28,7 +28,7 @@ export function CoupangDynamicBannerWomen() {
 
 export function CoupangDynamicBannerFood() {
   return (
-    <div className='rounded-lg overflow-hidden dark:bg-border/20 border'>
+    <div className='rounded-lg overflow-hidden dark:bg-border/20 border w-full'>
       <iframe
         src='https://ads-partners.coupang.com/widgets.html?id=720306&template=carousel&trackingCode=AF0905237&subId=&width=300&height=300&tsource='
         width='300'
@@ -43,7 +43,7 @@ export function CoupangDynamicBannerFood() {
 
 export function CoupangDynamicBannerOnly() {
   return (
-    <div className='rounded-lg overflow-hidden dark:bg-border/20 border'>
+    <div className='rounded-lg overflow-hidden dark:bg-border/20 border w-full'>
       <iframe
         src='https://ads-partners.coupang.com/widgets.html?id=720306&template=carousel&trackingCode=AF0905237&subId=&width=300&height=300&tsource='
         width='300'

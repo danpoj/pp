@@ -38,7 +38,7 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
 
   return (
     <>
-      <div className='flex flex-col-reverse md:flex-row p-4 gap-4 md:gap-8'>
+      <div className='flex flex-col-reverse md:flex-row p-4 gap-4 md:gap-8 w-full'>
         <FilterCups />
 
         <CoupangDynamicBanner1 />
