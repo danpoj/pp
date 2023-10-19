@@ -1,6 +1,7 @@
 import CupRanking from '@/components/cup-ranking'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
+import { Metadata, ResolvingMetadata } from 'next'
 import { notFound } from 'next/navigation'
 
 type Props = {
@@ -9,19 +10,44 @@ type Props = {
   }
 }
 
-// export const revalidate = 30
+export async function generateMetadata(
+  { params: { cupId } }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata | undefined> {
+  const cup = await db.cup.findUnique({
+    where: {
+      id: cupId,
+    },
+  })
 
-// export async function generateStaticParams() {
-//   const cups = await db.cup.findMany({
-//     select: {
-//       id: true,
-//     },
-//   })
+  if (!cup) return
 
-//   return cups.map((cup) => ({
-//     cupId: cup.id,
-//   }))
-// }
+  return {
+    title: `PingPing 이상형 월드컵 랭킹페이지 | ${cup.title}`,
+    description: cup.description,
+
+    openGraph: {
+      title: `PingPing 이상형 월드컵 랭킹페이지 | ${cup.title}`,
+      description: cup.description,
+      url: `https://www.pingping.online/cup/${cup.id}`,
+      siteName: 'PingPing',
+      locale: 'ko_KR',
+      type: 'website',
+      images: [
+        {
+          url: cup.thumbnail,
+        },
+      ],
+    },
+
+    twitter: {
+      card: 'summary_large_image',
+      title: `PingPing 이상형 월드컵 랭킹페이지 | ${cup.title}`,
+      description: cup.description,
+      images: [cup.thumbnail],
+    },
+  }
+}
 
 export default async function Page({ params: { cupId } }: Props) {
   const cup = await db.cup.findUnique({

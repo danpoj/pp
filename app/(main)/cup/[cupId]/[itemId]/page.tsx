@@ -10,6 +10,7 @@ import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 
 import dayjs from 'dayjs'
+import { Metadata, ResolvingMetadata } from 'next'
 import Image from 'next/image'
 
 type Props = {
@@ -19,21 +20,44 @@ type Props = {
   }
 }
 
-// export const revalidate = 30
+export async function generateMetadata(
+  { params: { itemId } }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata | undefined> {
+  const item = await db.item.findUnique({
+    where: {
+      id: itemId,
+    },
+  })
 
-// export async function generateStaticParams() {
-//   const items = await db.item.findMany({
-//     select: {
-//       id: true,
-//       cupId: true,
-//     },
-//   })
+  if (!item) return
 
-//   return items.map((item) => ({
-//     itemId: item.id,
-//     cupId: item.cupId,
-//   }))
-// }
+  return {
+    title: `PingPing 이상형 월드컵 이미지 결과페이지 | ${item.description || ''}`,
+    description: item.description ?? 'PingPing 이상형 월드컵 이미지 결과페이지',
+
+    openGraph: {
+      title: `PingPing 이상형 월드컵 이미지 결과페이지 | ${item.description || ''}`,
+      description: item.description ?? 'PingPing 이상형 월드컵 이미지 결과페이지',
+      url: `https://www.pingping.online/cup/${item.cupId}/${item.id}`,
+      siteName: 'PingPing',
+      locale: 'ko_KR',
+      type: 'website',
+      images: [
+        {
+          url: item.url.includes('youtube') ? item.videoThumbnail! : item.url,
+        },
+      ],
+    },
+
+    twitter: {
+      card: 'summary_large_image',
+      title: `PingPing 이상형 월드컵 이미지 결과페이지 | ${item.description || ''}`,
+      description: item.description ?? 'PingPing 이상형 월드컵 이미지 결과페이지',
+      images: [item.url.includes('youtube') ? item.videoThumbnail! : item.url],
+    },
+  }
+}
 
 export default async function Page({ params }: Props) {
   const image = await db.item.findUnique({
