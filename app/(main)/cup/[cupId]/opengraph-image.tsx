@@ -1,3 +1,4 @@
+import db from '@/lib/db'
 import { ImageResponse } from 'next/server'
 
 // Route segment config
@@ -14,23 +15,19 @@ export const contentType = 'image/png'
 
 // Image generation
 export default async function Image({ params: { cupId } }: { params: { cupId: string } }) {
+  const cup = await db.cup.findUnique({
+    where: {
+      id: cupId,
+    },
+    select: {
+      thumbnail: true,
+      title: true,
+    },
+  })
+
   return new ImageResponse(
-    (
-      // ImageResponse JSX element
-      <div
-        style={{
-          fontSize: 128,
-          background: 'white',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        About Acme
-      </div>
-    ),
+    <img src={cup?.thumbnail} alt={cup?.title} className='w-full h-full object-contain' />,
+
     {
       ...size,
     }
