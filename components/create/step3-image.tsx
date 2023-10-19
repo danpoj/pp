@@ -42,10 +42,17 @@ export default function Step3Image({ cupData }: Props) {
   const upload = async () => {
     try {
       setIsUploading(true)
-      const { data } = await axios.post('/api/create/image', {
-        images,
-        ...cupData,
-      })
+      const { data } = await axios.post(
+        '/api/create/image',
+        {
+          images,
+          ...cupData,
+        },
+        {
+          maxBodyLength: Infinity,
+          maxContentLength: Infinity,
+        }
+      )
 
       openModal('create-complete', data)
 
