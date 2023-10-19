@@ -11,7 +11,7 @@ export const size = {
   height: 630,
 }
 
-export const contentType = 'image/png'
+export const contentType = 'image/gif'
 
 // Image generation
 export default async function Image({ params: { cupId } }: { params: { cupId: string } }) {
@@ -26,10 +26,10 @@ export default async function Image({ params: { cupId } }: { params: { cupId: st
   })
 
   return new ImageResponse(
-    (
+    cup ? (
       <div
         style={{
-          backgroundImage: `url(${cup?.thumbnail})`,
+          backgroundImage: `url('${cup?.thumbnail}')`,
           backgroundSize: 'contain',
 
           fontSize: 12,
@@ -42,6 +42,20 @@ export default async function Image({ params: { cupId } }: { params: { cupId: st
         }}
       >
         {cup?.title}
+      </div>
+    ) : (
+      <div
+        style={{
+          fontSize: 12,
+
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        pingping 월드컵
       </div>
     ),
     {
