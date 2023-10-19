@@ -24,12 +24,7 @@ export default async function Image({ params: { cupId } }: { params: { cupId: st
 
   return new ImageResponse(
     cup ? (
-      <div className='w-full h-full relative'>
-        <img src={cup.thumbnail} alt={cup.title} className='w-full h-full absolute inset-0 object-cover' />
-        <div className='absolute inset-0 flex items-center justify-center'>
-          <span className='px-3 py-2 bg-black/50 text-xs'>{cup.title}</span>
-        </div>
-      </div>
+      <img src={cup.thumbnail} alt={cup.title} className='w-full h-full absolute inset-0 object-cover' />
     ) : (
       //   <div
       //     style={{
