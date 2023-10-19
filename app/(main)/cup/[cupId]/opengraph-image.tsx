@@ -1,9 +1,6 @@
 import db from '@/lib/db'
 import { ImageResponse } from 'next/server'
 
-// Route segment config
-export const runtime = 'edge'
-
 // Image metadata
 export const alt = 'PingPing'
 export const size = {
