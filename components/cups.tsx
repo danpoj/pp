@@ -238,7 +238,9 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
         </Masonry>
       </ResponsiveMasonry>
 
-      {!isFinished && (
+      {isFinished ? (
+        <div className='w-full flex items-center justify-center py-10'>총 {cups.length}개의 컨텐츠 불러오기 완료</div>
+      ) : (
         <div ref={ref} className='w-full flex items-center justify-center'>
           <Loader2 className='animate-spin w-12 h-12' />
         </div>
