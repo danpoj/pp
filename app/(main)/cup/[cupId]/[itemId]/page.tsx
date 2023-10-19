@@ -19,6 +19,22 @@ type Props = {
   }
 }
 
+export const revalidate = 30
+
+export async function generateStaticParams() {
+  const items = await db.item.findMany({
+    select: {
+      id: true,
+      cupId: true,
+    },
+  })
+
+  return items.map((item) => ({
+    itemId: item.id,
+    cupId: item.cupId,
+  }))
+}
+
 export default async function Page({ params }: Props) {
   const image = await db.item.findUnique({
     where: {
