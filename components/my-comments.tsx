@@ -66,7 +66,6 @@ export default function MyComments({ user }: Props) {
               alt={comment.cup.title}
               width={200}
               height={200}
-              quality={20}
               className='rounded w-[50px] h-[50px] object-cover'
             />
             <div className='flex flex-col text-xs'>

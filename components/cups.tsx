@@ -7,7 +7,7 @@ import { ArrowRight, Loader2, MessageSquare, YoutubeIcon } from 'lucide-react'
 import type { Session } from 'next-auth'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { ResponsiveMasonry } from 'react-responsive-masonry'
 import { BlurredImage } from './blurred-image'
@@ -86,7 +86,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
               const i = Math.floor(Math.random() * 3)
 
               return (
-                <>
+                <Fragment key={cup.id}>
                   <div key={index} className='rounded-lg overflow-hidden shadow dark:bg-border/20 border'>
                     <Link href={`/cup/${cup.id}`} className='hover:opacity-90 transition group'>
                       <div className='relative overflow-hidden'>
@@ -161,12 +161,12 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                   {i === 0 && <CoupangDynamicBannerFood />}
                   {i === 1 && <CoupangDynamicBannerOnly />}
                   {i === 2 && <CoupangDynamicBannerWomen />}
-                </>
+                </Fragment>
               )
             }
 
             return (
-              <div key={index} className='rounded-lg overflow-hidden shadow dark:bg-border/20 border'>
+              <div key={cup.id} className='rounded-lg overflow-hidden shadow dark:bg-border/20 border'>
                 <Link href={`/cup/${cup.id}`} className='hover:opacity-90 transition group'>
                   <div className='relative overflow-hidden'>
                     {cup.thumbnail ? (

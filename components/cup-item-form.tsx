@@ -14,14 +14,26 @@ type Props = {
 export default function CupItemForm({ item, cupType, contentsLength }: Props) {
   return (
     <div key={item.id} className='flex w-full gap-2 items-center'>
-      <div className='w-44 h-44 relative shrink-0'>
-        <CldImage
-          src={cupType === 'IMAGE' ? item.url : item.videoThumbnail!}
-          alt={item.description || 'cup item'}
-          fill
-          className='object-contain'
-          quality={20}
-        />
+      <div className='w-44 h-44 relative shrink-0 flex items-center justify-center'>
+        {cupType === 'IMAGE' ? (
+          <CldImage
+            src={item.url}
+            alt={item.description || 'cup item'}
+            width={item.width! / 2}
+            height={item.height! / 2}
+            className='object-contain w-full'
+            quality={50}
+          />
+        ) : (
+          <Image
+            src={item.videoThumbnail!}
+            alt={item.description || 'cup item'}
+            width={item.width! / 2}
+            height={item.height! / 2}
+            className='object-contain w-full'
+            quality={50}
+          />
+        )}
       </div>
 
       <CupItemDescriptionForm item={item} contentsLength={contentsLength} cupType={cupType} />

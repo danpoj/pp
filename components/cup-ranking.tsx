@@ -8,10 +8,8 @@ import { CldImage } from 'next-cloudinary'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ClipboardWithLink } from './clipboard-with-link'
-import CupCommentForm from './cup-comment-form'
-import { Button } from './ui/button'
-import { Pencil, Trash2 } from 'lucide-react'
 import CupCommentDeleteButton from './cup-comment-delete-button'
+import CupCommentForm from './cup-comment-form'
 
 export type ExtendedCup = Prisma.CupGetPayload<{
   include: {
@@ -43,13 +41,26 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
           <Link
             href={`/cup/${cup.id}/${item.id}`}
             key={item.id}
-            className='rounded overflow-hidden relative h-[24rem] sm:h-full sm:w-1/3'
+            className='rounded overflow-hidden relative h-[24rem] sm:h-full sm:w-1/3 flex items-center justify-center'
           >
             {cup.type === 'IMAGE' && (
-              <CldImage src={item.publicId!} alt='cup image' fill className='object-contain' quality={20} />
+              <CldImage
+                src={item.publicId!}
+                alt='cup image'
+                width={item.width! / 1.2}
+                height={item.height! / 1.2}
+                className='object-contain w-full h-full'
+                quality={50}
+              />
             )}
             {cup.type === 'VIDEO' && (
-              <Image src={item.videoThumbnail!} alt='cup image' fill className='object-contain' quality={20} />
+              <Image
+                src={item.videoThumbnail!}
+                alt='cup image'
+                width={item.width! / 1.2}
+                height={item.height! / 1.2}
+                className='object-contain w-full h-full'
+              />
             )}
             <div
               className={cn(
@@ -73,13 +84,26 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
           <Link
             href={`/cup/${cup.id}/${item.id}`}
             key={item.id}
-            className='rounded overflow-hidden relative shrink-0 h-full aspect-square'
+            className='rounded overflow-hidden relative shrink-0 h-full aspect-square flex items-center justify-center'
           >
             {cup.type === 'IMAGE' && (
-              <CldImage src={item.publicId!} alt='cup image' fill className='object-contain' quality={20} />
+              <CldImage
+                src={item.publicId!}
+                alt='cup image'
+                width={item.width! / 1.2}
+                height={item.height! / 1.2}
+                className='object-contain w-full h-full'
+                quality={50}
+              />
             )}
             {cup.type === 'VIDEO' && (
-              <Image src={item.videoThumbnail!} alt='cup image' fill className='object-contain' quality={20} />
+              <Image
+                src={item.videoThumbnail!}
+                alt='cup image'
+                width={item.width! / 1.2}
+                height={item.height! / 1.2}
+                className='object-contain w-full h-full'
+              />
             )}
             <div
               className={cn(
