@@ -5,7 +5,7 @@ import { ImageResponse } from 'next/server'
 export const runtime = 'edge'
 
 // Image metadata
-export const alt = 'About Acme'
+export const alt = 'PingPing'
 export const size = {
   width: 1200,
   height: 630,
@@ -26,8 +26,24 @@ export default async function Image({ params: { cupId } }: { params: { cupId: st
   })
 
   return new ImageResponse(
-    <img src={cup?.thumbnail} alt={cup?.title} className='w-full h-full object-contain' />,
+    (
+      <div
+        style={{
+          backgroundImage: `url("${cup?.thumbnail}")`,
+          backgroundSize: 'contain',
 
+          fontSize: 12,
+
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        {cup?.title}
+      </div>
+    ),
     {
       ...size,
     }
