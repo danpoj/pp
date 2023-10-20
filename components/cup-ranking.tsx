@@ -11,6 +11,7 @@ import { ClipboardWithLink } from './clipboard-with-link'
 import CupCommentDeleteButton from './cup-comment-delete-button'
 import CupCommentForm from './cup-comment-form'
 import { useConfetti } from './provider/confetti-provider'
+import { CldImage } from 'next-cloudinary'
 
 export type ExtendedCup = Prisma.CupGetPayload<{
   include: {
@@ -51,21 +52,21 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
             className='rounded overflow-hidden relative h-[24rem] sm:h-full sm:w-1/3 flex items-center justify-center'
           >
             {cup.type === 'IMAGE' && (
-              <Image
-                src={item.url!}
+              <CldImage
+                src={item.publicId!}
                 alt='cup image'
-                width={item.width! / 1.2}
-                height={item.height! / 1.2}
+                width={item.width!}
+                height={item.height!}
+                quality={40}
                 className='object-contain w-full h-full'
-                quality={50}
               />
             )}
             {cup.type === 'VIDEO' && (
               <Image
                 src={item.videoThumbnail!}
                 alt='cup image'
-                width={item.width! / 1.2}
-                height={item.height! / 1.2}
+                width={item.width!}
+                height={item.height!}
                 className='object-contain w-full h-full'
               />
             )}
@@ -94,21 +95,21 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
             className='rounded overflow-hidden relative shrink-0 h-full aspect-square flex items-center justify-center'
           >
             {cup.type === 'IMAGE' && (
-              <Image
-                src={item.url!}
+              <CldImage
+                src={item.publicId!}
                 alt='cup image'
-                width={item.width! / 1.2}
-                height={item.height! / 1.2}
+                width={item.width!}
+                height={item.height!}
+                quality={40}
                 className='object-contain w-full h-full'
-                quality={50}
               />
             )}
             {cup.type === 'VIDEO' && (
               <Image
                 src={item.videoThumbnail!}
                 alt='cup image'
-                width={item.width! / 1.2}
-                height={item.height! / 1.2}
+                width={item.width!}
+                height={item.height!}
                 className='object-contain w-full h-full'
               />
             )}

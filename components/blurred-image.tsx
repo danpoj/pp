@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils'
 import { CupType } from '@prisma/client'
 import Image from 'next/image'
 import { useState } from 'react'
+import { CldImage } from 'next-cloudinary'
 
 type Props = {
   thumbnail: string
@@ -19,12 +20,12 @@ export const BlurredImage = ({ thumbnail, title, width, height, type }: Props) =
   return (
     <>
       {type === 'IMAGE' ? (
-        <Image
+        <CldImage
           src={thumbnail}
           alt={title}
-          quality={20}
-          width={width / 3}
-          height={height / 3}
+          quality={40}
+          width={width}
+          height={height}
           className={cn(
             'object-cover duration-150 ease-in-out group-hover:scale-105 group-active:scale-110 w-full',
             isLoading ? ' blur scale-105' : 'blur-0 scale-100'
@@ -36,9 +37,9 @@ export const BlurredImage = ({ thumbnail, title, width, height, type }: Props) =
         <Image
           src={thumbnail}
           alt={title}
-          quality={20}
-          width={width / 3}
-          height={height / 3}
+          quality={40}
+          width={width}
+          height={height}
           className={cn(
             'object-cover duration-150 ease-in-out group-hover:scale-105 group-active:scale-110 w-full',
             isLoading ? ' blur scale-105' : 'blur-0 scale-100'

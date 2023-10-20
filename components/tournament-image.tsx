@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import DescriptionText from './description-text'
 import { CupLength } from './tournament'
+import { CldImage } from 'next-cloudinary'
 
 type Props = {
   cup: Prisma.CupGetPayload<{
@@ -120,12 +121,13 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
       className='w-[70%] sm:w-[60%] h-full absolute left-0'
     >
       <div className='w-full h-full relative'>
-        <Image
-          className='absolute inset-0 object-contain'
-          fill
-          src={selectedItem?.url!}
-          alt={selectedItem?.description || 'tournament left image'}
-          sizes='50vw'
+        <CldImage
+          className='absolute inset-0 object-contain w-full h-full'
+          width={selectedItem.width!}
+          height={selectedItem.height!}
+          quality={40}
+          src={selectedItem.url!}
+          alt={selectedItem.description || 'tournament left image'}
         />
       </div>
       <DescriptionText description={selectedItem.description} />
@@ -143,12 +145,13 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
       className='w-[70%] sm:w-[60%] h-full absolute right-0'
     >
       <div className='w-full h-full relative'>
-        <Image
-          className='absolute inset-0 object-contain'
-          fill
-          src={selectedItem?.url!}
-          alt={selectedItem?.description || 'tournament left image'}
-          sizes='50vw'
+        <CldImage
+          className='absolute inset-0 object-contain w-full h-full'
+          width={selectedItem.width!}
+          height={selectedItem.height!}
+          quality={40}
+          src={selectedItem.url!}
+          alt={selectedItem.description || 'tournament left image'}
         />
       </div>
       <DescriptionText description={selectedItem.description} />
@@ -176,12 +179,13 @@ const Initial = ({
         className='w-full h-1/2 top-0 sm:w-[50%] sm:h-full sm:left-0 absolute'
       >
         <div className='w-full h-full relative'>
-          <Image
-            className='absolute inset-0 object-contain'
-            fill
+          <CldImage
+            className='absolute inset-0 object-contain w-full h-full'
+            width={items[index * 2].width!}
+            height={items[index * 2].height!}
+            quality={40}
             src={items[index * 2].url}
             alt={items[index * 2].description || 'tournament left image'}
-            sizes='50vw'
           />
         </div>
         <DescriptionText description={items[index * 2].description} />
@@ -191,12 +195,13 @@ const Initial = ({
         className='w-full h-1/2 bottom-0 sm:w-[50%] sm:h-full sm:right-0 absolute'
       >
         <div className='w-full h-full relative'>
-          <Image
-            className='absolute inset-0 object-contain'
-            fill
+          <CldImage
+            className='absolute inset-0 object-contain w-full h-full'
+            width={items[index * 2 + 1].width!}
+            height={items[index * 2 + 1].height!}
+            quality={40}
             src={items[index * 2 + 1].url}
             alt={items[index * 2 + 1].description || 'tournament left image'}
-            sizes='50vw'
           />
         </div>
         <DescriptionText description={items[index * 2 + 1].description} />

@@ -1,7 +1,7 @@
 'use client'
 
 import { User } from '@prisma/client'
-import { Loader2, Pencil } from 'lucide-react'
+import { FileWarning, Loader2, Pencil } from 'lucide-react'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Button } from './ui/button'
@@ -92,6 +92,10 @@ export default function UserAvatarForm({ user, avatars }: Props) {
 
   return (
     <div className='flex flex-col items-center'>
+      <p className='flex gap-1 items-center text-xs text-blue-500'>
+        <FileWarning className='w-4 h-4' />
+        <span className='font-bold'>4MB</span>이하의 이미지
+      </p>
       <Popover open={open}>
         <PopoverTrigger asChild>
           <button
