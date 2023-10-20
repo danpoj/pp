@@ -9,10 +9,10 @@ import { Button } from './ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
 import axios from 'axios'
-import { CldImage } from 'next-cloudinary'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { toast, useToast } from './ui/use-toast'
 import { useConfetti } from './provider/confetti-provider'
+import { toast } from './ui/use-toast'
 
 type Props = {
   user: User
@@ -101,7 +101,7 @@ export default function UserAvatarForm({ user, avatars }: Props) {
             {isUploading ? (
               <Loader2 className='animate-spin' />
             ) : (
-              <CldImage fill src={user.image!} alt='user profile image' className='object-cover' quality={20} />
+              <Image fill src={user.image!} alt='user profile image' className='object-cover' quality={20} />
             )}
 
             <span className='hidden group-hover:flex bg-black/40 inset-0 absolute rounded-full items-center justify-center'>
@@ -141,7 +141,7 @@ export default function UserAvatarForm({ user, avatars }: Props) {
               key={avatar}
               className='hover:outline hover:outline-slate-400 w-14 h-14 relative rounded-full bg-white'
             >
-              <CldImage src={avatar} alt='default profile image' fill className='p-3' quality={20} />
+              <Image src={avatar} alt='default profile image' fill className='p-3' quality={20} />
             </button>
           ))}
         </PopoverContent>

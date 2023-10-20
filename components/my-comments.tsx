@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Button } from './ui/button'
 import { Separator } from './ui/separator'
-import { CldImage } from 'next-cloudinary'
 
 type Props = {
   user: User & {
@@ -61,7 +60,7 @@ export default function MyComments({ user }: Props) {
       {user.cupComments.map((comment) => (
         <div key={comment.id} className='space-y-1 p-2 rounded'>
           <div className='flex gap-1'>
-            <CldImage
+            <Image
               src={comment.cup.thumbnail}
               alt={comment.cup.title}
               width={200}
@@ -128,7 +127,7 @@ export default function MyComments({ user }: Props) {
       {user.itemComments.map((comment) => (
         <div key={comment.id} className='space-y-1 p-2 rounded'>
           <div className='flex gap-1'>
-            <CldImage
+            <Image
               src={comment.item.videoThumbnail || comment.item.url}
               alt={comment.item.description || 'cup result image'}
               width={50}

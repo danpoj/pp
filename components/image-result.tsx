@@ -1,6 +1,6 @@
 'use client'
 
-import { CldImage } from 'next-cloudinary'
+import Image from 'next/image'
 import { useState } from 'react'
 import { Button } from './ui/button'
 
@@ -19,7 +19,7 @@ export default function ImageResult({ src, description }: Props) {
 
   return (
     <div className='relative w-full h-[24rem] shrink-0 lg:shrink lg:h-full'>
-      <CldImage
+      <Image
         fill
         src={src}
         alt={description ?? 'cup image'}

@@ -4,14 +4,13 @@ import { cn } from '@/lib/utils'
 import type { Prisma } from '@prisma/client'
 import dayjs from 'dayjs'
 import type { Session } from 'next-auth'
-import { CldImage } from 'next-cloudinary'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect } from 'react'
 import { ClipboardWithLink } from './clipboard-with-link'
 import CupCommentDeleteButton from './cup-comment-delete-button'
 import CupCommentForm from './cup-comment-form'
 import { useConfetti } from './provider/confetti-provider'
-import { useEffect } from 'react'
 
 export type ExtendedCup = Prisma.CupGetPayload<{
   include: {
@@ -52,8 +51,8 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
             className='rounded overflow-hidden relative h-[24rem] sm:h-full sm:w-1/3 flex items-center justify-center'
           >
             {cup.type === 'IMAGE' && (
-              <CldImage
-                src={item.publicId!}
+              <Image
+                src={item.url!}
                 alt='cup image'
                 width={item.width! / 1.2}
                 height={item.height! / 1.2}
@@ -95,8 +94,8 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
             className='rounded overflow-hidden relative shrink-0 h-full aspect-square flex items-center justify-center'
           >
             {cup.type === 'IMAGE' && (
-              <CldImage
-                src={item.publicId!}
+              <Image
+                src={item.url!}
                 alt='cup image'
                 width={item.width! / 1.2}
                 height={item.height! / 1.2}

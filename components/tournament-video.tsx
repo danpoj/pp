@@ -1,17 +1,16 @@
 'use client'
 
-import type { Item, Prisma } from '@prisma/client'
-import { CupLength } from './tournament'
 import { shuffle } from '@/lib/shuffle'
-import { CldImage } from 'next-cloudinary'
-import { useEffect, useRef, useState } from 'react'
+import { updateCupPlayCountAndItemWinCount } from '@/lib/update-cup-playcount-and-item-wincount'
+import { cn } from '@/lib/utils'
+import type { Item, Prisma } from '@prisma/client'
 import { motion as m } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { cn } from '@/lib/utils'
-import { Player } from './player'
-import { Button } from './ui/button'
-import { updateCupPlayCountAndItemWinCount } from '@/lib/update-cup-playcount-and-item-wincount'
+import { useEffect, useRef, useState } from 'react'
 import DescriptionText from './description-text'
+import { Player } from './player'
+import { CupLength } from './tournament'
+import { Button } from './ui/button'
 
 type Props = {
   cup: Prisma.CupGetPayload<{

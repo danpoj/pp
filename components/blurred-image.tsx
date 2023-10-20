@@ -1,10 +1,9 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { useState } from 'react'
-import { CldImage } from 'next-cloudinary'
-import Image from 'next/image'
 import { CupType } from '@prisma/client'
+import Image from 'next/image'
+import { useState } from 'react'
 
 type Props = {
   thumbnail: string
@@ -20,7 +19,7 @@ export const BlurredImage = ({ thumbnail, title, width, height, type }: Props) =
   return (
     <>
       {type === 'IMAGE' ? (
-        <CldImage
+        <Image
           src={thumbnail}
           alt={title}
           quality={20}

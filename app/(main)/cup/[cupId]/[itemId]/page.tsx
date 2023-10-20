@@ -85,7 +85,7 @@ export default async function Page({ params }: Props) {
     <div className='h-full max-w-6xl mx-auto p-2 flex flex-col lg:flex-row lg:justify-center lg:items-center lg:gap-6 relative'>
       <PlayConfetti />
       {image.cup.type === 'IMAGE' ? (
-        <ImageResult src={image.publicId!} description={image.description} />
+        <ImageResult src={image.url!} description={image.description} />
       ) : (
         <div className='relative w-full h-[24rem] shrink-0 lg:shrink lg:h-full rounded-xl overflow-hidden'>
           <Player url={image.url} width='100%' height='100%' />

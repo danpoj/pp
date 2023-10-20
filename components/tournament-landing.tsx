@@ -3,11 +3,10 @@
 import { cn } from '@/lib/utils'
 import type { CupType, Item, Prisma } from '@prisma/client'
 import { Check, ChevronDown, ChevronRight } from 'lucide-react'
-import { CldImage } from 'next-cloudinary'
-import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react'
-import { Button } from './ui/button'
-import { CupLength } from './tournament'
 import Image from 'next/image'
+import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react'
+import { CupLength } from './tournament'
+import { Button } from './ui/button'
 
 type Props = {
   cup: Prisma.CupGetPayload<{
