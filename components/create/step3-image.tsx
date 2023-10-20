@@ -11,13 +11,14 @@ import { useDropzone } from 'react-dropzone'
 import { useConfetti } from '../provider/confetti-provider'
 import { useModal } from '../provider/modal-provider'
 import { Button } from '../ui/button'
+import { toast } from '../ui/use-toast'
 
 type Props = {
   cupData: cupData
 }
 
 export default function Step3Image({ cupData }: Props) {
-  const [images, setImages] = useState<File[]>([])
+  const [images, setImages] = useState<string[]>([])
   const [isUploading, setIsUploading] = useState(false)
   const { open: openModal } = useModal()
   const { open: openConfetti } = useConfetti()
@@ -25,16 +26,22 @@ export default function Step3Image({ cupData }: Props) {
 
   const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
     onDrop: (acceptedFiles, rejectedFiles) => {
-      // acceptedFiles.map((file) => {
-      // const reader = new FileReader()
-      // reader.onload = (onLoadEvent) => {
-      //   // setImages((prev) => [onLoadEvent.target?.result as string, ...prev])
+      const filteredLargeFiles = acceptedFiles.filter((file) => file.size <= 4_000_000)
 
-      // }
-      // reader.readAsDataURL(file)
+      if (filteredLargeFiles.length !== acceptedFiles.length) {
+        toast({
+          description: `${acceptedFiles.length - filteredLargeFiles.length}개의 파일이 4MB용량을 넘어 제외되었습니다.`,
+          variant: 'destructive',
+        })
+      }
 
-      setImages((prev) => [...acceptedFiles, ...prev])
-      // })
+      filteredLargeFiles.map((file) => {
+        const reader = new FileReader()
+        reader.onload = () => {
+          setImages((prev) => [reader.result as string, ...prev])
+        }
+        reader.readAsDataURL(file)
+      })
     },
     accept: {
       'image/*': ['.jpeg', '.jpg', '.avif', '.gif', '.png', '.webp'],
@@ -46,22 +53,7 @@ export default function Step3Image({ cupData }: Props) {
     try {
       setIsUploading(true)
 
-      const promises = []
-
-      for (const image of images) {
-        const formData = new FormData()
-
-        formData.append('file', image)
-        formData.append('upload_preset', 'cup-images')
-
-        const promise = axios.post(
-          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLD_NAME}/image/upload`,
-          formData
-        )
-
-        promises.push(promise)
-      }
-
+      const promises = images.map((image) => axios.post('/api/cloudinary/upload', { image }))
       const responses = await Promise.all(promises)
       const cldImages = responses.map(({ data }) => ({ ...data }))
 
@@ -83,8 +75,6 @@ export default function Step3Image({ cupData }: Props) {
     }
   }
 
-  const previewImages = images.map((image) => URL.createObjectURL(image))
-
   return (
     <div className='mt-4 w-full h-full pb-20 overflow-hidden relative'>
       <div
@@ -101,12 +91,12 @@ export default function Step3Image({ cupData }: Props) {
         )}
 
         <div className='space-y-2 p-6 pb-2 text-xs sm:text-sm'>
-          <p className='truncate'>8개~100개의 이미지를 업로드 할 수 있습니다</p>
+          <p className='truncate'>8개~100개의 이미지를 업로드 할 수 있습니다 (각 4Mb 이하의 이미지)</p>
           <p className='truncate'>이미지 개수에 따라 8, 16, 32, 64강의 월드컵이 만들어집니다</p>
         </div>
 
         <div className='grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 2xl:grid-cols-8 gap-1.5 py-4 px-2'>
-          {previewImages.map((image, i) => (
+          {images.map((image, i) => (
             <div key={i} className='aspect-square rounded-lg overflow-hidden relative group'>
               <Image fill src={image} alt='preview image' className='object-cover w-full h-full' />
               <button
