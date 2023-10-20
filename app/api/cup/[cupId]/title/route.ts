@@ -11,14 +11,14 @@ type PatchProps = {
 }
 
 export const PATCH = async (req: NextRequest, { params: { cupId } }: PatchProps) => {
-  const session = await getSession()
-
-  if (!session) return new NextResponse('/api/cup/[cupId]/title : 인증된 유저가 아닙니다', { status: 401 })
-
-  const body = await req.json()
-  const { title } = titleSchema.parse(body)
-
   try {
+    const session = await getSession()
+
+    if (!session) return new NextResponse('/api/cup/[cupId]/title : 인증된 유저가 아닙니다', { status: 401 })
+
+    const body = await req.json()
+    const { title } = titleSchema.parse(body)
+
     const updatedCup = await db.cup.update({
       where: {
         id: cupId,

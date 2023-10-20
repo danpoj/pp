@@ -21,7 +21,11 @@ export default async function Page({ params: { cupId } }: Props) {
     },
     include: {
       _count: true,
-      items: true,
+      items: {
+        orderBy: {
+          createdAt: 'desc',
+        },
+      },
     },
   })
 

@@ -1,27 +1,31 @@
 'use client'
 
-import { cupData } from '@/app/(main)/create/page'
+import { Button } from '@/components/ui/button'
+import { toast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
+import type { Cup, Item } from '@prisma/client'
 import axios from 'axios'
 import { ChevronRight, ImagePlus, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { useConfetti } from '../provider/confetti-provider'
-import { useModal } from '../provider/modal-provider'
-import { Button } from '../ui/button'
-import { toast } from '../ui/use-toast'
 
 type Props = {
-  cupData: cupData
+  cup: Cup & {
+    _count: {
+      items: number
+      comments: number
+      likes: number
+    }
+    items: Item[]
+  }
 }
 
-export default function Step3Image({ cupData }: Props) {
+export default function ImageUpdateDropzone({ cup }: Props) {
   const [images, setImages] = useState<string[]>([])
   const [isUploading, setIsUploading] = useState(false)
-  const { open: openModal } = useModal()
-  const { open: openConfetti } = useConfetti()
+
   const router = useRouter()
 
   const { getRootProps, getInputProps, isDragAccept, isDragReject } = useDropzone({
@@ -46,7 +50,7 @@ export default function Step3Image({ cupData }: Props) {
     accept: {
       'image/*': ['.jpeg', '.jpg', '.avif', '.gif', '.png', '.webp'],
     },
-    maxFiles: 100,
+    maxFiles: 100 - cup._count.items,
   })
 
   const upload = async () => {
@@ -57,17 +61,12 @@ export default function Step3Image({ cupData }: Props) {
       const responses = await Promise.all(promises)
       const cldImages = responses.map(({ data }) => ({ ...data }))
 
-      const { data } = await axios.post('/api/create/image', {
+      const { data } = await axios.post(`/api/cup/${cup.id}/item/image`, {
         images: cldImages,
-        ...cupData,
       })
 
-      openModal('create-complete', data)
-
       router.refresh()
-      router.push('/')
-
-      openConfetti()
+      setImages([])
     } catch (error) {
       console.log(error)
     } finally {
@@ -75,8 +74,10 @@ export default function Step3Image({ cupData }: Props) {
     }
   }
 
+  const totalImagesLength = images.length + cup._count.items
+
   return (
-    <div className='mt-4 w-full h-full pb-20 overflow-hidden relative'>
+    <div className='mt-4 w-full h-96 pb-20 overflow-hidden relative'>
       <div
         {...getRootProps()}
         className={cn(
@@ -91,7 +92,9 @@ export default function Step3Image({ cupData }: Props) {
         )}
 
         <div className='space-y-2 p-6 pb-2 text-xs sm:text-sm'>
-          <p className='truncate'>8개~100개의 이미지를 업로드 할 수 있습니다 (각 4Mb 이하의 이미지)</p>
+          <p className='truncate'>
+            {100 - cup._count.items}개 이하의 이미지를 업로드 할 수 있습니다 (각 4Mb 이하의 이미지)
+          </p>
           <p className='truncate'>이미지 개수에 따라 8, 16, 32, 64강의 월드컵이 만들어집니다</p>
         </div>
 
@@ -115,12 +118,12 @@ export default function Step3Image({ cupData }: Props) {
       </div>
 
       <div className='w-full flex justify-end mt-4 items-center gap-4'>
-        <span className={cn('text-3xl', images.length < 8 || images.length > 100 ? 'text-red-600' : 'text-blue-600')}>
+        <span className={cn('text-3xl', totalImagesLength > 100 ? 'text-red-600' : 'text-blue-600')}>
           {images.length}개
         </span>
         <Button
           onClick={upload}
-          disabled={images.length < 8 || images.length > 100 || isUploading}
+          disabled={totalImagesLength > 100 || images.length === 0 || isUploading}
           isLoading={isUploading}
           className='h-12 w-40'
           variant='blue'
