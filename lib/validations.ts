@@ -2,7 +2,12 @@ import { z } from 'zod'
 
 export const createImageSchema = z.object({
   images: z
-    .string()
+    .object({
+      secure_url: z.string().min(1),
+      width: z.number(),
+      height: z.number(),
+      public_id: z.string().min(1),
+    })
     .array()
     .min(8, { message: '8개 이상의 이미지가 필요합니다' })
     .max(100, { message: '이미지 개수는 100개를 넘을 수 없습니다' }),

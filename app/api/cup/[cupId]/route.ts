@@ -35,8 +35,6 @@ export const DELETE = async (req: NextRequest, { params: { cupId } }: DeleteProp
       const promises = cup.items.map((item) => cloudinary.uploader.destroy(`${item.publicId}`))
 
       await Promise.all(promises)
-
-      await cloudinary.api.delete_folder(`cup/${cup.folder}`)
     }
 
     const deletedCup = await db.cup.delete({

@@ -1,12 +1,8 @@
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { createImageSchema } from '@/lib/validations'
-import { v2 as cloudinary } from 'cloudinary'
-import { nanoid } from 'nanoid'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-
-export const maxDuration = 10
 
 export const POST = async (req: NextRequest) => {
   try {
@@ -18,28 +14,16 @@ export const POST = async (req: NextRequest) => {
 
     const body = await req.json()
 
-    const { images, type, title, description } = createImageSchema.parse(body)
-
-    const folderName = nanoid(10)
-
-    const promises = images.map((image) =>
-      cloudinary.uploader.upload(image, {
-        folder: `cup/${folderName}`,
-        // transformation: [{ quality: 50 }],
-      })
-    )
-
-    const cldImages = await Promise.all(promises)
+    const { type, title, description, images } = createImageSchema.parse(body)
 
     const cup = await db.cup.create({
       data: {
         type,
         title,
         description,
-        folder: folderName,
-        thumbnail: cldImages[0].secure_url,
-        thumbnailWidth: cldImages[0].width,
-        thumbnailHeight: cldImages[0].height,
+        thumbnail: images[0].secure_url,
+        thumbnailWidth: images[0].width,
+        thumbnailHeight: images[0].height,
         userId: session.user.id,
       },
     })
@@ -49,13 +33,12 @@ export const POST = async (req: NextRequest) => {
     }
 
     const items = await db.item.createMany({
-      data: cldImages.map((image) => ({
+      data: images.map((image) => ({
         cupId: cup.id,
         url: image.secure_url,
         width: image.width,
         height: image.height,
         publicId: image.public_id,
-        folder: folderName,
       })),
     })
 

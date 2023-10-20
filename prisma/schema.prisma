@@ -71,7 +71,6 @@ model Cup {
   thumbnailHeight Int
   playCount       Int          @default(0)
   type            CupType
-  folder          String?
   items           Item[]
   comments        CupComment[]
 
@@ -93,7 +92,6 @@ model Item {
   width          Int?
   height         Int?
   publicId       String?
-  folder         String?
   videoThumbnail String?
 
   winCount Int @default(0)

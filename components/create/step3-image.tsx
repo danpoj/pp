@@ -5,19 +5,19 @@ import { cn } from '@/lib/utils'
 import axios from 'axios'
 import { ChevronRight, ImagePlus, Trash2 } from 'lucide-react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useConfetti } from '../provider/confetti-provider'
 import { useModal } from '../provider/modal-provider'
 import { Button } from '../ui/button'
-import { useRouter } from 'next/navigation'
 
 type Props = {
   cupData: cupData
 }
 
 export default function Step3Image({ cupData }: Props) {
-  const [images, setImages] = useState<string[]>([])
+  const [images, setImages] = useState<File[]>([])
   const [isUploading, setIsUploading] = useState(false)
   const { open: openModal } = useModal()
   const { open: openConfetti } = useConfetti()
@@ -25,13 +25,16 @@ export default function Step3Image({ cupData }: Props) {
 
   const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
     onDrop: (acceptedFiles, rejectedFiles) => {
-      acceptedFiles.map((file) => {
-        const reader = new FileReader()
-        reader.onload = () => {
-          setImages((prev) => [reader.result as string, ...prev])
-        }
-        reader.readAsDataURL(file)
-      })
+      // acceptedFiles.map((file) => {
+      // const reader = new FileReader()
+      // reader.onload = (onLoadEvent) => {
+      //   // setImages((prev) => [onLoadEvent.target?.result as string, ...prev])
+
+      // }
+      // reader.readAsDataURL(file)
+
+      setImages((prev) => [...acceptedFiles, ...prev])
+      // })
     },
     accept: {
       'image/*': ['.jpeg', '.jpg', '.avif', '.gif', '.png', '.webp'],
@@ -42,17 +45,30 @@ export default function Step3Image({ cupData }: Props) {
   const upload = async () => {
     try {
       setIsUploading(true)
-      const { data } = await axios.post(
-        '/api/create/image',
-        {
-          images,
-          ...cupData,
-        },
-        {
-          maxBodyLength: Infinity,
-          maxContentLength: Infinity,
-        }
-      )
+
+      const promises = []
+
+      for (const image of images) {
+        const formData = new FormData()
+
+        formData.append('file', image)
+        formData.append('upload_preset', 'cup-images')
+
+        const promise = axios.post(
+          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLD_NAME}/image/upload`,
+          formData
+        )
+
+        promises.push(promise)
+      }
+
+      const responses = await Promise.all(promises)
+      const cldImages = responses.map(({ data }) => ({ ...data }))
+
+      const { data } = await axios.post('/api/create/image', {
+        images: cldImages,
+        ...cupData,
+      })
 
       openModal('create-complete', data)
 
@@ -66,6 +82,8 @@ export default function Step3Image({ cupData }: Props) {
       setIsUploading(false)
     }
   }
+
+  const previewImages = images.map((image) => URL.createObjectURL(image))
 
   return (
     <div className='mt-4 w-full h-full pb-20 overflow-hidden relative'>
@@ -88,7 +106,7 @@ export default function Step3Image({ cupData }: Props) {
         </div>
 
         <div className='grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 2xl:grid-cols-8 gap-1.5 py-4 px-2'>
-          {images.map((image, i) => (
+          {previewImages.map((image, i) => (
             <div key={i} className='aspect-square rounded-lg overflow-hidden relative group'>
               <Image fill src={image} alt='preview image' className='object-cover w-full h-full' />
               <button
