@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react'
 import { CupLength } from './tournament'
 import { Button } from './ui/button'
+import { CldImage } from 'next-cloudinary'
 
 type Props = {
   cup: Prisma.CupGetPayload<{
@@ -52,11 +53,11 @@ function ImageRotation({ currentIndex, images, type }: { images: Item[]; current
       {images.map((item, index) => (
         <Fragment key={item.id}>
           {type === 'IMAGE' ? (
-            <Image
+            <CldImage
               fill
-              // src={item.publicId!}
-              src={item.url!}
-              alt='Framework logo'
+              src={item.publicId!}
+              alt='cup landing background image'
+              quality={40}
               className={cn(
                 'w-full h-full object-cover absolute inset-0 transition-all duration-300',
                 currentIndex === index ? 'opacity-100 transform-none' : 'opacity-0'
@@ -66,8 +67,7 @@ function ImageRotation({ currentIndex, images, type }: { images: Item[]; current
             <Image
               fill
               src={item.videoThumbnail!}
-              alt='Framework logo'
-              quality={20}
+              alt='cup landing background image'
               className={cn(
                 'w-full h-full object-cover absolute inset-0 transition-all duration-300',
                 currentIndex === index ? 'opacity-100 transform-none' : 'opacity-0'

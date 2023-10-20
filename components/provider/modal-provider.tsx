@@ -9,6 +9,8 @@ type Data = {
   title: string
   description: string
   cupId: string
+  thumbnailWidth: number
+  thumbnailHeight: number
 }
 
 type Modal = {

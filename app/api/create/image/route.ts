@@ -53,6 +53,8 @@ export const POST = async (req: NextRequest) => {
       title: cup.title,
       description: cup.description,
       cupId: cup.id,
+      thumbnailWidth: cup.thumbnailWidth,
+      thumbnailHeight: cup.thumbnailHeight,
     })
   } catch (error) {
     if (error instanceof z.ZodError) {
