@@ -4,6 +4,8 @@ import { createImageSchema } from '@/lib/validations'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
+export const maxDuration = 10
+
 export const POST = async (req: NextRequest) => {
   try {
     const session = await getSession()

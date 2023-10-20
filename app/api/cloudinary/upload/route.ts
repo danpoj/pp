@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { v2 as cloudinary } from 'cloudinary'
 
+export const maxDuration = 10
+
 export const POST = async (req: NextRequest) => {
   try {
     const { image } = await req.json()
