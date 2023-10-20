@@ -72,7 +72,10 @@ export default function Header({ session }: Props) {
 
           <button
             onClick={() => {
-              if (!session) open('signin')
+              if (!session) {
+                open('signin')
+                return
+              }
               router.push('/my/likes')
             }}
             className={cn(
