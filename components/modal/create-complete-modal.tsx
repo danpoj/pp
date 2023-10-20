@@ -3,7 +3,7 @@
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog'
 import { DialogTitle } from '@radix-ui/react-dialog'
 import { ChevronRight } from 'lucide-react'
-import { CldImage } from 'next-cloudinary'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { ClipboardWithLink } from '../clipboard-with-link'
 import { useModal } from '../provider/modal-provider'
@@ -23,7 +23,7 @@ export default function CreateCompleteModal() {
         </DialogHeader>
         <div className=''>
           <div className='relative h-60 mx-auto rounded overflow-hidden'>
-            <CldImage
+            <Image
               width={data?.thumbnailWidth}
               height={data?.thumbnailHeight}
               src={data?.thumbnail!}

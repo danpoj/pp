@@ -14,27 +14,25 @@ export const POST = async (req: NextRequest, { params: { cupId } }: PatchProps) 
 
     if (!session) return new NextResponse('/api/cup/[cupId]/item/youtube : 인증된 유저가 아닙니다', { status: 401 })
 
-    const { images } = (await req.json()) as {
-      images: {
-        secure_url: string
-        width: number
-        height: number
-        public_id: string
+    const { links } = (await req.json()) as {
+      links: {
+        videoUrl: string
+        imageUrl: string
       }[]
     }
 
     const dbItems = await db.item.createMany({
-      data: images.map((image) => ({
+      data: links.map(({ videoUrl, imageUrl }) => ({
         cupId,
-        url: image.secure_url,
-        width: image.width,
-        height: image.height,
-        publicId: image.public_id,
+        url: videoUrl,
+        width: 1280,
+        height: 720,
+        videoThumbnail: imageUrl,
       })),
     })
 
     return NextResponse.json(dbItems)
   } catch (error) {
-    return new NextResponse('/api/cup/[cupId]/item/youtube : 이미지 월드컵 컨텐츠 업로드 실패', { status: 500 })
+    return new NextResponse('/api/cup/[cupId]/item/youtube : 유튜브 월드컵 컨텐츠 업로드 실패', { status: 500 })
   }
 }

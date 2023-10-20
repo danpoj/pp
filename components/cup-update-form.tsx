@@ -5,6 +5,7 @@ import CupTitleForm from './cup-title-form'
 import { Separator } from './ui/separator'
 import { Trash2 } from 'lucide-react'
 import ImageUpdateDropzone from './image-update-dropzone'
+import VideoUpdateForm from './video-update-form'
 
 type Props = {
   cup: Cup & {
@@ -33,7 +34,8 @@ export default function CupUpdateForm({ cup }: Props) {
         </p>
       )}
 
-      {cup._count.items < 100 && <ImageUpdateDropzone cup={cup} />}
+      {cup._count.items < 100 && cup.type === 'IMAGE' && <ImageUpdateDropzone cup={cup} />}
+      {cup._count.items < 100 && cup.type === 'VIDEO' && <VideoUpdateForm cup={cup} />}
 
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-x-4'>
         {cup.items.map((item) => (
