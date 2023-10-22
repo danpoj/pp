@@ -6,7 +6,7 @@ import type { Dispatch, MutableRefObject, SetStateAction } from 'react'
 import type { CupType } from '@prisma/client'
 
 // image
-import { createPageImage1, createPageImage2, createPageImage3, createPageImage4 } from '@/data/images'
+import { images } from '@/data/images'
 import { YoutbeIcon } from '../icons'
 
 // style
@@ -22,8 +22,6 @@ type Props = {
 }
 
 export default function Step1({ setCurrentStep, cupData }: Props) {
-  const images = [createPageImage1, createPageImage2, createPageImage3, createPageImage4]
-
   const onClick = (cupType: CupType) => {
     cupData.current.type = cupType
     setCurrentStep((cs) => cs + 1)
