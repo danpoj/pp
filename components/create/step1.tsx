@@ -3,6 +3,7 @@
 // type
 import type { cupData } from '@/app/(main)/create/page'
 import type { Dispatch, MutableRefObject, SetStateAction } from 'react'
+import type { CupType } from '@prisma/client'
 
 // image
 import { createPageImage1, createPageImage2, createPageImage3, createPageImage4 } from '@/data/images'
@@ -21,6 +22,13 @@ type Props = {
 }
 
 export default function Step1({ setCurrentStep, cupData }: Props) {
+  const images = [createPageImage1, createPageImage2, createPageImage3, createPageImage4]
+
+  const onClick = (cupType: CupType) => {
+    cupData.current.type = cupType
+    setCurrentStep((cs) => cs + 1)
+  }
+
   return (
     <m.div
       initial={{ opacity: 0 }}
@@ -32,50 +40,27 @@ export default function Step1({ setCurrentStep, cupData }: Props) {
 
       <div className='flex mt-6 md:mt-16 gap-5 flex-col md:flex-row w-full'>
         <Button
-          onClick={() => {
-            cupData.current.type = 'IMAGE'
-            setCurrentStep((cs) => cs + 1)
-          }}
+          onClick={() => onClick('IMAGE')}
           variant='ghost'
           className='flex flex-col gap-10 md:w-full h-[14rem] md:h-[20rem] group dark:brightness-75 dark:hover:brightness-90 transition'
         >
           <div className='grid grid-cols-4 md:grid-cols-2 gap-0.5 h-fit'>
-            <Image
-              src={createPageImage1}
-              alt='create cup image'
-              width={80}
-              height={80}
-              className='object-cover w-[80px] h-[80px] rounded'
-            />
-            <Image
-              src={createPageImage2}
-              alt='create cup image'
-              width={80}
-              height={80}
-              className='object-cover w-[80px] h-[80px] rounded'
-            />
-            <Image
-              src={createPageImage3}
-              alt='create cup image'
-              width={80}
-              height={80}
-              className='object-cover w-[80px] h-[80px] rounded'
-            />
-            <Image
-              src={createPageImage4}
-              alt='create cup image'
-              width={80}
-              height={80}
-              className='object-cover w-[80px] h-[80px] rounded'
-            />
+            {images.map((image, index) => (
+              <Image
+                key={index}
+                src={image}
+                alt='create cup image'
+                width={80}
+                height={80}
+                className='object-cover w-[80px] h-[80px] rounded'
+              />
+            ))}
           </div>
           <span className='text-2xl font-extrabold text-primary/90 tracking-tight'>이미지 월드컵</span>
         </Button>
+
         <Button
-          onClick={() => {
-            cupData.current.type = 'VIDEO'
-            setCurrentStep((cs) => cs + 1)
-          }}
+          onClick={() => onClick('VIDEO')}
           variant='ghost'
           className='flex flex-col gap-10 md:w-full h-[14rem] md:h-[20rem] group dark:brightness-75 dark:hover:brightness-90 transition'
         >

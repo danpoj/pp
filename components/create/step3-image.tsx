@@ -76,11 +76,17 @@ export default function Step3Image({ cupData }: Props) {
 
       openConfetti()
     } catch (error) {
-      console.log(error)
+      toast({
+        title: '월드컵 업로드 실패',
+        description: 'upload failed.',
+        variant: 'destructive',
+      })
     } finally {
       setIsUploading(false)
     }
   }
+
+  const isUploadAvailable = !(images.length < 8 || images.length > 100)
 
   return (
     <div className='mt-4 w-full h-full pb-20 overflow-hidden relative'>
@@ -122,12 +128,10 @@ export default function Step3Image({ cupData }: Props) {
       </div>
 
       <div className='w-full flex justify-end mt-4 items-center gap-4'>
-        <span className={cn('text-3xl', images.length < 8 || images.length > 100 ? 'text-red-600' : 'text-blue-600')}>
-          {images.length}개
-        </span>
+        <span className={cn('text-3xl', isUploadAvailable ? 'text-blue-600' : 'text-red-600')}>{images.length}개</span>
         <Button
           onClick={upload}
-          disabled={images.length < 8 || images.length > 100 || isUploading}
+          disabled={!isUploadAvailable || isUploading}
           isLoading={isUploading}
           className='h-12 w-40'
           variant='blue'

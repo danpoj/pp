@@ -31,7 +31,7 @@ type Props = {
 }
 
 const urlSchema = z.object({
-  url: z.string().min(2, { message: '이미지 주소를 넣어주세요.' }).max(20000, { message: '이미지 주소 길이 초과.' }),
+  url: z.string().trim().min(1, { message: '유튜브 주소를 입력해주세요' }),
 })
 
 export default function ThirdStepYoutube({ cupData }: Props) {
@@ -98,10 +98,10 @@ export default function ThirdStepYoutube({ cupData }: Props) {
         return
       }
 
-      if (links.length > 80) {
+      if (links.length > 100) {
         toast({
           title: '유튜브 링크 개수를 초과했습니다.',
-          description: '80개 이하의 유튜브 링크를 업로드 해주세요.',
+          description: '100개 이하의 유튜브 링크를 업로드 해주세요.',
           variant: 'destructive',
         })
 
@@ -134,9 +134,13 @@ export default function ThirdStepYoutube({ cupData }: Props) {
     <div className='mt-3 w-full px-2'>
       <div className='flex justify-center mt-2'>
         {thumbnail.current ? (
-          <div className='h-48 relative aspect-video'>
-            <Image fill src={thumbnail.current} className='absolute object-cover rounded-lg' alt='youtube thumbnail' />
-          </div>
+          <Image
+            width={1280}
+            height={720}
+            src={thumbnail.current}
+            className='h-48 aspect-video object-cover max-w-[20rem] rounded-lg'
+            alt='youtube thumbnail'
+          />
         ) : (
           <div className='h-48 aspect-video bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 rounded-lg text-slate-200 flex items-center justify-center flex-col gap-2'>
             <span className='text-xl font-black tracking-tight'>썸네일 이미지</span>
