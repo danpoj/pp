@@ -1,12 +1,12 @@
 'use client'
 
+import { GoogleIcon, KakaoIcon, NaverIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
+import { pingping } from '@/data/pingping'
+import { signIn } from 'next-auth/react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { signIn } from 'next-auth/react'
-import { GoogleIcon, KakaoIcon, NaverIcon } from '@/components/icons'
-import Image from 'next/image'
-import { pingpingLogo } from '@/data/images'
 
 export default function SignUp() {
   const [isGoogleLaoding, setIsGoogleLaoding] = useState(false)
@@ -53,7 +53,7 @@ export default function SignUp() {
     <div className='flex flex-col items-center gap-2 px-6 pt-10 pb-2'>
       <div className='flex flex-col items-center mb-10 gap-4'>
         <div className='flex font-bold text-lg'>
-          <Image alt='pingping logo' width={40} height={40} src={pingpingLogo} />
+          <Image alt='pingping logo' width={40} height={40} src={pingping} />
           <Link href='/' className='flex items-center justify-center mr-6 hover:text-primary/90'>
             ping
             <span className='bg-gradient-to-r from-cyan-500 via-blue-500 to-sky-500 text-transparent bg-clip-text'>
