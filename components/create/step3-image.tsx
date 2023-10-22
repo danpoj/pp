@@ -1,17 +1,24 @@
 'use client'
 
-import { cupData } from '@/app/(main)/create/page'
+// type
+import type { cupData } from '@/app/(main)/create/page'
+
+// image
+import { ChevronRight, ImagePlus, Trash2 } from 'lucide-react'
+
+// style
+import { Button } from '@/components/ui/button'
+
+// etc
 import { cn } from '@/lib/utils'
 import axios from 'axios'
-import { ChevronRight, ImagePlus, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { useConfetti } from '../provider/confetti-provider'
-import { useModal } from '../provider/modal-provider'
-import { Button } from '../ui/button'
-import { toast } from '../ui/use-toast'
+import { useConfetti } from '@/components/provider/confetti-provider'
+import { useModal } from '@/components/provider/modal-provider'
+import { toast } from '@/components/ui/use-toast'
 
 type Props = {
   cupData: cupData

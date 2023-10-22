@@ -1,12 +1,19 @@
 'use client'
 
-import { cupData } from '@/app/(main)/create/page'
+// type
+import type { cupData } from '@/app/(main)/create/page'
+import type { Dispatch, MutableRefObject, SetStateAction } from 'react'
+
+// image
 import { createPageImage1, createPageImage2, createPageImage3, createPageImage4 } from '@/data/images'
-import { motion as m } from 'framer-motion'
-import { Dispatch, MutableRefObject, SetStateAction } from 'react'
-import { Button } from '../ui/button'
-import Image from 'next/image'
 import { YoutbeIcon } from '../icons'
+
+// style
+import { Button } from '../ui/button'
+
+// etc
+import { motion as m } from 'framer-motion'
+import Image from 'next/image'
 
 type Props = {
   setCurrentStep: Dispatch<SetStateAction<number>>

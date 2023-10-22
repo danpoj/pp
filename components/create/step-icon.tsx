@@ -1,6 +1,9 @@
+// image
+import { CheckIcon } from '../icons'
+
+// etc
 import { cn } from '@/lib/utils'
 import { motion as m } from 'framer-motion'
-import { CheckIcon } from '../icons'
 
 type StepProps = { step: number; currentStep: number }
 

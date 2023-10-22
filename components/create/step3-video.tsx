@@ -1,23 +1,30 @@
 'use client'
 
-import { cn } from '@/lib/utils'
+// type
+import type { cupData } from '@/app/(main)/create/page'
+
+// image
 import { Check, ChevronRight, Trash2 } from 'lucide-react'
+
+// style
+import { Form, FormControl, FormDescription, FormField, FormItem } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+
+// etc
+import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
-import { Button } from '../ui/button'
-import { Form, FormControl, FormDescription, FormField, FormItem } from '../ui/form'
-import { Input } from '../ui/input'
-import { toast } from '../ui/use-toast'
+import { Button } from '@/components/ui/button'
+import { toast } from '@/components/ui/use-toast'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { getYouTubeVideoId } from '@/lib/get-youtube-video-id'
 import axios from 'axios'
-import { cupData } from '@/app/(main)/create/page'
-import { useModal } from '../provider/modal-provider'
-import { useConfetti } from '../provider/confetti-provider'
+import { useModal } from '@/components/provider/modal-provider'
+import { useConfetti } from '@/components/provider/confetti-provider'
 
 type Props = {
   cupData: cupData

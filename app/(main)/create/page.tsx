@@ -1,6 +1,9 @@
 'use client'
 
-import { CupType } from '@prisma/client'
+// type
+import type { CupType } from '@prisma/client'
+
+// etc
 import { useRef, useState } from 'react'
 import Step1 from '@/components/create/step1'
 import Step2 from '@/components/create/step2'

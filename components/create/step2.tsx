@@ -1,15 +1,22 @@
 'use client'
 
-import { cupData } from '@/app/(main)/create/page'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Dispatch, MutableRefObject, SetStateAction } from 'react'
-import { useForm } from 'react-hook-form'
-import * as z from 'zod'
-import { motion as m } from 'framer-motion'
+// type
+import type { cupData } from '@/app/(main)/create/page'
+import type { Dispatch, MutableRefObject, SetStateAction } from 'react'
+
+// image
+import { ChevronRight } from 'lucide-react'
+
+// style
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { ChevronRight } from 'lucide-react'
+
+// etc
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { motion as m } from 'framer-motion'
 
 type Props = {
   setCurrentStep: Dispatch<SetStateAction<number>>
