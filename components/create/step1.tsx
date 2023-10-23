@@ -2,8 +2,8 @@
 
 // type
 import type { cupData } from '@/app/(main)/create/page'
-import type { Dispatch, MutableRefObject, SetStateAction } from 'react'
 import type { CupType } from '@prisma/client'
+import type { Dispatch, MutableRefObject, SetStateAction } from 'react'
 
 // image
 
@@ -13,7 +13,6 @@ import { YoutbeIcon } from '../icons'
 import { Button } from '../ui/button'
 
 // etc
-import { motion as m } from 'framer-motion'
 import Image from 'next/image'
 
 type Props = {
@@ -28,12 +27,7 @@ export default function Step1({ setCurrentStep, cupData }: Props) {
   }
 
   return (
-    <m.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, delay: 0.1 }}
-      className='mt-10 flex flex-col w-full items-center'
-    >
+    <div className='mt-10 flex flex-col w-full items-center'>
       <p className='text-3xl font-extrabold text-primary/70 tracking-tight'>어떤 종류의 월드컵인가요? 👋</p>
 
       <div className='flex mt-6 md:mt-16 gap-5 flex-col md:flex-row w-full'>
@@ -69,7 +63,7 @@ export default function Step1({ setCurrentStep, cupData }: Props) {
           <span className='text-2xl font-extrabold text-primary/90 tracking-tight'>유튜브 영상 월드컵</span>
         </Button>
       </div>
-    </m.div>
+    </div>
   )
 }
 
