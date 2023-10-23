@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { CupType } from '@prisma/client'
+import type { CupType } from '@prisma/client'
 import Image from 'next/image'
 import { useState } from 'react'
 import { CldImage } from 'next-cloudinary'

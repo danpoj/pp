@@ -1,7 +1,7 @@
 'use client'
 
 import { BarChartBig } from 'lucide-react'
-import { Button } from './ui/button'
+import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 
 type Props = {

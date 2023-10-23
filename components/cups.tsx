@@ -10,16 +10,16 @@ import Link from 'next/link'
 import { Fragment, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { ResponsiveMasonry } from 'react-responsive-masonry'
-import { BlurredImage } from './blurred-image'
-import { ClipboardButton } from './clipboard-button'
-import LikeButton from './like-button'
-import { buttonVariants } from './ui/button'
+import { BlurredImage } from '@/components/blurred-image'
+import { ClipboardButton } from '@/components/clipboard-button'
+import LikeButton from '@/components/like-button'
+import { buttonVariants } from '@/components/ui/button'
 import dynamic from 'next/dynamic'
 import {
   CoupangDynamicBannerFood,
   CoupangDynamicBannerOnly,
   CoupangDynamicBannerWomen,
-} from './adsense/coupang-dynamic-banner'
+} from '@/components/adsense/coupang-dynamic-banner'
 
 const Masonry = dynamic(() => import('react-responsive-masonry'), {
   ssr: false,

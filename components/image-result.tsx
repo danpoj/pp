@@ -1,10 +1,9 @@
 'use client'
 
-import Image from 'next/image'
-import { useState } from 'react'
-import { Button } from './ui/button'
-import { CldImage } from 'next-cloudinary'
 import { cn } from '@/lib/utils'
+import { CldImage } from 'next-cloudinary'
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
 
 type Props = {
   width: number

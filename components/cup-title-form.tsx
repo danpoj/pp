@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input'
 import { titleSchema } from '@/lib/validations'
 import axios from 'axios'
 import { useState } from 'react'
-import { toast } from './ui/use-toast'
+import { toast } from '@/components/ui/use-toast'
 
 type Props = {
   title: string

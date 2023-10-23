@@ -2,8 +2,8 @@ import { Children } from '@/types/type'
 
 import { NextThemesProvider } from '@/components/provider/theme-provider'
 import ModalProvider from '@/components/provider/modal-provider'
-import { ConfettiProvider } from './confetti-provider'
-import { Toaster } from '../ui/toaster'
+import { ConfettiProvider } from '@/components/provider/confetti-provider'
+import { Toaster } from '@/components/ui/toaster'
 
 export default function Providers({ children }: Children) {
   return (

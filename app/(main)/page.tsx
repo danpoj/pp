@@ -4,7 +4,7 @@ import FilterCups from '@/components/filter-cups'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { getQuery } from '@/lib/get-query'
-import { Cup, Like, User } from '@prisma/client'
+import type { Cup, Like, User } from '@prisma/client'
 
 type Type = 'all' | 'video' | 'image'
 type Order = 'popular' | 'like' | 'newest'

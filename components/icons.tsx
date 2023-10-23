@@ -1,4 +1,4 @@
-import { LucideProps } from 'lucide-react'
+import type { LucideProps } from 'lucide-react'
 import { motion as m } from 'framer-motion'
 
 export const GoogleIcon = (props: LucideProps) => (

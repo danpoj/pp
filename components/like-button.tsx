@@ -5,10 +5,10 @@ import type { Cup, Like } from '@prisma/client'
 import axios from 'axios'
 import type { Session } from 'next-auth'
 import { useState } from 'react'
-import HeartEmoji from './heart-emoji'
-import { Button } from './ui/button'
+import HeartEmoji from '@/components/heart-emoji'
+import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
-import { useModal } from './provider/modal-provider'
+import { useModal } from '@/components/provider/modal-provider'
 
 type Props = {
   cup: Cup & {

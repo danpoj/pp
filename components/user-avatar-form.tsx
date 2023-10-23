@@ -1,10 +1,10 @@
 'use client'
 
-import { User } from '@prisma/client'
+import type { User } from '@prisma/client'
 import { FileWarning, Loader2, Pencil } from 'lucide-react'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { Button } from './ui/button'
+import { Button } from '@/components/ui/button'
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
@@ -12,7 +12,7 @@ import axios from 'axios'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useConfetti } from './provider/confetti-provider'
-import { toast } from './ui/use-toast'
+import { toast } from '@/components/ui/use-toast'
 
 type Props = {
   user: User

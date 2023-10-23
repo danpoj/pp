@@ -7,10 +7,10 @@ import type { Item, Prisma } from '@prisma/client'
 import { motion as m } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import DescriptionText from './description-text'
-import { Player } from './player'
-import { CupLength } from './tournament'
-import { Button } from './ui/button'
+import DescriptionText from '@/components/description-text'
+import { Player } from '@/components/player'
+import type { CupLength } from '@/components/tournament'
+import { Button } from '@/components/ui/button'
 
 type Props = {
   cup: Prisma.CupGetPayload<{

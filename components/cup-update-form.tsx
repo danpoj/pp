@@ -1,11 +1,11 @@
 import { Cup, Item } from '@prisma/client'
-import CupDescriptionForm from './cup-description-form'
-import CupItemForm from './cup-item-form'
-import CupTitleForm from './cup-title-form'
-import { Separator } from './ui/separator'
+import CupDescriptionForm from '@/components/cup-description-form'
+import CupItemForm from '@/components/cup-item-form'
+import CupTitleForm from '@/components/cup-title-form'
+import { Separator } from '@/components/ui/separator'
 import { Trash2 } from 'lucide-react'
-import ImageUpdateDropzone from './image-update-dropzone'
-import VideoUpdateForm from './video-update-form'
+import ImageUpdateDropzone from '@/components/image-update-dropzone'
+import VideoUpdateForm from '@/components/video-update-form'
 
 type Props = {
   cup: Cup & {

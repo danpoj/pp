@@ -2,8 +2,7 @@
 
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { useModal } from '../provider/modal-provider'
-import SignIn from '../sign-in'
-import SignUp from '../sign-up'
+import SignUp from '@/components/sign-up'
 
 export default function SignUpModal() {
   const { type, isOpen, close } = useModal()

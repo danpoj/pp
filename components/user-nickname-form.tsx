@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { User } from '@prisma/client'
+import type { User } from '@prisma/client'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -9,10 +9,10 @@ import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import axios from 'axios'
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { toast, useToast } from './ui/use-toast'
-import { useConfetti } from './provider/confetti-provider'
+import { useState } from 'react'
+import { useConfetti } from '@/components/provider/confetti-provider'
+import { toast } from '@/components/ui/use-toast'
 
 type Props = {
   user: User

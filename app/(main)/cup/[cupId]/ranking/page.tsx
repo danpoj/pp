@@ -1,7 +1,7 @@
 import CupRanking from '@/components/cup-ranking'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
-import { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata, ResolvingMetadata } from 'next'
 import { notFound } from 'next/navigation'
 
 type Props = {

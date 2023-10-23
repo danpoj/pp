@@ -3,7 +3,7 @@ import db from '@/lib/db'
 import { itemDescriptionSchema } from '@/lib/validations'
 import { NextRequest, NextResponse } from 'next/server'
 import { v2 as cloudinary } from 'cloudinary'
-import { CupType } from '@prisma/client'
+import type { CupType } from '@prisma/client'
 
 export const PATCH = async (req: NextRequest, { params: { itemId } }: { params: { itemId: string } }) => {
   try {

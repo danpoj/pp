@@ -1,3 +1,4 @@
+import HeartEmoji from '@/components/heart-emoji'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,12 +7,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { LogOut, MessageSquare, Settings, Swords, User2 } from 'lucide-react'
+import { LogOut, MessageSquare, Swords, User2 } from 'lucide-react'
 import type { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import HeartEmoji from './heart-emoji'
 
 type Props = {
   session: Session

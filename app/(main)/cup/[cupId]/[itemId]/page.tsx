@@ -10,7 +10,7 @@ import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 
 import dayjs from 'dayjs'
-import { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata, ResolvingMetadata } from 'next'
 import Image from 'next/image'
 
 type Props = {

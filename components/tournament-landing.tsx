@@ -4,9 +4,9 @@ import { cn } from '@/lib/utils'
 import type { CupType, Item, Prisma } from '@prisma/client'
 import { Check, ChevronDown, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
-import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react'
-import { CupLength } from './tournament'
-import { Button } from './ui/button'
+import { type Dispatch, type SetStateAction, Fragment, useEffect, useState } from 'react'
+import { CupLength } from '@/components/tournament'
+import { Button } from '@/components/ui/button'
 import { CldImage } from 'next-cloudinary'
 
 type Props = {

@@ -3,13 +3,13 @@
 import { cn } from '@/lib/utils'
 import type { Session } from 'next-auth'
 import { usePathname, useRouter } from 'next/navigation'
-import MobileMenu from './mobile-menu'
-import PingpingLogo from './pingping-logo'
-import { useModal } from './provider/modal-provider'
-import { ThemeMenu } from './theme-menu'
-import { Button } from './ui/button'
-import UserSetting from './user-setting'
-import HeartEmoji from './heart-emoji'
+import MobileMenu from '@/components/mobile-menu'
+import PingpingLogo from '@/components/pingping-logo'
+import { useModal } from '@/components/provider/modal-provider'
+import { ThemeMenu } from '@/components/theme-menu'
+import { Button } from '@/components/ui/button'
+import UserSetting from '@/components/user-setting'
+import HeartEmoji from '@/components/heart-emoji'
 
 type Props = {
   session: Session | null

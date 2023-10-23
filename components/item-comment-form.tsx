@@ -11,7 +11,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import type { Session } from 'next-auth'
-import { useModal } from './provider/modal-provider'
+import { useModal } from '@/components/provider/modal-provider'
 
 type Props = {
   session: Session | null

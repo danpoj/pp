@@ -2,7 +2,7 @@
 
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { useModal } from '../provider/modal-provider'
-import SignIn from '../sign-in'
+import SignIn from '@/components/sign-in'
 
 export default function SignInModal() {
   const { type, isOpen, close } = useModal()

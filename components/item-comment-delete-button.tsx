@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { Button } from './ui/button'
+import { Button } from '@/components/ui/button'
 
 type Props = {
   itemId: string

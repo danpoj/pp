@@ -8,15 +8,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { LogOut, Menu, MessageSquare, Settings, Swords, User2 } from 'lucide-react'
+import { LogOut, Menu, MessageSquare, Swords, User2 } from 'lucide-react'
 import type { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Button } from './ui/button'
-import { useModal } from './provider/modal-provider'
 import { useRouter } from 'next/navigation'
-import HeartEmoji from './heart-emoji'
+import HeartEmoji from '@/components/heart-emoji'
+import { useModal } from '@/components/provider/modal-provider'
+import { Button } from '@/components/ui/button'
 
 type Props = {
   session: Session | null

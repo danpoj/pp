@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { useModal } from './provider/modal-provider'
+import { useModal } from '@/components/provider/modal-provider'
 import type { Session } from 'next-auth'
 
 type Props = {

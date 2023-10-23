@@ -13,7 +13,7 @@ import { Pencil, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { CupType, Item } from '@prisma/client'
-import { toast } from './ui/use-toast'
+import { toast } from '@/components/ui/use-toast'
 
 type Props = {
   item: Item

@@ -1,6 +1,6 @@
 'use client'
 
-import { CupType, Item } from '@prisma/client'
+import type { CupType, Item } from '@prisma/client'
 import Image from 'next/image'
 import CupItemDescriptionForm from './cup-item-description-form'
 import { CldImage } from 'next-cloudinary'

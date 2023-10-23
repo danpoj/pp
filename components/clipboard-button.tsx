@@ -1,8 +1,8 @@
 'use client'
 
 import { Check, Copy } from 'lucide-react'
-import { HTMLAttributes, useState } from 'react'
-import { Button } from './ui/button'
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
 
 type ClipboardButtonProps = { path: string }
 

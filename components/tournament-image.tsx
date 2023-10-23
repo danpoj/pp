@@ -5,12 +5,11 @@ import { updateCupPlayCountAndItemWinCount } from '@/lib/update-cup-playcount-an
 import { cn } from '@/lib/utils'
 import type { Item, Prisma } from '@prisma/client'
 import { motion as m } from 'framer-motion'
-import Image from 'next/image'
+import { CldImage } from 'next-cloudinary'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import DescriptionText from './description-text'
-import { CupLength } from './tournament'
-import { CldImage } from 'next-cloudinary'
+import DescriptionText from '@/components/description-text'
+import type { CupLength } from '@/components/tournament'
 
 type Props = {
   cup: Prisma.CupGetPayload<{

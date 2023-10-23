@@ -1,6 +1,6 @@
 'use client'
 
-import { Cup, CupType } from '@prisma/client'
+import type { Cup, CupType } from '@prisma/client'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import { MessageSquare, Pencil, Trash2, Youtube } from 'lucide-react'
@@ -8,9 +8,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { ClipboardWithLink } from './clipboard-with-link'
-import { Button } from './ui/button'
-import { toast } from './ui/use-toast'
+import { ClipboardWithLink } from '@/components/clipboard-with-link'
+import { Button } from '@/components/ui/button'
+import { toast } from '@/components/ui/use-toast'
 import { CldImage } from 'next-cloudinary'
 
 type Props = {

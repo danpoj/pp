@@ -1,6 +1,6 @@
 import Tournament from '@/components/tournament'
 import db from '@/lib/db'
-import { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata, ResolvingMetadata } from 'next'
 import { notFound } from 'next/navigation'
 
 type Props = {

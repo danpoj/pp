@@ -2,9 +2,9 @@
 
 import type { Prisma } from '@prisma/client'
 import { useState } from 'react'
-import TournamentLanding from './tournament-landing'
-import TournamentImage from './tournament-image'
-import TournamentVideo from './tournament-video'
+import TournamentLanding from '@/components/tournament-landing'
+import TournamentImage from '@/components/tournament-image'
+import TournamentVideo from '@/components/tournament-video'
 
 type Props = {
   cup: Prisma.CupGetPayload<{

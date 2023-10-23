@@ -7,8 +7,8 @@ import { ArrowRight, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { Button } from './ui/button'
-import { Separator } from './ui/separator'
+import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
 import { CldImage } from 'next-cloudinary'
 
 type Props = {
