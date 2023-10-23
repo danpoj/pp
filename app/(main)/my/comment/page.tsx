@@ -32,9 +32,9 @@ export default async function Page() {
   const commentsLength = user._count.cupComments + user._count.itemComments
 
   return (
-    <div className='min-h-full px-2 pt-8 max-w-4xl mx-auto'>
+    <section className='min-h-full px-2 pt-8 max-w-4xl mx-auto'>
       <span className='text-2xl font-semibold tracking-tighter'>내 댓글 ({commentsLength}개)</span>
       <MyComments user={user} />
-    </div>
+    </section>
   )
 }

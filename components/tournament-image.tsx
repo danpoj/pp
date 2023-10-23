@@ -123,8 +123,8 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
       <div className='w-full h-full relative'>
         <CldImage
           className='absolute inset-0 object-contain w-full h-full'
-          width={selectedItem.width!}
-          height={selectedItem.height!}
+          width={600}
+          height={520}
           quality={40}
           src={selectedItem.url!}
           alt={selectedItem.description || 'tournament left image'}
@@ -147,8 +147,8 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
       <div className='w-full h-full relative'>
         <CldImage
           className='absolute inset-0 object-contain w-full h-full'
-          width={selectedItem.width!}
-          height={selectedItem.height!}
+          width={600}
+          height={520}
           quality={40}
           src={selectedItem.url!}
           alt={selectedItem.description || 'tournament left image'}
@@ -181,8 +181,8 @@ const Initial = ({
         <div className='w-full h-full relative'>
           <CldImage
             className='absolute inset-0 object-contain w-full h-full'
-            width={items[index * 2].width!}
-            height={items[index * 2].height!}
+            width={600}
+            height={520}
             quality={40}
             src={items[index * 2].url}
             alt={items[index * 2].description || 'tournament left image'}
@@ -197,8 +197,8 @@ const Initial = ({
         <div className='w-full h-full relative'>
           <CldImage
             className='absolute inset-0 object-contain w-full h-full'
-            width={items[index * 2 + 1].width!}
-            height={items[index * 2 + 1].height!}
+            width={600}
+            height={520}
             quality={40}
             src={items[index * 2 + 1].url}
             alt={items[index * 2 + 1].description || 'tournament left image'}

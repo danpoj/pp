@@ -11,6 +11,13 @@ export const POST = async (req: NextRequest) => {
       folder: 'cup',
       eager: [
         {
+          width: 300,
+          height: 260,
+          quality: 40,
+        },
+        {
+          width: 600,
+          height: 520,
           quality: 40,
         },
       ],

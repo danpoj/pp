@@ -19,10 +19,10 @@ export default function CupItemForm({ item, cupType, contentsLength }: Props) {
           <CldImage
             src={item.url}
             alt={item.description || 'cup item'}
-            width={item.width!}
-            height={item.height!}
-            className='object-contain w-full'
+            width={300}
+            height={260}
             quality={40}
+            className='object-contain w-full'
           />
         ) : (
           <Image

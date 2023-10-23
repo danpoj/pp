@@ -54,7 +54,8 @@ function ImageRotation({ currentIndex, images, type }: { images: Item[]; current
         <Fragment key={item.id}>
           {type === 'IMAGE' ? (
             <CldImage
-              fill
+              width={600}
+              height={520}
               src={item.publicId!}
               alt='cup landing background image'
               quality={40}

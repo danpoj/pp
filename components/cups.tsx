@@ -75,7 +75,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
   }, [inView])
 
   return (
-    <>
+    <section>
       <ResponsiveMasonry
         className='px-1 w-full'
         columnsCountBreakPoints={{ 0: 1, 440: 2, 720: 3, 1100: 4, 1400: 5, 1700: 6 }}
@@ -152,7 +152,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                           랭킹보기 <ArrowRight className='w-3 h-3 ml-1' />
                         </Link>
                         <ClipboardButton path={`/cup/${cup.id}`} />
-                        {/* TODO */}
+
                         <LikeButton cup={cup} session={session} className='flex items-center gap-1 flex-1' />
                       </div>
                     </div>
@@ -248,6 +248,6 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
           <Loader2 className='animate-spin w-12 h-12' />
         </div>
       )}
-    </>
+    </section>
   )
 }

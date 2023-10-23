@@ -26,7 +26,7 @@ export default function Page() {
   })
 
   return (
-    <div className='h-full w-full sm:max-w-6xl mx-auto py-4 px-2 sm:px-6 flex flex-col items-center'>
+    <section className='h-full w-full sm:max-w-6xl mx-auto py-4 px-2 sm:px-6 flex flex-col items-center'>
       <div className='flex gap-8'>
         <StepIcon step={1} currentStep={currentStep} />
         <StepIcon step={2} currentStep={currentStep} />
@@ -37,6 +37,6 @@ export default function Page() {
       {currentStep === 2 && <Step2 setCurrentStep={setCurrentStep} cupData={cupData} />}
       {currentStep === 3 && cupData.current.type === 'IMAGE' && <Step3Image cupData={cupData.current} />}
       {currentStep === 3 && cupData.current.type === 'VIDEO' && <Step3Video cupData={cupData.current} />}
-    </div>
+    </section>
   )
 }

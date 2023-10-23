@@ -55,8 +55,8 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
               <CldImage
                 src={item.publicId!}
                 alt='cup image'
-                width={item.width!}
-                height={item.height!}
+                width={300}
+                height={260}
                 quality={40}
                 className='object-contain w-full h-full'
               />
@@ -98,8 +98,8 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
               <CldImage
                 src={item.publicId!}
                 alt='cup image'
-                width={item.width!}
-                height={item.height!}
+                width={300}
+                height={260}
                 quality={40}
                 className='object-contain w-full h-full'
               />

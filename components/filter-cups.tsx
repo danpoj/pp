@@ -29,7 +29,7 @@ export default function FilterCups() {
   }
 
   return (
-    <div className='py-6 px-2 mx-2 flex gap-6 items-start sm:items-center shrink-0 flex-col sm:flex-row'>
+    <section className='py-6 px-2 mx-2 flex gap-6 items-start sm:items-center shrink-0 flex-col sm:flex-row'>
       <RadioGroup value={type}>
         <div
           onClick={() =>
@@ -121,6 +121,6 @@ export default function FilterCups() {
           </Label>
         </div>
       </RadioGroup>
-    </div>
+    </section>
   )
 }

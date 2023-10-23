@@ -24,10 +24,10 @@ export const BlurredImage = ({ thumbnail, title, width, height, type }: Props) =
           src={thumbnail}
           alt={title}
           quality={40}
-          width={width}
-          height={height}
+          width={300}
+          height={260}
           className={cn(
-            'object-cover duration-150 ease-in-out group-hover:scale-105 group-active:scale-110 w-full',
+            'object-contain duration-150 ease-in-out group-hover:scale-105 group-active:scale-110 w-full',
             isLoading ? ' blur scale-105' : 'blur-0 scale-100'
           )}
           // sizes='(max-width: 768px) 50vw, (max-width: 1280px) 33vw, (max-width: 1536px) 25vw, 20vw'
@@ -41,7 +41,7 @@ export const BlurredImage = ({ thumbnail, title, width, height, type }: Props) =
           width={width}
           height={height}
           className={cn(
-            'object-cover duration-150 ease-in-out group-hover:scale-105 group-active:scale-110 w-full',
+            'object-contain duration-150 ease-in-out group-hover:scale-105 group-active:scale-110 w-full',
             isLoading ? ' blur scale-105' : 'blur-0 scale-100'
           )}
           // sizes='(max-width: 768px) 50vw, (max-width: 1280px) 33vw, (max-width: 1536px) 25vw, 20vw'

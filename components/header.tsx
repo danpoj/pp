@@ -38,7 +38,7 @@ export default function Header({ session }: Props) {
         >
           월드컵 만들기
         </Button>
-        <div className='flex ml-3 gap-1 text-xs'>
+        <nav className='flex ml-3 gap-1 text-xs'>
           <button
             onClick={() => {
               if (!session) {
@@ -85,7 +85,7 @@ export default function Header({ session }: Props) {
           >
             <HeartEmoji className='fill-red-500 stroke-red-500 mr-1' /> 좋아요
           </button>
-        </div>
+        </nav>
       </div>
 
       <div className='flex items-center gap-2'>
@@ -94,7 +94,7 @@ export default function Header({ session }: Props) {
         </div>
         <MobileMenu session={session} />
 
-        <div className='hidden sm:flex sm:gap-2 sm:items-center'>
+        <aside className='hidden sm:flex sm:gap-2 sm:items-center'>
           <ThemeMenu />
           {session ? (
             <UserSetting session={session} />
@@ -113,7 +113,7 @@ export default function Header({ session }: Props) {
               </Button>
             </>
           )}
-        </div>
+        </aside>
       </div>
     </header>
   )

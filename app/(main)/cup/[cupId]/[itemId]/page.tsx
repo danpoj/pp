@@ -82,7 +82,7 @@ export default async function Page({ params }: Props) {
   if (!image) return null
 
   return (
-    <div className='h-full max-w-6xl mx-auto p-2 flex flex-col lg:flex-row lg:justify-center lg:items-center lg:gap-6 relative'>
+    <section className='h-full max-w-6xl mx-auto p-2 flex flex-col lg:flex-row lg:justify-center lg:items-center lg:gap-6 relative'>
       <PlayConfetti />
       {image.cup.type === 'IMAGE' ? (
         <ImageResult width={image.width!} height={image.height!} src={image.url!} description={image.description} />
@@ -151,6 +151,6 @@ export default async function Page({ params }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

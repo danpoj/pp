@@ -78,8 +78,8 @@ export default async function Page({ params: { cupId } }: Props) {
   const session = await getSession()
 
   return (
-    <div className='h-full max-w-7xl mx-auto p-2'>
+    <section className='h-full max-w-7xl mx-auto p-2'>
       <CupRanking session={session} {...cup} />
-    </div>
+    </section>
   )
 }

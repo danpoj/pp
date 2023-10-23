@@ -69,8 +69,8 @@ export default function MyCups({ cups }: Props) {
               {cup.type === 'IMAGE' ? (
                 <CldImage
                   src={cup.thumbnail}
-                  width={cup.thumbnailWidth}
-                  height={cup.thumbnailHeight}
+                  width={300}
+                  height={260}
                   alt={cup.title}
                   className='rounded object-cover w-52 h-52'
                   quality={40}
