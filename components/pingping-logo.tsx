@@ -9,6 +9,7 @@ export default function PingpingLogo() {
       <h1 className='font-bold'>
         Ping
         <span className='bg-fancy text-transparent bg-clip-text'>Ping</span>
+        <span className='sr-only'>이상형 월드컵</span>
       </h1>
     </Link>
   )

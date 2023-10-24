@@ -1,26 +1,20 @@
 'use client'
 
+import { BlurredImage } from '@/components/blurred-image'
+import { ClipboardButton } from '@/components/clipboard-button'
+import LikeButton from '@/components/like-button'
+import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import type { Cup, Like, User } from '@prisma/client'
 import axios from 'axios'
 import { ArrowRight, Loader2, MessageSquare, YoutubeIcon } from 'lucide-react'
 import type { Session } from 'next-auth'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { ResponsiveMasonry } from 'react-responsive-masonry'
-import { BlurredImage } from '@/components/blurred-image'
-import { ClipboardButton } from '@/components/clipboard-button'
-import LikeButton from '@/components/like-button'
-import { buttonVariants } from '@/components/ui/button'
-import dynamic from 'next/dynamic'
-import {
-  CoupangDynamicBannerFood,
-  CoupangDynamicBannerOnly,
-  CoupangDynamicBannerWomen,
-} from '@/components/adsense/coupang-dynamic-banner'
-import { useSearchParams } from 'next/navigation'
 
 const Masonry = dynamic(() => import('react-responsive-masonry'), {
   ssr: false,
@@ -171,9 +165,9 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                     </div>
                   </div>
 
-                  {i === 0 && <CoupangDynamicBannerFood />}
+                  {/* {i === 0 && <CoupangDynamicBannerFood />}
                   {i === 1 && <CoupangDynamicBannerOnly />}
-                  {i === 2 && <CoupangDynamicBannerWomen />}
+                  {i === 2 && <CoupangDynamicBannerWomen />} */}
                 </Fragment>
               )
             }
@@ -206,8 +200,8 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                   </div>
                 </Link>
                 <div className='h-full flex flex-col px-1 pt-2 pb-1.5 break-all gap-1'>
-                  <p className='font-bold'>{cup.title}</p>
-                  <p className='text-xs text-primary/50 font-medium'>{cup.description}</p>
+                  <h2 className='font-bold'>{cup.title}</h2>
+                  <h3 className='text-xs text-primary/50 font-medium'>{cup.description}</h3>
 
                   <div className='flex items-center gap-1 my-2'>
                     <Image
@@ -255,11 +249,11 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
       </ResponsiveMasonry>
 
       {isFinished ? (
-        <div className='w-full flex items-center justify-center pb-10'>총 {cups.length}개의 컨텐츠 불러오기 완료</div>
+        <div className='w-full flex items-center justify-center pb-6'>총 {cups.length}개의 컨텐츠 불러오기 완료</div>
       ) : (
         !isLoading && (
           <div ref={ref} className='w-full flex items-center justify-center'>
-            <Loader2 className='animate-spin w-6 h-6' />
+            <Loader2 className='animate-spin w-10 h-10' />
           </div>
         )
       )}

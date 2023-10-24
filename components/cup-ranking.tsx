@@ -130,8 +130,8 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
       <div className='md:flex mt-2'>
         <div className='w-full flex flex-col h-full'>
           <div className='my-4 h-full pr-2'>
-            <h1 className='text-2xl font-extrabold text-primary/80 tracking-tight'>{cup.title}</h1>
-            <p className='text-sm font-semiboid text-primary/70 my-2'>{cup.description}</p>
+            <h2 className='text-2xl font-extrabold text-primary/80 tracking-tight'>{cup.title}</h2>
+            <h3 className='text-sm font-semiboid text-primary/70 my-2'>{cup.description}</h3>
             <div className='flex items-center gap-1 my-2'>
               <Image
                 src={cup.user.image!}

@@ -93,8 +93,8 @@ export default async function Page({ params }: Props) {
       )}
 
       <div className='mt-4 h-full lg:w-[30rem] lg:shrink-0 pr-2'>
-        <h1 className='text-2xl font-extrabold text-primary/80 tracking-tight'>{image.cup.title}</h1>
-        <p className='text-sm font-semiboid text-primary/70 my-2'>{image.cup.description}</p>
+        <h2 className='text-2xl font-extrabold text-primary/80 tracking-tight'>{image.cup.title}</h2>
+        <h3 className='text-sm font-semiboid text-primary/70 my-2'>{image.cup.description}</h3>
         <div className='flex gap-2 font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 bg-clip-text text-transparent mt-8 mb-6'>
           <span>우승: {image.winCount}회</span>
           <span>/</span>
