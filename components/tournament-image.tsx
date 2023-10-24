@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import DescriptionText from '@/components/description-text'
 import type { CupLength } from '@/components/tournament'
+import CupInformation from '@/components/cup-information'
 
 type Props = {
   cup: Prisma.CupGetPayload<{
@@ -95,12 +96,7 @@ export default function TournamentImage({ cup, cupLength }: Props) {
 
   return (
     <div className='h-full flex items-center justify-center flex-col md:flex-row relative bg-black w-full'>
-      <div className='bg-black/70 w-full h-14 fixed top-0 z-50 mt-12 text-white flex gap-3 items-center justify-center pointer-events-none'>
-        <h1 className='text-lg'>{`${cup.title} ${limit.current === 1 ? '결승전' : limit.current * 2 + '강'}`}</h1>
-        <span className='text-xl'>
-          ({index + 1}/{limit.current})
-        </span>
-      </div>
+      <CupInformation title={cup.title} limit={limit.current} index={index} />
 
       <Initial onLeftClick={onLeftClick} onRightClick={onRightClick} items={items} index={index} clicked={clicked} />
 
