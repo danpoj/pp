@@ -23,7 +23,7 @@ export const BlurredImage = ({ thumbnail, title, width, height, type }: Props) =
         <CldImage
           src={thumbnail}
           alt={title}
-          quality={40}
+          // quality={40}
           width={300}
           height={260}
           className={cn(
@@ -37,7 +37,7 @@ export const BlurredImage = ({ thumbnail, title, width, height, type }: Props) =
         <Image
           src={thumbnail}
           alt={title}
-          quality={40}
+          // quality={40}
           width={width}
           height={height}
           className={cn(

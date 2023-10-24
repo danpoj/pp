@@ -4,6 +4,7 @@ import type { CupType, Item } from '@prisma/client'
 import Image from 'next/image'
 import CupItemDescriptionForm from './cup-item-description-form'
 import { CldImage } from 'next-cloudinary'
+import Link from 'next/link'
 
 type Props = {
   item: Item
@@ -25,13 +26,15 @@ export default function CupItemForm({ item, cupType, contentsLength }: Props) {
             className='object-contain w-full'
           />
         ) : (
-          <Image
-            src={item.videoThumbnail!}
-            alt={item.description || 'cup item'}
-            width={item.width!}
-            height={item.height!}
-            className='object-contain w-full'
-          />
+          <Link href={item.url} target='_blank' rel='noreferrer noopener' className='hover:opacity-80'>
+            <Image
+              src={item.videoThumbnail!}
+              alt={item.description || 'cup item'}
+              width={item.width!}
+              height={item.height!}
+              className='object-contain w-full'
+            />
+          </Link>
         )}
       </div>
 

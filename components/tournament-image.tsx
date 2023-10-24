@@ -120,7 +120,7 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
           className='absolute inset-0 object-contain w-full h-full'
           width={600}
           height={520}
-          quality={40}
+          // quality={40}
           src={selectedItem.url!}
           alt={selectedItem.description || 'tournament left image'}
         />
@@ -144,7 +144,7 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
           className='absolute inset-0 object-contain w-full h-full'
           width={600}
           height={520}
-          quality={40}
+          // quality={40}
           src={selectedItem.url!}
           alt={selectedItem.description || 'tournament left image'}
         />
@@ -178,7 +178,7 @@ const Initial = ({
             className='absolute inset-0 object-contain w-full h-full'
             width={600}
             height={520}
-            quality={40}
+            // quality={40}
             src={items[index * 2].url}
             alt={items[index * 2].description || 'tournament left image'}
           />
@@ -194,7 +194,7 @@ const Initial = ({
             className='absolute inset-0 object-contain w-full h-full'
             width={600}
             height={520}
-            quality={40}
+            // quality={40}
             src={items[index * 2 + 1].url}
             alt={items[index * 2 + 1].description || 'tournament left image'}
           />
