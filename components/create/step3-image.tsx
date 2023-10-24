@@ -37,7 +37,7 @@ export default function Step3Image({ cupData }: Props) {
 
       if (filteredLargeFiles.length !== acceptedFiles.length) {
         toast({
-          description: `${acceptedFiles.length - filteredLargeFiles.length}개의 파일이 4MB용량을 넘어 제외되었습니다.`,
+          description: `${acceptedFiles.length - filteredLargeFiles.length}개의 파일이 3MB용량을 넘어 제외되었습니다.`,
           variant: 'destructive',
         })
       }

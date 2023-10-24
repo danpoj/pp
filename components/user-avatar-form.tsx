@@ -30,6 +30,15 @@ export default function UserAvatarForm({ user, avatars }: Props) {
   const { open: openFileUploader } = useDropzone({
     multiple: false,
     onDrop(acceptedFile) {
+      if (acceptedFile[0].size > 3_000_000) {
+        toast({
+          description: `이미지가 3MB를 초과했습니다.`,
+          variant: 'destructive',
+        })
+
+        return
+      }
+
       const reader = new FileReader()
       reader.onload = () => {
         onLocalImageUpload(reader.result as string)
@@ -94,7 +103,7 @@ export default function UserAvatarForm({ user, avatars }: Props) {
     <div className='flex flex-col items-center'>
       <p className='flex gap-1 items-center text-xs text-blue-500'>
         <FileWarning className='w-4 h-4' />
-        <span className='font-bold'>4MB</span>이하의 이미지
+        <span className='font-bold'>3MB</span>이하의 이미지
       </p>
       <Popover open={open}>
         <PopoverTrigger asChild>
