@@ -7,7 +7,6 @@ import { getQuery } from '@/lib/get-query'
 import type { Cup, Like, User } from '@prisma/client'
 
 type Type = 'all' | 'video' | 'image'
-type Order = 'popular' | 'like' | 'newest'
 type CupWithUser = Cup & {
   _count: {
     items: number
@@ -18,19 +17,16 @@ type CupWithUser = Cup & {
   likes: Like[]
 }
 
-export const dynamic = 'force-static'
-export const revalidate = 1
+// export const dynamic = 'force-static'
 
 export default async function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
   let type = (searchParams.type ?? 'all') as Type
-  let order = (searchParams.order ?? 'polular') as Order
 
   if (!(type === 'all' || type === 'video' || type === 'image')) type = 'all'
-  if (!(order === 'popular' || order === 'like' || order === 'newest')) order = 'popular'
 
   const query = getQuery({
+    page: 0,
     type,
-    order,
   })
 
   const initialCups = (await db.cup.findMany(query)) as CupWithUser[]
@@ -45,7 +41,7 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
         <CoupangDynamicBanner1 />
       </div>
 
-      <Cups initialCups={initialCups} session={session} type={type} order={order} />
+      <Cups initialCups={initialCups} session={session} type={type} />
     </>
   )
 }

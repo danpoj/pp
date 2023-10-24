@@ -1,55 +1,20 @@
 import type { Prisma } from '@prisma/client'
 
 type Type = 'all' | 'video' | 'image'
-type Order = 'popular' | 'like' | 'newest'
 
-export function getQuery({ lastCupId, type, order }: { lastCupId?: string; type?: Type; order?: Order }) {
+const TAKE = 12
+
+export function getQuery({ page, type }: { page: number; type?: Type }) {
   const query: Prisma.CupFindManyArgs = {
-    take: lastCupId ? 12 : 24,
-    skip: lastCupId ? 1 : 0,
-    ...(lastCupId
-      ? {
-          cursor: {
-            id: lastCupId,
-          },
-        }
-      : {}),
+    take: TAKE,
+    skip: page * TAKE,
 
-    ...(type === 'image'
-      ? {
-          where: {
-            type: {
-              equals: 'IMAGE',
-            },
-          },
-        }
-      : {}),
-
-    ...(type === 'video'
-      ? {
-          where: {
-            type: {
-              equals: 'VIDEO',
-            },
-          },
-        }
-      : {}),
-
-    orderBy: {
-      ...(order === 'popular'
-        ? {
-            playCount: 'desc',
-          }
-        : order === 'like'
-        ? {
-            likes: {
-              _count: 'desc',
-            },
-          }
-        : {
-            createdAt: 'desc',
-          }),
+    where: {
+      ...(type === 'image' ? { type: 'IMAGE' } : {}),
+      ...(type === 'video' ? { type: 'VIDEO' } : {}),
+      ...(type === 'all' && {}),
     },
+
     include: {
       _count: true,
       user: true,

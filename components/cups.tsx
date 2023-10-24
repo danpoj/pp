@@ -7,7 +7,7 @@ import { ArrowRight, Loader2, MessageSquare, YoutubeIcon } from 'lucide-react'
 import type { Session } from 'next-auth'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { ResponsiveMasonry } from 'react-responsive-masonry'
 import { BlurredImage } from '@/components/blurred-image'
@@ -26,7 +26,7 @@ const Masonry = dynamic(() => import('react-responsive-masonry'), {
 })
 
 type Type = 'all' | 'video' | 'image'
-type Order = 'popular' | 'like' | 'newest'
+
 type CupWithUser = Cup & {
   _count: {
     items: number
@@ -42,30 +42,38 @@ type Props = {
   session: Session | null
   isLiked?: boolean
   type?: Type
-  order?: Order
 }
 
-export default function Cups({ initialCups, session, isLiked = false, type = 'all', order = 'popular' }: Props) {
+export default function Cups({ initialCups, session, isLiked = false, type = 'all' }: Props) {
   const [cups, setCups] = useState<CupWithUser[]>(initialCups)
-  const [isFinished, setIsFinished] = useState(initialCups.length < 24)
+  const [isFinished, setIsFinished] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const page = useRef(1)
 
   const { ref, inView } = useInView({
     threshold: 1,
   })
 
   const getCups = async () => {
-    const lastCupId = cups[cups.length - 1].id
+    try {
+      setIsLoading(true)
 
-    const { data } = (await axios.get(
-      `/api/cup?lastCupId=${lastCupId}&isLiked=${isLiked}&type=${type}&order=${order}`
-    )) as { data: CupWithUser[] }
+      const { data } = (await axios.get(`/api/cup?isLiked=${isLiked}&type=${type}&page=${page.current}`)) as {
+        data: CupWithUser[]
+      }
 
-    if (data.length === 0) {
-      setIsFinished(true)
-      return
+      if (data.length === 0) {
+        setIsFinished(true)
+        return
+      }
+
+      setCups((prev) => [...prev, ...data])
+      page.current++
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
     }
-
-    setCups((prev) => [...prev, ...data])
   }
 
   useEffect(() => {
@@ -242,11 +250,13 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
       </ResponsiveMasonry>
 
       {isFinished ? (
-        <div className='w-full flex items-center justify-center py-10'>총 {cups.length}개의 컨텐츠 불러오기 완료</div>
+        <div className='w-full flex items-center justify-center pb-10'>총 {cups.length}개의 컨텐츠 불러오기 완료</div>
       ) : (
-        <div ref={ref} className='w-full flex items-center justify-center'>
-          <Loader2 className='animate-spin w-12 h-12' />
-        </div>
+        !isLoading && (
+          <div ref={ref} className='w-full flex items-center justify-center'>
+            <Loader2 className='animate-spin w-6 h-6' />
+          </div>
+        )
       )}
     </section>
   )

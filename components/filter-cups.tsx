@@ -12,10 +12,8 @@ export default function FilterCups() {
   const searchParams = useSearchParams()
 
   let type = searchParams.get('type') ?? 'all'
-  let order = searchParams.get('order') ?? 'popular'
 
   if (!(type === 'all' || type === 'video' || type === 'image')) type = 'all'
-  if (!(order === 'popular' || order === 'like' || order === 'newest')) order = 'popular'
 
   const pushQuery = (query: { [key: string]: string }) => {
     const url = qs.stringifyUrl({
@@ -75,49 +73,6 @@ export default function FilterCups() {
           <RadioGroupItem value='image' id='image' />
           <Label htmlFor='image' className='bg-fancy px-2 py-1 rounded text-white font-bold text-xs cursor-pointer'>
             이미지
-          </Label>
-        </div>
-      </RadioGroup>
-
-      <RadioGroup value={order} className='flex flex-col gap-4'>
-        <div
-          onClick={() =>
-            pushQuery({
-              order: 'popular',
-            })
-          }
-          className='flex items-center space-x-2'
-        >
-          <RadioGroupItem value='popular' id='popular' />
-          <Label htmlFor='popular' className='cursor-pointer font-semibold'>
-            인기(플레이) 순
-          </Label>
-        </div>
-        <div
-          onClick={() =>
-            pushQuery({
-              order: 'like',
-            })
-          }
-          className='flex items-center space-x-2'
-        >
-          <RadioGroupItem value='like' id='like' />
-          <Label htmlFor='like' className='flex items-center gap-0.5 cursor-pointer font-semibold'>
-            <HeartEmoji className='w-3 h-3 fill-red-500 stroke-red-500' />
-            좋아요 순
-          </Label>
-        </div>
-        <div
-          onClick={() =>
-            pushQuery({
-              order: 'newest',
-            })
-          }
-          className='flex items-center space-x-2'
-        >
-          <RadioGroupItem value='newest' id='newest' />
-          <Label htmlFor='newest' className='cursor-pointer font-semibold'>
-            최신 순
           </Label>
         </div>
       </RadioGroup>

@@ -4,23 +4,20 @@ import { getQuery } from '@/lib/get-query'
 import { NextRequest, NextResponse } from 'next/server'
 
 type Type = 'all' | 'video' | 'image'
-type Order = 'popular' | 'like' | 'newest'
 
 export const GET = async (req: NextRequest) => {
   try {
     const url = new URL(req.url)
-    const lastCupId = url.searchParams.get('lastCupId') as string | undefined
     const isLiked = url.searchParams.get('isLiked') === 'true' || false
+
     let type = url.searchParams.get('type') as Type | undefined
-    let order = url.searchParams.get('order') as Order | undefined
+    let page = url.searchParams.get('page')
 
     if (!(type === 'all' || type === 'video' || type === 'image' || type == null)) type = 'all'
-    if (!(order === 'popular' || order === 'like' || order === 'newest' || order == null)) order = 'popular'
 
     const query = getQuery({
-      lastCupId,
+      page: +page!,
       type,
-      order,
     })
 
     if (isLiked) {
