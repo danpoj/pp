@@ -12,12 +12,12 @@ export const POST = async (req: NextRequest) => {
       eager: [
         {
           width: 300,
-          height: 260,
+          // height: 260,
           // quality: 40,
         },
         {
           width: 600,
-          height: 520,
+          // height: 520,
           // quality: 40,
         },
       ],
