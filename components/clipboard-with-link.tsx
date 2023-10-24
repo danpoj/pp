@@ -13,9 +13,27 @@ export const ClipboardWithLink = ({ path, title, ...props }: ClipboardWithLinkPr
   const [copied, setCopied] = useState(false)
   const origin = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://www.pingping.online'
 
+  // const onCopy = () => {
+  //   navigator.clipboard.writeText(origin + path)
+  //   setCopied(true)
+
+  //   setTimeout(() => {
+  //     setCopied(false)
+  //   }, 1000)
+  // }
+
   const onCopy = () => {
-    navigator.clipboard.writeText(origin + path)
     setCopied(true)
+
+    const $textarea = document.createElement('textarea')
+    document.body.appendChild($textarea)
+
+    $textarea.value = origin + path
+    $textarea.select()
+
+    document.execCommand('copy')
+
+    document.body.removeChild($textarea)
 
     setTimeout(() => {
       setCopied(false)
