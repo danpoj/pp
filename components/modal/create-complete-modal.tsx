@@ -27,7 +27,7 @@ export default function CreateCompleteModal() {
               width={data?.thumbnailWidth}
               height={data?.thumbnailHeight}
               src={data?.thumbnail!}
-              quality={40}
+              // quality={40}
               alt={data?.title!}
               className='object-contain w-full h-full'
             />

@@ -58,7 +58,7 @@ function ImageRotation({ currentIndex, images, type }: { images: Item[]; current
               height={520}
               src={item.publicId!}
               alt='cup landing background image'
-              quality={40}
+              // quality={40}
               className={cn(
                 'w-full h-full object-cover absolute inset-0 transition-all duration-300',
                 currentIndex === index ? 'opacity-100 transform-none' : 'opacity-0'

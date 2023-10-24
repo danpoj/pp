@@ -57,7 +57,7 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
                 alt='cup image'
                 width={300}
                 height={260}
-                quality={40}
+                // quality={40}
                 className='object-contain w-full h-full'
               />
             )}
@@ -100,7 +100,7 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
                 alt='cup image'
                 width={300}
                 height={260}
-                quality={40}
+                // quality={40}
                 className='object-contain w-full h-full'
               />
             )}

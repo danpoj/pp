@@ -22,7 +22,7 @@ export default function CupItemForm({ item, cupType, contentsLength }: Props) {
             alt={item.description || 'cup item'}
             width={300}
             height={260}
-            quality={40}
+            // quality={40}
             className='object-contain w-full'
           />
         ) : (

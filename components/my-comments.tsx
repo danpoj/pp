@@ -65,7 +65,7 @@ export default function MyComments({ user }: Props) {
               <CldImage
                 src={comment.cup.thumbnail}
                 alt={comment.cup.title}
-                quality={40}
+                // quality={40}
                 width={300}
                 height={260}
                 className='rounded w-[120px] h-[120px] object-cover'
@@ -74,7 +74,7 @@ export default function MyComments({ user }: Props) {
               <Image
                 src={comment.cup.thumbnail}
                 alt={comment.cup.title}
-                quality={40}
+                // quality={40}
                 width={120}
                 height={120}
                 className='rounded w-[120px] h-[120px] object-cover'
@@ -146,7 +146,7 @@ export default function MyComments({ user }: Props) {
                 alt={comment.item.description || 'cup result image'}
                 width={120}
                 height={120}
-                quality={40}
+                // quality={40}
                 className='rounded w-[120px] h-[120px] object-cover'
               />
             ) : (
@@ -155,7 +155,7 @@ export default function MyComments({ user }: Props) {
                 alt={comment.item.description || 'cup result image'}
                 width={300}
                 height={260}
-                quality={40}
+                // quality={40}
                 className='rounded w-[120px] h-[120px] object-cover'
               />
             )}

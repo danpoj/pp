@@ -105,7 +105,7 @@ export default function UserAvatarForm({ user, avatars }: Props) {
             {isUploading ? (
               <Loader2 className='animate-spin' />
             ) : (
-              <Image fill src={user.image!} alt='user profile image' className='object-cover' quality={20} />
+              <Image fill src={user.image!} alt='user profile image' className='object-cover' />
             )}
 
             <span className='hidden group-hover:flex bg-black/40 inset-0 absolute rounded-full items-center justify-center'>
@@ -145,7 +145,7 @@ export default function UserAvatarForm({ user, avatars }: Props) {
               key={avatar}
               className='hover:outline hover:outline-slate-400 w-14 h-14 relative rounded-full bg-white'
             >
-              <Image src={avatar} alt='default profile image' fill className='p-3' quality={20} />
+              <Image src={avatar} alt='default profile image' fill className='p-3' />
             </button>
           ))}
         </PopoverContent>

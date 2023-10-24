@@ -28,7 +28,7 @@ export default function ImageResult({ width, height, src, description }: Props) 
         src={src}
         alt={description ?? 'cup image'}
         className={cn('w-full h-full', type === 'cover' ? 'object-cover' : 'object-contain')}
-        quality={40}
+        // quality={40}
       />
       <Button
         onClick={toggle}
