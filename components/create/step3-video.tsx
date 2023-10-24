@@ -132,7 +132,7 @@ export default function ThirdStepYoutube({ cupData }: Props) {
 
   return (
     <div className='mt-3 w-full px-2'>
-      <div className='flex justify-center mt-2'>
+      {/* <div className='flex justify-center mt-2'>
         {thumbnail.current ? (
           <Image
             width={1280}
@@ -150,7 +150,7 @@ export default function ThirdStepYoutube({ cupData }: Props) {
             </span>
           </div>
         )}
-      </div>
+      </div> */}
 
       <div className='mt-10 font-bold tracking-tight text-lg'>
         <span className='text-blue-500'>8 ~ 100개 </span>의 링크를 업로드 할 수 있습니다

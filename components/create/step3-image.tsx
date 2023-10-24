@@ -106,6 +106,9 @@ export default function Step3Image({ cupData }: Props) {
         <div className='space-y-2 p-6 pb-2 text-xs sm:text-sm'>
           <p className='truncate'>8개~100개의 이미지를 업로드 할 수 있습니다 (각 3Mb 이하의 이미지)</p>
           <p className='truncate'>이미지 개수에 따라 8, 16, 32, 64강의 월드컵이 만들어집니다</p>
+          <p className='truncate font-bold pt-4 text-center text-blue-500'>
+            업로드 이후 자유롭게 수정 가능합니다 (제목, 설명, 썸네일, 이미지)
+          </p>
         </div>
 
         <div className='grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 2xl:grid-cols-8 gap-1.5 py-4 px-2'>
@@ -136,7 +139,7 @@ export default function Step3Image({ cupData }: Props) {
           className='h-12 w-40'
           variant='blue'
         >
-          다음 단계 <ChevronRight className='w-5 h-5 ml-1' />
+          업로드 <ChevronRight className='w-5 h-5 ml-1' />
         </Button>
       </div>
     </div>
