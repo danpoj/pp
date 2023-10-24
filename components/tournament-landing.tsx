@@ -25,7 +25,7 @@ export default function TournamentLanding({ cup, cupLength, setCupLength, setisL
 
   useEffect(() => {
     const increaseIndex = () => {
-      setCurrentIndex((i) => (i + 1) % 4)
+      setCurrentIndex((i) => (i + 1) % 3)
     }
 
     const intervalId = setInterval(increaseIndex, 4000)
