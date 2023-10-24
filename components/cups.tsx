@@ -20,6 +20,7 @@ import {
   CoupangDynamicBannerOnly,
   CoupangDynamicBannerWomen,
 } from '@/components/adsense/coupang-dynamic-banner'
+import { useSearchParams } from 'next/navigation'
 
 const Masonry = dynamic(() => import('react-responsive-masonry'), {
   ssr: false,
@@ -81,6 +82,10 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
       getCups()
     }
   }, [inView])
+
+  useEffect(() => {
+    setCups(initialCups)
+  }, [type, initialCups])
 
   return (
     <section>

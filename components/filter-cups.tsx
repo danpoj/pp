@@ -1,15 +1,15 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import qs from 'query-string'
 
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Youtube } from 'lucide-react'
-import HeartEmoji from '@/components/heart-emoji'
 
 export default function FilterCups() {
   const searchParams = useSearchParams()
+  const router = useRouter()
 
   let type = searchParams.get('type') ?? 'all'
 
@@ -23,7 +23,9 @@ export default function FilterCups() {
       },
     })
 
-    window.location.href = url
+    router.push(url)
+
+    // window.location.href = url
   }
 
   return (
