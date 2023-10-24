@@ -15,6 +15,10 @@ export function getQuery({ page, type }: { page: number; type?: Type }) {
       ...(type === 'all' && {}),
     },
 
+    orderBy: {
+      createdAt: 'desc',
+    },
+
     include: {
       _count: true,
       user: true,
