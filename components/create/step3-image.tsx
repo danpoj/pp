@@ -33,7 +33,7 @@ export default function Step3Image({ cupData }: Props) {
 
   const { getRootProps, getInputProps, isDragAccept, isDragReject } = useDropzone({
     onDrop: (acceptedFiles) => {
-      const filteredLargeFiles = acceptedFiles.filter((file) => file.size <= 3_600_000)
+      const filteredLargeFiles = acceptedFiles.filter((file) => file.size <= 3_000_000)
 
       if (filteredLargeFiles.length !== acceptedFiles.length) {
         toast({
@@ -104,7 +104,7 @@ export default function Step3Image({ cupData }: Props) {
         )}
 
         <div className='space-y-2 p-6 pb-2 text-xs sm:text-sm'>
-          <p className='truncate'>8개~100개의 이미지를 업로드 할 수 있습니다 (각 3.6Mb 이하의 이미지)</p>
+          <p className='truncate'>8개~100개의 이미지를 업로드 할 수 있습니다 (각 3Mb 이하의 이미지)</p>
           <p className='truncate'>이미지 개수에 따라 8, 16, 32, 64강의 월드컵이 만들어집니다</p>
         </div>
 
