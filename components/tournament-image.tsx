@@ -35,7 +35,7 @@ export default function TournamentImage({ cup, cupLength }: Props) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setClicked('INITIAL')
-    }, 2600)
+    }, 2000)
 
     return () => clearTimeout(timeout)
   }, [index])
@@ -111,7 +111,7 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
     <m.div
       animate={{ left: '50%', translateX: '-50%' }}
       transition={{
-        duration: 0.4,
+        duration: 0.2,
       }}
       className='w-[70%] sm:w-[60%] h-full absolute left-0'
     >
@@ -135,7 +135,7 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
     <m.div
       animate={{ right: '50%', translateX: '50%' }}
       transition={{
-        duration: 0.4,
+        duration: 0.2,
       }}
       className='w-[70%] sm:w-[60%] h-full absolute right-0'
     >
