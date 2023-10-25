@@ -4,6 +4,11 @@ export default async function sitemap() {
   const cupIds = await db.cup.findMany({
     select: {
       id: true,
+      items: {
+        select: {
+          id: true,
+        },
+      },
       updatedAt: true,
     },
   })
@@ -13,6 +18,21 @@ export default async function sitemap() {
     lastModified: cup.updatedAt,
   }))
 
+  const cupRankings = cupIds.map((cup) => ({
+    url: `https://www.pingping.online/cup/${cup.id}/ranking`,
+    lastModified: cup.updatedAt,
+  }))
+
+  const items = []
+
+  for (const cup of cupIds) {
+    for (const item of cup.items) {
+      items.push({
+        url: `https://www.pingping.online/cup/${cup.id}/${item.id}`,
+      })
+    }
+  }
+
   const routes = [''].map((route) => ({
     url: `https://www.pingping.online${route}`,
     lastModified: new Date().toISOString().split('T')[0],
@@ -20,5 +40,5 @@ export default async function sitemap() {
     priority: 1,
   }))
 
-  return [...routes, ...cups]
+  return [...routes, ...cups, ...cupRankings, ...items]
 }
