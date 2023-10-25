@@ -41,6 +41,9 @@ export const metadata: Metadata = {
     title: 'Ping Ping',
     card: 'summary_large_image',
   },
+  verification: {
+    google: 'Ve2EPtkFbD5bFsAaOqCqAuyELbzmLPZqspd_G6y6nEk',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
