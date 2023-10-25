@@ -37,9 +37,10 @@ type Props = {
   session: Session | null
   isLiked?: boolean
   type?: Type
+  search?: string
 }
 
-export default function Cups({ initialCups, session, isLiked = false, type = 'all' }: Props) {
+export default function Cups({ initialCups, session, isLiked = false, type = 'all', search }: Props) {
   const [cups, setCups] = useState<CupWithUser[]>(initialCups)
   const [isFinished, setIsFinished] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -53,7 +54,9 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
     try {
       setIsLoading(true)
 
-      const { data } = (await axios.get(`/api/cup?isLiked=${isLiked}&type=${type}&page=${page.current}`)) as {
+      const { data } = (await axios.get(
+        `/api/cup?isLiked=${isLiked}&type=${type}&page=${page.current}&search=${search}`
+      )) as {
         data: CupWithUser[]
       }
 

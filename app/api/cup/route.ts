@@ -12,12 +12,14 @@ export const GET = async (req: NextRequest) => {
 
     let type = url.searchParams.get('type') as Type | undefined
     let page = url.searchParams.get('page')
+    const search = url.searchParams.get('search') || ''
 
     if (!(type === 'all' || type === 'video' || type === 'image' || type == null)) type = 'all'
 
     const query = getQuery({
       page: +page!,
       type,
+      search,
     })
 
     if (isLiked) {

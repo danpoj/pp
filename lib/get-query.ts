@@ -4,7 +4,7 @@ type Type = 'all' | 'video' | 'image'
 
 const TAKE = 12
 
-export function getQuery({ page, type }: { page: number; type?: Type }) {
+export function getQuery({ page, type, search }: { page: number; type?: Type; search?: string }) {
   const query: Prisma.CupFindManyArgs = {
     take: TAKE,
     skip: page * TAKE,
@@ -13,6 +13,12 @@ export function getQuery({ page, type }: { page: number; type?: Type }) {
       ...(type === 'image' ? { type: 'IMAGE' } : {}),
       ...(type === 'video' ? { type: 'VIDEO' } : {}),
       ...(type === 'all' && {}),
+
+      ...(search && {
+        title: {
+          contains: search,
+        },
+      }),
     },
 
     orderBy: {

@@ -1,12 +1,19 @@
 import { CoupangDynamicBanner1 } from '@/components/adsense/coupang-dynamic-banner'
 import Cups from '@/components/cups'
 import FilterCups from '@/components/filter-cups'
+import SearchInput from '@/components/search-input'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { getQuery } from '@/lib/get-query'
 import type { Cup, Like, User } from '@prisma/client'
 
-type Type = 'all' | 'video' | 'image'
+export type Type = 'all' | 'video' | 'image'
+
+type SearchParmas = {
+  type: string
+  search: string
+}
+
 type CupWithUser = Cup & {
   _count: {
     items: number
@@ -19,12 +26,14 @@ type CupWithUser = Cup & {
 
 export default async function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
   let type = (searchParams.type ?? 'all') as Type
+  const search = searchParams.search
 
-  if (!(type === 'all' || type === 'video' || type === 'image')) type = 'all'
+  if (!(type === 'video' || type === 'image')) type = 'all'
 
   const query = getQuery({
     page: 0,
     type,
+    search,
   })
 
   const initialCups = (await db.cup.findMany(query)) as CupWithUser[]
@@ -33,13 +42,16 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
 
   return (
     <>
-      <div className='flex flex-col-reverse md:flex-row px-8 py-12 gap-4 md:gap-8 w-full'>
-        <FilterCups />
-
+      <div className='flex flex-col w-full px-2'>
         <CoupangDynamicBanner1 />
+
+        <div className='flex items-center justify-center pr-4 py-4 gap-4'>
+          <FilterCups />
+          <SearchInput />
+        </div>
       </div>
 
-      <Cups initialCups={initialCups} session={session} type={type} />
+      <Cups initialCups={initialCups} session={session} type={type} search={search} />
     </>
   )
 }
