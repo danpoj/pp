@@ -1,6 +1,7 @@
 import { CoupangDynamicBanner1 } from '@/components/adsense/coupang-dynamic-banner'
 import Cups from '@/components/cups'
 import FilterCups from '@/components/filter-cups'
+import ScrollTopButton from '@/components/scroll-top-button'
 import SearchInput from '@/components/search-input'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
@@ -52,6 +53,8 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
       </div>
 
       <Cups initialCups={initialCups} session={session} type={type} search={search} />
+
+      <ScrollTopButton />
     </>
   )
 }

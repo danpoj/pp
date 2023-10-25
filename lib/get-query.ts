@@ -2,7 +2,7 @@ import type { Prisma } from '@prisma/client'
 
 type Type = 'all' | 'video' | 'image'
 
-const TAKE = 12
+const TAKE = 16
 
 export function getQuery({ page, type, search }: { page: number; type?: Type; search?: string }) {
   const query: Prisma.CupFindManyArgs = {
@@ -12,13 +12,15 @@ export function getQuery({ page, type, search }: { page: number; type?: Type; se
     where: {
       ...(type === 'image' ? { type: 'IMAGE' } : {}),
       ...(type === 'video' ? { type: 'VIDEO' } : {}),
-      ...(type === 'all' && {}),
+      // ...(type === 'all' && {}),
 
-      ...(search && {
-        title: {
-          contains: search,
-        },
-      }),
+      ...(search
+        ? {
+            title: {
+              contains: search,
+            },
+          }
+        : {}),
     },
 
     orderBy: {
