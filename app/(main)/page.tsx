@@ -1,4 +1,3 @@
-import { CoupangDynamicBanner1 } from '@/components/adsense/coupang-dynamic-banner'
 import Cups from '@/components/cups'
 import FilterCups from '@/components/filter-cups'
 import ScrollTopButton from '@/components/scroll-top-button'
@@ -44,7 +43,7 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
   return (
     <>
       <div className='flex flex-col w-full px-2'>
-        <CoupangDynamicBanner1 />
+        {/* <CoupangDynamicBanner1 /> */}
 
         <div className='flex items-center justify-center pr-4 py-4 gap-4'>
           <FilterCups />
