@@ -15,7 +15,7 @@ export default function SearchInput() {
   const search = searchParams.get('search')
 
   const [value, setValue] = useState(search || '')
-  const debounceValue = useDebounce(value, 1000)
+  const debounceValue = useDebounce(value, 500)
 
   useEffect(() => {
     const url = qs.stringifyUrl(
