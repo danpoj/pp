@@ -34,7 +34,7 @@ export default function TournamentLanding({ cup, cupLength, setCupLength, setisL
   }, [])
 
   return (
-    <div className='h-full flex items-center justify-center relative w-full'>
+    <div className='h-full flex items-center justify-center relative w-full bg-black'>
       <ImageRotation images={cup.items.slice(0, 3)} currentIndex={currentIndex} type={cup.type} />
 
       <Modal
@@ -94,7 +94,7 @@ function Modal({ cupLength, setCupLength, setisLanding, cupItemsLength }: ModalP
 
   return (
     <div className='relative w-full h-full flex items-center justify-center'>
-      <div aria-hidden className='bg-black inset-0 absolute opacity-60' />
+      <div aria-hidden className='inset-0 absolute bg-black/40' />
       <div className='bg-background rounded-lg w-full max-w-[32rem] z-50 p-6 absolute flex flex-col gap-6 items-center'>
         <div className='mb-4 flex flex-col items-center gap-2'>
           <span className='text-xl'>총 {cupItemsLength}개의 컨텐츠</span>

@@ -49,11 +49,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='ko' suppressHydrationWarning>
-      <Script
-        async
-        crossOrigin='anonymous'
-        src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3412419424653583'
-      />
+      <head>
+        <Script
+          async
+          crossOrigin='anonymous'
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3412419424653583'
+          strategy='lazyOnload'
+        />
+      </head>
       <body className={cn('antialiased text-sm', notoSans.className)}>
         <Providers>
           {children}
