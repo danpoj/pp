@@ -5,10 +5,11 @@ import type { CupType } from '@prisma/client'
 
 // etc
 import { useRef, useState } from 'react'
-import Step1 from '@/components/create/step1'
+
 import StepIcon from '@/components/create/step-icon'
 import dynamic from 'next/dynamic'
 
+const Step1 = dynamic(() => import('@/components/create/step1'))
 const Step2 = dynamic(() => import('@/components/create/step2'))
 const Step3Image = dynamic(() => import('@/components/create/step3-image'))
 const Step3Video = dynamic(() => import('@/components/create/step3-video'))
