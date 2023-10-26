@@ -14,12 +14,9 @@ export default function SearchInput() {
   const search = searchParams.get('search')
 
   const [value, setValue] = useState(search || '')
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    setIsSubmitting(true)
 
     const url = qs.stringifyUrl(
       {
@@ -32,8 +29,6 @@ export default function SearchInput() {
     )
 
     router.push(url)
-
-    setIsSubmitting(false)
   }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +43,6 @@ export default function SearchInput() {
       <form onSubmit={onSubmit} className='relative w-full overflow-hidden rounded-lg'>
         <Input
           onChange={onChange}
-          disabled={isSubmitting}
           value={value}
           placeholder='입력...'
           id='search'
@@ -57,10 +51,9 @@ export default function SearchInput() {
 
         <button
           type='submit'
-          disabled={isSubmitting}
           className='absolute right-0 top-1/2 -translate-y-1/2 text-primary/50 bg-primary/10 h-full w-16 flex items-center justify-center hover:bg-primary/20 hover:text-primary/60 transition'
         >
-          {isSubmitting ? <Loader2 className='w-5 h-5' /> : <Search className='w-5 h-5' />}
+          <Search className='w-5 h-5' />
         </button>
       </form>
     </div>
