@@ -1,12 +1,11 @@
 'use client'
 
 import { Input } from '@/components/ui/input'
-import { Search } from 'lucide-react'
-import { Label } from './ui/label'
-import qs from 'query-string'
-import { useState, type ChangeEvent, useEffect } from 'react'
+import { Loader2, Search } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useDebounce } from '@/hooks/use-debounce'
+import qs from 'query-string'
+import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { Label } from './ui/label'
 
 export default function SearchInput() {
   const router = useRouter()
@@ -15,21 +14,27 @@ export default function SearchInput() {
   const search = searchParams.get('search')
 
   const [value, setValue] = useState(search || '')
-  const debounceValue = useDebounce(value, 500)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  useEffect(() => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    setIsSubmitting(true)
+
     const url = qs.stringifyUrl(
       {
         url: window.location.href,
         query: {
-          search: debounceValue,
+          search: value,
         },
       },
       { skipNull: true, skipEmptyString: true }
     )
 
     router.push(url)
-  }, [debounceValue, router])
+
+    setIsSubmitting(false)
+  }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
@@ -40,16 +45,24 @@ export default function SearchInput() {
       <Label htmlFor='search' className='ml-1'>
         월드컵 검색하기
       </Label>
-      <div className='relative w-full'>
-        <Search className='absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/50' />
+      <form onSubmit={onSubmit} className='relative w-full overflow-hidden rounded-lg'>
         <Input
           onChange={onChange}
+          disabled={isSubmitting}
           value={value}
           placeholder='입력...'
           id='search'
           className='h-12 text-lg pr-10 w-full'
         />
-      </div>
+
+        <button
+          type='submit'
+          disabled={isSubmitting}
+          className='absolute right-0 top-1/2 -translate-y-1/2 text-primary/50 bg-primary/10 h-full w-16 flex items-center justify-center hover:bg-primary/20 hover:text-primary/60 transition'
+        >
+          {isSubmitting ? <Loader2 className='w-5 h-5' /> : <Search className='w-5 h-5' />}
+        </button>
+      </form>
     </div>
   )
 }

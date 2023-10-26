@@ -42,7 +42,7 @@ type Props = {
 
 export default function Cups({ initialCups, session, isLiked = false, type = 'all', search }: Props) {
   const [cups, setCups] = useState<CupWithUser[]>(initialCups)
-  const [isFinished, setIsFinished] = useState(false)
+  const [isFinished, setIsFinished] = useState(initialCups.length === 0)
   const [isLoading, setIsLoading] = useState(false)
   const page = useRef(1)
 
