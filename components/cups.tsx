@@ -132,7 +132,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                     alt='cup author profile image'
                     width={24}
                     height={24}
-                    className='bg-white rounded-full p-0.5'
+                    className='bg-white rounded-full w-[24px] h-[24px] object-cover'
                   />
                   <span className='text-xs font-normal'>@{cup.user.nickname}</span>
                 </div>
