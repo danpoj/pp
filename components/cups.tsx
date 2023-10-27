@@ -170,7 +170,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
         <div className='w-full flex items-center justify-center pb-6'>총 {cups.length}개의 컨텐츠 불러오기 완료</div>
       ) : (
         <div className='w-full flex items-center justify-center'>
-          <Loader2 className='animate-spin w-10 h-10' />
+          <Image src='/loader.gif' alt='pingping logo' width={160} height={160} />
         </div>
       )}
     </section>
