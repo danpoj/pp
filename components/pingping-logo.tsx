@@ -1,4 +1,3 @@
-import { pingping } from '@/data/pingping'
 import Image from 'next/image'
 import Link from 'next/link'
 

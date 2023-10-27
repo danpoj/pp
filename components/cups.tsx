@@ -7,7 +7,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import type { Cup, Like, User } from '@prisma/client'
 import axios from 'axios'
-import { ArrowRight, Loader2, MessageSquare, YoutubeIcon } from 'lucide-react'
+import { BarChart, MessageSquare, YoutubeIcon } from 'lucide-react'
 import type { Session } from 'next-auth'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
@@ -154,7 +154,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                   >
                     <span className='hidden sm:block'>랭킹보기</span>
                     <span className='block sm:hidden text-[0.65rem]'>랭킹</span>
-                    <ArrowRight className='w-3 h-3 ml-0.5 sm:ml-1' />
+                    <BarChart className='w-3 h-3 ml-0.5 sm:ml-1' />
                   </Link>
                   <ClipboardButton path={`/cup/${cup.id}`} />
                   {/* TODO */}

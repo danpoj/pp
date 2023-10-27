@@ -48,7 +48,7 @@ export const ClipboardButton = ({ path }: ClipboardButtonProps) => {
             <Copy className='w-3 h-3 ml-1' />
           </div>
           <div className='flex sm:hidden items-center'>
-            <span className='text-xs text-[0.65rem]'>공유</span>
+            <span className='text-xs text-[0.60rem]'>공유</span>
             <Copy className='w-3 h-3 ml-0.5' />
           </div>
         </>
