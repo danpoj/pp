@@ -28,7 +28,7 @@ export default function SearchInput() {
       { skipNull: true, skipEmptyString: true }
     )
 
-    router.push(url)
+    router.replace(url)
   }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

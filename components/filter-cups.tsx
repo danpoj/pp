@@ -29,7 +29,7 @@ export default function FilterCups() {
       }
     )
 
-    router.push(url)
+    router.replace(url)
   }
 
   return (
