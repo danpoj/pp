@@ -1,8 +1,8 @@
 import Cups from '@/components/cups'
 import { getSession } from '@/lib/auth'
+import { redirect } from 'next/navigation'
 import db from '@/lib/db'
 import type { Cup, Like, User } from '@prisma/client'
-import { redirect } from 'next/navigation'
 
 type CupWithUser = Cup & {
   _count: {
