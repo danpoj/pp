@@ -154,7 +154,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                   >
                     <span className='hidden sm:block'>랭킹보기</span>
                     <span className='block sm:hidden text-[0.65rem]'>랭킹</span>
-                    <BarChart className='w-3 h-3 ml-0.5 sm:ml-1' />
+                    <BarChart className='w-3 h-3 hidden sm:block ml-1' />
                   </Link>
                   <ClipboardButton path={`/cup/${cup.id}`} />
                   {/* TODO */}

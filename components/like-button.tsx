@@ -69,7 +69,7 @@ export default function LikeButton({ cup, session, className, size }: Props) {
   return (
     <Button onClick={onClick} disabled={isSubmitting} variant='ghost' className={className} size='sm'>
       <HeartEmoji size={size} className={cn(isLiked ? 'fill-red-500 stroke-red-500' : 'stroke-slate-400')} />
-      <span className='text-slate-500'>{likeCount}</span>
+      <span className='text-slate-500 text-xs'>{likeCount}</span>
     </Button>
   )
 }
