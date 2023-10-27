@@ -24,7 +24,9 @@ export function getQuery({ page, type, search }: { page: number; type?: Type; se
     },
 
     orderBy: {
-      createdAt: 'desc',
+      likes: {
+        _count: 'desc',
+      },
     },
 
     include: {

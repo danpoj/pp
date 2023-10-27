@@ -143,7 +143,7 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
                 alt='cup author profile image'
                 width={40}
                 height={40}
-                className='bg-white rounded-full p-0.5'
+                className='bg-white rounded-full p-0.5 w-[40px] h-[40px] object-cover'
               />
               <span className='font-normal'>@{cup.user.nickname}</span>
             </div>

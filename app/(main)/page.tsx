@@ -46,7 +46,7 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
       <div className='flex flex-col w-full px-2'>
         {/* <CoupangDynamicBanner1 /> */}
 
-        <div className='flex items-center justify-center pr-4 py-4 gap-4'>
+        <div className='flex flex-col sm:flex-row items-center justify-center sm:pr-4 py-4 sm:gap-4'>
           <FilterCups />
           <SearchInput />
         </div>

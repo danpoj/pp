@@ -85,12 +85,9 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
   }, [type, initialCups])
 
   return (
-    <section className='px-2'>
-      <ResponsiveMasonry
-        className='px-1 w-full'
-        columnsCountBreakPoints={{ 0: 1, 440: 2, 720: 3, 1100: 4, 1400: 5, 1700: 6 }}
-      >
-        <Masonry gutter='4px' className='pb-20 w-full'>
+    <section className='sm:px-2'>
+      <ResponsiveMasonry className='px-1 w-full' columnsCountBreakPoints={{ 0: 2, 760: 3, 1100: 4, 1400: 5, 1700: 6 }}>
+        <Masonry gutter='2px' className='pb-20 w-full'>
           {cups.map((cup, index) => (
             <div
               key={cup.id}
@@ -123,8 +120,8 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                 </div>
               </Link>
               <div className='h-full flex flex-col px-1 pt-2 pb-1.5 break-all gap-1'>
-                <h2 className='font-bold'>{cup.title}</h2>
-                <h3 className='text-xs text-primary/50 font-medium'>{cup.description}</h3>
+                <h2 className='font-bold text-xs sm:text-base'>{cup.title}</h2>
+                <h3 className='text-xs text-[0.65rem] sm:text-[0.75rem] text-primary/60'>{cup.description}</h3>
 
                 <div className='flex items-center gap-1 my-2'>
                   <Image
@@ -155,7 +152,9 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                     href={`/cup/${cup.id}/ranking`}
                     className={cn(buttonVariants({ className: 'text-xs text-[11px] px-2 flex-1', size: 'sm' }), 'h-8')}
                   >
-                    랭킹보기 <ArrowRight className='w-3 h-3 ml-1' />
+                    <span className='hidden sm:block'>랭킹보기</span>
+                    <span className='block sm:hidden text-[0.65rem]'>랭킹</span>
+                    <ArrowRight className='w-3 h-3 ml-0.5 sm:ml-1' />
                   </Link>
                   <ClipboardButton path={`/cup/${cup.id}`} />
                   {/* TODO */}
