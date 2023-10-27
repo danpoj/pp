@@ -97,7 +97,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
               ref={index === cups.length - 1 ? ref : null}
               className='rounded-lg overflow-hidden shadow dark:bg-border/20 border'
             >
-              <Link href={`/cup/${cup.id}`} className='hover:opacity-90 transition group'>
+              <Link prefetch={false} href={`/cup/${cup.id}`} className='hover:opacity-90 transition group'>
                 <div className='relative overflow-hidden'>
                   {cup.thumbnail ? (
                     <BlurredImage
