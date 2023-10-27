@@ -6,6 +6,7 @@ import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { getQuery } from '@/lib/get-query'
 import type { Cup, Like, User } from '@prisma/client'
+import { Suspense } from 'react'
 
 export type Type = 'all' | 'video' | 'image'
 
@@ -51,7 +52,9 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
         </div>
       </div>
 
-      <Cups initialCups={initialCups} session={session} type={type} search={search} />
+      <Suspense fallback={null}>
+        <Cups initialCups={initialCups} session={session} type={type} search={search} />
+      </Suspense>
 
       <ScrollTopButton />
     </>
