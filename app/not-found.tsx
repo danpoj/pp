@@ -4,14 +4,9 @@ import { Button } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
 
-export default function Error({ error, reset }: { error: Error; reset: () => void }) {
+export default function NotFound() {
   const router = useRouter()
-
-  useEffect(() => {
-    console.error(error)
-  }, [error])
 
   return (
     <div className='w-full h-full flex flex-col items-center justify-center gap-4'>
@@ -20,7 +15,8 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
         홈으로 이동하기
       </Button>
 
-      <h1 className='text-xl'>에러!</h1>
+      <h1 className='text-xl'>페이지를 찾을 수 없습니다</h1>
+      <p className='text-lg'>404 Not Found</p>
       <Image src='/loader.gif' width={160} height={160} alt='brand image' />
     </div>
   )
