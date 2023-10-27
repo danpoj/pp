@@ -9,9 +9,14 @@ import { Separator } from '@/components/ui/separator'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 
-import dayjs from 'dayjs'
 import type { Metadata, ResolvingMetadata } from 'next'
 import Image from 'next/image'
+
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import 'dayjs/locale/ko'
+dayjs.extend(relativeTime)
+dayjs.locale('ko')
 
 type Props = {
   params: {
@@ -137,9 +142,7 @@ export default async function Page({ params }: Props) {
                   <span className='font-bold text-xs bg-gradient-to-r from-cyan-600 via-blue-600 to-sky-600 w-fit bg-clip-text text-transparent'>
                     @{comment.user.nickname}
                   </span>
-                  <span className='text-xs text-primary/40 tracking-tighter'>
-                    {dayjs(comment.createdAt).format('YYYY.M.D')}
-                  </span>
+                  <span className='text-xs text-primary/60 tracking-tighter'>{dayjs(comment.createdAt).fromNow()}</span>
 
                   {session?.user.id === comment.userId && (
                     <ItemCommentDeleteButton itemId={comment.itemId} commentId={comment.id} />

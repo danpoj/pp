@@ -2,7 +2,6 @@
 
 import { cn } from '@/lib/utils'
 import type { Prisma } from '@prisma/client'
-import dayjs from 'dayjs'
 import type { Session } from 'next-auth'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -12,6 +11,12 @@ import CupCommentDeleteButton from '@/components/cup-comment-delete-button'
 import CupCommentForm from '@/components/cup-comment-form'
 import { useConfetti } from '@/components/provider/confetti-provider'
 import { CldImage } from 'next-cloudinary'
+
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import 'dayjs/locale/ko'
+dayjs.extend(relativeTime)
+dayjs.locale('ko')
 
 export type ExtendedCup = Prisma.CupGetPayload<{
   include: {
@@ -171,8 +176,8 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
                     <span className='font-bold text-xs bg-gradient-to-r from-cyan-600 via-blue-600 to-sky-600 w-fit bg-clip-text text-transparent'>
                       @{comment.user.nickname}
                     </span>
-                    <span className='text-xs text-primary/40 tracking-tighter font-light'>
-                      {dayjs(comment.createdAt).format('YYYY.M.D')}
+                    <span className='text-xs text-primary/60 tracking-tighter'>
+                      {dayjs(comment.createdAt).fromNow()}
                     </span>
 
                     {session?.user.id === comment.userId && (

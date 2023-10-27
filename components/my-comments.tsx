@@ -2,7 +2,6 @@
 
 import { Cup, CupComment, Item, ItemComment, User } from '@prisma/client'
 import axios from 'axios'
-import dayjs from 'dayjs'
 import { ArrowRight, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -10,6 +9,12 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { CldImage } from 'next-cloudinary'
+
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import 'dayjs/locale/ko'
+dayjs.extend(relativeTime)
+dayjs.locale('ko')
 
 type Props = {
   user: User & {
@@ -98,9 +103,7 @@ export default function MyComments({ user }: Props) {
               <span className='font-bold text-xs bg-gradient-to-r from-cyan-600 via-blue-600 to-sky-600 w-fit bg-clip-text text-transparent'>
                 @{user.nickname}
               </span>
-              <span className='text-xs text-primary/40 tracking-tighter font-light'>
-                {dayjs(comment.createdAt).format('YYYY.M.D')}
-              </span>
+              <span className='text-xs text-primary/60 tracking-tighter'>{dayjs(comment.createdAt).fromNow()}</span>
             </div>
             <span className='text-xs w-full'>{comment.text}</span>
           </div>
@@ -167,9 +170,7 @@ export default function MyComments({ user }: Props) {
               <span className='font-bold text-xs bg-gradient-to-r from-cyan-600 via-blue-600 to-sky-600 w-fit bg-clip-text text-transparent'>
                 @{user.nickname}
               </span>
-              <span className='text-xs text-primary/40 tracking-tighter font-light'>
-                {dayjs(comment.createdAt).format('YYYY.M.D')}
-              </span>
+              <span className='text-xs text-primary/60 tracking-tighter'>{dayjs(comment.createdAt).fromNow()}</span>
             </div>
             <span className='text-xs w-full'>{comment.text}</span>
           </div>
