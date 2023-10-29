@@ -15,6 +15,7 @@ import Image from 'next/image'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/ko'
+import { notFound } from 'next/navigation'
 dayjs.extend(relativeTime)
 dayjs.locale('ko')
 
@@ -84,7 +85,7 @@ export default async function Page({ params }: Props) {
 
   const session = await getSession()
 
-  if (!image) return null
+  if (!image) return notFound()
 
   return (
     <section className='h-full max-w-6xl mx-auto p-2 flex flex-col lg:flex-row lg:justify-center lg:items-center lg:gap-6 relative'>
