@@ -3,11 +3,11 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import qs from 'query-string'
 
+import { Type } from '@/app/(main)/(landing-page)/page'
 import { Label } from '@/components/ui/label'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Youtube } from 'lucide-react'
+import { RadioGroup } from '@/components/ui/radio-group'
 import { cn } from '@/lib/utils'
-import { Type } from '@/app/(main)/page'
+import { Youtube } from 'lucide-react'
 
 export default function FilterCups() {
   const searchParams = useSearchParams()

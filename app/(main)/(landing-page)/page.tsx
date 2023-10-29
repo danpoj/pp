@@ -1,12 +1,9 @@
 import Cups from '@/components/cups'
-import FilterCups from '@/components/filter-cups'
-import ScrollTopButton from '@/components/scroll-top-button'
-import SearchInput from '@/components/search-input'
+
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { getQuery } from '@/lib/get-query'
 import type { Cup, Like, User } from '@prisma/client'
-import { Suspense } from 'react'
 
 export type Type = 'all' | 'video' | 'image'
 
@@ -31,23 +28,6 @@ export default async function Page({ searchParams }: { searchParams: SearchParma
 
   if (!(type === 'video' || type === 'image')) type = 'all'
 
-  return (
-    <>
-      <div className='flex flex-col w-full px-2'>
-        <div className='flex flex-col sm:flex-row items-center justify-center sm:pr-4 py-4 sm:gap-4'>
-          <FilterCups />
-          <SearchInput />
-        </div>
-      </div>
-
-      <CupsWrapper type={type} search={search} />
-
-      <ScrollTopButton />
-    </>
-  )
-}
-
-const CupsWrapper = async ({ type, search }: { type: Type; search: string }) => {
   const query = getQuery({
     page: 0,
     type,

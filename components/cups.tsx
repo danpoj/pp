@@ -42,7 +42,7 @@ type Props = {
 
 export default function Cups({ initialCups, session, isLiked = false, type = 'all', search }: Props) {
   const [cups, setCups] = useState<CupWithUser[]>(initialCups)
-  const [isFinished, setIsFinished] = useState(initialCups.length === 0)
+  const [isFinished, setIsFinished] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const page = useRef(1)
 
@@ -82,6 +82,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
 
   useEffect(() => {
     setCups(initialCups)
+    initialCups.length === 0 ? setIsFinished(true) : setIsFinished(false)
   }, [type, initialCups])
 
   return (
@@ -157,7 +158,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                     <BarChart className='w-3 h-3 hidden sm:block ml-1' />
                   </Link>
                   <ClipboardButton path={`/cup/${cup.id}`} />
-                  {/* TODO */}
+
                   <LikeButton cup={cup} session={session} className='flex items-center gap-1 flex-1' />
                 </div>
               </div>

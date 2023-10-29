@@ -22,7 +22,7 @@ export default function SearchInput() {
       {
         url: window.location.href,
         query: {
-          search: value,
+          search: value.trim(),
         },
       },
       { skipNull: true, skipEmptyString: true }
