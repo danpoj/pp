@@ -38,5 +38,5 @@ export default async function Page({ searchParams }: { searchParams: SearchParma
 
   const session = await getSession()
 
-  return <Cups initialCups={initialCups} session={session} type={type} search={search} />
+  return <Cups key={type + search} initialCups={initialCups} session={session} type={type} search={search} />
 }

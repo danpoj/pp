@@ -17,7 +17,7 @@ export default function FilterCups() {
 
   if (!(type === 'video' || type === 'image')) type = 'all'
 
-  const pushQuery = (query: { [key: string]: string }) => {
+  const pushQuery = (query: { type: string }) => {
     const url = qs.stringifyUrl(
       {
         url: window.location.href,

@@ -42,12 +42,12 @@ type Props = {
 
 export default function Cups({ initialCups, session, isLiked = false, type = 'all', search }: Props) {
   const [cups, setCups] = useState<CupWithUser[]>(initialCups)
-  const [isFinished, setIsFinished] = useState(false)
+  const [isFinished, setIsFinished] = useState(initialCups.length === 0)
   const [isLoading, setIsLoading] = useState(false)
   const page = useRef(1)
 
   const { ref, inView } = useInView({
-    threshold: 1,
+    threshold: 0,
   })
 
   const getCups = async () => {
@@ -80,11 +80,6 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
       getCups()
     }
   }, [inView])
-
-  useEffect(() => {
-    setCups(initialCups)
-    initialCups.length === 0 ? setIsFinished(true) : setIsFinished(false)
-  }, [type, initialCups])
 
   return (
     <section className='sm:px-2'>
@@ -170,7 +165,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
 
       {isFinished ? (
         <div className='w-full flex items-center justify-center pb-6 flex-col gap-2'>
-          <span className='text-lg font-bold'>검색어: {search}</span>
+          <span className='text-lg font-bold'>{search == null ? '' : `검색어: ${search}`}</span>
           <span>
             {cups.length === 0 ? `${search}에 대한 컨텐츠가 없습니다` : `총 ${cups.length}개의 컨텐츠 불러오기 완료`}
           </span>
