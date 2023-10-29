@@ -21,7 +21,7 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
       </Button>
 
       <h1 className='text-xl'>에러!</h1>
-      <Image src='/loader.gif' width={160} height={160} alt='brand image' />
+      <Image src='/loader.gif' width={120} height={120} alt='brand image' />
     </div>
   )
 }

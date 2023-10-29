@@ -6,7 +6,6 @@ import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { getQuery } from '@/lib/get-query'
 import type { Cup, Like, User } from '@prisma/client'
-import Image from 'next/image'
 import { Suspense } from 'react'
 
 export type Type = 'all' | 'video' | 'image'
@@ -26,12 +25,29 @@ type CupWithUser = Cup & {
   likes: Like[]
 }
 
-export default async function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
-  let type = (searchParams.type ?? 'all') as Type
+export default async function Page({ searchParams }: { searchParams: SearchParmas }) {
   const search = searchParams.search
+  let type = (searchParams.type ?? 'all') as Type
 
   if (!(type === 'video' || type === 'image')) type = 'all'
 
+  return (
+    <>
+      <div className='flex flex-col w-full px-2'>
+        <div className='flex flex-col sm:flex-row items-center justify-center sm:pr-4 py-4 sm:gap-4'>
+          <FilterCups />
+          <SearchInput />
+        </div>
+      </div>
+
+      <CupsWrapper type={type} search={search} />
+
+      <ScrollTopButton />
+    </>
+  )
+}
+
+const CupsWrapper = async ({ type, search }: { type: Type; search: string }) => {
   const query = getQuery({
     page: 0,
     type,
@@ -42,22 +58,5 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
 
   const session = await getSession()
 
-  return (
-    <>
-      <div className='flex flex-col w-full px-2'>
-        {/* <CoupangDynamicBanner1 /> */}
-
-        <div className='flex flex-col sm:flex-row items-center justify-center sm:pr-4 py-4 sm:gap-4'>
-          <FilterCups />
-          <SearchInput />
-        </div>
-      </div>
-
-      <Suspense fallback={<Image src='/loader.gif' alt='pingping logo' width={160} height={160} />}>
-        <Cups initialCups={initialCups} session={session} type={type} search={search} />
-      </Suspense>
-
-      <ScrollTopButton />
-    </>
-  )
+  return <Cups initialCups={initialCups} session={session} type={type} search={search} />
 }
