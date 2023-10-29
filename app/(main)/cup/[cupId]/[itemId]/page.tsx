@@ -85,7 +85,7 @@ export default async function Page({ params }: Props) {
 
   const session = await getSession()
 
-  if (!image) return notFound()
+  if (!image) notFound()
 
   return (
     <section className='h-full max-w-6xl mx-auto p-2 flex flex-col lg:flex-row lg:justify-center lg:items-center lg:gap-6 relative'>

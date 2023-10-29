@@ -58,7 +58,7 @@ export default async function Page({ params: { cupId } }: Props) {
     },
   })
 
-  if (!cup) return notFound()
+  if (!cup) notFound()
 
   return (
     <section className='h-full'>

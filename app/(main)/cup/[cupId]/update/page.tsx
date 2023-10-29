@@ -1,7 +1,7 @@
 import CupUpdateForm from '@/components/cup-update-form'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
-import { redirect } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 
 type Props = {
   params: {
@@ -29,7 +29,7 @@ export default async function Page({ params: { cupId } }: Props) {
     },
   })
 
-  if (!cup) return redirect('/')
+  if (!cup) notFound()
 
   return (
     <div className='h-full max-w-5xl mx-auto p-2 pt-10'>

@@ -1,7 +1,7 @@
 import MyComments from '@/components/my-comments'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
-import { redirect } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 
 export default async function Page() {
   const session = await getSession()
@@ -27,7 +27,7 @@ export default async function Page() {
     },
   })
 
-  if (!user) redirect('/')
+  if (!user) notFound()
 
   const commentsLength = user._count.cupComments + user._count.itemComments
 

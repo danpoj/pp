@@ -1,7 +1,7 @@
 import MyCups from '@/components/my-cups'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
-import { redirect } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 
 export default async function Page() {
   const session = await getSession()
@@ -21,9 +21,7 @@ export default async function Page() {
     },
   })
 
-  if (!cups) {
-    return <div>{/* TODO */}</div>
-  }
+  if (!cups) notFound()
 
   return (
     <section className='min-h-full px-2 pt-8 max-w-4xl mx-auto'>

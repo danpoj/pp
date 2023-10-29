@@ -73,7 +73,7 @@ export default async function Page({ params: { cupId } }: Props) {
     },
   })
 
-  if (!cup) return notFound()
+  if (!cup) notFound()
 
   const session = await getSession()
 
