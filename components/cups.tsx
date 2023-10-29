@@ -69,6 +69,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
       page.current++
     } catch (error) {
       console.log(error)
+      throw error
     } finally {
       setIsLoading(false)
     }
@@ -168,7 +169,12 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
       </ResponsiveMasonry>
 
       {isFinished ? (
-        <div className='w-full flex items-center justify-center pb-6'>총 {cups.length}개의 컨텐츠 불러오기 완료</div>
+        <div className='w-full flex items-center justify-center pb-6 flex-col gap-2'>
+          <span className='text-lg font-bold'>검색어: {search}</span>
+          <span>
+            {cups.length === 0 ? `${search}에 대한 컨텐츠가 없습니다` : `총 ${cups.length}개의 컨텐츠 불러오기 완료`}
+          </span>
+        </div>
       ) : (
         <div className='w-full flex items-center justify-center'>
           <Image src='/loader.gif' alt='pingping logo' width={120} height={120} />

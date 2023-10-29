@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, Suspense } from 'react'
 import FilterCups from '@/components/filter-cups'
 import ScrollTopButton from '@/components/scroll-top-button'
 import SearchInput from '@/components/search-input'
