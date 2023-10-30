@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     default: 'PingPing 이상형 월드컵',
     template: 'PingPing 이상형 월드컵',
   },
+  keywords: ['이상형 월드컵', '이상형', '월드컵'],
   description: '핑핑은 나만의 이상형 월드컵을 만들고 사용자들과 공유하는 공간이에요',
   openGraph: {
     title: 'PingPing 이상형 월드컵',

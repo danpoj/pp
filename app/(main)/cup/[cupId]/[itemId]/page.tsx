@@ -41,6 +41,7 @@ export async function generateMetadata(
   return {
     title: `PingPing 이상형 월드컵 이미지 결과페이지 | ${item.description || ''}`,
     description: item.description ?? 'PingPing 이상형 월드컵 이미지 결과페이지',
+    keywords: ['이상형 월드컵', item.description ?? '이상형'],
 
     openGraph: {
       title: `PingPing 이상형 월드컵 이미지 결과페이지 | ${item.description || ''}`,

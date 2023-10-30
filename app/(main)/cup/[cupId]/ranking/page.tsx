@@ -25,6 +25,7 @@ export async function generateMetadata(
   return {
     title: `PingPing 이상형 월드컵 랭킹페이지 | ${cup.title}`,
     description: cup.description,
+    keywords: ['이상형 월드컵', cup.title, cup.description],
 
     openGraph: {
       title: `PingPing 이상형 월드컵 랭킹페이지 | ${cup.title}`,
