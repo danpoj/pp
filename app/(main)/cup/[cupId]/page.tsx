@@ -22,7 +22,7 @@ export async function generateMetadata(
   if (!cup) return
 
   return {
-    title: `PingPing 이상형 월드컵 | ${cup.title}`,
+    title: cup.title,
     description: cup.description,
     keywords: ['이상형 월드컵', cup.title, cup.description],
 

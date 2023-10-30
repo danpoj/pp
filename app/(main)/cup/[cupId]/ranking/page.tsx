@@ -10,10 +10,7 @@ type Props = {
   }
 }
 
-export async function generateMetadata(
-  { params: { cupId } }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata | undefined> {
+export async function generateMetadata({ params: { cupId } }: Props): Promise<Metadata | undefined> {
   const cup = await db.cup.findUnique({
     where: {
       id: cupId,
@@ -23,7 +20,7 @@ export async function generateMetadata(
   if (!cup) return
 
   return {
-    title: `PingPing 이상형 월드컵 랭킹페이지 | ${cup.title}`,
+    title: cup.title,
     description: cup.description,
     keywords: ['이상형 월드컵', cup.title, cup.description],
 

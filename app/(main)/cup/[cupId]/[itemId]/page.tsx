@@ -39,7 +39,7 @@ export async function generateMetadata(
   if (!item) return
 
   return {
-    title: `PingPing 이상형 월드컵 이미지 결과페이지 | ${item.description || ''}`,
+    title: '이상형 월드컵 결과페이지 | ' + (item.description ?? ''),
     description: item.description ?? 'PingPing 이상형 월드컵 이미지 결과페이지',
     keywords: ['이상형 월드컵', item.description ?? '이상형'],
 
