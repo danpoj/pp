@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/my/*', '/setting', '/create', '/cup/*/update'],
       },
     ],
-    sitemap: 'https://pingping.online/sitemap.xml',
-    host: 'https://pingping.online',
+    sitemap: 'https://www.pingping.online/sitemap.xml',
+    host: 'https://www.pingping.online',
   }
 }
