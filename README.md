@@ -5,3 +5,6 @@
 
 - 페이지 색인 https://search.google.com/search-console?resource_id=https://www.pingping.online/
 -
+
+ns1.vercel-dns.com
+ns2.vercel-dns.com
