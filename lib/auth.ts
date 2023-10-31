@@ -54,14 +54,15 @@ export const authOptions: NextAuthOptions = {
       }
 
       if (!dbUser.nickname) {
+        const nickname = nanoid(10)
+
         await db.user.update({
           where: {
             id: dbUser.id,
           },
           data: {
-            nickname: nanoid(10),
-            image:
-              'https://res.cloudinary.com/dqpfzywid/image/upload/v1696239458/avatar/icons8-dolphin-64_2_j7tmze.png',
+            nickname,
+            image: `https://avatar.vercel.sh/${nickname}.svg?text=${token.email?.slice(0, 4)}`,
           },
         })
       }
