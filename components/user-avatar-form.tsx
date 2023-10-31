@@ -42,8 +42,7 @@ export default function UserAvatarForm({ user }: Props) {
       onLocalImageUpload(acceptedFile[0])
     },
     accept: {
-      'image/jpeg': [],
-      'image/png': [],
+      'image/*': ['.jpeg', '.jpg', '.avif', '.gif', '.png', '.webp'],
     },
     maxFiles: 1,
   })
@@ -113,7 +112,14 @@ export default function UserAvatarForm({ user }: Props) {
             {isUploading ? (
               <Loader2 className='animate-spin' />
             ) : (
-              <Image unoptimized fill src={user.image!} alt='user profile image' className='object-cover' />
+              <Image
+                unoptimized
+                width={160}
+                height={160}
+                src={user.image!}
+                alt='user profile image'
+                className='object-cover'
+              />
             )}
 
             <span className='hidden group-hover:flex bg-black/40 inset-0 absolute rounded-full items-center justify-center'>
