@@ -20,14 +20,13 @@ export const BlurredImage = ({ thumbnail, title, width, height, type }: Props) =
     <Image
       src={thumbnail}
       alt={title}
-      // quality={40}
       width={width}
       height={height}
       className={cn(
         'object-contain duration-200 ease-in-out group-hover:scale-105 group-active:scale-110 w-full',
         isLoading ? ' blur-[3px] ' : 'blur-0'
       )}
-      onLoadingComplete={() => setIsLoading(false)}
+      onLoad={() => setIsLoading(false)}
     />
   )
 }

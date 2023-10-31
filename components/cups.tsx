@@ -172,7 +172,14 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
         </div>
       ) : (
         <div className='w-full flex items-center justify-center'>
-          <Image src='/loader.gif' alt='pingping logo' width={120} height={120} />
+          <Image
+            src='/loader.gif'
+            alt='pingping logo'
+            width={120}
+            height={120}
+            className='w-[120px] h-[120px] object-contain'
+            priority
+          />
         </div>
       )}
     </section>

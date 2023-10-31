@@ -21,13 +21,25 @@ export default function UserSetting({ session }: Props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className='rounded-full select-none group relative overflow-hidden w-8 h-8'>
-        <Image src={session.user.image!} alt='logged in user image' fill className='dark:bg-white object-cover' />
+        <Image
+          src={session.user.image!}
+          alt='logged in user image'
+          width={40}
+          height={40}
+          className='dark:bg-white object-cover aspect-square'
+        />
         <div aria-hidden className='absolute bg-black inset-0 rounded-full opacity-5 hidden group-hover:block' />
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='w-72  p-2 hidden sm:block'>
         <DropdownMenuLabel className='flex gap-2 items-center'>
           <div className='relative w-12 h-12 rounded-full overflow-hidden'>
-            <Image src={session.user.image!} alt='logged in user image' fill className=' dark:bg-white object-cover' />
+            <Image
+              src={session.user.image!}
+              alt='logged in user image'
+              width={60}
+              height={60}
+              className=' dark:bg-white object-cover aspect-square'
+            />
           </div>
           <span className='text-xs font-mono'>@{session.user.nickname}</span>
         </DropdownMenuLabel>
