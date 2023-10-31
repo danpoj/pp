@@ -12,6 +12,7 @@ import { Player } from '@/components/player'
 import type { CupLength } from '@/components/tournament'
 import { Button } from '@/components/ui/button'
 import CupInformation from '@/components/cup-information'
+import Image from 'next/image'
 
 type Props = {
   cup: Prisma.CupGetPayload<{
@@ -105,6 +106,8 @@ export default function TournamentVideo({ cup, cupLength }: Props) {
 
       {clicked === 'LEFT' && <Left selectedItem={selectedItem.current!} />}
       {clicked === 'RIGHT' && <Right selectedItem={selectedItem.current!} />}
+
+      <Overlay isFinished={isFinished} />
     </div>
   )
 }
@@ -178,6 +181,26 @@ const Initial = ({
         </Button>
         <DescriptionText description={items[index * 2 + 1].description} />
       </div>
+    </div>
+  )
+}
+
+const Overlay = ({ isFinished }: { isFinished: boolean }) => {
+  return (
+    <div className='fixed inset-0 flex items-center justify-center pointer-events-none'>
+      {isFinished ? (
+        <div className='flex flex-col gap-2 bg-primary p-4 rounded-lg items-center'>
+          <span className='text-white'>결과 페이지로 이동 중...</span>
+          <Image src='/loader.gif' width={80} height={80} alt='tournament finish loading state image' />
+        </div>
+      ) : (
+        <div className='rounded-lg hidden md:block'>
+          <p className='uppercase text-2xl font-black font-mono text-white'>
+            <span className='text-blue-400'>V</span>
+            <span className='text-red-400'>S</span>
+          </p>
+        </div>
+      )}
     </div>
   )
 }

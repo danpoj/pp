@@ -106,14 +106,7 @@ export default function TournamentImage({ cup, cupLength }: Props) {
       {clicked === 'LEFT' && <Left selectedItem={selectedItem.current!} />}
       {clicked === 'RIGHT' && <Right selectedItem={selectedItem.current!} />}
 
-      {isFinished && (
-        <div className='fixed inset-0 flex items-center justify-center'>
-          <div className='flex flex-col gap-2 bg-primary p-4 rounded-lg items-center'>
-            <span className='text-white'>결과 페이지로 이동 중...</span>
-            <Image src='/loader.gif' width={80} height={80} alt='tournament finish loading state image' />
-          </div>
-        </div>
-      )}
+      <Overlay isFinished={isFinished} />
     </div>
   )
 }
@@ -205,6 +198,26 @@ const Initial = ({
         </div>
         <DescriptionText description={items[index * 2 + 1].description} />
       </button>
+    </div>
+  )
+}
+
+const Overlay = ({ isFinished }: { isFinished: boolean }) => {
+  return (
+    <div className='fixed inset-0 flex items-center justify-center pointer-events-none'>
+      {isFinished ? (
+        <div className='flex flex-col gap-2 bg-primary p-4 rounded-lg items-center'>
+          <span className='text-white'>결과 페이지로 이동 중...</span>
+          <Image src='/loader.gif' width={80} height={80} alt='tournament finish loading state image' />
+        </div>
+      ) : (
+        <div className='rounded-lg hidden md:block'>
+          <p className='uppercase text-2xl font-black font-mono text-white'>
+            <span className='text-blue-400'>V</span>
+            <span className='text-red-400'>S</span>
+          </p>
+        </div>
+      )}
     </div>
   )
 }
