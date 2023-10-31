@@ -25,6 +25,7 @@ export default function TournamentImage({ cup, cupLength }: Props) {
   const [items, setItems] = useState(() => shuffle(cup.items).slice(0, cupLength))
   const [clicked, setClicked] = useState<'LEFT' | 'RIGHT' | 'INITIAL'>('INITIAL')
   const [index, setIndex] = useState(0)
+  const [isFinished, setIsFinished] = useState(false)
 
   const selectedItems = useRef<Item[]>([])
   const selectedItem = useRef<Item | null>(null)
@@ -46,6 +47,7 @@ export default function TournamentImage({ cup, cupLength }: Props) {
 
     if (limit.current === 1) {
       try {
+        setIsFinished(true)
         await updateCupPlayCountAndItemWinCount({
           cupId: cup.id,
           itemId: itemId,
@@ -73,6 +75,7 @@ export default function TournamentImage({ cup, cupLength }: Props) {
 
     if (limit.current === 1) {
       try {
+        setIsFinished(true)
         await updateCupPlayCountAndItemWinCount({
           cupId: cup.id,
           itemId: itemId,
@@ -102,6 +105,15 @@ export default function TournamentImage({ cup, cupLength }: Props) {
 
       {clicked === 'LEFT' && <Left selectedItem={selectedItem.current!} />}
       {clicked === 'RIGHT' && <Right selectedItem={selectedItem.current!} />}
+
+      {isFinished && (
+        <div className='fixed inset-0 flex items-center justify-center'>
+          <div className='flex flex-col gap-2 bg-primary p-4 rounded-lg items-center'>
+            <span className='text-white'>결과 페이지로 이동 중...</span>
+            <Image src='/loader.gif' width={80} height={80} alt='tournament finish loading state image' />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

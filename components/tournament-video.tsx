@@ -26,6 +26,7 @@ export default function TournamentVideo({ cup, cupLength }: Props) {
   const [items, setItems] = useState(() => shuffle(cup.items).slice(0, cupLength))
   const [clicked, setClicked] = useState<'LEFT' | 'RIGHT' | 'INITIAL'>('INITIAL')
   const [index, setIndex] = useState(0)
+  const [isFinished, setIsFinished] = useState(false)
 
   const selectedItems = useRef<Item[]>([])
   const selectedItem = useRef<Item | null>(null)
@@ -46,6 +47,7 @@ export default function TournamentVideo({ cup, cupLength }: Props) {
     selectedItem.current = items[index * 2]
 
     if (limit.current === 1) {
+      setIsFinished(true)
       try {
         await updateCupPlayCountAndItemWinCount({
           cupId: cup.id,
@@ -73,6 +75,7 @@ export default function TournamentVideo({ cup, cupLength }: Props) {
     selectedItem.current = items[index * 2 + 1]
 
     if (limit.current === 1) {
+      setIsFinished(true)
       try {
         await updateCupPlayCountAndItemWinCount({
           cupId: cup.id,
