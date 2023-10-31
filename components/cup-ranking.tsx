@@ -128,9 +128,7 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
               <span className='font-normal'>@{cup.user.nickname}</span>
             </div>
             <div className='flex gap-4 font-bold  mt-10 mb-4 items-center'>
-              <span className='bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 bg-clip-text text-transparent'>
-                월드컵 플레이 수: {cup.playCount}회
-              </span>
+              <span className='bg-fancy bg-clip-text text-transparent'>월드컵 플레이 수: {cup.playCount}회</span>
             </div>
 
             <ClipboardWithLink path={`/cup/${cup.id}`} title='월드컵 공유하기' className='flex items-center gap-2' />

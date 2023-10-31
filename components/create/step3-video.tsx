@@ -142,7 +142,7 @@ export default function ThirdStepYoutube({ cupData }: Props) {
             alt='youtube thumbnail'
           />
         ) : (
-          <div className='h-48 aspect-video bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 rounded-lg text-slate-200 flex items-center justify-center flex-col gap-2'>
+          <div className='h-48 aspect-video bg-fancy rounded-lg text-slate-200 flex items-center justify-center flex-col gap-2'>
             <span className='text-xl font-black tracking-tight'>썸네일 이미지</span>
             <span className='tracking-tight text-sm font-bold text-center'>
               마지막으로 업로드한 영상이

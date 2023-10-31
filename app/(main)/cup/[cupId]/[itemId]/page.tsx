@@ -102,7 +102,7 @@ export default async function Page({ params }: Props) {
       <div className='mt-4 h-full lg:w-[30rem] lg:shrink-0 pr-2'>
         <h2 className='text-2xl font-extrabold text-primary/80 tracking-tight'>{image.cup.title}</h2>
         <h3 className='text-sm font-semiboid text-primary/70 my-2'>{image.cup.description}</h3>
-        <div className='flex gap-2 font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 bg-clip-text text-transparent mt-8 mb-6'>
+        <div className='flex gap-2 font-bold bg-fancy bg-clip-text text-transparent mt-8 mb-6'>
           <span>우승: {image.winCount}회</span>
           <span>/</span>
           <span>플레이수: {image.cup.playCount}회</span>
@@ -142,7 +142,7 @@ export default async function Page({ params }: Props) {
                     height={40}
                     className='w-6 h-6 rounded-full bg-white'
                   />
-                  <span className='font-bold text-xs bg-gradient-to-r from-cyan-600 via-blue-600 to-sky-600 w-fit bg-clip-text text-transparent'>
+                  <span className='font-bold text-xs bg-fancy w-fit bg-clip-text text-transparent'>
                     @{comment.user.nickname}
                   </span>
                   <span className='text-xs text-primary/60 tracking-tighter'>{dayjs(comment.createdAt).fromNow()}</span>

@@ -63,9 +63,7 @@ export default function SignUp() {
           />
           <Link href='/' className='flex items-center justify-center mr-6 hover:text-primary/90'>
             ping
-            <span className='bg-gradient-to-r from-cyan-500 via-blue-500 to-sky-500 text-transparent bg-clip-text'>
-              Ping
-            </span>
+            <span className='bg-fancy text-transparent bg-clip-text'>Ping</span>
             <span className='ml-2'>회원가입</span>
           </Link>
         </div>

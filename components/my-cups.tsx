@@ -53,7 +53,7 @@ export default function MyCups({ cups }: Props) {
         <div key={cup.id} className='flex p-2 flex-col md:flex-row relative'>
           <div className='absolute top-4 left-2 font-bold px-2 rounded flex gap-1 items-center'>
             {cup.type === 'IMAGE' ? (
-              <span className='bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 text-xs text-[10px] px-2 py-1 rounded text-white font-bold w-fit mb-1'>
+              <span className='bg-fancy text-xs text-[10px] px-2 py-1 rounded text-white font-bold w-fit mb-1'>
                 이미지
               </span>
             ) : (

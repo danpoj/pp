@@ -90,9 +90,7 @@ export default function MyComments({ user }: Props) {
                 height={40}
                 className='w-6 h-6 rounded-full'
               />
-              <span className='font-bold text-xs bg-gradient-to-r from-cyan-600 via-blue-600 to-sky-600 w-fit bg-clip-text text-transparent'>
-                @{user.nickname}
-              </span>
+              <span className='font-bold text-xs bg-fancy w-fit bg-clip-text text-transparent'>@{user.nickname}</span>
               <span className='text-xs text-primary/60 tracking-tighter'>{dayjs(comment.createdAt).fromNow()}</span>
             </div>
             <span className='text-xs w-full'>{comment.text}</span>
@@ -153,9 +151,7 @@ export default function MyComments({ user }: Props) {
                 height={40}
                 className='w-6 h-6'
               />
-              <span className='font-bold text-xs bg-gradient-to-r from-cyan-600 via-blue-600 to-sky-600 w-fit bg-clip-text text-transparent'>
-                @{user.nickname}
-              </span>
+              <span className='font-bold text-xs bg-fancy w-fit bg-clip-text text-transparent'>@{user.nickname}</span>
               <span className='text-xs text-primary/60 tracking-tighter'>{dayjs(comment.createdAt).fromNow()}</span>
             </div>
             <span className='text-xs w-full'>{comment.text}</span>

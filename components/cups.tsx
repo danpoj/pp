@@ -110,7 +110,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                       <YoutubeIcon className='w-4 h-4' /> 유튜브
                     </div>
                   ) : (
-                    <div className='absolute left-2 top-2 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 text-xs text-[10px] px-2 py-1 rounded text-white font-bold'>
+                    <div className='absolute left-2 top-2 bg-fancy text-xs text-[10px] px-2 py-1 rounded text-white font-bold'>
                       이미지
                     </div>
                   )}

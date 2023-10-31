@@ -70,6 +70,6 @@ body {
     @apply bg-background text-foreground;
   }
   .bg-fancy {
-    @apply bg-gradient-to-r from-cyan-500 via-blue-500 to-sky-500;
+    @apply bg-gradient-to-r from-[#007CF0]  to-[#00DFD8];
   }
 }
