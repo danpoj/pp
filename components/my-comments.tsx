@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { CldImage } from 'next-cloudinary'
 
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -66,25 +65,14 @@ export default function MyComments({ user }: Props) {
       {user.cupComments.map((comment) => (
         <div key={comment.id} className='space-y-1 p-2 rounded'>
           <div className='flex gap-1'>
-            {comment.cup.type === 'IMAGE' ? (
-              <CldImage
-                src={comment.cup.thumbnail}
-                alt={comment.cup.title}
-                // quality={40}
-                width={300}
-                height={260}
-                className='rounded w-[120px] h-[120px] object-cover'
-              />
-            ) : (
-              <Image
-                src={comment.cup.thumbnail}
-                alt={comment.cup.title}
-                // quality={40}
-                width={120}
-                height={120}
-                className='rounded w-[120px] h-[120px] object-cover'
-              />
-            )}
+            <Image
+              src={comment.cup.thumbnail}
+              alt={comment.cup.title}
+              width={120}
+              height={120}
+              className='rounded w-[120px] h-[120px] object-cover'
+            />
+
             <div className='flex flex-col text-xs'>
               <span className='font-semibold max-w-[240px] truncate sm:max-w-[460px]'>{comment.cup.title}</span>
               <span className='text-slate-600 truncate max-w-[240px] sm:max-w-[460px]'>{comment.cup.description}</span>
@@ -143,25 +131,13 @@ export default function MyComments({ user }: Props) {
       {user.itemComments.map((comment) => (
         <div key={comment.id} className='space-y-1 p-2 rounded'>
           <div className='flex gap-1'>
-            {comment.item.videoThumbnail ? (
-              <Image
-                src={comment.item.videoThumbnail}
-                alt={comment.item.description || 'cup result image'}
-                width={120}
-                height={120}
-                // quality={40}
-                className='rounded w-[120px] h-[120px] object-cover'
-              />
-            ) : (
-              <CldImage
-                src={comment.item.url}
-                alt={comment.item.description || 'cup result image'}
-                width={300}
-                height={260}
-                // quality={40}
-                className='rounded w-[120px] h-[120px] object-cover'
-              />
-            )}
+            <Image
+              src={comment.item.publicId ? comment.item.url : comment.item.videoThumbnail!}
+              alt={comment.item.description || 'cup result image'}
+              width={120}
+              height={120}
+              className='rounded w-[120px] h-[120px] object-cover'
+            />
           </div>
 
           <div className='flex flex-col gap-2 break-words mb-4'>

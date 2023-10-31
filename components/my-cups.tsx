@@ -11,7 +11,6 @@ import { useState } from 'react'
 import { ClipboardWithLink } from '@/components/clipboard-with-link'
 import { Button } from '@/components/ui/button'
 import { toast } from '@/components/ui/use-toast'
-import { CldImage } from 'next-cloudinary'
 
 type Props = {
   cups: (Cup & {
@@ -66,24 +65,13 @@ export default function MyCups({ cups }: Props) {
 
           <div className='flex gap-3'>
             <Link href={`/cup/${cup.id}`} className='shrink-0'>
-              {cup.type === 'IMAGE' ? (
-                <CldImage
-                  src={cup.thumbnail}
-                  width={300}
-                  height={260}
-                  alt={cup.title}
-                  className='rounded object-cover w-52 h-52'
-                  // quality={40}
-                />
-              ) : (
-                <Image
-                  src={cup.thumbnail}
-                  width={208}
-                  height={208}
-                  alt={cup.title}
-                  className='rounded object-cover w-52 h-52'
-                />
-              )}
+              <Image
+                src={cup.thumbnail}
+                width={208}
+                height={208}
+                alt={cup.title}
+                className='rounded object-cover w-52 h-52'
+              />
             </Link>
             <div className='flex flex-col'>
               <div className='flex flex-col justify-between h-full'>

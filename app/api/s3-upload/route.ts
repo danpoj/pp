@@ -1,20 +1,8 @@
-import { getSession } from '@/lib/auth'
-import db from '@/lib/db'
-import { uploadImageToS3 } from '@/lib/upload-image-to-s3'
-import { S3Client } from '@aws-sdk/client-s3'
 import { NextRequest, NextResponse } from 'next/server'
-import { z } from 'zod'
+import { uploadImageToS3 } from '@/lib/upload-image-to-s3'
 
-const bodySchema = z.object({
-  avatar: z.string().min(1),
-})
-
-export async function PATCH(request: NextRequest, response: NextResponse) {
+export async function POST(request: NextRequest, response: NextResponse) {
   try {
-    const session = await getSession()
-
-    if (!session) return new NextResponse('/api/user/image/local : 인증된 유저가 아닙니다', { status: 401 })
-
     const formData = await request.formData()
 
     const file = formData.get('file') as Blob | null
@@ -32,16 +20,11 @@ export async function PATCH(request: NextRequest, response: NextResponse) {
 
     const fileName = await uploadImageToS3(buffer, crypto.randomUUID() + '.' + fileExtension)
 
-    const updatedUser = await db.user.update({
-      where: {
-        id: session.user.id,
-      },
-      data: {
-        image: `${process.env.NEXT_PUBLIC_S3_BASEURL}/${fileName}`,
-      },
+    return NextResponse.json({
+      fileName,
+      width,
+      height,
     })
-
-    return NextResponse.json(updatedUser)
   } catch (error) {
     console.error('Error uploading image:', error)
     NextResponse.json({ message: 'Error uploading image' })

@@ -3,7 +3,6 @@
 import type { CupType, Item } from '@prisma/client'
 import Image from 'next/image'
 import CupItemDescriptionForm from './cup-item-description-form'
-import { CldImage } from 'next-cloudinary'
 import Link from 'next/link'
 
 type Props = {
@@ -23,7 +22,7 @@ export default function CupItemForm({ item, cupType, contentsLength }: Props) {
             rel='noreferrer noopener'
             className='hover:opacity-80 rounded overflow-hidden transition-opacity'
           >
-            <CldImage
+            <Image
               src={item.url}
               alt={item.description || 'cup item'}
               width={300}

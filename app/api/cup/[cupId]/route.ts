@@ -1,7 +1,6 @@
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { NextRequest, NextResponse } from 'next/server'
-import { v2 as cloudinary } from 'cloudinary'
 
 type DeleteProps = {
   params: {
@@ -31,11 +30,7 @@ export const DELETE = async (req: NextRequest, { params: { cupId } }: DeleteProp
 
     if (!cup) return new NextResponse('/api/cup/[cupId] : 인증된 유저가 아닙니다', { status: 401 })
 
-    if (cup.type === 'IMAGE') {
-      const promises = cup.items.map((item) => cloudinary.uploader.destroy(`${item.publicId}`))
-
-      await Promise.all(promises)
-    }
+    // TODO: 컵 이미지들 s3에서 삭제
 
     const deletedCup = await db.cup.delete({
       where: {

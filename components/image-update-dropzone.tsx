@@ -6,10 +6,16 @@ import { cn } from '@/lib/utils'
 import type { Cup, Item } from '@prisma/client'
 import axios from 'axios'
 import { ChevronRight, ImagePlus, Trash2 } from 'lucide-react'
-import Image from 'next/image'
+import NextImage from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
+
+type Img = {
+  src: File
+  width: number
+  height: number
+}
 
 type Props = {
   cup: Cup & {
@@ -23,10 +29,12 @@ type Props = {
 }
 
 export default function ImageUpdateDropzone({ cup }: Props) {
-  const [images, setImages] = useState<string[]>([])
+  const [images, setImages] = useState<Img[]>([])
   const [isUploading, setIsUploading] = useState(false)
 
   const router = useRouter()
+
+  const previews = images.map((image) => URL.createObjectURL(image.src))
 
   const { getRootProps, getInputProps, isDragAccept, isDragReject } = useDropzone({
     onDrop: (acceptedFiles) => {
@@ -40,16 +48,24 @@ export default function ImageUpdateDropzone({ cup }: Props) {
       }
 
       filteredLargeFiles.map((file) => {
-        const reader = new FileReader()
-        reader.onload = () => {
-          setImages((prev) => [reader.result as string, ...prev])
+        const img = new Image()
+        img.src = URL.createObjectURL(file)
+        img.onload = () => {
+          const image: Img = {
+            src: file,
+            width: img.width,
+            height: img.height,
+          }
+
+          setImages((prev) => [image, ...prev])
         }
-        reader.readAsDataURL(file)
       })
     },
+
     accept: {
       'image/*': ['.jpeg', '.jpg', '.avif', '.gif', '.png', '.webp'],
     },
+
     maxFiles: 100 - cup._count.items,
   })
 
@@ -57,12 +73,27 @@ export default function ImageUpdateDropzone({ cup }: Props) {
     try {
       setIsUploading(true)
 
-      const promises = images.map((image) => axios.post('/api/cloudinary/upload', { image }))
-      const responses = await Promise.all(promises)
-      const cldImages = responses.map(({ data }) => ({ ...data }))
+      const promises = images.map((image) => {
+        const body = new FormData()
+        body.append('file', image.src)
+        body.append('width', image.width.toString())
+        body.append('height', image.height.toString())
 
-      const { data } = await axios.post(`/api/cup/${cup.id}/item/image`, {
-        images: cldImages,
+        const promise = fetch('/api/s3-upload', {
+          method: 'POST',
+          body,
+        })
+        return promise
+      })
+
+      const response = await Promise.all(promises)
+
+      const s3ImagePromises = response.map((res) => res.json())
+
+      const s3Images = await Promise.all(s3ImagePromises)
+
+      await axios.post(`/api/cup/${cup.id}/item/image`, {
+        images: s3Images,
       })
 
       router.refresh()
@@ -99,9 +130,9 @@ export default function ImageUpdateDropzone({ cup }: Props) {
         </div>
 
         <div className='grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 2xl:grid-cols-8 gap-1.5 py-4 px-2'>
-          {images.map((image, i) => (
+          {previews.map((image, i) => (
             <div key={i} className='aspect-square rounded-lg overflow-hidden relative group'>
-              <Image fill src={image} alt='preview image' className='object-cover w-full h-full' />
+              <NextImage fill src={image} alt='preview image' className='object-cover w-full h-full' />
               <button
                 onClick={(e) => {
                   e.stopPropagation()
@@ -128,7 +159,7 @@ export default function ImageUpdateDropzone({ cup }: Props) {
           className='h-12 w-40'
           variant='blue'
         >
-          다음 단계 <ChevronRight className='w-5 h-5 ml-1' />
+          업로드 <ChevronRight className='w-5 h-5 ml-1' />
         </Button>
       </div>
     </div>

@@ -16,24 +16,23 @@ export const POST = async (req: NextRequest, { params: { cupId } }: PatchProps) 
 
     const { images } = (await req.json()) as {
       images: {
-        secure_url: string
-        width: number
-        height: number
-        public_id: string
+        fileName: string
+        width: string
+        height: string
       }[]
     }
 
     const dbItems = await db.item.createMany({
       data: images.map((image) => ({
         cupId,
-        url: image.secure_url,
-        width: image.width,
-        height: image.height,
-        publicId: image.public_id,
+        url: `${process.env.NEXT_PUBLIC_S3_BASEURL}/${image.fileName}`,
+        width: +image.width,
+        height: +image.height,
+        publicId: image.fileName,
       })),
     })
 
-    return NextResponse.json(dbItems)
+    return NextResponse.json('ok')
   } catch (error) {
     return new NextResponse('/api/cup/[cupId]/item/image : 유튜브 월드컵 컨텐츠 업로드 실패', { status: 500 })
   }

@@ -2,7 +2,6 @@ import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { itemDescriptionSchema } from '@/lib/validations'
 import { NextRequest, NextResponse } from 'next/server'
-import { v2 as cloudinary } from 'cloudinary'
 import type { CupType } from '@prisma/client'
 
 export const PATCH = async (req: NextRequest, { params: { itemId } }: { params: { itemId: string } }) => {
@@ -47,9 +46,7 @@ export const POST = async (req: NextRequest, { params: { itemId } }: { params: {
       },
     })
 
-    if (cupType === 'IMAGE') {
-      await cloudinary.uploader.destroy(`${deletedItem.publicId}`)
-    }
+    // TODO: s3에서 이미지 삭제
 
     return NextResponse.json(deletedItem)
   } catch (error) {

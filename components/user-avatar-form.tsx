@@ -16,10 +16,10 @@ import { toast } from '@/components/ui/use-toast'
 
 type Props = {
   user: User
-  avatars: string[]
+  // avatars: string[]
 }
 
-export default function UserAvatarForm({ user, avatars }: Props) {
+export default function UserAvatarForm({ user }: Props) {
   const [isDefaultAvatars, setIsDefaultAvatars] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
   const [open, setOpen] = useState(false)
@@ -39,11 +39,7 @@ export default function UserAvatarForm({ user, avatars }: Props) {
         return
       }
 
-      const reader = new FileReader()
-      reader.onload = () => {
-        onLocalImageUpload(reader.result as string)
-      }
-      reader.readAsDataURL(acceptedFile[0])
+      onLocalImageUpload(acceptedFile[0])
     },
     accept: {
       'image/jpeg': [],
@@ -52,11 +48,14 @@ export default function UserAvatarForm({ user, avatars }: Props) {
     maxFiles: 1,
   })
 
-  const onLocalImageUpload = async (avatar: string) => {
+  const onLocalImageUpload = async (avatar: File) => {
     try {
       setIsUploading(true)
 
-      await axios.patch(`/api/user/image/local`, { avatar })
+      const body = new FormData()
+      body.append('file', avatar)
+
+      await axios.patch(`/api/user/image/local`, body)
 
       router.refresh()
 
@@ -76,28 +75,28 @@ export default function UserAvatarForm({ user, avatars }: Props) {
     }
   }
 
-  const onDefaultAvatarClick = async (avatar: string) => {
-    try {
-      setIsUploading(true)
+  // const onDefaultAvatarClick = async (avatar: string) => {
+  //   try {
+  //     setIsUploading(true)
 
-      await axios.patch(`/api/user/image/default`, { avatar })
+  //     await axios.patch(`/api/user/image/default`, { avatar })
 
-      router.refresh()
+  //     router.refresh()
 
-      toast({
-        title: '이미지 변경 완료 🥳',
-        style: {
-          backgroundColor: '#111',
-          color: '#ddd',
-        },
-      })
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsDefaultAvatars(false)
-      setIsUploading(false)
-    }
-  }
+  //     toast({
+  //       title: '이미지 변경 완료 🥳',
+  //       style: {
+  //         backgroundColor: '#111',
+  //         color: '#ddd',
+  //       },
+  //     })
+  //   } catch (error) {
+  //     console.log(error)
+  //   } finally {
+  //     setIsDefaultAvatars(false)
+  //     setIsUploading(false)
+  //   }
+  // }
 
   return (
     <div className='flex flex-col items-center'>
@@ -123,14 +122,14 @@ export default function UserAvatarForm({ user, avatars }: Props) {
           </button>
         </PopoverTrigger>
         <PopoverContent className='flex flex-col gap-2 p-2 w-48' onInteractOutside={() => setOpen(false)}>
-          <Button
+          {/* <Button
             onClick={() => {
               setIsDefaultAvatars((prev) => !prev)
               setOpen(false)
             }}
           >
             기본 이미지
-          </Button>
+          </Button> */}
           <Button
             onClick={() => {
               openFileUploader()
@@ -142,7 +141,7 @@ export default function UserAvatarForm({ user, avatars }: Props) {
         </PopoverContent>
       </Popover>
 
-      <Popover open={isDefaultAvatars}>
+      {/* <Popover open={isDefaultAvatars}>
         <PopoverTrigger />
         <PopoverContent
           className='w-[220px] p-4 flex flex-wrap gap-2'
@@ -158,7 +157,7 @@ export default function UserAvatarForm({ user, avatars }: Props) {
             </button>
           ))}
         </PopoverContent>
-      </Popover>
+      </Popover> */}
     </div>
   )
 }

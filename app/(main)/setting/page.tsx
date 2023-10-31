@@ -3,7 +3,6 @@ import UserNicknameForm from '@/components/user-nickname-form'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { redirect } from 'next/navigation'
-import { v2 as cloudinary } from 'cloudinary'
 
 type Cld = {
   total_count: number
@@ -25,12 +24,9 @@ export default async function Page() {
 
   if (!user) redirect('/')
 
-  const cld: Cld = await cloudinary.search.expression('folder:avatar').execute()
-  const avatars = cld.resources.map((image) => image.secure_url)
-
   return (
     <div className='h-full max-w-6xl mx-auto flex flex-col items-center pt-20 gap-16'>
-      <UserAvatarForm user={user} avatars={avatars} />
+      <UserAvatarForm user={user} />
 
       <UserNicknameForm user={user} />
     </div>

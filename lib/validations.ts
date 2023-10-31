@@ -3,10 +3,9 @@ import { z } from 'zod'
 export const createImageSchema = z.object({
   images: z
     .object({
-      secure_url: z.string().min(1),
-      width: z.number(),
-      height: z.number(),
-      public_id: z.string().min(1),
+      fileName: z.string().min(1),
+      width: z.string(),
+      height: z.string(),
     })
     .array()
     .min(8, { message: '8개 이상의 이미지가 필요합니다' })

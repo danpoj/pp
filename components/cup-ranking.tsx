@@ -10,7 +10,6 @@ import { ClipboardWithLink } from '@/components/clipboard-with-link'
 import CupCommentDeleteButton from '@/components/cup-comment-delete-button'
 import CupCommentForm from '@/components/cup-comment-form'
 import { useConfetti } from '@/components/provider/confetti-provider'
-import { CldImage } from 'next-cloudinary'
 
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -56,25 +55,14 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
             key={item.id}
             className='rounded overflow-hidden relative h-[24rem] sm:h-full sm:w-1/3 flex items-center justify-center'
           >
-            {cup.type === 'IMAGE' && (
-              <CldImage
-                src={item.publicId!}
-                alt='cup image'
-                width={300}
-                height={260}
-                // quality={40}
-                className='object-contain w-full h-full'
-              />
-            )}
-            {cup.type === 'VIDEO' && (
-              <Image
-                src={item.videoThumbnail!}
-                alt='cup image'
-                width={item.width!}
-                height={item.height!}
-                className='object-contain w-full h-full'
-              />
-            )}
+            <Image
+              src={item.publicId ? item.url : item.videoThumbnail!}
+              alt='cup image'
+              width={item.width!}
+              height={item.height!}
+              className='object-contain w-full h-full'
+            />
+
             <div
               className={cn(
                 'tracking-tighter flex gap-2 items-center absolute right-2 top-2 px-3 py-1 rounded pointer-events-none text-white backdrop-blur-sm',
@@ -99,25 +87,14 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
             key={item.id}
             className='rounded overflow-hidden relative shrink-0 h-full aspect-square flex items-center justify-center'
           >
-            {cup.type === 'IMAGE' && (
-              <CldImage
-                src={item.publicId!}
-                alt='cup image'
-                width={300}
-                height={260}
-                // quality={40}
-                className='object-contain w-full h-full'
-              />
-            )}
-            {cup.type === 'VIDEO' && (
-              <Image
-                src={item.videoThumbnail!}
-                alt='cup image'
-                width={item.width!}
-                height={item.height!}
-                className='object-contain w-full h-full'
-              />
-            )}
+            <Image
+              src={item.publicId ? item.url : item.videoThumbnail!}
+              alt='cup image'
+              width={item.width!}
+              height={item.height!}
+              className='object-contain w-full h-full'
+            />
+
             <div
               className={cn(
                 'tracking-tighter flex gap-2 items-center absolute right-2 top-2 px-3 py-1 rounded pointer-events-none text-white bg-black'

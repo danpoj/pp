@@ -1,9 +1,9 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { CldImage } from 'next-cloudinary'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import Image from 'next/image'
 
 type Props = {
   width: number
@@ -22,13 +22,12 @@ export default function ImageResult({ width, height, src, description }: Props) 
 
   return (
     <div className='relative w-full h-[24rem] shrink-0 lg:shrink lg:h-full'>
-      <CldImage
+      <Image
         width={600}
         height={520}
         src={src}
         alt={description ?? 'cup image'}
         className={cn('w-full h-full', type === 'cover' ? 'object-cover' : 'object-contain')}
-        // quality={40}
       />
       <Button
         onClick={toggle}

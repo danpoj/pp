@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button'
 // etc
 import { cn } from '@/lib/utils'
 import axios from 'axios'
-import Image from 'next/image'
+import NextImage from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
@@ -24,12 +24,20 @@ type Props = {
   cupData: cupData
 }
 
+type Img = {
+  src: File
+  width: number
+  height: number
+}
+
 export default function Step3Image({ cupData }: Props) {
-  const [images, setImages] = useState<string[]>([])
+  const [images, setImages] = useState<Img[]>([])
   const [isUploading, setIsUploading] = useState(false)
   const { open: openModal } = useModal()
   const { open: openConfetti } = useConfetti()
   const router = useRouter()
+
+  const previews = images.map((image) => URL.createObjectURL(image.src))
 
   const { getRootProps, getInputProps, isDragAccept, isDragReject } = useDropzone({
     onDrop: (acceptedFiles) => {
@@ -43,16 +51,24 @@ export default function Step3Image({ cupData }: Props) {
       }
 
       filteredLargeFiles.map((file) => {
-        const reader = new FileReader()
-        reader.onload = () => {
-          setImages((prev) => [reader.result as string, ...prev])
+        const img = new Image()
+        img.src = URL.createObjectURL(file)
+        img.onload = () => {
+          const image: Img = {
+            src: file,
+            width: img.width,
+            height: img.height,
+          }
+
+          setImages((prev) => [image, ...prev])
         }
-        reader.readAsDataURL(file)
       })
     },
+
     accept: {
       'image/*': ['.jpeg', '.jpg', '.avif', '.gif', '.png', '.webp'],
     },
+
     maxFiles: 100,
   })
 
@@ -60,20 +76,34 @@ export default function Step3Image({ cupData }: Props) {
     try {
       setIsUploading(true)
 
-      const promises = images.map((image) => axios.post('/api/cloudinary/upload', { image }))
-      const responses = await Promise.all(promises)
-      const cldImages = responses.map(({ data }) => ({ ...data }))
+      const promises = images.map((image) => {
+        const body = new FormData()
+        body.append('file', image.src)
+        body.append('width', image.width.toString())
+        body.append('height', image.height.toString())
 
-      const { data } = await axios.post('/api/create/image', {
-        images: cldImages,
-        ...cupData,
+        const promise = fetch('/api/s3-upload', {
+          method: 'POST',
+          body,
+        })
+        return promise
       })
 
-      openModal('create-complete', data)
+      const response = await Promise.all(promises)
+
+      const s3ImagePromises = response.map((res) => res.json())
+
+      const s3Images = await Promise.all(s3ImagePromises)
+
+      const { data } = await axios.post('/api/create/image', {
+        images: s3Images,
+        ...cupData,
+      })
 
       router.refresh()
       router.push('/')
 
+      openModal('create-complete', data)
       openConfetti()
     } catch (error) {
       toast({
@@ -112,9 +142,9 @@ export default function Step3Image({ cupData }: Props) {
         </div>
 
         <div className='grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 2xl:grid-cols-8 gap-1.5 py-4 px-2'>
-          {images.map((image, i) => (
+          {previews.map((image, i) => (
             <div key={i} className='aspect-square rounded-lg overflow-hidden relative group'>
-              <Image fill src={image} alt='preview image' className='object-cover w-full h-full' />
+              <NextImage fill src={image} alt='preview image' className='object-cover w-full h-full' />
               <button
                 onClick={(e) => {
                   e.stopPropagation()

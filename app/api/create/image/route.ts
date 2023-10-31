@@ -4,8 +4,6 @@ import { createImageSchema } from '@/lib/validations'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
-export const maxDuration = 10
-
 export const POST = async (req: NextRequest) => {
   try {
     const session = await getSession()
@@ -23,9 +21,9 @@ export const POST = async (req: NextRequest) => {
         type,
         title,
         description,
-        thumbnail: images[0].secure_url,
-        thumbnailWidth: images[0].width,
-        thumbnailHeight: images[0].height,
+        thumbnail: `${process.env.NEXT_PUBLIC_S3_BASEURL}/${images[0].fileName}`,
+        thumbnailWidth: +images[0].width,
+        thumbnailHeight: +images[0].height,
         userId: session.user.id,
       },
     })
@@ -37,10 +35,10 @@ export const POST = async (req: NextRequest) => {
     const items = await db.item.createMany({
       data: images.map((image) => ({
         cupId: cup.id,
-        url: image.secure_url,
-        width: image.width,
-        height: image.height,
-        publicId: image.public_id,
+        url: `${process.env.NEXT_PUBLIC_S3_BASEURL}/${image.fileName}`,
+        width: +image.width,
+        height: +image.height,
+        publicId: image.fileName,
       })),
     })
 
