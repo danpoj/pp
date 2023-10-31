@@ -3,6 +3,7 @@ import db from '@/lib/db'
 import { itemDescriptionSchema } from '@/lib/validations'
 import { NextRequest, NextResponse } from 'next/server'
 import type { CupType } from '@prisma/client'
+import { deleteImageFromS3 } from '@/lib/delete-image-from-s3'
 
 export const PATCH = async (req: NextRequest, { params: { itemId } }: { params: { itemId: string } }) => {
   try {
@@ -46,7 +47,7 @@ export const POST = async (req: NextRequest, { params: { itemId } }: { params: {
       },
     })
 
-    // TODO: s3에서 이미지 삭제
+    await deleteImageFromS3(deletedItem.publicId!)
 
     return NextResponse.json(deletedItem)
   } catch (error) {

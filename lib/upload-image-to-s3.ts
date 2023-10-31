@@ -20,8 +20,6 @@ export async function uploadImageToS3(
 ): Promise<string> {
   let resizedImageBuffer
 
-  console.log(extension)
-
   if (type === 'avatar') {
     resizedImageBuffer = await sharp(file)
       .resize(160, 160, {
@@ -66,7 +64,7 @@ export async function uploadImageToS3(
     Bucket: process.env.BUCKET_NAME as string,
     Key: fileName,
     Body: resizedImageBuffer,
-    ContentType: 'image/gif',
+    ContentType: extension,
   })
 
   await s3.send(command)
