@@ -5,6 +5,7 @@ export default function PingpingLogo() {
   return (
     <Link href='/' className='flex items-center gap-1'>
       <Image
+        unoptimized
         src='/loader.gif'
         alt='pingping logo'
         width={26}

@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { uploadImageToS3 } from '@/lib/upload-image-to-s3'
 
-export async function POST(request: NextRequest, response: NextResponse) {
+export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData()
 
     const file = formData.get('file') as Blob | null
     const width = formData.get('width')
     const height = formData.get('height')
+    const extension = file?.type ?? ''
 
-    if (!file) {
+    if (!file || !width || !height) {
       return NextResponse.json({ error: 'File blob is required.' }, { status: 400 })
     }
 
@@ -18,7 +19,14 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
     const buffer = Buffer.from(await file.arrayBuffer())
 
-    const fileName = await uploadImageToS3(buffer, crypto.randomUUID() + '.' + fileExtension)
+    const fileName = await uploadImageToS3(
+      buffer,
+      crypto.randomUUID() + '.' + fileExtension,
+      'cup',
+      +width,
+      +height,
+      extension
+    )
 
     return NextResponse.json({
       fileName,

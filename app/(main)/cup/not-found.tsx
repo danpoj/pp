@@ -18,6 +18,7 @@ export default function NotFound() {
       <h1 className='text-xl'>페이지를 찾을 수 없습니다</h1>
       <p className='text-lg'>404 Not Found</p>
       <Image
+        unoptimized
         src='/loader.gif'
         width={120}
         height={120}

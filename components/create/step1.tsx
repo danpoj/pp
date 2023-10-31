@@ -39,6 +39,7 @@ export default function Step1({ setCurrentStep, cupData }: Props) {
           <div className='grid grid-cols-4 md:grid-cols-2 gap-0.5 h-fit'>
             {images.map((image, index) => (
               <Image
+                unoptimized
                 key={index}
                 src={image}
                 alt='create cup image'

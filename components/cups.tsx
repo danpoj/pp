@@ -122,6 +122,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
 
                 <div className='flex items-center gap-1 my-2'>
                   <Image
+                    unoptimized
                     src={cup.user.image!}
                     alt='cup author profile image'
                     width={24}
@@ -173,6 +174,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
       ) : (
         <div className='w-full flex items-center justify-center'>
           <Image
+            unoptimized
             src='/loader.gif'
             alt='pingping logo'
             width={120}

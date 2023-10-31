@@ -122,6 +122,7 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
     >
       <div className='w-full h-full relative'>
         <Image
+          unoptimized
           className='absolute inset-0 object-contain w-full h-full'
           fill
           src={selectedItem.url!}
@@ -144,6 +145,7 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
     >
       <div className='w-full h-full relative'>
         <Image
+          unoptimized
           className='absolute inset-0 object-contain w-full h-full'
           fill
           src={selectedItem.url!}
@@ -176,6 +178,7 @@ const Initial = ({
       >
         <div className='w-full h-full relative'>
           <Image
+            unoptimized
             className='absolute inset-0 object-contain w-full h-full'
             fill
             src={items[index * 2].url}
@@ -190,6 +193,7 @@ const Initial = ({
       >
         <div className='w-full h-full relative'>
           <Image
+            unoptimized
             className='absolute inset-0 object-contain w-full h-full'
             fill
             src={items[index * 2 + 1].url}
@@ -208,7 +212,7 @@ const Overlay = ({ isFinished }: { isFinished: boolean }) => {
       {isFinished ? (
         <div className='flex flex-col gap-2 bg-primary p-4 rounded-lg items-center'>
           <span className='text-white'>결과 페이지로 이동 중...</span>
-          <Image src='/loader.gif' width={80} height={80} alt='tournament finish loading state image' />
+          <Image unoptimized src='/loader.gif' width={80} height={80} alt='tournament finish loading state image' />
         </div>
       ) : (
         <div className='rounded-lg hidden md:block'>

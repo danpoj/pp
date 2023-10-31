@@ -23,6 +23,7 @@ export default function CupItemForm({ item, cupType, contentsLength }: Props) {
             className='hover:opacity-80 rounded overflow-hidden transition-opacity'
           >
             <Image
+              unoptimized
               src={item.url}
               alt={item.description || 'cup item'}
               width={300}
@@ -39,6 +40,7 @@ export default function CupItemForm({ item, cupType, contentsLength }: Props) {
             className='hover:opacity-80 rounded overflow-hidden transition-opacity'
           >
             <Image
+              unoptimized
               src={item.videoThumbnail!}
               alt={item.description || 'cup item'}
               width={item.width!}

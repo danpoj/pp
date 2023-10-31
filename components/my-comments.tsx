@@ -66,6 +66,7 @@ export default function MyComments({ user }: Props) {
         <div key={comment.id} className='space-y-1 p-2 rounded'>
           <div className='flex gap-1'>
             <Image
+              unoptimized
               src={comment.cup.thumbnail}
               alt={comment.cup.title}
               width={120}
@@ -82,6 +83,7 @@ export default function MyComments({ user }: Props) {
           <div className='flex flex-col gap-2 break-words mb-4'>
             <div className='flex gap-1 items-center'>
               <Image
+                unoptimized
                 src={user.image!}
                 alt='user profile image'
                 width={40}
@@ -132,6 +134,7 @@ export default function MyComments({ user }: Props) {
         <div key={comment.id} className='space-y-1 p-2 rounded'>
           <div className='flex gap-1'>
             <Image
+              unoptimized
               src={comment.item.publicId ? comment.item.url : comment.item.videoThumbnail!}
               alt={comment.item.description || 'cup result image'}
               width={120}
@@ -142,7 +145,14 @@ export default function MyComments({ user }: Props) {
 
           <div className='flex flex-col gap-2 break-words mb-4'>
             <div className='flex gap-1 items-center'>
-              <Image src={user.image!} alt='user profile image' width={40} height={40} className='w-6 h-6' />
+              <Image
+                unoptimized
+                src={user.image!}
+                alt='user profile image'
+                width={40}
+                height={40}
+                className='w-6 h-6'
+              />
               <span className='font-bold text-xs bg-gradient-to-r from-cyan-600 via-blue-600 to-sky-600 w-fit bg-clip-text text-transparent'>
                 @{user.nickname}
               </span>

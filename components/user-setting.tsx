@@ -22,6 +22,7 @@ export default function UserSetting({ session }: Props) {
     <DropdownMenu>
       <DropdownMenuTrigger className='rounded-full select-none group relative overflow-hidden w-8 h-8'>
         <Image
+          unoptimized
           src={session.user.image!}
           alt='logged in user image'
           width={40}
@@ -34,6 +35,7 @@ export default function UserSetting({ session }: Props) {
         <DropdownMenuLabel className='flex gap-2 items-center'>
           <div className='relative w-12 h-12 rounded-full overflow-hidden'>
             <Image
+              unoptimized
               src={session.user.image!}
               alt='logged in user image'
               width={60}

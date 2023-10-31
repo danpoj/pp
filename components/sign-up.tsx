@@ -53,6 +53,7 @@ export default function SignUp() {
       <div className='flex flex-col items-center mb-10 gap-4'>
         <div className='flex font-bold text-lg'>
           <Image
+            unoptimized
             alt='pingping logo'
             width={40}
             height={40}

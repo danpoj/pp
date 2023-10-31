@@ -52,6 +52,7 @@ function ImageRotation({ currentIndex, images, type }: { images: Item[]; current
       {images.map((item, index) => (
         <Fragment key={item.id}>
           <Image
+            unoptimized
             fill
             src={item.publicId ? item.url : item.videoThumbnail!}
             alt='cup landing background image'

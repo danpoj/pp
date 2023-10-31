@@ -22,6 +22,7 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
 
       <h1 className='text-xl'>에러!</h1>
       <Image
+        unoptimized
         src='/loader.gif'
         width={120}
         height={120}

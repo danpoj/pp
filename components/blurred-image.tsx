@@ -18,6 +18,7 @@ export const BlurredImage = ({ thumbnail, title, width, height, type }: Props) =
 
   return (
     <Image
+      unoptimized
       src={thumbnail}
       alt={title}
       width={width}

@@ -36,6 +36,7 @@ export default function MobileMenu({ session }: Props) {
           <DropdownMenuLabel className='flex gap-2 items-center'>
             <div className='relative w-12 h-12 rounded-full overflow-hidden'>
               <Image
+                unoptimized
                 src={session.user.image!}
                 alt='logged in user image'
                 fill
