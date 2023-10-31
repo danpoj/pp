@@ -1,5 +1,6 @@
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
+import { deleteImageFromS3 } from '@/lib/delete-image-from-s3'
 import { uploadImageToS3 } from '@/lib/upload-image-to-s3'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -16,6 +17,7 @@ export async function PATCH(request: NextRequest) {
     const formData = await request.formData()
 
     const file = formData.get('file') as Blob | null
+    const previousAvatar = formData.get('previousAvatar') as string
     const extension = file?.type ?? ''
 
     if (!file) {
@@ -44,6 +46,11 @@ export async function PATCH(request: NextRequest) {
         image: `${process.env.NEXT_PUBLIC_S3_BASEURL}/${fileName}`,
       },
     })
+
+    if (previousAvatar.includes('amazonaws.com')) {
+      const fileName = previousAvatar.split('amazonaws.com/')[1]
+      await deleteImageFromS3(fileName)
+    }
 
     return NextResponse.json(updatedUser)
   } catch (error) {

@@ -20,7 +20,6 @@ type Props = {
 }
 
 export default function UserAvatarForm({ user }: Props) {
-  const [isDefaultAvatars, setIsDefaultAvatars] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
   const [open, setOpen] = useState(false)
   const router = useRouter()
@@ -53,6 +52,7 @@ export default function UserAvatarForm({ user }: Props) {
 
       const body = new FormData()
       body.append('file', avatar)
+      body.append('previousAvatar', user.image!)
 
       await axios.patch(`/api/user/image/local`, body)
 
@@ -74,32 +74,9 @@ export default function UserAvatarForm({ user }: Props) {
     }
   }
 
-  // const onDefaultAvatarClick = async (avatar: string) => {
-  //   try {
-  //     setIsUploading(true)
-
-  //     await axios.patch(`/api/user/image/default`, { avatar })
-
-  //     router.refresh()
-
-  //     toast({
-  //       title: '이미지 변경 완료 🥳',
-  //       style: {
-  //         backgroundColor: '#111',
-  //         color: '#ddd',
-  //       },
-  //     })
-  //   } catch (error) {
-  //     console.log(error)
-  //   } finally {
-  //     setIsDefaultAvatars(false)
-  //     setIsUploading(false)
-  //   }
-  // }
-
   return (
     <div className='flex flex-col items-center'>
-      <p className='flex gap-1 items-center text-xs text-blue-500'>
+      <p className='flex gap-1 items-center text-xs text-blue-500 mb-4'>
         <FileWarning className='w-4 h-4' />
         <span className='font-bold'>3MB</span>이하의 이미지
       </p>
@@ -128,14 +105,6 @@ export default function UserAvatarForm({ user }: Props) {
           </button>
         </PopoverTrigger>
         <PopoverContent className='flex flex-col gap-2 p-2 w-48' onInteractOutside={() => setOpen(false)}>
-          {/* <Button
-            onClick={() => {
-              setIsDefaultAvatars((prev) => !prev)
-              setOpen(false)
-            }}
-          >
-            기본 이미지
-          </Button> */}
           <Button
             onClick={() => {
               openFileUploader()
@@ -146,24 +115,6 @@ export default function UserAvatarForm({ user }: Props) {
           </Button>
         </PopoverContent>
       </Popover>
-
-      {/* <Popover open={isDefaultAvatars}>
-        <PopoverTrigger />
-        <PopoverContent
-          className='w-[220px] p-4 flex flex-wrap gap-2'
-          onInteractOutside={() => setIsDefaultAvatars(false)}
-        >
-          {avatars.map((avatar) => (
-            <button
-              onClick={() => onDefaultAvatarClick(avatar)}
-              key={avatar}
-              className='hover:outline hover:outline-slate-400 w-14 h-14 relative rounded-full bg-white'
-            >
-              <Image src={avatar} alt='default profile image' fill className='p-3' />
-            </button>
-          ))}
-        </PopoverContent>
-      </Popover> */}
     </div>
   )
 }

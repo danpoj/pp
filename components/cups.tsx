@@ -168,7 +168,9 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
         <div className='w-full flex items-center justify-center pb-6 flex-col gap-2'>
           <span className='text-lg font-bold'>{search == null ? '' : `검색어: ${search}`}</span>
           <span>
-            {cups.length === 0 ? `${search}에 대한 컨텐츠가 없습니다` : `총 ${cups.length}개의 컨텐츠 불러오기 완료`}
+            {cups.length === 0
+              ? `${search ?? '검색'}에 대한 컨텐츠가 없습니다`
+              : `총 ${cups.length}개의 컨텐츠 불러오기 완료`}
           </span>
         </div>
       ) : (
