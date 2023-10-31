@@ -62,7 +62,7 @@ export const authOptions: NextAuthOptions = {
           },
           data: {
             nickname,
-            image: `https://avatar.vercel.sh/${nickname}.svg?text=${token.email?.slice(0, 4)}`,
+            image: `https://avatar.vercel.sh/${token.id}.svg?text=${token.email?.slice(0, 3)}`,
           },
         })
       }

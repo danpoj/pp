@@ -3,26 +3,18 @@ import db from '@/lib/db'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
-const bodySchema = z.object({
-  avatar: z.string().min(1),
-})
-
 export const PATCH = async (req: NextRequest) => {
   try {
     const session = await getSession()
 
     if (!session) return new NextResponse('/api/user/image/default : 인증된 유저가 아닙니다', { status: 401 })
 
-    const body = await req.json()
-
-    const { avatar } = bodySchema.parse(body)
-
     const updatedUser = await db.user.update({
       where: {
         id: session.user.id,
       },
       data: {
-        image: avatar,
+        image: `https://avatar.vercel.sh/${session.user.id}.svg?text=${session.user.email?.slice(0, 3)}`,
       },
     })
 

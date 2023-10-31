@@ -74,6 +74,18 @@ export default function UserAvatarForm({ user }: Props) {
     }
   }
 
+  const handleDefaultAvatar = async () => {
+    try {
+      await fetch('/api/user/image/default', {
+        method: 'PATCH',
+      })
+
+      router.refresh()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className='flex flex-col items-center'>
       <p className='flex gap-1 items-center text-xs text-blue-500 mb-4'>
@@ -105,6 +117,15 @@ export default function UserAvatarForm({ user }: Props) {
           </button>
         </PopoverTrigger>
         <PopoverContent className='flex flex-col gap-2 p-2 w-48' onInteractOutside={() => setOpen(false)}>
+          <Button
+            onClick={() => {
+              handleDefaultAvatar()
+              setOpen(false)
+            }}
+            variant='secondary'
+          >
+            기본 이미지
+          </Button>
           <Button
             onClick={() => {
               openFileUploader()

@@ -28,6 +28,7 @@
     "clsx": "^2.0.0",
     "dayjs": "^1.11.10",
     "framer-motion": "^10.16.4",
+    "geist": "^1.0.0",
     "image-to-base64": "^2.2.0",
     "lucide-react": "^0.279.0",
     "nanoid": "^5.0.1",
