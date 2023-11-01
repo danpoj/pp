@@ -52,13 +52,18 @@ export async function uploadImageToS3(
       }
     } else if (width > 1400 || height > 1400) {
       resizedImageBuffer = await sharp(file)
-        .webp({})
-        .resize(Math.floor(width / 2), Math.floor(height / 2))
+        .webp()
+        .resize(Math.floor(width / 1.8), Math.floor(height / 1.8))
+        .toBuffer()
+    } else if (width > 1000 || height > 1000) {
+      resizedImageBuffer = await sharp(file)
+        .webp()
+        .resize(Math.floor(width / 1.4), Math.floor(height / 1.4))
         .toBuffer()
     } else {
       resizedImageBuffer = await sharp(file)
         .webp()
-        .resize(Math.floor(width / 1.4), Math.floor(height / 1.4))
+        .resize(Math.floor(width / 1.1), Math.floor(height / 1.1))
         .toBuffer()
     }
   }
