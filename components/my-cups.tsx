@@ -21,11 +21,11 @@ type Props = {
 
 export default function MyCups({ cups }: Props) {
   const router = useRouter()
-  const [isDeletingId, setIsDeletingId] = useState<string | null>(null)
+  const [deletingIds, setDeletingIds] = useState<string[]>([])
 
   const onDelete = async ({ cupId, type }: { cupId: string; type: CupType }) => {
     try {
-      setIsDeletingId(cupId)
+      setDeletingIds((prev) => [...prev, cupId])
 
       await axios.delete(`/api/cup/${cupId}`)
 
@@ -41,7 +41,8 @@ export default function MyCups({ cups }: Props) {
     } catch (error) {
       console.log(error)
     } finally {
-      setIsDeletingId(null)
+      const index = deletingIds.findIndex((id) => id === cupId)
+      setDeletingIds((prev) => [...prev.slice(0, index), ...prev.slice(index + 1)])
     }
   }
 
@@ -107,8 +108,8 @@ export default function MyCups({ cups }: Props) {
                 수정 <Pencil className='w-3 h-3 ml-1' />
               </Button>
               <Button
-                disabled={isDeletingId === cup.id}
-                isLoading={isDeletingId === cup.id}
+                disabled={deletingIds.includes(cup.id)}
+                isLoading={deletingIds.includes(cup.id)}
                 onClick={() => onDelete({ cupId: cup.id, type: cup.type })}
                 size='sm'
                 variant='destructive'
