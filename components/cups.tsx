@@ -109,14 +109,16 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                 <h3 className='text-xs text-[0.65rem] sm:text-[0.75rem] text-primary/60'>{cup.description}</h3>
 
                 <div className='flex items-center gap-1 my-2'>
-                  <Image
-                    unoptimized
-                    src={cup.user.image!}
-                    alt='cup author profile image'
-                    width={24}
-                    height={24}
-                    className='bg-white rounded-full w-[24px] h-[24px] object-cover'
-                  />
+                  <div className='outline rounded-full overflow-hidden outline-offset-1 outline-primary/70'>
+                    <Image
+                      unoptimized
+                      src={cup.user.image!}
+                      alt='cup author profile image'
+                      width={24}
+                      height={24}
+                      className='bg-white w-[24px] h-[24px] object-cover'
+                    />
+                  </div>
                   <span className='text-xs font-normal'>@{cup.user.nickname}</span>
                 </div>
 

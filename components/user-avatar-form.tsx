@@ -76,6 +76,7 @@ export default function UserAvatarForm({ user }: Props) {
 
   const handleDefaultAvatar = async () => {
     try {
+      setIsUploading(true)
       await fetch('/api/user/image/default', {
         method: 'PATCH',
       })
@@ -91,6 +92,8 @@ export default function UserAvatarForm({ user }: Props) {
       })
     } catch (error) {
       console.log(error)
+    } finally {
+      setIsUploading(false)
     }
   }
 
@@ -104,7 +107,7 @@ export default function UserAvatarForm({ user }: Props) {
         <PopoverTrigger asChild>
           <button
             onClick={() => setOpen((prev) => !prev)}
-            className='relative w-20 h-20 rounded-full group bg-white overflow-hidden flex items-center justify-center'
+            className='relative w-20 h-20 rounded-full group bg-white overflow-hidden flex items-center justify-center outline outline-primary/70 outline-offset-1'
           >
             {isUploading ? (
               <Loader2 className='animate-spin' />

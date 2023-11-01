@@ -1,7 +1,7 @@
 import Modals from '@/components/modal/modals'
 import Providers from '@/components/provider/providers'
 import { cn } from '@/lib/utils'
-import { GeistSans } from 'geist/font'
+import { Noto_Sans } from 'next/font/google'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
@@ -31,6 +31,11 @@ export const metadata: Metadata = {
   },
 }
 
+const notoSans = Noto_Sans({
+  subsets: ['latin'],
+  weight: ['500'],
+})
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='ko' suppressHydrationWarning>
@@ -42,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           strategy='lazyOnload'
         />
       </head>
-      <body className={cn('antialiased text-sm', GeistSans.className)}>
+      <body className={cn('antialiased text-sm', notoSans.className)}>
         <Providers>
           {children}
           <Modals />
