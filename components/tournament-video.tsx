@@ -105,7 +105,7 @@ export default function TournamentVideo({ cup, cupLength }: Props) {
       {clicked === 'LEFT' && <Left selectedItem={selectedItem.current!} />}
       {clicked === 'RIGHT' && <Right selectedItem={selectedItem.current!} />}
 
-      <Overlay isFinished={isFinished} />
+      {/* <Overlay isFinished={isFinished} /> */}
     </div>
   )
 }
