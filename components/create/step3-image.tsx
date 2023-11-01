@@ -29,7 +29,7 @@ type Img = {
 
 export default function Step3Image({ cupData }: Props) {
   const [images, setImages] = useState<Img[]>([])
-  const [isUploading, setIsUploading] = useState(false)
+  const [step, setStep] = useState<'initial' | 'uploading' | 'finished'>('initial')
   const { open: openModal } = useModal()
   const { open: openConfetti } = useConfetti()
   const router = useRouter()
@@ -81,7 +81,7 @@ export default function Step3Image({ cupData }: Props) {
 
   const upload = async () => {
     try {
-      setIsUploading(true)
+      setStep('uploading')
 
       const promises = images.map((image) => {
         const body = new FormData()
@@ -107,7 +107,6 @@ export default function Step3Image({ cupData }: Props) {
         ...cupData,
       })
 
-      router.push('/')
       router.refresh()
 
       openModal('create-complete', data)
@@ -119,13 +118,13 @@ export default function Step3Image({ cupData }: Props) {
         variant: 'destructive',
       })
     } finally {
-      setIsUploading(false)
+      setStep('finished')
     }
   }
 
   const isUploadAvailable = !(images.length < 8 || images.length > 100)
 
-  if (isUploading) {
+  if (step === 'uploading') {
     return (
       <div className='mt-4 w-full h-full pb-20 overflow-hidden relative flex flex-col items-center justify-center space-y-2'>
         <div className='flex items-center gap-4 animate-bounce'>
@@ -152,6 +151,31 @@ export default function Step3Image({ cupData }: Props) {
         <Link href='/' className={cn(buttonVariants(), 'flex mt-10')}>
           <ArrowLeft className='w-4 h-4 mr-1' />
           <span>홈으로 이동하기</span>
+        </Link>
+      </div>
+    )
+  }
+
+  if (step === 'finished') {
+    return (
+      <div className='mt-4 w-full h-full pb-20 overflow-hidden relative flex flex-col items-center justify-center space-y-6'>
+        <div className='flex items-center gap-4'>
+          <span className='font-bold text-lg flex gap-1 items-center'>
+            업로드 완료! <Sparkle className='w-5 h-5 fill-yellow-400 stroke-yellow-400' />
+          </span>
+          <NextImage
+            src='/loader.gif'
+            unoptimized
+            width={48}
+            height={32}
+            alt='loader image'
+            className='w-[48px] h-[32px] object-cover'
+          />
+        </div>
+
+        <Link href='/my/cup' className={cn(buttonVariants(), 'flex mt-10')}>
+          <ArrowLeft className='w-4 h-4 mr-1' />
+          <span>월드컵 설정하기</span>
         </Link>
       </div>
     )
@@ -201,13 +225,7 @@ export default function Step3Image({ cupData }: Props) {
 
       <div className='w-full flex justify-end mt-4 items-center gap-4'>
         <span className={cn('text-3xl', isUploadAvailable ? 'text-blue-600' : 'text-red-600')}>{images.length}개</span>
-        <Button
-          onClick={upload}
-          disabled={!isUploadAvailable || isUploading}
-          isLoading={isUploading}
-          className='h-12 w-40'
-          variant='blue'
-        >
+        <Button onClick={upload} disabled={!isUploadAvailable} className='h-12 w-40' variant='blue'>
           업로드 <ChevronRight className='w-5 h-5 ml-1' />
         </Button>
       </div>
