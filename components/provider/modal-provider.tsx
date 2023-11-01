@@ -4,6 +4,7 @@ import { Children } from '@/types/type'
 import { Dispatch, SetStateAction, createContext, useContext, useRef, useState } from 'react'
 
 type ModalType = 'signin' | 'signup' | 'create-complete' | null
+
 type Data = {
   thumbnail: string
   title: string

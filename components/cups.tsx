@@ -5,7 +5,7 @@ import { ClipboardButton } from '@/components/clipboard-button'
 import LikeButton from '@/components/like-button'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import type { Cup, Like, User } from '@prisma/client'
+import { CupWithUser, TypeCupSearchParams } from '@/types/type'
 import axios from 'axios'
 import { BarChart, MessageSquare, YoutubeIcon } from 'lucide-react'
 import type { Session } from 'next-auth'
@@ -20,23 +20,11 @@ const Masonry = dynamic(() => import('react-responsive-masonry'), {
   ssr: false,
 })
 
-type Type = 'all' | 'video' | 'image'
-
-type CupWithUser = Cup & {
-  _count: {
-    items: number
-    comments: number
-    likes: number
-  }
-  user: User
-  likes: Like[]
-}
-
 type Props = {
   initialCups: CupWithUser[]
   session: Session | null
   isLiked?: boolean
-  type?: Type
+  type?: TypeCupSearchParams
   search?: string
 }
 

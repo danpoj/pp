@@ -7,20 +7,11 @@ import { Label } from '@/components/ui/label'
 import { Check, Copy } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-type ClipboardWithLinkProps = HTMLAttributes<HTMLDivElement> & { path: string; title?: string }
+type Props = HTMLAttributes<HTMLDivElement> & { path: string; title?: string }
 
-export const ClipboardWithLink = ({ path, title, ...props }: ClipboardWithLinkProps) => {
+export const ClipboardWithLink = ({ path, title, ...props }: Props) => {
   const [copied, setCopied] = useState(false)
   const origin = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://www.pingping.online'
-
-  // const onCopy = () => {
-  //   navigator.clipboard.writeText(origin + path)
-  //   setCopied(true)
-
-  //   setTimeout(() => {
-  //     setCopied(false)
-  //   }, 1000)
-  // }
 
   const onCopy = () => {
     setCopied(true)

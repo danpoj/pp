@@ -6,14 +6,11 @@ import { Separator } from '@/components/ui/separator'
 import { Trash2 } from 'lucide-react'
 import ImageUpdateDropzone from '@/components/image-update-dropzone'
 import VideoUpdateForm from '@/components/video-update-form'
+import { CupCount } from '@/types/type'
 
 type Props = {
   cup: Cup & {
-    _count: {
-      items: number
-      comments: number
-      likes: number
-    }
+    _count: CupCount
     items: Item[]
   }
 }

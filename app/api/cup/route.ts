@@ -1,16 +1,15 @@
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { getQuery } from '@/lib/get-query'
+import { TypeCupSearchParams } from '@/types/type'
 import { NextRequest, NextResponse } from 'next/server'
-
-type Type = 'all' | 'video' | 'image'
 
 export const GET = async (req: NextRequest) => {
   try {
     const url = new URL(req.url)
     const isLiked = url.searchParams.get('isLiked') === 'true' || false
 
-    let type = url.searchParams.get('type') as Type | undefined
+    let type = url.searchParams.get('type') as TypeCupSearchParams | undefined
     let page = url.searchParams.get('page')
     const search = url.searchParams.get('search') || ''
 

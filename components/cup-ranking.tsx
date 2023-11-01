@@ -1,41 +1,23 @@
 'use client'
 
-import { cn } from '@/lib/utils'
-import type { Prisma } from '@prisma/client'
-import type { Session } from 'next-auth'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect } from 'react'
 import { ClipboardWithLink } from '@/components/clipboard-with-link'
 import CupCommentDeleteButton from '@/components/cup-comment-delete-button'
 import CupCommentForm from '@/components/cup-comment-form'
 import { useConfetti } from '@/components/provider/confetti-provider'
+import { cn } from '@/lib/utils'
+import type { Session } from 'next-auth'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect } from 'react'
 
+import { CupRankingPage } from '@/types/type'
 import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/ko'
+import relativeTime from 'dayjs/plugin/relativeTime'
 dayjs.extend(relativeTime)
 dayjs.locale('ko')
 
-export type ExtendedCup = Prisma.CupGetPayload<{
-  include: {
-    _count: true
-    comments: {
-      orderBy: {
-        createdAt: 'desc'
-      }
-      include: {
-        user: true
-      }
-    }
-    items: {
-      orderBy: {
-        winCount: 'asc'
-      }
-    }
-    user: true
-  }
-}> & {
+export type ExtendedCup = CupRankingPage & {
   session: Session | null
 }
 

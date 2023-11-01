@@ -3,21 +3,19 @@
 import { shuffle } from '@/lib/shuffle'
 import { updateCupPlayCountAndItemWinCount } from '@/lib/update-cup-playcount-and-item-wincount'
 import { cn } from '@/lib/utils'
-import type { Item, Prisma } from '@prisma/client'
+import type { Cup, Item } from '@prisma/client'
 import { motion as m } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import DescriptionText from '@/components/description-text'
-import type { CupLength } from '@/components/tournament'
 import CupInformation from '@/components/cup-information'
 import Image from 'next/image'
+import { CupLength } from '@/types/type'
 
 type Props = {
-  cup: Prisma.CupGetPayload<{
-    include: {
-      items: true
-    }
-  }>
+  cup: Cup & {
+    items: Item[]
+  }
   cupLength: CupLength
 }
 

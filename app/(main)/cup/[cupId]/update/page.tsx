@@ -1,6 +1,6 @@
 import CupUpdateForm from '@/components/cup-update-form'
 import { getSession } from '@/lib/auth'
-import db from '@/lib/db'
+import { getCupUpdatePage } from '@/lib/query'
 import { notFound, redirect } from 'next/navigation'
 
 type Props = {
@@ -14,19 +14,9 @@ export default async function Page({ params: { cupId } }: Props) {
 
   if (!session) redirect('/')
 
-  const cup = await db.cup.findUnique({
-    where: {
-      id: cupId,
-      userId: session.user.id,
-    },
-    include: {
-      _count: true,
-      items: {
-        orderBy: {
-          createdAt: 'desc',
-        },
-      },
-    },
+  const cup = await getCupUpdatePage({
+    userId: session.user.id,
+    cupId,
   })
 
   if (!cup) notFound()

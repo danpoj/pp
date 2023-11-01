@@ -11,13 +11,11 @@ import { useState } from 'react'
 import { ClipboardWithLink } from '@/components/clipboard-with-link'
 import { Button } from '@/components/ui/button'
 import { toast } from '@/components/ui/use-toast'
+import { CupCount } from '@/types/type'
 
 type Props = {
   cups: (Cup & {
-    _count: {
-      items: number
-      comments: number
-    }
+    _count: CupCount
   })[]
 }
 

@@ -81,6 +81,14 @@ export default function UserAvatarForm({ user }: Props) {
       })
 
       router.refresh()
+
+      toast({
+        title: '기본 이미지로 변경되었습니다 🎊',
+        style: {
+          backgroundColor: '#111',
+          color: '#ddd',
+        },
+      })
     } catch (error) {
       console.log(error)
     }

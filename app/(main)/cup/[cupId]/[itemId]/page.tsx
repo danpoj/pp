@@ -16,15 +16,9 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/ko'
 import { notFound } from 'next/navigation'
+import { getItemResultPage } from '@/lib/query'
 dayjs.extend(relativeTime)
 dayjs.locale('ko')
-
-type Props = {
-  params: {
-    cupId: string
-    itemId: string
-  }
-}
 
 export async function generateMetadata(
   { params: { itemId } }: Props,
@@ -66,27 +60,19 @@ export async function generateMetadata(
   }
 }
 
-export default async function Page({ params }: Props) {
-  const image = await db.item.findUnique({
-    where: {
-      id: params.itemId,
-    },
-    include: {
-      cup: true,
-      comments: {
-        orderBy: {
-          createdAt: 'desc',
-        },
-        include: {
-          user: true,
-        },
-      },
-    },
-  })
+type Props = {
+  params: {
+    cupId: string
+    itemId: string
+  }
+}
 
-  const session = await getSession()
+export default async function Page({ params }: Props) {
+  const image = await getItemResultPage(params.itemId)
 
   if (!image) notFound()
+
+  const session = await getSession()
 
   return (
     <section className='h-full max-w-6xl mx-auto p-2 flex flex-col lg:flex-row lg:justify-center lg:items-center lg:gap-6 relative'>

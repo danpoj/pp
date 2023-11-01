@@ -1,12 +1,7 @@
 'use client'
 
-// type
-import type { cupData } from '@/app/(main)/create/page'
-
-// image
 import { Check, ChevronRight, Trash2 } from 'lucide-react'
 
-// style
 import { Form, FormControl, FormDescription, FormField, FormItem } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
@@ -25,6 +20,7 @@ import { getYouTubeVideoId } from '@/lib/get-youtube-video-id'
 import axios from 'axios'
 import { useModal } from '@/components/provider/modal-provider'
 import { useConfetti } from '@/components/provider/confetti-provider'
+import { cupData } from '@/types/type'
 
 type Props = {
   cupData: cupData
@@ -182,7 +178,14 @@ export default function ThirdStepYoutube({ cupData }: Props) {
                     </Button>
                   </div>
                 </FormControl>
-                <FormDescription>유튜브 링크를 복사하여 추가해주세요</FormDescription>
+                <FormDescription>
+                  <div className='space-y-2 mt-4'>
+                    <p>유튜브 링크를 복사하여 추가해주세요</p>
+                    <p className='text-blue-500 font-semibold underline underline-offset-4'>
+                      업로드 이후 자유롭게 수정 가능합니다 (제목, 설명, 썸네일, 비디오)
+                    </p>
+                  </div>
+                </FormDescription>
               </FormItem>
             )}
           />

@@ -1,15 +1,9 @@
 'use client'
 
-// type
-import type { cupData } from '@/app/(main)/create/page'
-
-// image
 import { ChevronRight, ImagePlus, Trash2 } from 'lucide-react'
 
-// style
 import { Button } from '@/components/ui/button'
 
-// etc
 import { cn } from '@/lib/utils'
 import axios from 'axios'
 import NextImage from 'next/image'
@@ -19,6 +13,7 @@ import { useDropzone } from 'react-dropzone'
 import { useConfetti } from '@/components/provider/confetti-provider'
 import { useModal } from '@/components/provider/modal-provider'
 import { toast } from '@/components/ui/use-toast'
+import { cupData } from '@/types/type'
 
 type Props = {
   cupData: cupData

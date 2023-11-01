@@ -4,13 +4,6 @@ import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { redirect } from 'next/navigation'
 
-type Cld = {
-  total_count: number
-  resources: {
-    secure_url: string
-  }[]
-}
-
 export default async function Page() {
   const session = await getSession()
 

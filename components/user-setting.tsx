@@ -40,7 +40,7 @@ export default function UserSetting({ session }: Props) {
               alt='logged in user image'
               width={60}
               height={60}
-              className=' dark:bg-white object-cover aspect-square'
+              className='dark:bg-white object-cover aspect-square'
             />
           </div>
           <span className='text-xs font-mono'>@{session.user.nickname}</span>

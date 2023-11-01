@@ -3,28 +3,11 @@ import Cups from '@/components/cups'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 import { getQuery } from '@/lib/get-query'
-import type { Cup, Like, User } from '@prisma/client'
+import { CupSearchParmas, CupWithUser, TypeCupSearchParams } from '@/types/type'
 
-export type Type = 'all' | 'video' | 'image'
-
-type SearchParmas = {
-  type: string
-  search: string
-}
-
-type CupWithUser = Cup & {
-  _count: {
-    items: number
-    comments: number
-    likes: number
-  }
-  user: User
-  likes: Like[]
-}
-
-export default async function Page({ searchParams }: { searchParams: SearchParmas }) {
+export default async function Page({ searchParams }: { searchParams: CupSearchParmas }) {
   const search = searchParams.search
-  let type = (searchParams.type ?? 'all') as Type
+  let type = (searchParams.type ?? 'all') as TypeCupSearchParams
 
   if (!(type === 'video' || type === 'image')) type = 'all'
 

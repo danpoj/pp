@@ -1,19 +1,14 @@
 'use client'
 
-// type
-import type { cupData } from '@/app/(main)/create/page'
 import type { CupType } from '@prisma/client'
 import type { Dispatch, MutableRefObject, SetStateAction } from 'react'
 
-// image
-
 import { YoutbeIcon } from '../icons'
 
-// style
 import { Button } from '../ui/button'
 
-// etc
 import Image from 'next/image'
+import { cupData } from '@/types/type'
 
 type Props = {
   setCurrentStep: Dispatch<SetStateAction<number>>

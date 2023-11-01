@@ -9,14 +9,11 @@ import HeartEmoji from '@/components/heart-emoji'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { useModal } from '@/components/provider/modal-provider'
+import { CupCount } from '@/types/type'
 
 type Props = {
   cup: Cup & {
-    _count: {
-      items: number
-      comments: number
-      likes: number
-    }
+    _count: CupCount
     likes: Like[]
   }
   session: Session | null

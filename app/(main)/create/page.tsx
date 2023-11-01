@@ -1,9 +1,7 @@
 'use client'
 
-// type
 import type { CupType } from '@prisma/client'
 
-// etc
 import { useRef, useState } from 'react'
 
 import StepIcon from '@/components/create/step-icon'
@@ -12,12 +10,7 @@ import Step1 from '@/components/create/step1'
 import Step2 from '@/components/create/step2'
 import Step3Image from '@/components/create/step3-image'
 import Step3Video from '@/components/create/step3-video'
-
-export type cupData = {
-  type: CupType
-  title: string
-  description: string
-}
+import { cupData } from '@/types/type'
 
 export default function Page() {
   const [currentStep, setCurrentStep] = useState(1)

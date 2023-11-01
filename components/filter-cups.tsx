@@ -3,17 +3,17 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import qs from 'query-string'
 
-import { Type } from '@/app/(main)/(landing-page)/page'
 import { Label } from '@/components/ui/label'
 import { RadioGroup } from '@/components/ui/radio-group'
 import { cn } from '@/lib/utils'
 import { Youtube } from 'lucide-react'
+import { TypeCupSearchParams } from '@/types/type'
 
 export default function FilterCups() {
   const searchParams = useSearchParams()
   const router = useRouter()
 
-  let type = (searchParams.get('type') ?? 'all') as Type
+  let type = (searchParams.get('type') ?? 'all') as TypeCupSearchParams
 
   if (!(type === 'video' || type === 'image')) type = 'all'
 

@@ -1,6 +1,6 @@
 import MyComments from '@/components/my-comments'
 import { getSession } from '@/lib/auth'
-import db from '@/lib/db'
+import { getMyCommentPage } from '@/lib/query'
 import { notFound, redirect } from 'next/navigation'
 
 export default async function Page() {
@@ -8,24 +8,7 @@ export default async function Page() {
 
   if (!session) redirect('/')
 
-  const user = await db.user.findUnique({
-    where: {
-      id: session.user.id,
-    },
-    include: {
-      _count: true,
-      cupComments: {
-        include: {
-          cup: true,
-        },
-      },
-      itemComments: {
-        include: {
-          item: true,
-        },
-      },
-    },
-  })
+  const user = await getMyCommentPage(session.user.id)
 
   if (!user) notFound()
 
@@ -33,7 +16,7 @@ export default async function Page() {
 
   return (
     <section className='min-h-full px-2 pt-8 max-w-4xl mx-auto'>
-      <span className='text-2xl font-semibold tracking-tighter'>내 댓글 ({commentsLength}개)</span>
+      <span className='text-xl font-semibold tracking-tighter'>/ 내 댓글 ({commentsLength}개)</span>
       <MyComments user={user} />
     </section>
   )

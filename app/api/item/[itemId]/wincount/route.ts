@@ -2,7 +2,6 @@ import db from '@/lib/db'
 import { NextRequest, NextResponse } from 'next/server'
 
 type PatchProps = {
-  req: NextRequest
   params: {
     itemId: string
   }

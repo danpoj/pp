@@ -1,14 +1,9 @@
 import CupRanking from '@/components/cup-ranking'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
+import { getCupRankingPage } from '@/lib/query'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-
-type Props = {
-  params: {
-    cupId: string
-  }
-}
 
 export async function generateMetadata({ params: { cupId } }: Props): Promise<Metadata | undefined> {
   const cup = await db.cup.findUnique({
@@ -47,29 +42,14 @@ export async function generateMetadata({ params: { cupId } }: Props): Promise<Me
   }
 }
 
+type Props = {
+  params: {
+    cupId: string
+  }
+}
+
 export default async function Page({ params: { cupId } }: Props) {
-  const cup = await db.cup.findUnique({
-    where: {
-      id: cupId,
-    },
-    include: {
-      _count: true,
-      comments: {
-        orderBy: {
-          createdAt: 'desc',
-        },
-        include: {
-          user: true,
-        },
-      },
-      items: {
-        orderBy: {
-          winCount: 'desc',
-        },
-      },
-      user: true,
-    },
-  })
+  const cup = await getCupRankingPage(cupId)
 
   if (!cup) notFound()
 

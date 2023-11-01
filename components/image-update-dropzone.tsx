@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { toast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
+import { CupCount } from '@/types/type'
 import type { Cup, Item } from '@prisma/client'
 import axios from 'axios'
 import { ChevronRight, ImagePlus, Trash2 } from 'lucide-react'
@@ -19,11 +20,7 @@ type Img = {
 
 type Props = {
   cup: Cup & {
-    _count: {
-      items: number
-      comments: number
-      likes: number
-    }
+    _count: CupCount
     items: Item[]
   }
 }

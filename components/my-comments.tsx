@@ -60,7 +60,7 @@ export default function MyComments({ user }: Props) {
 
   return (
     <div className='h-full flex flex-col mt-10 gap-2 pb-20'>
-      <span className='text-lg font-bold'>월드컵 랭킹 댓글 ({user.cupComments.length}개)</span>
+      <span className='text-base'>월드컵 랭킹 댓글 ({user.cupComments.length}개)</span>
       <Separator className='my-2' />
       {user.cupComments.map((comment) => (
         <div key={comment.id} className='space-y-1 p-2 rounded'>
@@ -126,7 +126,7 @@ export default function MyComments({ user }: Props) {
         </div>
       ))}
 
-      <span className='text-lg font-bold mt-20'>컨텐츠 결과 댓글 ({user.itemComments.length}개)</span>
+      <span className='text-base mt-20'>컨텐츠 결과 댓글 ({user.itemComments.length}개)</span>
       <Separator className='my-2' />
       {user.itemComments.map((comment) => (
         <div key={comment.id} className='space-y-1 p-2 rounded'>

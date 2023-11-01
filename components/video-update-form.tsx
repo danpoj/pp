@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
 import { getYouTubeVideoId } from '@/lib/get-youtube-video-id'
 import { cn } from '@/lib/utils'
+import { CupCount } from '@/types/type'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Cup, Item } from '@prisma/client'
 import axios from 'axios'
@@ -19,11 +20,7 @@ import { z } from 'zod'
 
 type Props = {
   cup: Cup & {
-    _count: {
-      items: number
-      comments: number
-      likes: number
-    }
+    _count: CupCount
     items: Item[]
   }
 }

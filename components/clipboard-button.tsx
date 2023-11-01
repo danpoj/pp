@@ -4,9 +4,9 @@ import { Check, Copy } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 
-type ClipboardButtonProps = { path: string }
+type Props = { path: string }
 
-export const ClipboardButton = ({ path }: ClipboardButtonProps) => {
+export const ClipboardButton = ({ path }: Props) => {
   const [copied, setCopied] = useState(false)
   const origin = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://www.pingping.online'
 
@@ -37,7 +37,6 @@ export const ClipboardButton = ({ path }: ClipboardButtonProps) => {
             <Check className='w-3 h-3 ml-1' />
           </div>
           <div className='flex sm:hidden items-center'>
-            {/* <span className='text-xs text-[0.65rem]'>복사</span> */}
             <Check className='w-3 h-3 ml-0.5' />
           </div>
         </>
@@ -48,7 +47,6 @@ export const ClipboardButton = ({ path }: ClipboardButtonProps) => {
             <Copy className='w-3 h-3 ml-1' />
           </div>
           <div className='flex sm:hidden items-center'>
-            {/* <span className='text-xs text-[0.65rem]'>공유</span> */}
             <Copy className='w-3 h-3 ml-0.5' />
           </div>
         </>

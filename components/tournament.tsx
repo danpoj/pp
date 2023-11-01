@@ -1,20 +1,17 @@
 'use client'
 
-import type { Prisma } from '@prisma/client'
-import { useState } from 'react'
-import TournamentLanding from '@/components/tournament-landing'
 import TournamentImage from '@/components/tournament-image'
+import TournamentLanding from '@/components/tournament-landing'
 import TournamentVideo from '@/components/tournament-video'
+import { CupLength } from '@/types/type'
+import type { Cup, Item } from '@prisma/client'
+import { useState } from 'react'
 
 type Props = {
-  cup: Prisma.CupGetPayload<{
-    include: {
-      items: true
-    }
-  }>
+  cup: Cup & {
+    items: Item[]
+  }
 }
-
-export type CupLength = 8 | 16 | 32 | 64
 
 export default function Tournament({ cup }: Props) {
   const [isLanding, setIsLanding] = useState(true)

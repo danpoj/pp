@@ -1,10 +1,9 @@
+import { TypeCupSearchParams } from '@/types/type'
 import type { Prisma } from '@prisma/client'
-
-type Type = 'all' | 'video' | 'image'
 
 const TAKE = 16
 
-export function getQuery({ page, type, search }: { page: number; type?: Type; search?: string }) {
+export function getQuery({ page, type, search }: { page: number; type?: TypeCupSearchParams; search?: string }) {
   const query: Prisma.CupFindManyArgs = {
     take: TAKE,
     skip: page * TAKE,

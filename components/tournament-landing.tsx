@@ -1,19 +1,17 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import type { CupType, Item, Prisma } from '@prisma/client'
+import type { Cup, CupType, Item } from '@prisma/client'
 import { Check, ChevronDown, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import { type Dispatch, type SetStateAction, Fragment, useEffect, useState } from 'react'
-import { CupLength } from '@/components/tournament'
 import { Button } from '@/components/ui/button'
+import { CupLength } from '@/types/type'
 
 type Props = {
-  cup: Prisma.CupGetPayload<{
-    include: {
-      items: true
-    }
-  }>
+  cup: Cup & {
+    items: Item[]
+  }
   cupLength: CupLength
   setCupLength: Dispatch<SetStateAction<CupLength>>
   setisLanding: Dispatch<SetStateAction<boolean>>

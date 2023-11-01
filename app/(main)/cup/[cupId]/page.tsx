@@ -1,5 +1,6 @@
 import Tournament from '@/components/tournament'
 import db from '@/lib/db'
+import { getCupPage } from '@/lib/query'
 import type { Metadata, ResolvingMetadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -50,14 +51,7 @@ export async function generateMetadata(
 }
 
 export default async function Page({ params: { cupId } }: Props) {
-  const cup = await db.cup.findUnique({
-    where: {
-      id: cupId,
-    },
-    include: {
-      items: true,
-    },
-  })
+  const cup = await getCupPage(cupId)
 
   if (!cup) notFound()
 
@@ -67,33 +61,3 @@ export default async function Page({ params: { cupId } }: Props) {
     </section>
   )
 }
-
-// if (cup.type === 'IMAGE') {
-//   const promises = []
-
-//   for (let i = 0; i < 3; i++) {
-//     promises.push(imageToBase64(cup.items[i].url))
-//   }
-
-//   console.time('image')
-//   const urls = await Promise.all(promises)
-//   console.timeEnd('image')
-
-//   for (let i = 0; i < 3; i++) {
-//     cup.items[i].url = 'data:image/png;base64,' + urls[i]
-//   }
-// }
-
-// const convertToBase64 = async (cup: Cup & { items: Item[] }) => {
-//   const promises = []
-
-//   for (let i = 0; i < cup.items.length; i++) {
-//     promises.push(imageToBase64(cup.items[i].url))
-//   }
-
-//   const urls = await Promise.all(promises)
-
-//   for (let i = 0; i < cup.items.length; i++) {
-//     cup.items[i].url = 'data:image/png;base64,' + urls[i]
-//   }
-// }
