@@ -20,7 +20,7 @@ type Props = {
 export default function UserSetting({ session }: Props) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className='rounded-full select-none group relative overflow-hidden w-8 h-8'>
+      <DropdownMenuTrigger className='rounded-full select-none group relative overflow-hidden w-7 h-7 outline outline-2 outline-offset-1 outline-primary/70'>
         <Image
           unoptimized
           src={session.user.image!}
@@ -33,7 +33,7 @@ export default function UserSetting({ session }: Props) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='w-72  p-2 hidden sm:block'>
         <DropdownMenuLabel className='flex gap-2 items-center'>
-          <div className='relative w-12 h-12 rounded-full overflow-hidden'>
+          <div className='relative w-12 h-12 rounded-full overflow-hidden outline outline-2 outline-offset-1 outline-primary/70'>
             <Image
               unoptimized
               src={session.user.image!}

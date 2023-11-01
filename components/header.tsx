@@ -49,7 +49,7 @@ export default function Header({ session }: Props) {
             }}
             className={cn(
               'hidden sm:flex items-center justify-center px-2 h-8 hover:bg-primary/5 rounded',
-              path === '/my/cup' && 'underline underline-offset-4'
+              path === '/my/cup' && 'font-bold underline underline-offset-4'
             )}
           >
             내 월드컵
@@ -64,7 +64,7 @@ export default function Header({ session }: Props) {
             }}
             className={cn(
               'hidden sm:flex items-center justify-center px-2 h-8 hover:bg-primary/5 rounded',
-              path === '/my/comment' && 'underline underline-offset-4'
+              path === '/my/comment' && 'font-bold underline underline-offset-4'
             )}
           >
             내 댓글
@@ -80,7 +80,7 @@ export default function Header({ session }: Props) {
             }}
             className={cn(
               'hidden sm:flex items-center justify-center px-2 h-8 hover:bg-primary/5 rounded gap-0.5',
-              path === '/my/likes' && 'underline underline-offset-4'
+              path === '/my/likes' && 'font-bold underline underline-offset-4'
             )}
           >
             <HeartEmoji className='fill-red-500 stroke-red-500 mr-1' /> 좋아요

@@ -35,7 +35,7 @@ export const DELETE = async (req: NextRequest, { params: { cupId } }: DeleteProp
       const objects = cup.items.map((item) => ({
         Key: item.publicId!,
       }))
-      console.log(objects)
+
       await deleteImagesFromS3(objects)
     }
 

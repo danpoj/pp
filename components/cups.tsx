@@ -105,21 +105,21 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                 </div>
               </Link>
               <div className='h-full flex flex-col px-1 pt-2 pb-1.5 break-all gap-1'>
-                <h2 className='font-bold text-xs sm:text-base'>{cup.title}</h2>
-                <h3 className='text-xs text-[0.65rem] sm:text-[0.75rem] text-primary/60'>{cup.description}</h3>
+                <h2 className='font-bold text-xs sm:text-base px-1'>{cup.title}</h2>
+                <h3 className='text-xs text-[0.65rem] sm:text-[0.75rem] text-primary/60 px-1'>{cup.description}</h3>
 
-                <div className='flex items-center gap-1 my-2'>
+                <div className='flex items-center gap-1 my-2 px-1'>
                   <div className='outline rounded-full overflow-hidden outline-offset-1 outline-primary/70'>
                     <Image
                       unoptimized
                       src={cup.user.image!}
                       alt='cup author profile image'
-                      width={24}
-                      height={24}
-                      className='bg-white w-[24px] h-[24px] object-cover'
+                      width={18}
+                      height={18}
+                      className='bg-white w-[18px] h-[18px] object-cover'
                     />
                   </div>
-                  <span className='text-xs font-normal'>@{cup.user.nickname}</span>
+                  <span className='text-xs font-normal ml-1'>@{cup.user.nickname}</span>
                 </div>
 
                 <div className='mb-2 flex gap-2 ml-1 font-normal'>

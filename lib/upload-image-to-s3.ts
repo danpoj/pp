@@ -22,6 +22,7 @@ export async function uploadImageToS3(
 
   if (type === 'avatar') {
     resizedImageBuffer = await sharp(file)
+      .webp()
       .resize(160, 160, {
         fit: 'cover',
       })
@@ -51,10 +52,12 @@ export async function uploadImageToS3(
       }
     } else if (width > 1400 || height > 1400) {
       resizedImageBuffer = await sharp(file)
+        .webp({})
         .resize(Math.floor(width / 2), Math.floor(height / 2))
         .toBuffer()
     } else {
       resizedImageBuffer = await sharp(file)
+        .webp()
         .resize(Math.floor(width / 1.4), Math.floor(height / 1.4))
         .toBuffer()
     }
@@ -64,7 +67,7 @@ export async function uploadImageToS3(
     Bucket: process.env.BUCKET_NAME as string,
     Key: fileName,
     Body: resizedImageBuffer,
-    ContentType: extension,
+    ContentType: 'image/webp',
   })
 
   await s3.send(command)

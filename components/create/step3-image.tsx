@@ -1,19 +1,20 @@
 'use client'
 
-import { ChevronRight, ImagePlus, Trash2 } from 'lucide-react'
+import { ArrowLeft, ChevronRight, ImagePlus, Sparkle, Trash2 } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 
-import { cn } from '@/lib/utils'
-import axios from 'axios'
-import NextImage from 'next/image'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import { useDropzone } from 'react-dropzone'
 import { useConfetti } from '@/components/provider/confetti-provider'
 import { useModal } from '@/components/provider/modal-provider'
 import { toast } from '@/components/ui/use-toast'
+import { cn } from '@/lib/utils'
 import { cupData } from '@/types/type'
+import axios from 'axios'
+import NextImage from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { useDropzone } from 'react-dropzone'
 
 type Props = {
   cupData: cupData
@@ -23,6 +24,7 @@ type Img = {
   src: File
   width: number
   height: number
+  base64: string
 }
 
 export default function Step3Image({ cupData }: Props) {
@@ -32,7 +34,16 @@ export default function Step3Image({ cupData }: Props) {
   const { open: openConfetti } = useConfetti()
   const router = useRouter()
 
-  const previews = images.map((image) => URL.createObjectURL(image.src))
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault()
+      e.returnValue = ''
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
+  }, [])
 
   const { getRootProps, getInputProps, isDragAccept, isDragReject } = useDropzone({
     onDrop: (acceptedFiles) => {
@@ -53,6 +64,7 @@ export default function Step3Image({ cupData }: Props) {
             src: file,
             width: img.width,
             height: img.height,
+            base64: URL.createObjectURL(file),
           }
 
           setImages((prev) => [image, ...prev])
@@ -95,8 +107,8 @@ export default function Step3Image({ cupData }: Props) {
         ...cupData,
       })
 
-      router.refresh()
       router.push('/')
+      router.refresh()
 
       openModal('create-complete', data)
       openConfetti()
@@ -112,6 +124,38 @@ export default function Step3Image({ cupData }: Props) {
   }
 
   const isUploadAvailable = !(images.length < 8 || images.length > 100)
+
+  if (isUploading) {
+    return (
+      <div className='mt-4 w-full h-full pb-20 overflow-hidden relative flex flex-col items-center justify-center space-y-2'>
+        <div className='flex items-center gap-4 animate-bounce'>
+          <span className='font-bold text-lg'>업로드 중 ...</span>
+          <NextImage
+            src='/loader.gif'
+            unoptimized
+            width={48}
+            height={32}
+            alt='loader image'
+            className='w-[48px] h-[32px] object-cover'
+          />
+        </div>
+
+        <div className='flex flex-col items-center gap-2 py-10 '>
+          <p>업로드가 완료되면 알려드릴게요!</p>
+          <p>약 10초 소요...</p>
+          <p className='text-blue-500 flex gap-1 items-center'>
+            <Sparkle className='w-4 h-4' />
+            다른 페이지로 이동해도 됩니다
+          </p>
+        </div>
+
+        <Link href='/' className={cn(buttonVariants(), 'flex mt-10')}>
+          <ArrowLeft className='w-4 h-4 mr-1' />
+          <span>홈으로 이동하기</span>
+        </Link>
+      </div>
+    )
+  }
 
   return (
     <div className='mt-4 w-full h-full pb-20 overflow-hidden relative'>
@@ -137,9 +181,9 @@ export default function Step3Image({ cupData }: Props) {
         </div>
 
         <div className='grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 2xl:grid-cols-8 gap-1.5 py-4 px-2'>
-          {previews.map((image, i) => (
+          {images.map((image, i) => (
             <div key={i} className='aspect-square rounded-lg overflow-hidden relative group'>
-              <NextImage fill src={image} alt='preview image' className='object-cover w-full h-full' />
+              <NextImage fill src={image.base64} alt='preview image' className='object-cover w-full h-full' />
               <button
                 onClick={(e) => {
                   e.stopPropagation()

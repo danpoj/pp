@@ -113,8 +113,8 @@ export default function ThirdStepYoutube({ cupData }: Props) {
       openModal('create-complete', data)
       openConfetti()
 
-      router.refresh()
       router.push('/')
+      router.refresh()
     } catch (error) {
       toast({
         title: '월드컵 업로드 실패',

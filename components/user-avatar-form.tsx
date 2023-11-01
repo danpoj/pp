@@ -107,7 +107,7 @@ export default function UserAvatarForm({ user }: Props) {
         <PopoverTrigger asChild>
           <button
             onClick={() => setOpen((prev) => !prev)}
-            className='relative w-20 h-20 rounded-full group bg-white overflow-hidden flex items-center justify-center outline outline-primary/70 outline-offset-1'
+            className='relative w-20 h-20 rounded-full group bg-white overflow-hidden flex items-center justify-center outline outline-2 outline-primary/70 outline-offset-1'
           >
             {isUploading ? (
               <Loader2 className='animate-spin' />

@@ -20,7 +20,7 @@ export default function CupItemForm({ item, cupType, contentsLength }: Props) {
             href={`/cup/${item.cupId}/${item.id}`}
             target='_blank'
             rel='noreferrer noopener'
-            className='hover:opacity-80 rounded overflow-hidden transition-opacity'
+            className='hover:opacity-80 rounded overflow-hidden transition-opacity h-full'
           >
             <Image
               unoptimized
@@ -37,7 +37,7 @@ export default function CupItemForm({ item, cupType, contentsLength }: Props) {
             href={`/cup/${item.cupId}/${item.id}`}
             target='_blank'
             rel='noreferrer noopener'
-            className='hover:opacity-80 rounded overflow-hidden transition-opacity'
+            className='hover:opacity-80 rounded overflow-hidden transition-opacity h-full'
           >
             <Image
               unoptimized
