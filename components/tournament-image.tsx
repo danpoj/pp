@@ -34,7 +34,7 @@ export default function TournamentImage({ cup, cupLength }: Props) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setClicked('INITIAL')
-    }, 2000)
+    }, 1400)
 
     return () => clearTimeout(timeout)
   }, [index])
