@@ -107,6 +107,8 @@ export default function Step3Image({ cupData }: Props) {
         ...cupData,
       })
 
+      router.push('/')
+
       router.refresh()
 
       openModal('create-complete', data)
@@ -140,18 +142,14 @@ export default function Step3Image({ cupData }: Props) {
         </div>
 
         <div className='flex flex-col items-center gap-2 py-10 '>
-          <p>업로드가 완료되면 알려드릴게요!</p>
+          <p className='text-blue-500'>업로드가 될 동안 기다려주세요</p>
           <p>약 10초 소요...</p>
-          <p className='text-blue-500 flex gap-1 items-center'>
-            <Sparkle className='w-4 h-4' />
-            다른 페이지로 이동해도 됩니다
-          </p>
         </div>
 
-        <Link href='/' className={cn(buttonVariants(), 'flex mt-10')}>
+        {/* <Link href='/' className={cn(buttonVariants(), 'flex mt-10')}>
           <ArrowLeft className='w-4 h-4 mr-1' />
           <span>홈으로 이동하기</span>
-        </Link>
+        </Link> */}
       </div>
     )
   }
