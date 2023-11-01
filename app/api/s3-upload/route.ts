@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { uploadImageToS3 } from '@/lib/upload-image-to-s3'
 
+export const maxDuration = 10
+
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData()

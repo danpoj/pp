@@ -29,7 +29,7 @@ type Img = {
 
 export default function Step3Image({ cupData }: Props) {
   const [images, setImages] = useState<Img[]>([])
-  const [step, setStep] = useState<'initial' | 'uploading' | 'finished'>('initial')
+  const [isUploading, setIsUploading] = useState(false)
   const { open: openModal } = useModal()
   const { open: openConfetti } = useConfetti()
   const router = useRouter()
@@ -81,7 +81,7 @@ export default function Step3Image({ cupData }: Props) {
 
   const upload = async () => {
     try {
-      setStep('uploading')
+      setIsUploading(true)
 
       const promises = images.map((image) => {
         const body = new FormData()
@@ -120,15 +120,15 @@ export default function Step3Image({ cupData }: Props) {
         variant: 'destructive',
       })
     } finally {
-      setStep('finished')
+      setIsUploading(false)
     }
   }
 
   const isUploadAvailable = !(images.length < 8 || images.length > 100)
 
-  if (step === 'uploading') {
+  if (isUploading) {
     return (
-      <div className='mt-4 w-full h-full pb-20 overflow-hidden relative flex flex-col items-center justify-center space-y-2'>
+      <div className='w-full h-full pb-20 overflow-hidden fixed inset-0 bg-primary/20 flex flex-col items-center justify-center space-y-2 z-50'>
         <div className='flex items-center gap-4 animate-bounce'>
           <span className='font-bold text-lg'>업로드 중 ...</span>
           <NextImage
@@ -154,30 +154,30 @@ export default function Step3Image({ cupData }: Props) {
     )
   }
 
-  if (step === 'finished') {
-    return (
-      <div className='mt-4 w-full h-full pb-20 overflow-hidden relative flex flex-col items-center justify-center space-y-6'>
-        <div className='flex items-center gap-4'>
-          <span className='font-bold text-lg flex gap-1 items-center'>
-            업로드 완료! <Sparkle className='w-5 h-5 fill-yellow-400 stroke-yellow-400' />
-          </span>
-          <NextImage
-            src='/loader.gif'
-            unoptimized
-            width={48}
-            height={32}
-            alt='loader image'
-            className='w-[48px] h-[32px] object-cover'
-          />
-        </div>
+  // if (step === 'finished') {
+  //   return (
+  //     <div className='mt-4 w-full h-full pb-20 overflow-hidden relative flex flex-col items-center justify-center space-y-6'>
+  //       <div className='flex items-center gap-4'>
+  //         <span className='font-bold text-lg flex gap-1 items-center'>
+  //           업로드 완료! <Sparkle className='w-5 h-5 fill-yellow-400 stroke-yellow-400' />
+  //         </span>
+  //         <NextImage
+  //           src='/loader.gif'
+  //           unoptimized
+  //           width={48}
+  //           height={32}
+  //           alt='loader image'
+  //           className='w-[48px] h-[32px] object-cover'
+  //         />
+  //       </div>
 
-        <Link href='/my/cup' className={cn(buttonVariants(), 'flex mt-10')}>
-          <ArrowLeft className='w-4 h-4 mr-1' />
-          <span>월드컵 설정하기</span>
-        </Link>
-      </div>
-    )
-  }
+  //       <Link href='/my/cup' className={cn(buttonVariants(), 'flex mt-10')}>
+  //         <ArrowLeft className='w-4 h-4 mr-1' />
+  //         <span>월드컵 설정하기</span>
+  //       </Link>
+  //     </div>
+  //   )
+  // }
 
   return (
     <div className='mt-4 w-full h-full pb-20 overflow-hidden relative'>
