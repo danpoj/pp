@@ -47,11 +47,13 @@ export default function Step3Image({ cupData }: Props) {
 
   const { getRootProps, getInputProps, isDragAccept, isDragReject } = useDropzone({
     onDrop: (acceptedFiles) => {
-      const filteredLargeFiles = acceptedFiles.filter((file) => file.size <= 3_000_000)
+      const filteredLargeFiles = acceptedFiles.filter((file) => file.size <= 2_500_000)
 
       if (filteredLargeFiles.length !== acceptedFiles.length) {
         toast({
-          description: `${acceptedFiles.length - filteredLargeFiles.length}개의 파일이 3MB용량을 넘어 제외되었습니다.`,
+          description: `${
+            acceptedFiles.length - filteredLargeFiles.length
+          }개의 파일이 2.5MB용량을 넘어 제외되었습니다.`,
           variant: 'destructive',
         })
       }

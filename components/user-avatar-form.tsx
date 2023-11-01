@@ -29,9 +29,9 @@ export default function UserAvatarForm({ user }: Props) {
   const { open: openFileUploader } = useDropzone({
     multiple: false,
     onDrop(acceptedFile) {
-      if (acceptedFile[0].size > 3_000_000) {
+      if (acceptedFile[0].size > 2_500_000) {
         toast({
-          description: `이미지가 3MB를 초과했습니다.`,
+          description: `이미지가 2.5MB를 초과했습니다.`,
           variant: 'destructive',
         })
 
