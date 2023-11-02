@@ -11,11 +11,25 @@ export default function Page() {
       <Tabs defaultValue='ios' className='w-full max-w-[400px]'>
         <TabsList className='w-full grid grid-cols-3'>
           <TabsTrigger value='ios'>
-            <Image src='/brand-logos/apple.svg' width={20} height={20} alt='android brand logo' className='mr-0.5' />
+            <Image
+              unoptimized
+              src='/brand-logos/apple.svg'
+              width={20}
+              height={20}
+              alt='android brand logo'
+              className='mr-0.5'
+            />
             Ios
           </TabsTrigger>
           <TabsTrigger value='android'>
-            <Image src='/brand-logos/android.svg' width={20} height={20} alt='android brand logo' className='mr-0.5' />
+            <Image
+              unoptimized
+              src='/brand-logos/android.svg'
+              width={20}
+              height={20}
+              alt='android brand logo'
+              className='mr-0.5'
+            />
             Android
           </TabsTrigger>
           <TabsTrigger value='pc'>
@@ -25,7 +39,14 @@ export default function Page() {
         </TabsList>
         <TabsContent value='ios' className='p-2 space-y-12'>
           <h2 className='text-xl flex'>
-            <Image src='/brand-logos/apple.svg' width={20} height={20} alt='android brand logo' className='mr-0.5' />
+            <Image
+              unoptimized
+              src='/brand-logos/apple.svg'
+              width={20}
+              height={20}
+              alt='android brand logo'
+              className='mr-0.5'
+            />
             IOS
           </h2>
 
@@ -35,6 +56,7 @@ export default function Page() {
               <span className='text-2xl font-bold'>1.</span> 공유하기 <Share className='w-4 h-4' /> 클릭
             </p>
             <Image
+              unoptimized
               src='/ios/ios-step-1.png'
               alt='ios install first step'
               width={200}
@@ -50,6 +72,7 @@ export default function Page() {
               <span className='text-2xl font-bold'>2.</span> 홈 화면에 추가
             </p>
             <Image
+              unoptimized
               src='/ios/ios-step-2.png'
               alt='ios install second step'
               width={200}
@@ -65,6 +88,7 @@ export default function Page() {
               <span className='text-2xl font-bold'>3.</span> 추가
             </p>
             <Image
+              unoptimized
               src='/ios/ios-step-3.png'
               alt='ios install third step'
               width={200}
@@ -80,6 +104,7 @@ export default function Page() {
               <span className='text-2xl font-bold'>4.</span> 설치 완료
             </p>
             <Image
+              unoptimized
               src='/ios/ios-step-4.png'
               alt='ios install fourth step'
               width={160}
@@ -91,7 +116,14 @@ export default function Page() {
 
         <TabsContent value='android' className='p-2 space-y-12'>
           <h2 className='text-xl flex'>
-            <Image src='/brand-logos/android.svg' width={20} height={20} alt='android brand logo' className='mr-0.5' />
+            <Image
+              unoptimized
+              src='/brand-logos/android.svg'
+              width={20}
+              height={20}
+              alt='android brand logo'
+              className='mr-0.5'
+            />
             Android
           </h2>
 
@@ -102,6 +134,7 @@ export default function Page() {
               클릭
             </p>
             <Image
+              unoptimized
               src='/android/android-step-1.png'
               alt='ios install first step'
               width={200}
@@ -115,6 +148,7 @@ export default function Page() {
               <span className='text-2xl font-bold'>2.</span> 설치 완료
             </p>
             <Image
+              unoptimized
               src='/ios/ios-step-4.png'
               alt='ios install fourth step'
               width={160}
@@ -137,6 +171,7 @@ export default function Page() {
               클릭하여 설치
             </p>
             <Image
+              unoptimized
               src='/pc/pc-step-1.png'
               alt='ios install first step'
               width={200}
@@ -150,6 +185,7 @@ export default function Page() {
               <span className='text-2xl font-bold'>2.</span> 설치 완료
             </p>
             <Image
+              unoptimized
               src='/ios/ios-step-4.png'
               alt='ios install fourth step'
               width={160}
