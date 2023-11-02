@@ -74,7 +74,7 @@ model Cup {
   items           Item[]
   comments        CupComment[]
 
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
   likes Like[]
@@ -111,7 +111,7 @@ model ItemComment {
   id   String @id @default(cuid())
   text String @db.Text
 
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
   item   Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
   itemId String
@@ -127,7 +127,7 @@ model CupComment {
   id   String @id @default(cuid())
   text String @db.Text
 
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
   cup    Cup    @relation(fields: [cupId], references: [id], onDelete: Cascade)
   cupId  String
@@ -144,7 +144,7 @@ model Like {
 
   cup    Cup    @relation(fields: [cupId], references: [id], onDelete: Cascade)
   cupId  String
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
   @@index([cupId])

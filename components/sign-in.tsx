@@ -86,14 +86,14 @@ export default function SignUp() {
         카카오 로그인
       </Button>
 
-      <Button
+      {/* <Button
         onClick={loginWithNaver}
         isLoading={isNaverLoading}
         className='w-full h-11 bg-[#03c75a] text-black hover:bg-[#03c75a]/80 font-bold'
       >
         {isNaverLoading ? null : <NaverIcon className='w-7 h-7 mr-2 ' />}
         네이버 로그인
-      </Button>
+      </Button> */}
     </div>
   )
 }

@@ -109,7 +109,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
                 <h3 className='text-xs text-[0.65rem] sm:text-[0.75rem] text-primary/60 px-1'>{cup.description}</h3>
 
                 <div className='flex items-center gap-1 my-2 px-1'>
-                  <div className='outline rounded-full overflow-hidden outline-offset-1 outline-primary/70'>
+                  <div className='rounded-full overflow-hidden'>
                     <Image
                       unoptimized
                       src={cup.user.image!}

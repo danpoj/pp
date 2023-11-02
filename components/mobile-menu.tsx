@@ -31,7 +31,7 @@ export default function MobileMenu({ session }: Props) {
       <DropdownMenuTrigger className='rounded select-none group relative p-1'>
         <Menu className='block sm:hidden' />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end' className='w-72 text-primary/60 p-2 block sm:hidden'>
+      <DropdownMenuContent align='end' className='w-60 text-primary/60 p-2 block sm:hidden'>
         {session ? (
           <DropdownMenuLabel className='flex gap-2 items-center'>
             <div className='relative w-12 h-12 rounded-full overflow-hidden'>
@@ -60,27 +60,24 @@ export default function MobileMenu({ session }: Props) {
 
         {session && (
           <>
-            <div className='flex'>
-              <DropdownMenuItem className='py-2.5 cursor-pointer flex-1 flex justify-center' asChild>
-                <Link href='/my/cup'>
-                  <Swords className='w-4 h-4 mr-2' /> 내 월드컵
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem className='py-2.5 cursor-pointer flex-1 flex justify-center' asChild>
-                <Link href='/my/comment'>
-                  <MessageSquare className='w-4 h-4 mr-2' /> 내 댓글
-                </Link>
-              </DropdownMenuItem>
-            </div>
-
-            <DropdownMenuItem className='py-2.5 cursor-pointer flex-1 flex justify-center gap-1' asChild>
+            <DropdownMenuItem className='h-9 text-xs cursor-pointer flex-1' asChild>
+              <Link href='/my/cup'>
+                <Swords className='w-4 h-4 mr-2' /> 내 월드컵
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem className='h-9 text-xs cursor-pointer flex-1' asChild>
+              <Link href='/my/comment'>
+                <MessageSquare className='w-4 h-4 mr-2' /> 내 댓글
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem className='h-9 text-xs cursor-pointer flex-1 gap-2' asChild>
               <Link href='/my/likes'>
-                <HeartEmoji className='w-4 h-4 fill-red-500 stroke-red-500' /> 좋아요
+                <HeartEmoji className='w-4 h-4 fill-red-500 stroke-red-500 ' /> 좋아요
               </Link>
             </DropdownMenuItem>
           </>
         )}
-        <DropdownMenuItem className='py-2.5 cursor-pointer' asChild>
+        <DropdownMenuItem className='h-9 text-xs cursor-pointer' asChild>
           <Link href='/setting'>
             <User2 className='w-4 h-4 mr-2' /> 설정
           </Link>
@@ -89,7 +86,7 @@ export default function MobileMenu({ session }: Props) {
         <DropdownMenuSeparator />
 
         <Button
-          className='w-full'
+          className='w-full h-9'
           onClick={() => {
             if (!session) {
               open('signin')
@@ -104,7 +101,7 @@ export default function MobileMenu({ session }: Props) {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className='py-2.5 cursor-pointer' onClick={() => signOut()}>
+        <DropdownMenuItem className='text-xs cursor-pointer' onClick={() => signOut()}>
           <LogOut className='w-4 h-4 mr-2' /> 로그아웃
         </DropdownMenuItem>
       </DropdownMenuContent>
