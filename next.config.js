@@ -1,4 +1,14 @@
 /** @type {import('next').NextConfig} */
+
+const runtimeCaching = require('next-pwa/cache')
+
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  runtimeCaching,
+})
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -18,4 +28,4 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-module.exports = withBundleAnalyzer(nextConfig)
+module.exports = withPWA(withBundleAnalyzer(nextConfig))
