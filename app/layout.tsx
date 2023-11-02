@@ -5,6 +5,7 @@ import { Noto_Sans } from 'next/font/google'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
+import GoogleAnalytics from '@/components/analytics/google-analytics'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.pingping.online'),
@@ -52,6 +53,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <Modals />
         </Providers>
+
+        <GoogleAnalytics />
       </body>
     </html>
   )
