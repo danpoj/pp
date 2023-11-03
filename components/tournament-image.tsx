@@ -17,9 +17,10 @@ type Props = {
     items: Item[]
   }
   cupLength: CupLength
+  isHidingHeader: boolean
 }
 
-export default function TournamentImage({ cup, cupLength }: Props) {
+export default function TournamentImage({ cup, cupLength, isHidingHeader }: Props) {
   const [items, setItems] = useState(() => shuffle(cup.items).slice(0, cupLength))
   const [clicked, setClicked] = useState<'LEFT' | 'RIGHT' | 'INITIAL'>('INITIAL')
   const [index, setIndex] = useState(0)
@@ -97,7 +98,7 @@ export default function TournamentImage({ cup, cupLength }: Props) {
 
   return (
     <div className='h-full flex items-center justify-center flex-col md:flex-row relative bg-black w-full'>
-      <CupInformation title={cup.title} limit={limit.current} index={index} />
+      <CupInformation isHidingHeader={isHidingHeader} title={cup.title} limit={limit.current} index={index} />
 
       <Initial onLeftClick={onLeftClick} onRightClick={onRightClick} items={items} index={index} clicked={clicked} />
 

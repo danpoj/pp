@@ -55,9 +55,5 @@ export default async function Page({ params: { cupId } }: Props) {
 
   if (!cup) notFound()
 
-  return (
-    <section className='h-full'>
-      <Tournament cup={cup} />
-    </section>
-  )
+  return <Tournament cup={cup} />
 }
