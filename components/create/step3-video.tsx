@@ -48,7 +48,7 @@ export default function ThirdStepYoutube({ cupData }: Props) {
 
   const onSubmitYoutubeUrlForm = (values: z.infer<typeof urlSchema>) => {
     try {
-      const videoId = getYouTubeVideoId(values.url)
+      const videoId = getYouTubeVideoId(values.url.trim())
 
       const isExist = links.filter((link) => link.videoUrl === `https://www.youtube.com/watch?v=${videoId}`).length > 0
 
@@ -178,14 +178,13 @@ export default function ThirdStepYoutube({ cupData }: Props) {
                     </Button>
                   </div>
                 </FormControl>
-                <FormDescription>
-                  <div className='space-y-2 mt-4'>
-                    <p>유튜브 링크를 복사하여 추가해주세요</p>
-                    <p className='text-blue-500 font-semibold underline underline-offset-4'>
-                      업로드 이후 자유롭게 수정 가능합니다 (제목, 설명, 썸네일, 비디오)
-                    </p>
-                  </div>
-                </FormDescription>
+
+                <div className='space-y-2 flex flex-col'>
+                  <span>유튜브 링크를 복사하여 추가해주세요</span>
+                  <span className='text-blue-500 font-semibold underline underline-offset-4'>
+                    업로드 이후 자유롭게 수정 가능합니다 (제목, 설명, 썸네일, 비디오)
+                  </span>
+                </div>
               </FormItem>
             )}
           />
