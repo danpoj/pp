@@ -65,7 +65,7 @@ model VerificationToken {
 model Cup {
   id              String       @id @default(cuid())
   title           String
-  description     String
+  description     String       @db.Text
   thumbnail       String       @db.Text
   thumbnailWidth  Int
   thumbnailHeight Int

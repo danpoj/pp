@@ -4,13 +4,15 @@ import { Check, ChevronRight, Trash2 } from 'lucide-react'
 
 import { Form, FormControl, FormDescription, FormField, FormItem } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 
 // etc
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useRef, useState } from 'react'
+import { FormEvent, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { toast } from '@/components/ui/use-toast'
 import { useForm } from 'react-hook-form'
@@ -36,6 +38,7 @@ export default function ThirdStepYoutube({ cupData }: Props) {
   const [links, setLinks] = useState<{ videoUrl: string; imageUrl: string }[]>([])
   const { open: openModal } = useModal()
   const { open: openConfetti } = useConfetti()
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
 
   const thumbnail = useRef<string | null>(null)
 
@@ -75,6 +78,29 @@ export default function ThirdStepYoutube({ cupData }: Props) {
       toast({
         title: '유효하지않은 유튜브 링크입니다',
 
+        variant: 'destructive',
+      })
+    }
+  }
+
+  const onSubmitYoutubeUrlsForm = () => {
+    if (!textAreaRef.current) return
+
+    try {
+      const inputs = textAreaRef.current.value.split('\n').filter((input) => input.trim().length > 0)
+      const videoIds = inputs.map((input) => getYouTubeVideoId(input))
+      const youtubeLinks = videoIds.map((videoId) => ({
+        videoUrl: `https://www.youtube.com/watch?v=${videoId}`,
+        imageUrl: `https://img.youtube.com/vi/${videoId}/0.jpg`,
+      }))
+
+      setLinks((prev) => [...youtubeLinks, ...prev])
+      thumbnail.current = youtubeLinks[0].imageUrl
+
+      textAreaRef.current.value = ''
+    } catch (error) {
+      toast({
+        title: '유효하지않은 유튜브 링크입니다',
         variant: 'destructive',
       })
     }
@@ -127,29 +153,12 @@ export default function ThirdStepYoutube({ cupData }: Props) {
   }
 
   return (
-    <div className='mt-3 w-full px-2'>
-      {/* <div className='flex justify-center mt-2'>
-        {thumbnail.current ? (
-          <Image
-            width={1280}
-            height={720}
-            src={thumbnail.current}
-            className='h-48 aspect-video object-cover max-w-[20rem] rounded-lg'
-            alt='youtube thumbnail'
-          />
-        ) : (
-          <div className='h-48 aspect-video bg-fancy rounded-lg text-slate-200 flex items-center justify-center flex-col gap-2'>
-            <span className='text-xl font-black tracking-tight'>썸네일 이미지</span>
-            <span className='tracking-tight text-sm font-bold text-center'>
-              마지막으로 업로드한 영상이
-              <br /> 썸네일 이미지가 됩니다.
-            </span>
-          </div>
-        )}
-      </div> */}
-
+    <div className='mt-3 w-full px-2 pb-20'>
       <div className='mt-10 font-bold tracking-tight text-lg'>
         <span className='text-blue-500'>8 ~ 100개 </span>의 링크를 업로드 할 수 있습니다
+        <p className='text-blue-500 font-semibold mt-2'>
+          업로드 이후 자유롭게 수정 가능합니다 (제목, 설명, 썸네일, 비디오)
+        </p>
         <div className='mt-6 flex items-center gap-2'>
           <span className='text-sm'>현재 업로드 개수: </span>
           <span
@@ -164,7 +173,10 @@ export default function ThirdStepYoutube({ cupData }: Props) {
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmitYoutubeUrlForm)} className='space-y-8 mt-6'>
+        <form onSubmit={form.handleSubmit(onSubmitYoutubeUrlForm)} className='space-y-4 mt-10'>
+          <div className='space-y-2 flex flex-col'>
+            <span>유튜브 링크를 복사하여 추가해주세요</span>
+          </div>
           <FormField
             control={form.control}
             name='url'
@@ -173,28 +185,47 @@ export default function ThirdStepYoutube({ cupData }: Props) {
                 <FormControl className='flex gap-2'>
                   <div>
                     <Input placeholder='유튜브 링크 추가...' {...field} className='h-16' />
-                    <Button variant='ghost' type='submit' className='h-16 min-w-[8rem] font-bold'>
+                    <Button type='submit' className='h-16 min-w-[8rem] font-bold'>
                       추가
                     </Button>
                   </div>
                 </FormControl>
-
-                <div className='space-y-2 flex flex-col'>
-                  <span>유튜브 링크를 복사하여 추가해주세요</span>
-                  <span className='text-blue-500 font-semibold underline underline-offset-4'>
-                    업로드 이후 자유롭게 수정 가능합니다 (제목, 설명, 썸네일, 비디오)
-                  </span>
-                </div>
               </FormItem>
             )}
           />
         </form>
       </Form>
 
+      <div className='grid w-full gap-1.5 mt-10'>
+        <p>유튜브 플레이리스트 영상 한번에 추가하기</p>
+        <Label htmlFor='multiple-links'>
+          <Link
+            href='https://www.thetubelab.com/get-all-urls-of-youtube-playlist-channel'
+            target='_blank'
+            rel='noreferrer noopener'
+            className='underline tracking-tighter text-blue-500'
+          >
+            https://www.thetubelab.com/get-all-urls-of-youtube-playlist-channel
+          </Link>
+        </Label>
+        <div className='flex gap-2 mt-3'>
+          <Textarea
+            ref={textAreaRef}
+            placeholder='여러 링크 한번에 추가... (엔터 키로 구분)'
+            id='multiple-links'
+            className='h-40'
+          />
+          <Button onClick={onSubmitYoutubeUrlsForm} className='h-full w-24'>
+            추가
+          </Button>
+        </div>
+      </div>
+
       <Button
         isLoading={isUploading}
         disabled={isUploading}
         onClick={onSubmitWorldcup}
+        variant='blue'
         className='my-4 h-16 w-full font-extrabold'
       >
         <span className='flex text-primary-foreground/80'>
