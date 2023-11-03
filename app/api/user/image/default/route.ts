@@ -14,7 +14,7 @@ export const PATCH = async (req: NextRequest) => {
         id: session.user.id,
       },
       data: {
-        image: `https://avatar.vercel.sh/${session.user.id}.svg?text=${session.user.email?.slice(0, 3)}`,
+        image: `https://avatar.vercel.sh/${session.user.id}.svg?text=${session.user.nickname?.slice(0, 1)}`,
       },
     })
 
