@@ -6,7 +6,7 @@ import TournamentVideo from '@/components/tournament-video'
 import { cn } from '@/lib/utils'
 import { CupLength } from '@/types/type'
 import type { Cup, Item } from '@prisma/client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ToggleHeaderButton from './toggle-header-button'
 
 type Props = {
@@ -22,6 +22,20 @@ export default function Tournament({ cup }: Props) {
   const [isHidingHeader, setIsHidingHeader] = useState(true)
 
   const toggleHidingHeader = () => setIsHidingHeader((prev) => !prev)
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      const isToggleKey = (e.metaKey && e.key === '.') || (e.ctrlKey && e.key === '.')
+
+      if (isToggleKey) {
+        setIsHidingHeader((prev) => !prev)
+      }
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [])
 
   return (
     <section className={cn(isHidingHeader ? 'h-screen fixed inset-0 z-50' : 'h-full')}>

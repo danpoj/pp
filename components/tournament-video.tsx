@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button'
 import CupInformation from '@/components/cup-information'
 import Image from 'next/image'
 import { CupLength } from '@/types/type'
+import { Check } from 'lucide-react'
 
 type Props = {
   cup: Cup & {
@@ -160,11 +161,11 @@ const Initial = ({
         onClick={() => onLeftClick(items[index * 2].id)}
         className='w-full h-[50%] sm:w-[50%] sm:h-full absolute top-0 sm:left-0'
       >
-        <div className='w-full h-[84%] sm:h-[89%]'>
+        <div className='w-full h-[88%] sm:h-[93%]'>
           <Player url={items[index * 2].url} width='100%' height='100%' />
         </div>
-        <Button variant='blue' className='rounded-none w-full h-[16%] sm:h-[11%]'>
-          선택하기
+        <Button className='rounded-none w-full h-[12%] sm:h-[7%] bg-fancy font-bold hover:hue-rotate-30'>
+          선택하기 <Check className='w-4 h-4 ml-1 stroke-[3px]' />
         </Button>
         <DescriptionText description={items[index * 2].description} />
       </div>
@@ -172,11 +173,11 @@ const Initial = ({
         onClick={() => onRightClick(items[index * 2 + 1].id)}
         className='w-full h-[50%] sm:w-[50%] sm:h-full absolute bottom-0 sm:right-0'
       >
-        <div className='w-full h-[84%] sm:h-[89%]'>
+        <div className='w-full h-[88%] sm:h-[93%]'>
           <Player url={items[index * 2 + 1].url} width='100%' height='100%' />
         </div>
-        <Button variant='red' className='rounded-none w-full h-[16%] sm:h-[11%]'>
-          선택하기
+        <Button className='rounded-none w-full h-[12%] sm:h-[7%] bg-fancy hue-rotate-60 font-bold hover:hue-rotate-90'>
+          선택하기 <Check className='w-4 h-4 ml-1 stroke-[3px]' />
         </Button>
         <DescriptionText description={items[index * 2 + 1].description} />
       </div>

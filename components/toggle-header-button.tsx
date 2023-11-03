@@ -1,6 +1,6 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Settings } from 'lucide-react'
 
 type Props = {
   toggleHidingHeader: () => void
@@ -25,7 +25,14 @@ export default function ToggleHeaderButton({ toggleHidingHeader, isHidingHeader 
           </button>
         </TooltipTrigger>
         <TooltipContent className='mr-2' side='bottom'>
-          <p className='text-xs'>전체화면 설정</p>
+          <p className='text-xs flex items-center gap-0.5 border-b py-1'>
+            <Settings className='w-3 h-3' />
+            전체화면
+          </p>
+          <div className='flex gap-1 mt-2'>
+            <div className='px-2 py-0.5 bg-background text-foreground rounded text-xs text-[10px]'>⌘ + .</div>
+            <div className='px-2 py-0.5 bg-background text-foreground rounded text-xs text-[10px]'>ctrl + .</div>
+          </div>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
