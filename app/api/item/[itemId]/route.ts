@@ -47,7 +47,9 @@ export const POST = async (req: NextRequest, { params: { itemId } }: { params: {
       },
     })
 
-    await deleteImageFromS3(deletedItem.publicId!)
+    if (deletedItem.publicId) {
+      await deleteImageFromS3(deletedItem.publicId!)
+    }
 
     return NextResponse.json(deletedItem)
   } catch (error) {

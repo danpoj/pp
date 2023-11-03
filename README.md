@@ -9,8 +9,6 @@ for (let i = 0; i < shorts.length; i++) {
   const url = shorts[i].querySelector('#thumbnail').href
   if (!url) continue
   result += url + '\n'
-
-  if (i === 101) break
 }
 
 console.log(result)
