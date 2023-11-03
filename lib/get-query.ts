@@ -9,17 +9,21 @@ export function getQuery({ page, type, search }: { page: number; type?: TypeCupS
     skip: page * TAKE,
 
     where: {
-      ...(type === 'image' ? { type: 'IMAGE' } : {}),
-      ...(type === 'video' ? { type: 'VIDEO' } : {}),
-      // ...(type === 'all' && {}),
-
-      ...(search
-        ? {
-            title: {
-              contains: search,
-            },
-          }
-        : {}),
+      AND: [
+        {
+          ...(search !== 'undefined'
+            ? {
+                title: {
+                  contains: search,
+                },
+              }
+            : {}),
+        },
+        {
+          ...(type === 'image' ? { type: 'IMAGE' } : {}),
+          ...(type === 'video' ? { type: 'VIDEO' } : {}),
+        },
+      ],
     },
 
     orderBy: {
