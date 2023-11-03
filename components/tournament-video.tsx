@@ -117,11 +117,17 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
     <m.div
       animate={{ left: '50%', translateX: '-50%' }}
       transition={{
-        duration: 0.2,
+        duration: 0.3,
       }}
-      className='w-[80%] aspect-video absolute left-0'
+      className='w-full max-w-2xl aspect-video absolute left-0 rounded overflow-hidden'
     >
-      <Player url={selectedItem.url} width='100%' height='100%' />
+      <Image
+        unoptimized
+        src={selectedItem.videoThumbnail!}
+        fill
+        alt={selectedItem.description ?? '유튜브 토너먼트 컨텐츠'}
+        className='object-cover'
+      />
       <DescriptionText description={selectedItem.description} />
     </m.div>
   )
@@ -132,11 +138,17 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
     <m.div
       animate={{ right: '50%', translateX: '50%' }}
       transition={{
-        duration: 0.2,
+        duration: 0.3,
       }}
-      className='w-[80%] aspect-video absolute right-0'
+      className='w-full max-w-2xl aspect-video absolute right-0 rounded overflow-hidden'
     >
-      <Player url={selectedItem.url} width='100%' height='100%' />
+      <Image
+        unoptimized
+        src={selectedItem.videoThumbnail!}
+        fill
+        alt={selectedItem.description ?? '유튜브 토너먼트 컨텐츠'}
+        className='object-cover'
+      />
       <DescriptionText description={selectedItem.description} />
     </m.div>
   )

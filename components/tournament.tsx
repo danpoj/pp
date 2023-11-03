@@ -19,7 +19,7 @@ export default function Tournament({ cup }: Props) {
   const [isLanding, setIsLanding] = useState(true)
   const [cupLength, setCupLength] = useState<CupLength>(8)
 
-  const [isHidingHeader, setIsHidingHeader] = useState(true)
+  const [isHidingHeader, setIsHidingHeader] = useState(false)
 
   const toggleHidingHeader = () => setIsHidingHeader((prev) => !prev)
 

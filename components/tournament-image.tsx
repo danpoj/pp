@@ -115,7 +115,7 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
     <m.div
       animate={{ left: '50%', translateX: '-50%' }}
       transition={{
-        duration: 0.2,
+        duration: 0.3,
       }}
       className='w-[70%] sm:w-[60%] h-full absolute left-0'
     >
@@ -138,7 +138,7 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
     <m.div
       animate={{ right: '50%', translateX: '50%' }}
       transition={{
-        duration: 0.2,
+        duration: 0.3,
       }}
       className='w-[70%] sm:w-[60%] h-full absolute right-0'
     >
