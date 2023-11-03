@@ -237,7 +237,7 @@ export default function ThirdStepYoutube({ cupData }: Props) {
       <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1'>
         {links.map(({ videoUrl, imageUrl }, i) => (
           <div key={`${imageUrl}-${i}`} className='relative group'>
-            <Link href={imageUrl} rel='noreferrer noopener' className=' aspect-square'>
+            <Link href={imageUrl} target='_blank' rel='noreferrer noopener' className=' aspect-square'>
               <Image
                 unoptimized
                 src={imageUrl}
