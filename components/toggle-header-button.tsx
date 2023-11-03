@@ -1,6 +1,6 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 
 type Props = {
   toggleHidingHeader: () => void
@@ -15,15 +15,13 @@ export default function ToggleHeaderButton({ toggleHidingHeader, isHidingHeader 
           <button
             onClick={toggleHidingHeader}
             className={cn(
-              'absolute right-2 sm:right-3 bg-white/90 hover:bg-white p-2 rounded-full z-[999]',
+              'absolute right-2 sm:right-3 bg-white/90 hover:bg-white p-2 rounded-full z-[999] outline outline-black',
               isHidingHeader ? 'top-1.5' : 'top-[52px]'
             )}
           >
-            {isHidingHeader ? (
-              <ChevronDown className='stroke-black w-4 h-4 stroke-[3px]' />
-            ) : (
-              <ChevronUp className='stroke-black w-4 h-4 stroke-[3px]' />
-            )}
+            <ChevronDown
+              className={cn('stroke-black w-4 h-4 stroke-[3px] transition', isHidingHeader ? '' : 'rotate-180')}
+            />
           </button>
         </TooltipTrigger>
         <TooltipContent className='mr-2' side='bottom'>
