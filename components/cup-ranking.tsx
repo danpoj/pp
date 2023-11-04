@@ -44,7 +44,7 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
           <Link
             href={`/cup/${cup.id}/${item.id}`}
             key={item.id}
-            className='rounded overflow-hidden relative h-[24rem] sm:h-full sm:w-1/3 flex items-center justify-center'
+            className='rounded overflow-hidden relative h-[24rem] sm:h-full sm:w-1/3 flex items-center justify-center hover:opacity-90 transition-opacity'
           >
             <Image
               unoptimized
@@ -92,7 +92,7 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
             <Link
               href={`/cup/${cup.id}/${item.id}`}
               key={item.id}
-              className='rounded overflow-hidden relative shrink-0 h-full aspect-square flex items-center justify-center'
+              className='rounded overflow-hidden relative shrink-0 h-full aspect-square flex items-center justify-center hover:opacity-90 transition-opacity'
             >
               <Image
                 unoptimized
