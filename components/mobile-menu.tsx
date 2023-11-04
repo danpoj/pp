@@ -102,9 +102,11 @@ export default function MobileMenu({ session }: Props) {
 
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem className='text-xs cursor-pointer' onClick={() => signOut()}>
-            <LogOut className='w-4 h-4 mr-2' /> 로그아웃
-          </DropdownMenuItem>
+          {session && (
+            <DropdownMenuItem className='text-xs cursor-pointer' onClick={() => signOut()}>
+              <LogOut className='w-4 h-4 mr-2' /> 로그아웃
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

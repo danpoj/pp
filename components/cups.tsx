@@ -76,7 +76,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
           {cups.map((cup, index) => (
             <div
               key={cup.id}
-              ref={index === cups.length - 1 ? ref : null}
+              // ref={index === cups.length - 1 ? ref : null}
               className='rounded-lg overflow-hidden shadow dark:bg-border/20 border'
             >
               <Link prefetch={false} href={`/cup/${cup.id}`} className='hover:opacity-90 transition group'>
@@ -164,7 +164,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
           </span>
         </div>
       ) : (
-        <div className='w-full flex items-center justify-center'>
+        <div ref={ref} className='w-full flex items-center justify-center'>
           <Image
             unoptimized
             src='/loader.gif'
