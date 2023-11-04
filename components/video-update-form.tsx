@@ -81,10 +81,10 @@ export default function VideoUpdateForm({ cup }: Props) {
     try {
       setIsUploading(true)
 
-      if (totalVideoLength > 100) {
+      if (totalVideoLength > 132) {
         toast({
-          title: '총 유튜브 영상 개수는 100개를 넘길 수 없습니다',
-          description: '100개 이하의 유튜브 영상을 올려주세요',
+          title: '총 유튜브 영상 개수는 132개를 넘길 수 없습니다',
+          description: '132개 이하의 유튜브 영상을 올려주세요',
           variant: 'destructive',
         })
 
@@ -130,16 +130,16 @@ export default function VideoUpdateForm({ cup }: Props) {
   return (
     <div className='mt-3 w-full px-2 mb-10'>
       <div className='mt-10 font-bold tracking-tight text-lg'>
-        <span className='text-blue-500'>{100 - totalVideoLength}개 </span>이하의 링크를 업로드 할 수 있습니다
+        <span className='text-blue-500'>{132 - totalVideoLength}개 </span>이하의 링크를 업로드 할 수 있습니다
         <div className='mt-6 flex items-center gap-2'>
           <span className='text-sm'>현재 업로드 개수: </span>
           <span
             className={cn(
               'flex gap-1 items-center',
-              totalVideoLength > 100 || links.length === 0 ? 'text-red-500' : 'text-blue-500'
+              totalVideoLength > 132 || links.length === 0 ? 'text-red-500' : 'text-blue-500'
             )}
           >
-            {links.length}개 {!(totalVideoLength > 100 || links.length === 0) && <Check className='w-5 h-5' />}
+            {links.length}개 {!(totalVideoLength > 132 || links.length === 0) && <Check className='w-5 h-5' />}
           </span>
         </div>
       </div>
@@ -168,7 +168,7 @@ export default function VideoUpdateForm({ cup }: Props) {
 
       <Button
         isLoading={isUploading}
-        disabled={isUploading || totalVideoLength > 100 || links.length === 0}
+        disabled={isUploading || totalVideoLength > 132 || links.length === 0}
         onClick={onSubmitWorldcup}
         className='my-4 h-16 w-full font-extrabold'
       >

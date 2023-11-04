@@ -76,7 +76,7 @@ export default function Step3Image({ cupData }: Props) {
       'image/*': ['.jpeg', '.jpg', '.avif', '.gif', '.png', '.webp'],
     },
 
-    maxFiles: 100,
+    maxFiles: 132,
   })
 
   const upload = async () => {
@@ -124,7 +124,7 @@ export default function Step3Image({ cupData }: Props) {
     }
   }
 
-  const isUploadAvailable = !(images.length < 8 || images.length > 100)
+  const isUploadAvailable = !(images.length < 8 || images.length > 132)
 
   if (isUploading) {
     return (
@@ -195,8 +195,8 @@ export default function Step3Image({ cupData }: Props) {
         )}
 
         <div className='space-y-2 p-6 pb-2 text-xs sm:text-sm'>
-          <p className='truncate'>8개~100개의 이미지를 업로드 할 수 있습니다 (각 3Mb 이하의 이미지)</p>
-          <p className='truncate'>이미지 개수에 따라 8, 16, 32, 64강의 월드컵이 만들어집니다</p>
+          <p className='truncate'>8개~132개의 이미지를 업로드 할 수 있습니다 (각 3Mb 이하의 이미지)</p>
+          <p className='truncate'>이미지 개수에 따라 8, 16, 32, 64강, 128강의 월드컵이 만들어집니다</p>
           <p className='truncate font-bold pt-4 text-center text-blue-500'>
             업로드 이후 자유롭게 수정 가능합니다 (제목, 설명, 썸네일, 이미지)
           </p>

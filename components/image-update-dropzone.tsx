@@ -63,7 +63,7 @@ export default function ImageUpdateDropzone({ cup }: Props) {
       'image/*': ['.jpeg', '.jpg', '.avif', '.gif', '.png', '.webp'],
     },
 
-    maxFiles: 100 - cup._count.items,
+    maxFiles: 132 - cup._count.items,
   })
 
   const upload = async () => {
@@ -121,7 +121,7 @@ export default function ImageUpdateDropzone({ cup }: Props) {
 
         <div className='space-y-2 p-6 pb-2 text-xs sm:text-sm'>
           <p className='truncate'>
-            {100 - cup._count.items}개 이하의 이미지를 업로드 할 수 있습니다 (각 3Mb 이하의 이미지)
+            {132 - cup._count.items}개 이하의 이미지를 업로드 할 수 있습니다 (각 3Mb 이하의 이미지)
           </p>
           <p className='truncate'>이미지 개수에 따라 8, 16, 32, 64강의 월드컵이 만들어집니다</p>
         </div>
@@ -146,12 +146,12 @@ export default function ImageUpdateDropzone({ cup }: Props) {
       </div>
 
       <div className='w-full flex justify-end mt-4 items-center gap-4'>
-        <span className={cn('text-3xl', totalImagesLength > 100 ? 'text-red-600' : 'text-blue-600')}>
+        <span className={cn('text-3xl', totalImagesLength > 132 ? 'text-red-600' : 'text-blue-600')}>
           {images.length}개
         </span>
         <Button
           onClick={upload}
-          disabled={totalImagesLength > 100 || images.length === 0 || isUploading}
+          disabled={totalImagesLength > 132 || images.length === 0 || isUploading}
           isLoading={isUploading}
           className='h-12 w-40'
           variant='blue'
