@@ -1,10 +1,10 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
 import axios from 'axios'
-import { Trash2 } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
 
 type Props = {
   itemId: string
@@ -34,10 +34,10 @@ export default function CupCommentDeleteButton({ itemId, commentId }: Props) {
       disabled={isDeleting}
       onClick={() => onDeleteCupComment()}
       size='icon'
-      className='w-5 h-5 rounded-sm ml-2'
+      className='w-5 h-5 rounded-sm ml-2 flex items-center justify-center'
       variant='destructive'
     >
-      <Trash2 className='w-3 h-3' />
+      <Plus className='w-3.5 h-3.5 rotate-45 stroke-[3px]' />
     </Button>
   )
 }

@@ -70,31 +70,28 @@ export default function MyCups({ cups }: Props) {
                 width={208}
                 height={208}
                 alt={cup.title}
-                className='rounded object-cover w-52 h-52'
+                className='rounded object-cover w-36 h-36 sm:w-52 sm:h-52'
               />
             </Link>
             <div className='flex flex-col'>
               <div className='flex flex-col justify-between h-full'>
                 <div className='flex flex-col gap-1'>
                   <span>{cup.title}</span>
-                  <span className='text-xs text-slate-500 max-h-16 overflow-y-scroll'>{cup.description}</span>
+                  <span className='text-xs text-slate-500 max-h-16 overflow-y-scroll pr-3 my-1'>{cup.description}</span>
                 </div>
 
-                <div className='flex flex-col text-xs gap-0.5'>
-                  <div className='flex gap-4 mb-2 font-semibold'>
+                <div className='flex flex-col text-xs text-[10px] gap-0.5'>
+                  <div className='flex gap-2 md:gap-4 mb-2 font-semibold'>
                     <span>{cup.playCount}회 플레이</span>
-                    <span className='flex items-center'>
-                      <MessageSquare className='w-3 h-3 mr-1' />
-                      댓글 {cup._count.comments}개
-                    </span>
+                    <span className='flex items-center'>댓글 {cup._count.comments}개</span>
                     <span>
-                      {cup.type === 'IMAGE' ? '이미지' : '유튜브 영상'} {cup._count.items}개
+                      {cup.type === 'IMAGE' ? '이미지' : '영상'} {cup._count.items}개
                     </span>
                   </div>
-                  <span className='text-[11px]'>
+                  <span className='text-[10px] sm:text-[11px]'>
                     마지막 수정: {dayjs(cup.updatedAt).format('YYYY. MM월 DD일 - hh:mm')}
                   </span>
-                  <span className='text-[11px]'>
+                  <span className='text-[10px] sm:text-[11px]'>
                     최초 업로드: {dayjs(cup.createdAt).format('YYYY. MM월 DD일 - hh:mm')}
                   </span>
                 </div>

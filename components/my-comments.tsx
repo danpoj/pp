@@ -65,15 +65,6 @@ export default function MyComments({ user }: Props) {
       {user.cupComments.map((comment) => (
         <div key={comment.id} className='space-y-1 p-2 rounded'>
           <div className='flex gap-1'>
-            <Image
-              unoptimized
-              src={comment.cup.thumbnail}
-              alt={comment.cup.title}
-              width={120}
-              height={120}
-              className='rounded w-[120px] h-[120px] object-cover'
-            />
-
             <div className='flex flex-col text-xs'>
               <span className='font-semibold max-w-[240px] truncate sm:max-w-[460px]'>{comment.cup.title}</span>
               <span className='text-slate-600 truncate max-w-[240px] sm:max-w-[460px]'>{comment.cup.description}</span>
@@ -121,8 +112,6 @@ export default function MyComments({ user }: Props) {
               삭제 <Trash2 className='w-3 h-3 ml-1' />
             </Button>
           </div>
-
-          <Separator />
         </div>
       ))}
 
@@ -130,17 +119,6 @@ export default function MyComments({ user }: Props) {
       <Separator className='my-2' />
       {user.itemComments.map((comment) => (
         <div key={comment.id} className='space-y-1 p-2 rounded'>
-          <div className='flex gap-1'>
-            <Image
-              unoptimized
-              src={comment.item.publicId ? comment.item.url : comment.item.videoThumbnail!}
-              alt={comment.item.description || 'cup result image'}
-              width={120}
-              height={120}
-              className='rounded w-[120px] h-[120px] object-cover'
-            />
-          </div>
-
           <div className='flex flex-col gap-2 break-words mb-4'>
             <div className='flex gap-1 items-center'>
               <Image
@@ -149,7 +127,7 @@ export default function MyComments({ user }: Props) {
                 alt='user profile image'
                 width={40}
                 height={40}
-                className='w-6 h-6'
+                className='w-6 h-6 rounded-full'
               />
               <span className='font-bold text-xs bg-fancy w-fit bg-clip-text text-transparent'>@{user.nickname}</span>
               <span className='text-xs text-primary/60 tracking-tighter'>{dayjs(comment.createdAt).fromNow()}</span>
@@ -182,8 +160,6 @@ export default function MyComments({ user }: Props) {
               삭제 <Trash2 className='w-3 h-3 ml-1' />
             </Button>
           </div>
-
-          <Separator className='' />
         </div>
       ))}
     </div>

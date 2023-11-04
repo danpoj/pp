@@ -20,10 +20,10 @@ export default function NotFound() {
       <Image
         unoptimized
         src='/loader.gif'
-        width={120}
-        height={120}
+        width={100}
+        height={100}
         alt='brand image'
-        className='w-[120px] h-[120px] object-contain'
+        className='w-[100px] h-[100px] object-contain'
         priority
       />
     </div>

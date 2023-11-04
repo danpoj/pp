@@ -7,9 +7,9 @@ export default function Loading() {
         unoptimized
         src='/loader.gif'
         alt='pingping logo'
-        width={120}
-        height={120}
-        className='w-[120px] h-[120px] object-contain'
+        width={100}
+        height={100}
+        className='w-[100px] h-[100px] object-contain'
         priority
       />
     </div>
