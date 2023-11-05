@@ -176,7 +176,7 @@ const Initial = ({
         <div className='w-full h-[88%] sm:h-[93%]'>
           <Player url={items[index * 2].url} width='100%' height='100%' />
         </div>
-        <Button className='rounded-none w-full h-[12%] sm:h-[7%] bg-fancy font-bold hover:hue-rotate-30'>
+        <Button variant='blue' className='rounded-none w-full h-[12%] sm:h-[7%]'>
           선택하기 <Check className='w-4 h-4 ml-1 stroke-[3px]' />
         </Button>
         <DescriptionText description={items[index * 2].description} />
@@ -188,7 +188,7 @@ const Initial = ({
         <div className='w-full h-[88%] sm:h-[93%]'>
           <Player url={items[index * 2 + 1].url} width='100%' height='100%' />
         </div>
-        <Button className='rounded-none w-full h-[12%] sm:h-[7%] bg-fancy hue-rotate-60 font-bold hover:hue-rotate-90'>
+        <Button variant='red' className='rounded-none w-full h-[12%] sm:h-[7%] font-bold'>
           선택하기 <Check className='w-4 h-4 ml-1 stroke-[3px]' />
         </Button>
         <DescriptionText description={items[index * 2 + 1].description} />
