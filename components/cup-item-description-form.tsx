@@ -19,9 +19,10 @@ type Props = {
   item: Item
   contentsLength: number
   cupType: CupType
+  thumbnail: string
 }
 
-export default function CupItemDescriptionForm({ item, contentsLength, cupType }: Props) {
+export default function CupItemDescriptionForm({ item, contentsLength, cupType, thumbnail }: Props) {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const form = useForm<z.infer<typeof itemDescriptionSchema>>({
@@ -50,6 +51,9 @@ export default function CupItemDescriptionForm({ item, contentsLength, cupType }
       setIsSubmitting(false)
     }
   }
+
+  const itemThumbnail = cupType === 'IMAGE' ? item.url : item.videoThumbnail!
+  const isThumbnail = itemThumbnail === thumbnail
 
   return (
     <div className='w-full space-y-10'>
@@ -82,18 +86,22 @@ export default function CupItemDescriptionForm({ item, contentsLength, cupType }
       </Form>
 
       <div className='flex justify-between'>
-        <CupThumbnailButton
-          cupId={item.cupId}
-          thumbnail={cupType === 'IMAGE' ? item.url : item.videoThumbnail!}
-          cupType={cupType}
-        />
+        {!isThumbnail && <CupThumbnailButton cupId={item.cupId} itemThumbnail={itemThumbnail} cupType={cupType} />}
         <CupItemDeleteButton itemId={item.id} contentsLength={contentsLength} cupType={cupType} />
       </div>
     </div>
   )
 }
 
-function CupThumbnailButton({ cupId, thumbnail, cupType }: { cupId: string; thumbnail: string; cupType: CupType }) {
+function CupThumbnailButton({
+  cupId,
+  itemThumbnail,
+  cupType,
+}: {
+  cupId: string
+  itemThumbnail: string
+  cupType: CupType
+}) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const router = useRouter()
 
@@ -102,7 +110,7 @@ function CupThumbnailButton({ cupId, thumbnail, cupType }: { cupId: string; thum
       setIsSubmitting(true)
 
       await axios.patch(`/api/cup/${cupId}/thumbnail`, {
-        thumbnail,
+        thumbnail: itemThumbnail,
       })
 
       router.refresh()

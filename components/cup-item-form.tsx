@@ -9,9 +9,10 @@ type Props = {
   item: Item
   cupType: CupType
   contentsLength: number
+  thumbnail: string
 }
 
-export default function CupItemForm({ item, cupType, contentsLength }: Props) {
+export default function CupItemForm({ item, cupType, contentsLength, thumbnail }: Props) {
   return (
     <div key={item.id} className='flex w-full gap-2 items-center'>
       <div className='w-44 h-44 relative shrink-0 flex items-center justify-center'>
@@ -28,7 +29,6 @@ export default function CupItemForm({ item, cupType, contentsLength }: Props) {
               alt={item.description || 'cup item'}
               width={300}
               height={260}
-              // quality={40}
               className='object-contain w-full h-full'
             />
           </Link>
@@ -51,7 +51,7 @@ export default function CupItemForm({ item, cupType, contentsLength }: Props) {
         )}
       </div>
 
-      <CupItemDescriptionForm item={item} contentsLength={contentsLength} cupType={cupType} />
+      <CupItemDescriptionForm item={item} contentsLength={contentsLength} cupType={cupType} thumbnail={thumbnail} />
     </div>
   )
 }

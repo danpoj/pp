@@ -36,7 +36,13 @@ export default function CupUpdateForm({ cup }: Props) {
 
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-14'>
         {cup.items.map((item) => (
-          <CupItemForm key={item.id} item={item} cupType={cup.type} contentsLength={cup._count.items} />
+          <CupItemForm
+            key={item.id}
+            item={item}
+            cupType={cup.type}
+            contentsLength={cup._count.items}
+            thumbnail={cup.thumbnail}
+          />
         ))}
       </div>
     </div>
