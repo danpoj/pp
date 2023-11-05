@@ -120,10 +120,10 @@ export default function ThirdStepYoutube({ cupData }: Props) {
         return
       }
 
-      if (links.length > 100) {
+      if (links.length > 132) {
         toast({
           title: '유튜브 링크 개수를 초과했습니다.',
-          description: '100개 이하의 유튜브 링크를 업로드 해주세요.',
+          description: '132개 이하의 유튜브 링크를 업로드 해주세요.',
           variant: 'destructive',
         })
 
@@ -155,7 +155,7 @@ export default function ThirdStepYoutube({ cupData }: Props) {
   return (
     <div className='mt-3 w-full px-2 pb-20'>
       <div className='mt-10 font-bold tracking-tight text-lg'>
-        <span className='text-blue-500'>8 ~ 100개 </span>의 링크를 업로드 할 수 있습니다
+        <span className='text-blue-500'>8 ~ 132개 </span>의 링크를 업로드 할 수 있습니다
         <p className='text-blue-500 font-semibold mt-2'>
           업로드 이후 자유롭게 수정 가능합니다 (제목, 설명, 썸네일, 비디오)
         </p>
