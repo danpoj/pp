@@ -1,8 +1,8 @@
 'use client'
 
+import Loader from '@/components/loader'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 export default function NotFound() {
@@ -17,15 +17,7 @@ export default function NotFound() {
 
       <h1 className='text-xl'>페이지를 찾을 수 없습니다</h1>
       <p className='text-lg'>404 Not Found</p>
-      <Image
-        unoptimized
-        src='/loader.gif'
-        width={100}
-        height={100}
-        alt='brand image'
-        className='w-[100px] h-[100px] object-contain'
-        priority
-      />
+      <Loader size='lg' />
     </div>
   )
 }

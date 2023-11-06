@@ -15,6 +15,7 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { ResponsiveMasonry } from 'react-responsive-masonry'
+import Loader from './loader'
 
 const Masonry = dynamic(() => import('react-responsive-masonry'), {
   ssr: false,
@@ -161,15 +162,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
         </div>
       ) : (
         <div ref={ref} className='w-full flex items-center justify-center'>
-          <Image
-            unoptimized
-            src='/loader.gif'
-            alt='pingping logo'
-            width={100}
-            height={100}
-            className='w-[100px] h-[100px] object-contain'
-            priority
-          />
+          <Loader size='md' />
         </div>
       )}
     </section>

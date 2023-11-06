@@ -14,6 +14,7 @@ import CupInformation from '@/components/cup-information'
 import Image from 'next/image'
 import { CupLength } from '@/types/type'
 import { Check } from 'lucide-react'
+import Loader from './loader'
 
 type Props = {
   cup: Cup & {
@@ -203,7 +204,7 @@ const Overlay = ({ isFinished }: { isFinished: boolean }) => {
       {isFinished ? (
         <div className='flex flex-col gap-2 bg-primary p-4 rounded-lg items-center'>
           <span className='text-white'>결과 페이지로 이동 중...</span>
-          <Image unoptimized src='/loader.gif' width={80} height={80} alt='tournament finish loading state image' />
+          <Loader size='md' />
         </div>
       ) : (
         <div className='rounded-lg hidden md:block'>

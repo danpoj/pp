@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { buttonVariants } from './ui/button'
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
+import Loader from './loader'
 
 type Props = {
   linkText: string
@@ -27,15 +28,7 @@ export default function NoItemPage({ href, linkText, text }: Props) {
 
       <h2 className='text-xl'>{text}</h2>
 
-      <Image
-        unoptimized
-        src='/loader.gif'
-        width={60}
-        height={60}
-        alt='brand image'
-        className='w-[60px] h-[60px] object-contain grayscale'
-        priority
-      />
+      <Loader size='md' className='grayscale' />
     </div>
   )
 }

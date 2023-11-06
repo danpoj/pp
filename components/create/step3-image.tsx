@@ -1,8 +1,8 @@
 'use client'
 
-import { ArrowLeft, ChevronRight, ImagePlus, Sparkle, Trash2 } from 'lucide-react'
+import { ChevronRight, ImagePlus, Trash2 } from 'lucide-react'
 
-import { Button, buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 
 import { useConfetti } from '@/components/provider/confetti-provider'
 import { useModal } from '@/components/provider/modal-provider'
@@ -11,10 +11,10 @@ import { cn } from '@/lib/utils'
 import { cupData } from '@/types/type'
 import axios from 'axios'
 import NextImage from 'next/image'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
+import Loader from '../loader'
 
 type Props = {
   cupData: cupData
@@ -128,17 +128,10 @@ export default function Step3Image({ cupData }: Props) {
 
   if (isUploading) {
     return (
-      <div className='w-full h-full pb-20 overflow-hidden fixed inset-0 bg-primary/20 flex flex-col items-center justify-center space-y-2 z-50'>
+      <div className='w-full h-full pb-20 overflow-hidden fixed inset-0 bg-primary/10 flex flex-col items-center justify-center space-y-2 z-50'>
         <div className='flex items-center gap-4 animate-bounce'>
           <span className='font-bold text-lg'>업로드 중 ...</span>
-          <NextImage
-            src='/loader.gif'
-            unoptimized
-            width={48}
-            height={32}
-            alt='loader image'
-            className='w-[48px] h-[32px] object-cover'
-          />
+          <Loader size='sm' />
         </div>
 
         <div className='flex flex-col items-center gap-2 py-10 '>

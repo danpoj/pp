@@ -6,6 +6,7 @@ import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import Loader from './loader'
 
 export default function SignUp() {
   const [isGoogleLaoding, setIsGoogleLaoding] = useState(false)
@@ -52,15 +53,7 @@ export default function SignUp() {
     <div className='flex flex-col items-center gap-2 px-6 pt-10 pb-2'>
       <div className='flex flex-col items-center mb-10 gap-4'>
         <div className='flex font-bold text-lg'>
-          <Image
-            unoptimized
-            alt='pingping logo'
-            width={40}
-            height={40}
-            src='/loader.gif'
-            className='w-[40px] h-[40px] object-contain'
-            priority
-          />
+          <Loader size='sm' />
           <Link href='/' className='flex items-center justify-center mr-6 hover:text-primary/90'>
             ping
             <span className='bg-fancy text-transparent bg-clip-text'>Ping</span>

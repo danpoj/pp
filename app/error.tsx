@@ -1,5 +1,6 @@
 'use client'
 
+import Loader from '@/components/loader'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
@@ -20,16 +21,8 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
         홈으로 이동하기
       </Button>
 
-      <h1 className='text-xl'>에러!</h1>
-      <Image
-        unoptimized
-        src='/loader.gif'
-        width={100}
-        height={100}
-        alt='brand image'
-        className='w-[100px] h-[100px] object-contain'
-        priority
-      />
+      <h1 className='text-xl'>에러가 발생했습니다</h1>
+      <Loader size='lg' />
     </div>
   )
 }
