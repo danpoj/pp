@@ -22,6 +22,7 @@ const Masonry = dynamic(() => import('react-responsive-masonry'), {
 })
 
 type Props = {
+  count: number
   initialCups: CupWithUser[]
   session: Session | null
   isLiked?: boolean
@@ -29,14 +30,14 @@ type Props = {
   search?: string
 }
 
-export default function Cups({ initialCups, session, isLiked = false, type = 'all', search }: Props) {
+export default function Cups({ count, initialCups, session, isLiked = false, type = 'all', search }: Props) {
   const [cups, setCups] = useState<CupWithUser[]>(initialCups)
-  const [isFinished, setIsFinished] = useState(initialCups.length === 0)
+  const [isFinished, setIsFinished] = useState(initialCups.length === count)
   const [isLoading, setIsLoading] = useState(false)
   const page = useRef(1)
 
   const { ref, inView } = useInView({
-    threshold: 0,
+    threshold: 1,
   })
 
   const getCups = async () => {
@@ -49,13 +50,12 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
         data: CupWithUser[]
       }
 
-      if (data.length === 0) {
-        setIsFinished(true)
-        return
-      }
-
       setCups((prev) => [...prev, ...data])
       page.current++
+
+      if (cups.length + data.length === count) {
+        setIsFinished(true)
+      }
     } catch (error) {
       console.log(error)
       throw error
@@ -75,11 +75,7 @@ export default function Cups({ initialCups, session, isLiked = false, type = 'al
       <ResponsiveMasonry className='px-1 w-full' columnsCountBreakPoints={{ 0: 2, 760: 3, 1100: 4, 1400: 5, 1700: 6 }}>
         <Masonry gutter='2px' className='pb-20 w-full'>
           {cups.map((cup, index) => (
-            <div
-              key={cup.id}
-              // ref={index === cups.length - 1 ? ref : null}
-              className='rounded-lg overflow-hidden shadow dark:bg-border/20 border'
-            >
+            <div key={cup.id} className='rounded-lg overflow-hidden shadow dark:bg-border/20 border'>
               <Link prefetch={false} href={`/cup/${cup.id}`} className='hover:opacity-90 transition group'>
                 <div className='relative overflow-hidden'>
                   {cup.thumbnail ? (

@@ -19,7 +19,29 @@ export default async function Page({ searchParams }: { searchParams: CupSearchPa
 
   const initialCups = (await db.cup.findMany(query)) as CupWithUser[]
 
+  const count = await db.cup.count({
+    where: {
+      AND: [
+        {
+          ...(search !== 'undefined'
+            ? {
+                title: {
+                  contains: search,
+                },
+              }
+            : {}),
+        },
+        {
+          ...(type === 'image' ? { type: 'IMAGE' } : {}),
+          ...(type === 'video' ? { type: 'VIDEO' } : {}),
+        },
+      ],
+    },
+  })
+
   const session = await getSession()
 
-  return <Cups key={type + search} initialCups={initialCups} session={session} type={type} search={search} />
+  return (
+    <Cups key={type + search} count={count} initialCups={initialCups} session={session} type={type} search={search} />
+  )
 }
