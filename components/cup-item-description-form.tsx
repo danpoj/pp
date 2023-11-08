@@ -13,7 +13,7 @@ import { Pencil, Sparkle, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { CupType, Item } from '@prisma/client'
-import { toast } from '@/components/ui/use-toast'
+import { toast } from 'sonner'
 
 type Props = {
   item: Item
@@ -38,13 +38,7 @@ export default function CupItemDescriptionForm({ item, contentsLength, cupType, 
 
       await axios.patch(`/api/item/${item.id}`, values)
 
-      toast({
-        title: '컨텐츠 설명 업데이트 완료',
-        style: {
-          backgroundColor: '#111',
-          color: '#ddd',
-        },
-      })
+      toast.success('설명 수정 완료!')
     } catch (error) {
       console.log(error)
     } finally {
@@ -115,13 +109,7 @@ function CupThumbnailButton({
 
       router.refresh()
 
-      toast({
-        title: '썸네일 변경 완료',
-        style: {
-          backgroundColor: '#111',
-          color: '#ddd',
-        },
-      })
+      toast.success('썸네일 변경 완료!')
     } catch (error) {
       console.log(error)
     } finally {
@@ -166,13 +154,7 @@ function CupItemDeleteButton({
 
       router.refresh()
 
-      toast({
-        title: '컨텐츠 삭제 완료',
-        style: {
-          backgroundColor: '#111',
-          color: '#ddd',
-        },
-      })
+      toast.success('컨텐츠 삭제 완료!')
     } catch (error) {
       console.log(error)
     } finally {

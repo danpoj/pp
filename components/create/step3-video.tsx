@@ -2,27 +2,26 @@
 
 import { Check, ChevronRight, Trash2 } from 'lucide-react'
 
-import { Form, FormControl, FormDescription, FormField, FormItem } from '@/components/ui/form'
+import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 
-// etc
+import { useConfetti } from '@/components/provider/confetti-provider'
+import { useModal } from '@/components/provider/modal-provider'
+import { Button } from '@/components/ui/button'
+import { toast } from 'sonner'
+import { getYouTubeVideoId } from '@/lib/get-youtube-video-id'
 import { cn } from '@/lib/utils'
+import { cupData } from '@/types/type'
+import { zodResolver } from '@hookform/resolvers/zod'
+import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { FormEvent, useRef, useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { toast } from '@/components/ui/use-toast'
+import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { getYouTubeVideoId } from '@/lib/get-youtube-video-id'
-import axios from 'axios'
-import { useModal } from '@/components/provider/modal-provider'
-import { useConfetti } from '@/components/provider/confetti-provider'
-import { cupData } from '@/types/type'
 
 type Props = {
   cupData: cupData
@@ -56,11 +55,7 @@ export default function ThirdStepYoutube({ cupData }: Props) {
       const isExist = links.filter((link) => link.videoUrl === `https://www.youtube.com/watch?v=${videoId}`).length > 0
 
       if (isExist) {
-        toast({
-          title: '링크 중복 업로드',
-          description: '이미 리스트에 존재하는 링크입니다.',
-          variant: 'destructive',
-        })
+        toast.warning('이미 리스트에 있는 영상입니다. (중복 업로드)')
 
         return
       }
@@ -75,11 +70,7 @@ export default function ThirdStepYoutube({ cupData }: Props) {
 
       form.reset()
     } catch (error) {
-      toast({
-        title: '유효하지않은 유튜브 링크입니다',
-
-        variant: 'destructive',
-      })
+      toast.warning('유효하지않은 유튜브 링크입니다.')
     }
   }
 
@@ -99,10 +90,7 @@ export default function ThirdStepYoutube({ cupData }: Props) {
 
       textAreaRef.current.value = ''
     } catch (error) {
-      toast({
-        title: '유효하지않은 유튜브 링크입니다',
-        variant: 'destructive',
-      })
+      toast.warning('유효하지않은 유튜브 링크입니다.')
     }
   }
 
@@ -111,21 +99,13 @@ export default function ThirdStepYoutube({ cupData }: Props) {
       setIsUploading(true)
 
       if (links.length < 8) {
-        toast({
-          title: '유튜브 링크 개수가 부족합니다.',
-          description: '8개 이상의 유튜브 링크를 업로드 해주세요.',
-          variant: 'destructive',
-        })
+        toast.warning('유튜브 링크 개수가 부족합니다.')
 
         return
       }
 
       if (links.length > 132) {
-        toast({
-          title: '유튜브 링크 개수를 초과했습니다.',
-          description: '132개 이하의 유튜브 링크를 업로드 해주세요.',
-          variant: 'destructive',
-        })
+        toast.warning('유튜브 링크 개수를 초과했습니다.')
 
         return
       }
@@ -142,11 +122,7 @@ export default function ThirdStepYoutube({ cupData }: Props) {
       router.push('/')
       router.refresh()
     } catch (error) {
-      toast({
-        title: '월드컵 업로드 실패',
-        description: 'upload failed.',
-        variant: 'destructive',
-      })
+      toast('월드컵 업로드 실패 😥')
     } finally {
       setIsUploading(false)
     }

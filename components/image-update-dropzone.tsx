@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { toast } from '@/components/ui/use-toast'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { CupCount } from '@/types/type'
 import type { Cup, Item } from '@prisma/client'
@@ -38,10 +38,7 @@ export default function ImageUpdateDropzone({ cup }: Props) {
       const filteredLargeFiles = acceptedFiles.filter((file) => file.size <= 3_000_000)
 
       if (filteredLargeFiles.length !== acceptedFiles.length) {
-        toast({
-          description: `${acceptedFiles.length - filteredLargeFiles.length}개의 파일이 3MB용량을 넘어 제외되었습니다.`,
-          variant: 'destructive',
-        })
+        toast.warning(`${acceptedFiles.length - filteredLargeFiles.length}개의 파일이 3MB용량을 넘어 제외되었습니다.`)
       }
 
       filteredLargeFiles.map((file) => {

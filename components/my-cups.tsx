@@ -1,17 +1,17 @@
 'use client'
 
+import { ClipboardWithLink } from '@/components/clipboard-with-link'
+import { Button } from '@/components/ui/button'
+import { toast } from 'sonner'
+import { CupCount } from '@/types/type'
 import type { Cup, CupType } from '@prisma/client'
 import axios from 'axios'
 import dayjs from 'dayjs'
-import { MessageSquare, Pencil, Trash2, Youtube } from 'lucide-react'
+import { Pencil, Trash2, Youtube } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { ClipboardWithLink } from '@/components/clipboard-with-link'
-import { Button } from '@/components/ui/button'
-import { toast } from '@/components/ui/use-toast'
-import { CupCount } from '@/types/type'
 
 type Props = {
   cups: (Cup & {
@@ -29,13 +29,7 @@ export default function MyCups({ cups }: Props) {
 
       await axios.delete(`/api/cup/${cupId}`)
 
-      toast({
-        title: '월드컵 삭제 완료',
-        style: {
-          backgroundColor: '#111',
-          color: '#ddd',
-        },
-      })
+      toast.success('월드컵 삭제 완료!')
 
       router.refresh()
     } catch (error) {

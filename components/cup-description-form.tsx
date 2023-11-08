@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input'
 import { descriptionSchema } from '@/lib/validations'
 import axios from 'axios'
 import { useState } from 'react'
-import { toast } from '@/components/ui/use-toast'
+import { toast } from 'sonner'
 
 type Props = {
   description: string
@@ -32,13 +32,7 @@ export default function CupDescriptionForm({ description, cupId }: Props) {
       setIsSubmitting(true)
       await axios.patch(`/api/cup/${cupId}/description`, values)
 
-      toast({
-        title: '월드컵 "설명" 수정 완료',
-        style: {
-          backgroundColor: '#111',
-          color: '#ddd',
-        },
-      })
+      toast.success('월드컵 설명 수정 완료!')
     } catch (error) {
       console.log(error)
     } finally {

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 
 import { useConfetti } from '@/components/provider/confetti-provider'
 import { useModal } from '@/components/provider/modal-provider'
-import { toast } from '@/components/ui/use-toast'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { cupData } from '@/types/type'
 import axios from 'axios'
@@ -50,10 +50,7 @@ export default function Step3Image({ cupData }: Props) {
       const filteredLargeFiles = acceptedFiles.filter((file) => file.size <= 3_000_000)
 
       if (filteredLargeFiles.length !== acceptedFiles.length) {
-        toast({
-          description: `${acceptedFiles.length - filteredLargeFiles.length}개의 파일이 3MB용량을 넘어 제외되었습니다.`,
-          variant: 'destructive',
-        })
+        toast.warning(`${acceptedFiles.length - filteredLargeFiles.length}개의 파일이 3MB용량을 넘어 제외되었습니다.`)
       }
 
       filteredLargeFiles.map((file) => {
@@ -114,11 +111,7 @@ export default function Step3Image({ cupData }: Props) {
       openModal('create-complete', data)
       openConfetti()
     } catch (error) {
-      toast({
-        title: '월드컵 업로드 실패',
-        description: 'upload failed.',
-        variant: 'destructive',
-      })
+      toast.error('월드컵 업로드 실패 😥')
     } finally {
       setIsUploading(false)
     }

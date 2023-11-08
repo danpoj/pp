@@ -12,7 +12,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useConfetti } from '@/components/provider/confetti-provider'
-import { toast } from '@/components/ui/use-toast'
+import { toast } from 'sonner'
 
 type Props = {
   user: User
@@ -44,14 +44,7 @@ export default function UserNicknameForm({ user }: Props) {
 
       const { data } = await axios.patch(`/api/user/nickname`, values)
 
-      toast({
-        title: '🍉',
-        description: `${data.nickname}로 변경되었습니다`,
-        style: {
-          backgroundColor: '#111',
-          color: '#ddd',
-        },
-      })
+      toast.success(`${data.nickname}로 변경되었습니다`)
 
       router.refresh()
 

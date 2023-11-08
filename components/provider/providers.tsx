@@ -3,7 +3,8 @@ import { Children } from '@/types/type'
 import { NextThemesProvider } from '@/components/provider/theme-provider'
 import ModalProvider from '@/components/provider/modal-provider'
 import { ConfettiProvider } from '@/components/provider/confetti-provider'
-import { Toaster } from '@/components/ui/toaster'
+
+import { Toaster } from 'sonner'
 
 export default function Providers({ children }: Children) {
   return (
@@ -11,7 +12,7 @@ export default function Providers({ children }: Children) {
       <ModalProvider>
         <ConfettiProvider>
           {children}
-          <Toaster />
+          <Toaster richColors position='top-center' />
         </ConfettiProvider>
       </ModalProvider>
     </NextThemesProvider>

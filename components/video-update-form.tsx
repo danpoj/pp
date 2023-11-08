@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormDescription, FormField, FormItem } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { toast } from '@/components/ui/use-toast'
+import { toast } from 'sonner'
 import { getYouTubeVideoId } from '@/lib/get-youtube-video-id'
 import { cn } from '@/lib/utils'
 import { CupCount } from '@/types/type'
@@ -51,11 +51,7 @@ export default function VideoUpdateForm({ cup }: Props) {
         ).length > 0
 
       if (isExist) {
-        toast({
-          title: '링크 중복 업로드',
-          description: '이미 리스트에 존재하는 링크입니다.',
-          variant: 'destructive',
-        })
+        toast.warning('이미 업로드 한 영상입니다. (중복 업로드)')
 
         return
       }
@@ -70,10 +66,7 @@ export default function VideoUpdateForm({ cup }: Props) {
       form.reset()
       form.setFocus('url')
     } catch (error) {
-      toast({
-        title: '유효하지않은 유튜브 링크입니다',
-        variant: 'destructive',
-      })
+      toast.warning('유효하지않은 유튜브 링크입니다.')
     }
   }
 
@@ -82,20 +75,13 @@ export default function VideoUpdateForm({ cup }: Props) {
       setIsUploading(true)
 
       if (totalVideoLength > 132) {
-        toast({
-          title: '총 유튜브 영상 개수는 132개를 넘길 수 없습니다',
-          description: '132개 이하의 유튜브 영상을 올려주세요',
-          variant: 'destructive',
-        })
+        toast.warning('총 유튜브 영상 개수는 132개를 넘길 수 없습니다.')
 
         return
       }
 
       if (links.length === 0) {
-        toast({
-          title: '유튜브 링크를 올려주세요',
-          variant: 'destructive',
-        })
+        toast.warning('유튜브 링크를 올려주세요')
 
         return
       }
@@ -107,19 +93,9 @@ export default function VideoUpdateForm({ cup }: Props) {
       router.refresh()
       setLinks([])
 
-      toast({
-        title: '유튜브 영상 추가 완료',
-        style: {
-          backgroundColor: '#111',
-          color: '#ddd',
-        },
-      })
+      toast.success('유튜브 영상 추가 완료!')
     } catch (error) {
-      toast({
-        title: '유튜브 영상 업로드 실패',
-        description: 'upload failed.',
-        variant: 'destructive',
-      })
+      toast.error('유튜브 영상 업로드 실패 😥')
     } finally {
       setIsUploading(false)
     }

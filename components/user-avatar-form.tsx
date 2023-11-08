@@ -12,11 +12,10 @@ import axios from 'axios'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useConfetti } from './provider/confetti-provider'
-import { toast } from '@/components/ui/use-toast'
+import { toast } from 'sonner'
 
 type Props = {
   user: User
-  // avatars: string[]
 }
 
 export default function UserAvatarForm({ user }: Props) {
@@ -30,10 +29,7 @@ export default function UserAvatarForm({ user }: Props) {
     multiple: false,
     onDrop(acceptedFile) {
       if (acceptedFile[0].size > 3_000_000) {
-        toast({
-          description: `이미지가 3MB를 초과했습니다.`,
-          variant: 'destructive',
-        })
+        toast.warning('이미지가 3MB를 초과했습니다.')
 
         return
       }
@@ -58,13 +54,7 @@ export default function UserAvatarForm({ user }: Props) {
 
       router.refresh()
 
-      toast({
-        title: '이미지 변경 완료 🎊',
-        style: {
-          backgroundColor: '#111',
-          color: '#ddd',
-        },
-      })
+      toast.success('아바타 업데이트 완료!')
 
       openConfetti()
     } catch (error) {
@@ -83,13 +73,7 @@ export default function UserAvatarForm({ user }: Props) {
 
       router.refresh()
 
-      toast({
-        title: '기본 이미지로 변경되었습니다 🎊',
-        style: {
-          backgroundColor: '#111',
-          color: '#ddd',
-        },
-      })
+      toast.success('기본 이미지로 변경되었습니다.')
     } catch (error) {
       console.log(error)
     } finally {
