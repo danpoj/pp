@@ -86,7 +86,7 @@ export default function VideoUpdateForm({ cup }: Props) {
         return
       }
 
-      const { data } = await axios.post(`/api/cup/${cup.id}/item/video`, {
+      await axios.post(`/api/cup/${cup.id}/item/video`, {
         links,
       })
 

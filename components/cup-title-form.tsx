@@ -11,6 +11,7 @@ import { titleSchema } from '@/lib/validations'
 import axios from 'axios'
 import { useState } from 'react'
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   title: string
@@ -19,6 +20,7 @@ type Props = {
 
 export default function CupTitleForm({ title, cupId }: Props) {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof titleSchema>>({
     resolver: zodResolver(titleSchema),
@@ -28,11 +30,19 @@ export default function CupTitleForm({ title, cupId }: Props) {
   })
 
   const onSubmit = async (values: z.infer<typeof titleSchema>) => {
+    if (values.title === title) {
+      toast.info('기존 제목과 동일합니다.')
+
+      return
+    }
+
     try {
       setIsSubmitting(true)
       await axios.patch(`/api/cup/${cupId}/title`, values)
 
       toast.success('월드컵 제목 수정 완료!')
+
+      router.refresh()
     } catch (error) {
       console.log(error)
     } finally {
@@ -58,7 +68,7 @@ export default function CupTitleForm({ title, cupId }: Props) {
           )}
         />
         <div className='flex justify-end'>
-          <Button type='submit' disabled={isSubmitting} isLoading={isSubmitting}>
+          <Button type='submit' disabled={isSubmitting}>
             제목 수정하기
           </Button>
         </div>

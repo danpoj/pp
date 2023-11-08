@@ -9,11 +9,12 @@ import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import axios from 'axios'
-import { Pencil, Sparkle, Trash2 } from 'lucide-react'
+import { Loader2, Pencil, Sparkle, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { CupType, Item } from '@prisma/client'
 import { toast } from 'sonner'
+import { cn } from '@/lib/utils'
 
 type Props = {
   item: Item
@@ -24,6 +25,7 @@ type Props = {
 
 export default function CupItemDescriptionForm({ item, contentsLength, cupType, thumbnail }: Props) {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof itemDescriptionSchema>>({
     resolver: zodResolver(itemDescriptionSchema),
@@ -33,12 +35,20 @@ export default function CupItemDescriptionForm({ item, contentsLength, cupType, 
   })
 
   const onSubmit = async (values: z.infer<typeof itemDescriptionSchema>) => {
+    if (values.description === item.description) {
+      toast.info('기존 설명과 동일합니다.')
+
+      return
+    }
+
     try {
       setIsSubmitting(true)
 
       await axios.patch(`/api/item/${item.id}`, values)
 
       toast.success('설명 수정 완료!')
+
+      router.refresh()
     } catch (error) {
       console.log(error)
     } finally {
@@ -65,10 +75,14 @@ export default function CupItemDescriptionForm({ item, contentsLength, cupType, 
                     <Button
                       type='submit'
                       disabled={isSubmitting}
-                      isLoading={isSubmitting}
                       className='shrink-0 rounded px-3 text-xs text-[11px] h-8'
                     >
-                      수정 <Pencil className='w-3 h-3 ml-1' />
+                      수정
+                      {isSubmitting ? (
+                        <Loader2 className='w-3 h-3 ml-1 animate-spin' />
+                      ) : (
+                        <Pencil className='w-3 h-3 ml-1' />
+                      )}
                     </Button>
                   </div>
                 </FormControl>
@@ -79,9 +93,14 @@ export default function CupItemDescriptionForm({ item, contentsLength, cupType, 
         </form>
       </Form>
 
-      <div className='flex justify-between'>
+      <div className={cn('flex', isThumbnail ? 'justify-end' : 'justify-between')}>
         {!isThumbnail && <CupThumbnailButton cupId={item.cupId} itemThumbnail={itemThumbnail} cupType={cupType} />}
-        <CupItemDeleteButton itemId={item.id} contentsLength={contentsLength} cupType={cupType} />
+        <CupItemDeleteButton
+          isThumbnail={isThumbnail}
+          itemId={item.id}
+          contentsLength={contentsLength}
+          cupType={cupType}
+        />
       </div>
     </div>
   )
@@ -121,9 +140,8 @@ function CupThumbnailButton({
     <Button
       onClick={() => onThumbnailChange()}
       disabled={isSubmitting}
-      isLoading={isSubmitting}
       size='sm'
-      className='rounded text-xs text-[11px] h-8 bg-fancy hover:opacity-90'
+      className='rounded text-xs text-[11px] h-8 bg-fancy hover:opacity-90 text-white'
     >
       썸네일 지정 <Sparkle className='w-3 h-3 ml-1' />
     </Button>
@@ -134,16 +152,24 @@ function CupItemDeleteButton({
   itemId,
   contentsLength,
   cupType,
+  isThumbnail,
 }: {
   itemId: string
   contentsLength: number
   cupType: CupType
+  isThumbnail: boolean
 }) {
   const [isDeleting, setIsDeleting] = useState(false)
   const router = useRouter()
 
   const onDelete = async () => {
     if (contentsLength <= 8) return
+
+    if (isThumbnail) {
+      toast.info('썸네일로 지정된 이미지는 삭제 할 수 없습니다.')
+
+      return
+    }
 
     try {
       setIsDeleting(true)
@@ -166,7 +192,6 @@ function CupItemDeleteButton({
     <Button
       onClick={() => onDelete()}
       disabled={isDeleting || contentsLength <= 8}
-      isLoading={isDeleting}
       size='sm'
       variant='destructive'
       className='rounded text-xs text-[11px] h-8'

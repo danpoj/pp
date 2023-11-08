@@ -39,6 +39,12 @@ export default function UserNicknameForm({ user }: Props) {
   const router = useRouter()
 
   const onSubmit = async (values: z.infer<typeof nicknameSchema>) => {
+    if (values.nickname === user.nickname) {
+      toast.info('기존 닉네임과 동일합니다.')
+
+      return
+    }
+
     try {
       setIsSubmitting(true)
 

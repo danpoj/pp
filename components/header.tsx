@@ -22,10 +22,10 @@ export default function Header({ session }: Props) {
 
   return (
     <header className='fixed w-full px-3 h-12 flex justify-between items-center bg-background/90 z-50 backdrop-blur-sm'>
-      <div className='flex items-center gap-4'>
+      <div className='flex items-center gap-2 sm:gap-4'>
         <PingpingLogo />
         <Button
-          className='hidden sm:block text-xs font-bold h-8'
+          className='text-[10px] sm:text-xs font-bold h-7 sm:h-8'
           onClick={() => {
             if (!session) {
               open('signin')

@@ -20,11 +20,11 @@ export function ThemeMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='py-2 font-semibold'>
         <DropdownMenuItem onClick={() => setTheme('light')} className='flex justify-between'>
-          밝게
+          라이트모드
           <Sun className='w-4 h-4' />
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('dark')} className='flex justify-between'>
-          어둡게 <Moon className='w-4 h-4 rotate-[260deg]' />
+          다크모드 <Moon className='w-4 h-4 rotate-[260deg]' />
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('system')} className='flex justify-between'>
           시스템

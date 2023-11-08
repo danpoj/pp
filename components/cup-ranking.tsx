@@ -72,8 +72,8 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
         ))}
       </m.div>
 
-      <Button onClick={() => setIsOpen((prev) => !prev)} className='mt-20 mb-10 max-w-[14rem]' size='lg'>
-        모든 결과 보기 ({cup._count.items - 3}개){' '}
+      <Button onClick={() => setIsOpen((prev) => !prev)} size='lg' className='mt-20 mb-10 max-w-[18rem]'>
+        모든 결과 보기 ({cup._count.items - 3}개)
         <ChevronDown className={cn('ml-1 transition duration-300', isOpen ? 'rotate-180' : 'rotate-0')} />
       </Button>
 

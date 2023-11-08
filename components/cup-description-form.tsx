@@ -11,6 +11,7 @@ import { descriptionSchema } from '@/lib/validations'
 import axios from 'axios'
 import { useState } from 'react'
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   description: string
@@ -19,6 +20,7 @@ type Props = {
 
 export default function CupDescriptionForm({ description, cupId }: Props) {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof descriptionSchema>>({
     resolver: zodResolver(descriptionSchema),
@@ -28,11 +30,19 @@ export default function CupDescriptionForm({ description, cupId }: Props) {
   })
 
   const onSubmit = async (values: z.infer<typeof descriptionSchema>) => {
+    if (values.description === description) {
+      toast.info('기존 설명과 동일합니다.')
+
+      return
+    }
+
     try {
       setIsSubmitting(true)
       await axios.patch(`/api/cup/${cupId}/description`, values)
 
       toast.success('월드컵 설명 수정 완료!')
+
+      router.refresh()
     } catch (error) {
       console.log(error)
     } finally {

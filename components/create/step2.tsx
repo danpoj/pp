@@ -50,7 +50,7 @@ export default function Step2({ setCurrentStep, cupData }: Props) {
       transition={{ duration: 0.5, delay: 0.1 }}
       className='mt-10 w-full flex flex-col items-center'
     >
-      <p className='text-3xl font-extrabold text-primary/70 tracking-tight'>제목 및 설명을 작성해주세요</p>
+      <p className='text-2xl sm:text-3xl font-extrabold text-primary/70 tracking-tight'>제목 및 설명을 작성해주세요</p>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='max-w-xl w-full space-y-6 mt-12 dark:brightness-75'>

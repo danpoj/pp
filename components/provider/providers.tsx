@@ -12,7 +12,14 @@ export default function Providers({ children }: Children) {
       <ModalProvider>
         <ConfettiProvider>
           {children}
-          <Toaster richColors position='top-center' />
+          <Toaster
+            richColors
+            position='top-center'
+            closeButton
+            toastOptions={{
+              duration: 2000,
+            }}
+          />
         </ConfettiProvider>
       </ModalProvider>
     </NextThemesProvider>

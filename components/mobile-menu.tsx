@@ -23,7 +23,6 @@ type Props = {
 
 export default function MobileMenu({ session }: Props) {
   const { open } = useModal()
-  const router = useRouter()
 
   return (
     <div className='block sm:hidden'>
@@ -84,20 +83,6 @@ export default function MobileMenu({ session }: Props) {
           )}
 
           <DropdownMenuSeparator />
-
-          <Button
-            className='w-full h-9'
-            onClick={() => {
-              if (!session) {
-                open('signin')
-                return
-              }
-
-              router.push('/create')
-            }}
-          >
-            월드컵 만들기
-          </Button>
 
           <DropdownMenuSeparator />
 

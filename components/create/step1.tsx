@@ -23,7 +23,7 @@ export default function Step1({ setCurrentStep, cupData }: Props) {
 
   return (
     <div className='mt-10 flex flex-col w-full items-center'>
-      <p className='text-3xl font-extrabold text-primary/70 tracking-tight'>어떤 종류의 월드컵인가요? 👋</p>
+      <p className='text-2xl sm:text-3xl font-extrabold text-primary/70 tracking-tight'>어떤 종류의 월드컵인가요?</p>
 
       <div className='flex mt-6 md:mt-16 gap-5 flex-col md:flex-row w-full'>
         <Button

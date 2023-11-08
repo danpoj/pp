@@ -132,7 +132,7 @@ export default function ThirdStepYoutube({ cupData }: Props) {
     <div className='mt-3 w-full px-2 pb-20'>
       <div className='mt-10 font-bold tracking-tight text-lg'>
         <span className='text-blue-500'>8 ~ 132개 </span>의 링크를 업로드 할 수 있습니다
-        <p className='text-blue-500 font-semibold mt-2'>
+        <p className='text-sm sm:text-base text-blue-500 font-semibold mt-2'>
           업로드 이후 자유롭게 수정 가능합니다 (제목, 설명, 썸네일, 비디오)
         </p>
         <div className='mt-6 flex items-center gap-2'>
