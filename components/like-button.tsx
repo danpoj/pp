@@ -1,15 +1,15 @@
 'use client'
 
+import { useModal } from '@/components/provider/modal-provider'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { CupCount } from '@/types/type'
 import type { Cup, Like } from '@prisma/client'
 import axios from 'axios'
+import { Star } from 'lucide-react'
 import type { Session } from 'next-auth'
-import { useState } from 'react'
-import HeartEmoji from '@/components/heart-emoji'
-import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
-import { useModal } from '@/components/provider/modal-provider'
-import { CupCount } from '@/types/type'
+import { useState } from 'react'
 
 type Props = {
   cup: Cup & {
@@ -64,8 +64,14 @@ export default function LikeButton({ cup, session, className, size }: Props) {
   }
 
   return (
-    <Button onClick={onClick} disabled={isSubmitting} variant='ghost' className={className} size='sm'>
-      <HeartEmoji size={size} className={cn(isLiked ? 'fill-red-500 stroke-red-500' : 'stroke-slate-400')} />
+    <Button
+      onClick={onClick}
+      disabled={isSubmitting}
+      variant='ghost'
+      className={cn(className, 'disabled:opacity-100')}
+      size='sm'
+    >
+      <Star className={cn('w-3.5 h-3.5', isLiked ? 'fill-yellow-400 stroke-yellow-600' : 'stroke-slate-400')} />
       <span className='text-slate-500 text-xs'>{likeCount}</span>
     </Button>
   )

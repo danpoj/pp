@@ -34,8 +34,8 @@ export default function CupCommentDeleteButton({ cupId, commentId }: Props) {
       disabled={isDeleting}
       onClick={() => onDeleteCupComment()}
       size='icon'
-      className='w-5 h-5 rounded-sm ml-2 flex items-center justify-center'
-      variant='destructive'
+      className='w-5 h-5 rounded ml-2 flex items-center justify-center'
+      variant='secondary'
     >
       <Plus className='w-3.5 h-3.5 rotate-45 stroke-[3px]' />
     </Button>

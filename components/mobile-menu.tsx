@@ -1,5 +1,7 @@
 'use client'
 
+import { useModal } from '@/components/provider/modal-provider'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,15 +10,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { LogOut, Menu, MessageSquare, Swords, User2 } from 'lucide-react'
+import { LogOut, Menu, MessageSquare, Star, Swords, User2 } from 'lucide-react'
 import type { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import HeartEmoji from '@/components/heart-emoji'
-import { useModal } from '@/components/provider/modal-provider'
-import { Button } from '@/components/ui/button'
 
 type Props = {
   session: Session | null
@@ -73,16 +72,16 @@ export default function MobileMenu({ session }: Props) {
               </DropdownMenuItem>
               <DropdownMenuItem className='h-9 text-xs cursor-pointer flex-1 gap-2' asChild>
                 <Link href='/my/likes'>
-                  <HeartEmoji className='w-4 h-4 fill-red-500 stroke-red-500 ' /> 좋아요
+                  <Star className='w-4 h-4 fill-yellow-300 stroke-yellow-600' /> 스크랩
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem className='h-9 text-xs cursor-pointer' asChild>
+                <Link href='/setting'>
+                  <User2 className='w-4 h-4 mr-2' /> 설정
                 </Link>
               </DropdownMenuItem>
             </>
           )}
-          <DropdownMenuItem className='h-9 text-xs cursor-pointer' asChild>
-            <Link href='/setting'>
-              <User2 className='w-4 h-4 mr-2' /> 설정
-            </Link>
-          </DropdownMenuItem>
 
           <DropdownMenuSeparator />
 

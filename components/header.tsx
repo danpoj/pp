@@ -1,15 +1,15 @@
 'use client'
 
-import { cn } from '@/lib/utils'
-import type { Session } from 'next-auth'
-import { usePathname, useRouter } from 'next/navigation'
 import MobileMenu from '@/components/mobile-menu'
 import PingpingLogo from '@/components/pingping-logo'
 import { useModal } from '@/components/provider/modal-provider'
 import { ThemeMenu } from '@/components/theme-menu'
 import { Button } from '@/components/ui/button'
 import UserSetting from '@/components/user-setting'
-import HeartEmoji from '@/components/heart-emoji'
+import { cn } from '@/lib/utils'
+import { Star } from 'lucide-react'
+import type { Session } from 'next-auth'
+import { usePathname, useRouter } from 'next/navigation'
 
 type Props = {
   session: Session | null
@@ -83,7 +83,7 @@ export default function Header({ session }: Props) {
               path === '/my/likes' && 'font-bold underline underline-offset-4'
             )}
           >
-            <HeartEmoji className='fill-red-500 stroke-red-500 mr-1' /> 좋아요
+            <Star className='w-3.5 h-3.5 fill-yellow-300 stroke-yellow-600' /> 스크랩
           </button>
         </nav>
       </div>
