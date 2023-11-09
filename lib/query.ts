@@ -112,7 +112,7 @@ export const getMyCommentPage = (userId: string) => {
 export const getMyLikesPage = (userId: string): Promise<CupWithUser[]> => {
   return db.cup.findMany({
     skip: 0,
-    take: 24,
+    take: 16,
     where: {
       likes: {
         some: {
