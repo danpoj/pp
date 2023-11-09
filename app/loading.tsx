@@ -2,7 +2,7 @@ import Loader from '@/components/loader'
 
 export default function Loading() {
   return (
-    <div className='h-full p-2 flex items-center justify-center'>
+    <div className='h-full flex items-center justify-center'>
       <Loader size='md' />
     </div>
   )

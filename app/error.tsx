@@ -22,7 +22,7 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
       </Button>
 
       <h1 className='text-xl'>에러가 발생했습니다</h1>
-      <Loader size='lg' />
+      <Loader size='md' />
     </div>
   )
 }

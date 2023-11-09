@@ -17,7 +17,7 @@ export default function NotFound() {
 
       <h1 className='text-xl'>페이지를 찾을 수 없습니다</h1>
       <p className='text-lg'>404 Not Found</p>
-      <Loader size='lg' />
+      <Loader size='md' />
     </div>
   )
 }
