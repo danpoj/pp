@@ -37,8 +37,6 @@ const notoSans = Noto_Sans({
   weight: ['500'],
 })
 
-export const preferredRegion = 'icn1'
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='ko' suppressHydrationWarning>
