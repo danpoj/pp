@@ -31,4 +31,4 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-module.exports = withPWA(nextConfig)
+module.exports = withBundleAnalyzer(withPWA(nextConfig))
