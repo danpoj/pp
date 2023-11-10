@@ -14,9 +14,11 @@ import { Check, ChevronRight, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { Label } from './ui/label'
+import { Textarea } from './ui/textarea'
 
 type Props = {
   cup: Cup & {
@@ -33,6 +35,8 @@ export default function VideoUpdateForm({ cup }: Props) {
   const [isUploading, setIsUploading] = useState(false)
   const router = useRouter()
   const [links, setLinks] = useState<{ videoUrl: string; imageUrl: string }[]>([])
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
+  const thumbnail = useRef<string | null>(null)
 
   const form = useForm<z.infer<typeof urlSchema>>({
     resolver: zodResolver(urlSchema),
@@ -62,9 +66,30 @@ export default function VideoUpdateForm({ cup }: Props) {
       }
 
       setLinks((prev) => [{ ...link }, ...prev])
+      thumbnail.current = link.imageUrl
 
       form.reset()
       form.setFocus('url')
+    } catch (error) {
+      toast.warning('유효하지않은 유튜브 링크입니다.')
+    }
+  }
+
+  const onSubmitYoutubeUrlsForm = () => {
+    if (!textAreaRef.current) return
+
+    try {
+      const inputs = textAreaRef.current.value.split('\n').filter((input) => input.trim().length > 0)
+      const videoIds = inputs.map((input) => getYouTubeVideoId(input))
+      const youtubeLinks = videoIds.map((videoId) => ({
+        videoUrl: `https://www.youtube.com/watch?v=${videoId}`,
+        imageUrl: `https://img.youtube.com/vi/${videoId}/0.jpg`,
+      }))
+
+      setLinks((prev) => [...youtubeLinks, ...prev])
+      thumbnail.current = youtubeLinks[0].imageUrl
+
+      textAreaRef.current.value = ''
     } catch (error) {
       toast.warning('유효하지않은 유튜브 링크입니다.')
     }
@@ -141,6 +166,31 @@ export default function VideoUpdateForm({ cup }: Props) {
           />
         </form>
       </Form>
+
+      <div className='grid w-full gap-1.5 mt-10'>
+        <p>유튜브 플레이리스트 영상 한번에 추가하기</p>
+        <Label htmlFor='multiple-links'>
+          <Link
+            href='https://www.thetubelab.com/get-all-urls-of-youtube-playlist-channel'
+            target='_blank'
+            rel='noreferrer noopener'
+            className='underline tracking-tighter text-blue-500'
+          >
+            https://www.thetubelab.com/get-all-urls-of-youtube-playlist-channel
+          </Link>
+        </Label>
+        <div className='flex gap-2 mt-3'>
+          <Textarea
+            ref={textAreaRef}
+            placeholder='여러 링크 한번에 추가... (엔터 키로 구분)'
+            id='multiple-links'
+            className='h-40'
+          />
+          <Button onClick={onSubmitYoutubeUrlsForm} className='h-full w-24'>
+            추가
+          </Button>
+        </div>
+      </div>
 
       <Button
         isLoading={isUploading}

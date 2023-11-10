@@ -12,6 +12,7 @@ import { Separator } from '@/components/ui/separator'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/ko'
+import { toast } from 'sonner'
 dayjs.extend(relativeTime)
 dayjs.locale('ko')
 
@@ -37,6 +38,8 @@ export default function MyComments({ user }: Props) {
       await axios.delete(`/api/cup/${cupId}/comment/${commentId}`)
 
       router.refresh()
+
+      toast.success('댓글 삭제 완료')
     } catch (error) {
       console.log(error)
     } finally {
@@ -51,6 +54,8 @@ export default function MyComments({ user }: Props) {
       await axios.delete(`/api/item/${itemId}/comment/${commentId}`)
 
       router.refresh()
+
+      toast.success('댓글 삭제 완료')
     } catch (error) {
       console.log(error)
     } finally {

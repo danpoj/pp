@@ -29,9 +29,9 @@ export default function MyCups({ cups }: Props) {
 
       await axios.delete(`/api/cup/${cupId}`)
 
-      toast.success('월드컵 삭제 완료!')
-
       router.refresh()
+
+      toast.success('월드컵 삭제 완료')
     } catch (error) {
       console.log(error)
     } finally {
