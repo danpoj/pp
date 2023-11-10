@@ -33,7 +33,7 @@ export const ClipboardButton = ({ path }: Props) => {
       {copied ? (
         <>
           <div className='hidden sm:flex items-center'>
-            <span className='text-xs'>복사완료!</span>
+            <span className='text-xs'>복사!</span>
             <Check className='w-3 h-3 ml-1' />
           </div>
           <div className='flex sm:hidden items-center'>
@@ -43,7 +43,7 @@ export const ClipboardButton = ({ path }: Props) => {
       ) : (
         <>
           <div className='hidden sm:flex items-center'>
-            <span className='text-xs'>공유하기</span>
+            <span className='text-xs'>공유</span>
             <Copy className='w-3 h-3 ml-1' />
           </div>
           <div className='flex sm:hidden items-center'>

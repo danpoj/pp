@@ -9,18 +9,12 @@ import { CupWithUser, TypeCupSearchParams } from '@/types/type'
 import axios from 'axios'
 import { BarChart, MessageSquare, YoutubeIcon } from 'lucide-react'
 import type { Session } from 'next-auth'
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { ResponsiveMasonry } from 'react-responsive-masonry'
-import Loader from './loader'
 import GoogleAdsense from './adsense/google-adsense'
-
-const Masonry = dynamic(() => import('react-responsive-masonry'), {
-  ssr: false,
-})
+import Loader from './loader'
 
 type Props = {
   count: number
@@ -41,7 +35,7 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
     threshold: 1,
   })
 
-  const getCups = async () => {
+  const getCups = useCallback(async () => {
     try {
       setIsLoading(true)
 
@@ -63,26 +57,23 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [count, cups.length, isLiked, search, type])
 
   useEffect(() => {
     if (inView && !isFinished && !isLoading) {
       getCups()
     }
-  }, [inView, isFinished, isLoading])
+  }, [inView, isFinished, isLoading, getCups])
 
   return (
-    <section className='sm:px-2 pb-20 '>
-      {/* <ResponsiveMasonry className='px-1 w-full' columnsCountBreakPoints={{ 0: 2, 760: 3, 1100: 4, 1400: 5, 1700: 6 }}>
-        <Masonry gutter='2px' className='pb-20 w-full'> */}
-
-      <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-7'>
+    <section className='sm:px-2 pb-20'>
+      <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6'>
         {cups.map((cup, index) => {
           if (index % 12 === 0) {
             return (
               <Fragment key={cup.id}>
+                <GoogleAdsense className='col-span-2' />
                 <WorldCup cup={cup} session={session} />
-                <GoogleAdsense className='col-span-2 sm:col-span-2 xl:col-span-4' />
               </Fragment>
             )
           }
@@ -90,11 +81,9 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
           return <WorldCup key={cup.id} cup={cup} session={session} />
         })}
       </div>
-      {/* </Masonry>
-      </ResponsiveMasonry> */}
 
       {isFinished ? (
-        <div className='w-full flex items-center justify-center pb-6 flex-col gap-2'>
+        <div className='w-full flex items-center justify-center pb-6 flex-col gap-2 mt-20'>
           <span className='text-lg font-bold'>{search == null ? '' : `검색어: ${search}`}</span>
           <span>총 {cups.length}개의 컨텐츠 불러오기 완료</span>
         </div>
@@ -111,7 +100,7 @@ function WorldCup({ cup, session }: { cup: CupWithUser; session: Session | null 
   return (
     <div key={cup.id} className='rounded-lg overflow-hidden shadow dark:bg-border/20 border h-fit'>
       <Link prefetch={false} href={`/cup/${cup.id}`} className='hover:opacity-90 transition group'>
-        <div className='relative overflow-hidden flex items-center justify-center'>
+        <div className='relative overflow-hidden flex items-center justify-center max-h-[24rem]'>
           {cup.thumbnail ? (
             <BlurredImage
               thumbnail={cup.thumbnail}
@@ -171,7 +160,7 @@ function WorldCup({ cup, session }: { cup: CupWithUser; session: Session | null 
             href={`/cup/${cup.id}/ranking`}
             className={cn(buttonVariants({ className: 'text-xs text-[11px] px-2 flex-1', size: 'sm' }), 'h-8')}
           >
-            <span className='hidden sm:block'>랭킹보기</span>
+            <span className='hidden sm:block'>랭킹</span>
             <span className='block sm:hidden text-[0.65rem]'>랭킹</span>
             <BarChart className='w-3 h-3 hidden sm:block ml-1' />
           </Link>

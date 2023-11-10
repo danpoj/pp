@@ -24,7 +24,7 @@ export const BlurredImage = ({ thumbnail, title, width, height, type }: Props) =
       width={width}
       height={height}
       className={cn(
-        'object-contain duration-200 ease-in-out group-hover:scale-105 group-active:scale-110 w-full',
+        'object-cover duration-200 ease-in-out group-hover:scale-105 group-active:scale-110 w-full',
         isLoading ? ' blur-[3px] ' : 'blur-0'
       )}
       onLoad={() => setIsLoading(false)}
