@@ -17,6 +17,7 @@ import 'dayjs/locale/ko'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { ChevronDown } from 'lucide-react'
 import { Button } from './ui/button'
+import GoogleAdsense from './adsense/google-adsense'
 dayjs.extend(relativeTime)
 dayjs.locale('ko')
 
@@ -117,6 +118,8 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
           ))}
         </m.div>
       )}
+
+      <GoogleAdsense className='mb-6' />
 
       <div className='md:flex mt-2'>
         <div className='w-full flex flex-col h-full'>
