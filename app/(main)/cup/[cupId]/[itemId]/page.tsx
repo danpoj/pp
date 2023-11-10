@@ -12,14 +12,11 @@ import db from '@/lib/db'
 import type { Metadata, ResolvingMetadata } from 'next'
 import Image from 'next/image'
 
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
-import 'dayjs/locale/ko'
-import { notFound } from 'next/navigation'
 import { getItemResultPage } from '@/lib/query'
-import GoogleAdsenseVertical from '@/components/adsense/google-adsense-vertical'
-import GoogleAdsense from '@/components/adsense/google-adsense'
-import GoogleAdsenseHorizontal from '@/components/adsense/google-adsense-horizontal'
+import dayjs from 'dayjs'
+import 'dayjs/locale/ko'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import { notFound } from 'next/navigation'
 dayjs.extend(relativeTime)
 dayjs.locale('ko')
 
@@ -78,10 +75,8 @@ export default async function Page({ params }: Props) {
   const session = await getSession()
 
   return (
-    <section className='h-full max-w-7xl mx-auto p-2 flex flex-col lg:flex-row lg:justify-center lg:items-center lg:gap-4 relative'>
+    <section className='h-full max-w-6xl mx-auto p-2 flex flex-col lg:flex-row lg:justify-center lg:items-center lg:gap-4 relative'>
       <PlayConfetti />
-
-      <GoogleAdsenseVertical className='hidden xl:block rounded-lg shrink-0 border h-full overflow-hidden' />
 
       {image.cup.type === 'IMAGE' ? (
         <ImageResult width={image.width!} height={image.height!} src={image.url!} description={image.description} />
@@ -92,7 +87,6 @@ export default async function Page({ params }: Props) {
       )}
 
       <div className='mt-4 h-full lg:w-[30rem] lg:shrink-0 pr-2'>
-        <GoogleAdsenseHorizontal className='mb-4 rounded-lg border lg:hidden' />
         <h2 className='text-xl sm:text-2xl font-extrabold text-primary/80 tracking-tight'>{image.cup.title}</h2>
         <h3 className='text-xs sm:text-sm font-semiboid text-primary/70 my-2'>{image.cup.description}</h3>
         <div className='flex gap-2 font-bold bg-fancy bg-clip-text text-transparent mt-8 mb-6'>
