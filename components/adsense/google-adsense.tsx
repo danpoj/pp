@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import { useEffect } from 'react'
 
 declare global {
@@ -8,13 +9,13 @@ declare global {
   }
 }
 
-export default function GoogleAdsense() {
+export default function GoogleAdsense({ className }: { className?: string }) {
   useEffect(() => {
     ;(window.adsbygoogle = window.adsbygoogle || []).push({})
   }, [])
 
   return (
-    <div className='rounded-lg overflow-hidden shadow dark:bg-border/20 border w-full'>
+    <div className={cn('rounded-lg overflow-hidden shadow dark:bg-border/20 border w-full', className)}>
       <ins
         className='adsbygoogle block'
         data-ad-format='fluid'
