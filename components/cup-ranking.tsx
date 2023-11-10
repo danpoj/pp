@@ -15,9 +15,10 @@ import { CupRankingPage } from '@/types/type'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ko'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 import { Button } from './ui/button'
 import GoogleAdsense from './adsense/google-adsense'
+import { Item } from '@prisma/client'
 dayjs.extend(relativeTime)
 dayjs.locale('ko')
 
@@ -89,37 +90,30 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
           }}
           className='mt-1 gap-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'
         >
-          {cup.items.slice(3).map((item, index) => (
-            <Link
-              href={`/cup/${cup.id}/${item.id}`}
-              key={item.id}
-              className='rounded overflow-hidden relative shrink-0 h-full aspect-square flex items-center justify-center hover:opacity-90 transition-opacity'
-            >
-              <Image
-                unoptimized
-                src={item.publicId ? item.url : item.videoThumbnail!}
-                alt='cup image'
-                width={item.width!}
-                height={item.height!}
-                className='object-contain w-full h-full'
-              />
+          {cup.items.slice(3).map((item, index) => {
+            if (index % 12 === 0) {
+              return (
+                <>
+                  <GoogleAdsense className='col-span-2' />
+                  <ResultItem key={item.id} item={item} index={index} cupPlayCount={cup.playCount} cupId={cup.id} />
+                </>
+              )
+            }
 
-              <div
-                className={cn(
-                  'flex gap-2 items-center absolute right-2 top-2 px-2 py-1 rounded pointer-events-none text-white bg-black/70'
-                )}
-              >
-                <span className='font-black text-xs sm:text-sm'>#{index + 4}</span>
-                <span className='font-bold text-xs sm:text-sm'>
-                  {cup.playCount === 0 ? '0.0' : ((item.winCount / cup.playCount) * 100).toFixed(1)}%
-                </span>
-              </div>
-            </Link>
-          ))}
+            return <ResultItem key={item.id} item={item} index={index} cupPlayCount={cup.playCount} cupId={cup.id} />
+          })}
         </m.div>
       )}
 
-      <GoogleAdsense className='mb-6' />
+      {isOpen && (
+        <Button onClick={() => setIsOpen((prev) => !prev)} size='lg' className='my-20 max-w-[18rem]'>
+          모든 결과 접기 <ChevronUp />
+        </Button>
+      )}
+
+      <div className='flex justify-end'>
+        <GoogleAdsense className='mb-6 max-w-[52rem] max-h-[24rem]' />
+      </div>
 
       <div className='md:flex mt-2'>
         <div className='w-full flex flex-col h-full'>
@@ -181,5 +175,45 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
         </div>
       </div>
     </div>
+  )
+}
+
+function ResultItem({
+  item,
+  index,
+  cupPlayCount,
+  cupId,
+}: {
+  item: Item
+  index: number
+  cupPlayCount: number
+  cupId: string
+}) {
+  return (
+    <Link
+      href={`/cup/${cupId}/${item.id}`}
+      key={item.id}
+      className='rounded overflow-hidden relative shrink-0 h-full aspect-square flex items-center justify-center hover:opacity-90 transition-opacity'
+    >
+      <Image
+        unoptimized
+        src={item.publicId ? item.url : item.videoThumbnail!}
+        alt='cup image'
+        width={item.width!}
+        height={item.height!}
+        className='object-contain w-full h-full'
+      />
+
+      <div
+        className={cn(
+          'flex gap-2 items-center absolute right-2 top-2 px-2 py-1 rounded pointer-events-none text-white bg-black/70'
+        )}
+      >
+        <span className='font-black text-xs sm:text-sm'>#{index + 4}</span>
+        <span className='font-bold text-xs sm:text-sm'>
+          {cupPlayCount === 0 ? '0.0' : ((item.winCount / cupPlayCount) * 100).toFixed(1)}%
+        </span>
+      </div>
+    </Link>
   )
 }
