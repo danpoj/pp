@@ -94,7 +94,7 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
             if (index % 12 === 0) {
               return (
                 <>
-                  <GoogleAdsense className='col-span-2' />
+                  <GoogleAdsense className='col-span-2 rounded overflow-hidden aspect-[2/1]' />
                   <ResultItem key={item.id} item={item} index={index} cupPlayCount={cup.playCount} cupId={cup.id} />
                 </>
               )
