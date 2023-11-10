@@ -81,7 +81,7 @@ export default async function Page({ params }: Props) {
     <section className='h-full max-w-7xl mx-auto p-2 flex flex-col lg:flex-row lg:justify-center lg:items-center lg:gap-4 relative'>
       <PlayConfetti />
 
-      <GoogleAdsenseVertical className='hidden xl:block rounded-lg h-full w-[14rem] shrink-0 border' />
+      <GoogleAdsenseVertical className='hidden xl:block rounded-lg shrink-0 border h-full overflow-hidden' />
 
       {image.cup.type === 'IMAGE' ? (
         <ImageResult width={image.width!} height={image.height!} src={image.url!} description={image.description} />
@@ -92,7 +92,7 @@ export default async function Page({ params }: Props) {
       )}
 
       <div className='mt-4 h-full lg:w-[30rem] lg:shrink-0 pr-2'>
-        <GoogleAdsenseHorizontal className='mb-4 rounded-lg min-h-[14rem] border lg:hidden' />
+        <GoogleAdsenseHorizontal className='mb-4 rounded-lg border lg:hidden' />
         <h2 className='text-xl sm:text-2xl font-extrabold text-primary/80 tracking-tight'>{image.cup.title}</h2>
         <h3 className='text-xs sm:text-sm font-semiboid text-primary/70 my-2'>{image.cup.description}</h3>
         <div className='flex gap-2 font-bold bg-fancy bg-clip-text text-transparent mt-8 mb-6'>

@@ -6,12 +6,12 @@ export default function GoogleAdsenseVertical({ className }: { className?: strin
       <ins
         className='adsbygoogle'
         style={{
-          display: 'block',
+          display: 'inline-block',
+          width: '200px',
+          height: '780px',
         }}
         data-ad-client='ca-pub-3412419424653583'
-        data-ad-slot='2989262477'
-        data-ad-format='auto'
-        data-full-width-responsive='true'
+        data-ad-slot='7756210289'
       ></ins>
     </div>
   )
