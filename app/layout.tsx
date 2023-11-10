@@ -47,6 +47,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         // strategy='lazyOnload'
       />
 
+      <Script async custom-element='amp-auto-ads' src='https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js' />
+
       <body className={cn('antialiased text-sm', notoSans.className)}>
         <Providers>
           {children}
