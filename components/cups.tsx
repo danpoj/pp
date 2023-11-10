@@ -88,7 +88,7 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
           <span>총 {cups.length}개의 컨텐츠 불러오기 완료</span>
         </div>
       ) : (
-        <div ref={ref} className='w-full flex items-center justify-center'>
+        <div ref={ref} className='flex items-center justify-center bg-black mx-auto w-fit'>
           <Loader size='md' />
         </div>
       )}
