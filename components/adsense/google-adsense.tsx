@@ -15,7 +15,7 @@ export default function GoogleAdsense({ className }: { className?: string }) {
   }, [])
 
   return (
-    <div className={cn('rounded-lg overflow-hidden shadow dark:bg-border/20 border w-full', className)}>
+    <div className={cn('rounded-lg overflow-hidden dark:bg-border/20 w-full', className)}>
       <ins
         className='adsbygoogle block'
         data-ad-format='fluid'
@@ -23,14 +23,6 @@ export default function GoogleAdsense({ className }: { className?: string }) {
         data-ad-client='ca-pub-3412419424653583'
         data-ad-slot='6021221123'
       />
-
-      {/* <ins
-        className='adsbygoogle block'
-        data-ad-client='ca-pub-3412419424653583'
-        data-ad-slot='5019393970'
-        data-ad-format='auto'
-        data-full-width-responsive='true'
-      ></ins> */}
     </div>
   )
 }
