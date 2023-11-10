@@ -44,7 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         async
         crossOrigin='anonymous'
         src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3412419424653583'
-        strategy='lazyOnload'
+        // strategy='lazyOnload'
       />
 
       <body className={cn('antialiased text-sm', notoSans.className)}>
