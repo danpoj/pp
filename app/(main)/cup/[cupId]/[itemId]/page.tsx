@@ -17,6 +17,7 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/ko'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { notFound } from 'next/navigation'
+import GoogleAdsense from '@/components/adsense/google-adsense'
 dayjs.extend(relativeTime)
 dayjs.locale('ko')
 
@@ -84,6 +85,8 @@ export default async function Page({ params }: Props) {
       )}
 
       <div className='mt-4 h-full lg:w-[30rem] lg:shrink-0 pr-2'>
+        <GoogleAdsense className='max-h-[10rem] shrink-0' />
+
         <h2 className='text-xl sm:text-2xl font-extrabold text-primary/80 tracking-tight'>{image.cup.title}</h2>
         <h3 className='text-xs sm:text-sm font-semiboid text-primary/70 my-2'>{image.cup.description}</h3>
         <div className='flex gap-2 font-bold bg-fancy bg-clip-text text-transparent mt-8 mb-6'>
@@ -112,7 +115,7 @@ export default async function Page({ params }: Props) {
         <div className='w-full'>
           <ItemCommentForm session={session} itemId={image.id} />
 
-          <div className='flex flex-col mt-6 gap-2 w-full h-full lg:max-h-[16rem] overflow-scroll pr-6 pb-20 lg:pb-10'>
+          <div className='flex flex-col mt-6 gap-2 w-full h-full lg:max-h-[16rem] pr-6 pb-20 lg:pb-10'>
             {image.comments.length === 0 && <p className='text-xs tracking-tight'>등록된 댓글이 없습니다</p>}
 
             {image.comments.map((comment) => (
