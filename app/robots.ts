@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/my/*', '/setting', '/create'],
+ 
       },
     ],
     sitemap: 'https://www.pingping.online/sitemap.xml',
