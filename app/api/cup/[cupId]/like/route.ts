@@ -14,6 +14,7 @@ export const PATCH = async (req: NextRequest, { params: { cupId } }: { params: {
       await db.like.delete({
         where: {
           id: like.id,
+          userId: session.user.id,
         },
       })
 

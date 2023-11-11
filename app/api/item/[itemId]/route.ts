@@ -44,6 +44,9 @@ export const POST = async (req: NextRequest, { params: { itemId } }: { params: {
     const deletedItem = await db.item.delete({
       where: {
         id: itemId,
+        cup: {
+          userId: session.user.id,
+        },
       },
     })
 
