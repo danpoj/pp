@@ -15,11 +15,13 @@ export default async function sitemap() {
 
   const cups = cupIds.map((cup) => ({
     url: `https://www.pingping.online/cup/${cup.id}`,
+    priority: 1,
     lastModified: cup.updatedAt,
   }))
 
   const cupRankings = cupIds.map((cup) => ({
     url: `https://www.pingping.online/cup/${cup.id}/ranking`,
+    priority: 1,
     lastModified: cup.updatedAt,
   }))
 
@@ -29,6 +31,8 @@ export default async function sitemap() {
     for (const item of cup.items) {
       items.push({
         url: `https://www.pingping.online/cup/${cup.id}/${item.id}`,
+        priority: 1,
+        lastModified: cup.updatedAt,
       })
     }
   }
