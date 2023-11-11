@@ -15,7 +15,7 @@ export async function generateMetadata({ params: { cupId } }: Props): Promise<Me
   if (!cup) return
 
   return {
-    title: cup.title,
+    title: `pingping 랭킹 ${cup.title}`,
     description: cup.description,
     keywords: ['이상형 월드컵', cup.title, cup.description],
 

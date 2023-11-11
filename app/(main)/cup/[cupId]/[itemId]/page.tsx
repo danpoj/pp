@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator'
 import { getSession } from '@/lib/auth'
 import db from '@/lib/db'
 
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata } from 'next'
 import Image from 'next/image'
 
 import { getItemResultPage } from '@/lib/query'
@@ -20,10 +20,7 @@ import { notFound } from 'next/navigation'
 dayjs.extend(relativeTime)
 dayjs.locale('ko')
 
-export async function generateMetadata(
-  { params: { itemId } }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata | undefined> {
+export async function generateMetadata({ params: { itemId } }: Props): Promise<Metadata | undefined> {
   const item = await db.item.findUnique({
     where: {
       id: itemId,
@@ -33,9 +30,9 @@ export async function generateMetadata(
   if (!item) return
 
   return {
-    title: '이상형 월드컵 결과페이지 | ' + (item.description ?? ''),
+    title: `pingping 결과 ${item.description ?? ''}`,
     description: item.description ?? 'PingPing 이상형 월드컵 이미지 결과페이지',
-    keywords: ['이상형 월드컵', item.description ?? '이상형'],
+    keywords: ['이상형 월드컵', item.description ?? '이상형', 'pingping'],
 
     openGraph: {
       title: `PingPing 이상형 월드컵 이미지 결과페이지 | ${item.description || ''}`,

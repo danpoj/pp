@@ -1,7 +1,7 @@
 import Tournament from '@/components/tournament'
 import db from '@/lib/db'
 import { getCupPage } from '@/lib/query'
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 type Props = {
@@ -10,10 +10,7 @@ type Props = {
   }
 }
 
-export async function generateMetadata(
-  { params: { cupId } }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata | undefined> {
+export async function generateMetadata({ params: { cupId } }: Props): Promise<Metadata | undefined> {
   const cup = await db.cup.findUnique({
     where: {
       id: cupId,
@@ -23,9 +20,9 @@ export async function generateMetadata(
   if (!cup) return
 
   return {
-    title: cup.title,
+    title: `pingping ${cup.title}`,
     description: cup.description,
-    keywords: ['이상형 월드컵', cup.title, cup.description],
+    keywords: ['이상형 월드컵', cup.title, cup.description, 'pingping'],
 
     openGraph: {
       title: `PingPing 이상형 월드컵 | ${cup.title}`,

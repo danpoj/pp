@@ -8,10 +8,7 @@ import './globals.css'
 import GoogleAnalytics from '@/components/analytics/google-analytics'
 
 export const metadata: Metadata = {
-  title: {
-    default: 'PingPing 이상형 월드컵',
-    template: 'PingPing | %s',
-  },
+  title: 'PingPing 이상형 월드컵',
   keywords: ['이상형 월드컵', '이상형', '월드컵', '핑핑', 'pingping'],
   description: '핑핑은 나만의 이상형 월드컵을 만들고 사용자들과 공유하는 공간이에요',
   openGraph: {
