@@ -85,7 +85,7 @@ export default async function Page({ params }: Props) {
       )}
 
       <div className='mt-4 h-full lg:w-[30rem] lg:shrink-0 pr-2'>
-        <GoogleAdsense className='max-h-[10rem] shrink-0' />
+        <GoogleAdsense className='aspect-[2/1]' />
 
         <h2 className='text-xl sm:text-2xl font-extrabold text-primary/80 tracking-tight'>{image.cup.title}</h2>
         <h3 className='text-xs sm:text-sm font-semiboid text-primary/70 my-2'>{image.cup.description}</h3>
