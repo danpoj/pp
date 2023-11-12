@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import type { Session } from 'next-auth'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { motion as m } from 'framer-motion'
 
 import { CupRankingPage } from '@/types/type'
@@ -93,10 +93,10 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
           {cup.items.slice(3).map((item, index) => {
             if (index % 12 === 0) {
               return (
-                <>
+                <Fragment key={item.id}>
                   <GoogleAdsense className='col-span-2 rounded overflow-hidden aspect-[2/1]' />
-                  <ResultItem key={item.id} item={item} index={index} cupPlayCount={cup.playCount} cupId={cup.id} />
-                </>
+                  <ResultItem item={item} index={index} cupPlayCount={cup.playCount} cupId={cup.id} />
+                </Fragment>
               )
             }
 

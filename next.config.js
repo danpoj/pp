@@ -1,5 +1,3 @@
-/** @type {import('next').NextConfig} */
-
 const runtimeCaching = require('next-pwa/cache')
 
 const withPWA = require('next-pwa')({
@@ -10,6 +8,7 @@ const withPWA = require('next-pwa')({
   disable: process.env.NODE_ENV === 'development',
 })
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -22,6 +21,10 @@ const nextConfig = {
         hostname: '**',
       },
     ],
+  },
+
+  experimental: {
+    ppr: true,
   },
 
   reactStrictMode: false,
