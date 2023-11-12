@@ -99,10 +99,16 @@ export const getMyCommentPage = (userId: string) => {
         include: {
           cup: true,
         },
+        orderBy: {
+          createdAt: 'desc',
+        },
       },
       itemComments: {
         include: {
           item: true,
+        },
+        orderBy: {
+          createdAt: 'desc',
         },
       },
     },

@@ -7,7 +7,7 @@ import { CupCount } from '@/types/type'
 import type { Cup, CupType } from '@prisma/client'
 import axios from 'axios'
 import dayjs from 'dayjs'
-import { Pencil, Trash2, Youtube } from 'lucide-react'
+import { ArrowRight, Pencil, Trash2, Youtube } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -95,8 +95,13 @@ export default function MyCups({ cups }: Props) {
 
           <div className='md:ml-auto flex flex-col justify-between mt-8 md:mt-0 shrink-0'>
             <div className='flex gap-1 justify-end'>
-              <Button onClick={() => router.push(`/cup/${cup.id}/update`)} size='sm' className='text-xs h-8 rounded'>
-                수정 <Pencil className='w-3 h-3 ml-1' />
+              <Button
+                variant='ghost'
+                onClick={() => router.push(`/cup/${cup.id}/update`)}
+                size='sm'
+                className='text-xs h-8 rounded font-bold'
+              >
+                수정하기 <ArrowRight className='w-3 h-3 ml-1' />
               </Button>
               <Button
                 disabled={deletingIds.includes(cup.id)}

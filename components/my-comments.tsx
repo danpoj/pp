@@ -13,6 +13,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/ko'
 import { toast } from 'sonner'
+import { cn } from '@/lib/utils'
 dayjs.extend(relativeTime)
 dayjs.locale('ko')
 
@@ -67,8 +68,8 @@ export default function MyComments({ user }: Props) {
     <div className='h-full flex flex-col mt-10 gap-2 pb-20'>
       <span className='text-base'>월드컵 랭킹 댓글 ({user.cupComments.length}개)</span>
       <Separator className='my-2' />
-      {user.cupComments.map((comment) => (
-        <div key={comment.id} className='space-y-1 p-2 rounded'>
+      {user.cupComments.map((comment, index) => (
+        <div key={comment.id} className={cn('space-y-1 p-2 rounded', index % 2 === 1 && 'bg-primary/5')}>
           <div className='flex gap-1'>
             <div className='flex flex-col text-xs'>
               <span className='font-semibold max-w-[240px] truncate sm:max-w-[460px]'>{comment.cup.title}</span>
@@ -122,8 +123,14 @@ export default function MyComments({ user }: Props) {
 
       <span className='text-base mt-20'>컨텐츠 결과 댓글 ({user.itemComments.length}개)</span>
       <Separator className='my-2' />
-      {user.itemComments.map((comment) => (
-        <div key={comment.id} className='space-y-1 p-2 rounded'>
+      {user.itemComments.map((comment, index) => (
+        <div key={comment.id} className={cn('space-y-1 p-2 rounded', index % 2 === 1 && 'bg-primary/5')}>
+          <div className='flex gap-1'>
+            <div className='flex flex-col text-xs'>
+              <span className='font-semibold max-w-[240px] truncate sm:max-w-[460px]'>{comment.item.description}</span>
+            </div>
+          </div>
+
           <div className='flex flex-col gap-2 break-words mb-4'>
             <div className='flex gap-1 items-center'>
               <Image
