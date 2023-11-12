@@ -49,11 +49,9 @@ type Props = {
 }
 
 export default async function Page({ params: { cupId } }: Props) {
-  const cup = await getCupRankingPage(cupId)
+  const [cup, session] = await Promise.all([getCupRankingPage(cupId), getSession()])
 
   if (!cup) notFound()
-
-  const session = await getSession()
 
   return (
     <section className='h-full max-w-7xl mx-auto p-2'>

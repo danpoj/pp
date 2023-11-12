@@ -19,6 +19,7 @@ export default function Page() {
             />
             Ios
           </TabsTrigger>
+
           <TabsTrigger value='android'>
             <Image
               unoptimized
@@ -30,6 +31,7 @@ export default function Page() {
             />
             Android
           </TabsTrigger>
+
           <TabsTrigger value='pc'>
             <Monitor className='w-4 h-4 mr-1' />
             Pc

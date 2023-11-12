@@ -66,11 +66,9 @@ type Props = {
 }
 
 export default async function Page({ params }: Props) {
-  const image = await getItemResultPage(params.itemId)
+  const [image, session] = await Promise.all([getItemResultPage(params.itemId), getSession()])
 
   if (!image) notFound()
-
-  const session = await getSession()
 
   return (
     <section className='h-full max-w-6xl mx-auto p-2 flex flex-col lg:flex-row lg:justify-center lg:items-center lg:gap-4 relative'>

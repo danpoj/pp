@@ -6,7 +6,6 @@ import LikeButton from '@/components/like-button'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { CupWithUser, TypeCupSearchParams } from '@/types/type'
-import axios from 'axios'
 import { BarChart, MessageSquare, YoutubeIcon } from 'lucide-react'
 import type { Session } from 'next-auth'
 import Image from 'next/image'
@@ -32,23 +31,21 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
   const page = useRef(1)
 
   const { ref, inView } = useInView({
-    threshold: 1,
+    threshold: 0,
   })
 
   const getCups = useCallback(async () => {
     try {
       setIsLoading(true)
 
-      const { data } = (await axios.get(
+      const newCups = await fetch(
         `/api/cup?isLiked=${isLiked}&type=${type}&page=${page.current}&search=${search}`
-      )) as {
-        data: CupWithUser[]
-      }
+      ).then((res) => res.json())
 
-      setCups((prev) => [...prev, ...data])
+      setCups((prev) => [...prev, ...newCups])
       page.current++
 
-      if (cups.length + data.length === count) {
+      if (cups.length + newCups.length === count) {
         setIsFinished(true)
       }
     } catch (error) {
