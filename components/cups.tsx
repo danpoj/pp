@@ -64,12 +64,12 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
 
   return (
     <section className='sm:px-2 pb-20'>
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6'>
+      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'>
         {cups.map((cup, index) => {
-          if (index % 12 === 0) {
+          if (index % 6 === 0) {
             return (
               <Fragment key={cup.id}>
-                <GoogleAdsense className='col-span-2' />
+                <GoogleAdsense className='col-span-2 md:col-span-1' />
                 <WorldCup cup={cup} session={session} />
               </Fragment>
             )
