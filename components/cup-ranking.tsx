@@ -111,8 +111,9 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
         </Button>
       )}
 
-      <div className='flex justify-end'>
-        <GoogleAdsense className='mb-6 max-w-[52rem] max-h-[24rem]' />
+      <div className='flex flex-col sm:flex-row gap-4'>
+        <GoogleAdsense className='border' />
+        <GoogleAdsense className='border' />
       </div>
 
       <div className='md:flex mt-2'>
