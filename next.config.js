@@ -23,9 +23,9 @@ const nextConfig = {
     ],
   },
 
-  experimental: {
-    ppr: true,
-  },
+  // experimental: {
+  //   ppr: true,
+  // },
 
   reactStrictMode: false,
 }
