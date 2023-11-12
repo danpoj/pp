@@ -69,7 +69,7 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
           if (index % 2 === 0) {
             return (
               <Fragment key={cup.id}>
-                <GoogleAdsense className={cn('col-span-2 md:col-span-1', index % 4 === 0 && 'md:row-span-2')} />
+                <GoogleAdsense className='col-span-2 md:col-span-1' />
                 <WorldCup cup={cup} session={session} />
               </Fragment>
             )
