@@ -69,7 +69,7 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
           if (index % 16 === 0) {
             return (
               <Fragment key={cup.id}>
-                <GoogleAdsense className='col-span-2 md:col-span-3' />
+                <GoogleAdsense className='col-span-2' />
                 <WorldCup cup={cup} session={session} />
               </Fragment>
             )
@@ -78,6 +78,8 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
           return <WorldCup key={cup.id} cup={cup} session={session} />
         })}
       </div>
+
+      <GoogleAdsense className='border mt-20' />
 
       {isFinished ? (
         <div className='w-full flex items-center justify-center pb-6 flex-col gap-2 mt-20 mb-20'>
@@ -89,19 +91,6 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
           <Loader size='md' />
         </div>
       )}
-
-      <div className='flex flex-col md:flex-row p-4 gap-4'>
-        <GoogleAdsense className='border' />
-        <GoogleAdsense className='border' />
-      </div>
-      <div className='flex flex-col md:flex-row p-4 gap-4'>
-        <GoogleAdsense className='border' />
-        <GoogleAdsense className='border' />
-      </div>
-      <div className='flex flex-col md:flex-row p-4 gap-4'>
-        <GoogleAdsense className='border' />
-        <GoogleAdsense className='border' />
-      </div>
     </section>
   )
 }

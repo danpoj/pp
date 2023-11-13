@@ -29,6 +29,7 @@ export type ExtendedCup = CupRankingPage & {
 export default function CupRanking({ session, ...cup }: ExtendedCup) {
   const { open: openConfetti } = useConfetti()
   const [isOpen, setIsOpen] = useState(false)
+  const [isDisabled, setIsDisabled] = useState(true)
 
   useEffect(() => {
     openConfetti()
@@ -74,10 +75,19 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
         ))}
       </m.div>
 
-      <Button onClick={() => setIsOpen((prev) => !prev)} size='lg' className='mt-20 mb-10 max-w-[18rem]'>
+      <Button
+        disabled={isDisabled}
+        onClick={() => setIsOpen((prev) => !prev)}
+        size='lg'
+        className='mt-20 mb-10 max-w-[18rem]'
+      >
         모든 결과 보기 ({cup._count.items - 3}개)
         <ChevronDown className={cn('ml-1 transition duration-300', isOpen ? 'rotate-180' : 'rotate-0')} />
       </Button>
+
+      <span className='mb-10 text-lg font-bold bg-fancy w-fit text-transparent bg-clip-text'>
+        🥹 아래 광고를 한 번 클릭하면 모든 결과를 볼 수 있습니다. 🥹
+      </span>
 
       {isOpen && (
         <m.div
@@ -90,18 +100,9 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
           }}
           className='mt-1 gap-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'
         >
-          {cup.items.slice(3).map((item, index) => {
-            if (index % 12 === 0) {
-              return (
-                <Fragment key={item.id}>
-                  <GoogleAdsense className='col-span-2 rounded overflow-hidden aspect-[2/1]' />
-                  <ResultItem item={item} index={index} cupPlayCount={cup.playCount} cupId={cup.id} />
-                </Fragment>
-              )
-            }
-
-            return <ResultItem key={item.id} item={item} index={index} cupPlayCount={cup.playCount} cupId={cup.id} />
-          })}
+          {cup.items.slice(3).map((item, index) => (
+            <ResultItem key={item.id} item={item} index={index} cupPlayCount={cup.playCount} cupId={cup.id} />
+          ))}
         </m.div>
       )}
 
@@ -111,10 +112,9 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
         </Button>
       )}
 
-      <div className='flex flex-col sm:flex-row gap-4'>
-        <GoogleAdsense className='border' />
-        <GoogleAdsense className='border' />
-      </div>
+      <button onClick={() => setIsDisabled(false)}>
+        <GoogleAdsense className='border aspect-video max-w-[36rem]' />
+      </button>
 
       <div className='md:flex mt-2'>
         <div className='w-full flex flex-col h-full'>
