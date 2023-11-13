@@ -40,7 +40,9 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
       }
     }
 
-    window.addEventListener('blur', tA)
+    window.addEventListener('blur', () => {
+      window.setTimeout(tA, 0)
+    })
 
     return () => window.removeEventListener('blur', tA)
   }, [])
