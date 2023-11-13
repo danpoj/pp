@@ -66,16 +66,10 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
     <section className='sm:px-2 pb-20'>
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 grid-flow-row-dense'>
         {cups.map((cup, index) => {
-          if (index % 3 === 0) {
+          if (index % 6 === 0) {
             return (
               <Fragment key={cup.id}>
-                <GoogleAdsense
-                  className={cn(
-                    'col-span-2',
-                    index % 6 === 0 && 'md:col-span-1 h-full aspect-square',
-                    index % 9 === 0 && 'md:col-span-3 h-[26rem] '
-                  )}
-                />
+                <GoogleAdsense className='col-span-2 md:col-span-3' />
                 <WorldCup cup={cup} session={session} />
               </Fragment>
             )
