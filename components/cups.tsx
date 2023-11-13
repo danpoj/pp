@@ -14,6 +14,11 @@ import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import GoogleAdsense from './adsense/google-adsense'
 import Loader from './loader'
+import dynamic from 'next/dynamic'
+import { ResponsiveMasonry } from 'react-responsive-masonry'
+const Masonry = dynamic(() => import('react-responsive-masonry'), {
+  ssr: false,
+})
 
 type Props = {
   count: number
@@ -64,20 +69,13 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
 
   return (
     <section className='sm:px-2 pb-20'>
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 grid-flow-row-dense'>
-        {cups.map((cup, index) => {
-          if (index % 16 === 0 && index !== 0) {
-            return (
-              <Fragment key={cup.id}>
-                <GoogleAdsense className='col-span-2' />
-                <WorldCup cup={cup} session={session} />
-              </Fragment>
-            )
-          }
-
-          return <WorldCup key={cup.id} cup={cup} session={session} />
-        })}
-      </div>
+      <ResponsiveMasonry className='px-1 w-full' columnsCountBreakPoints={{ 0: 2, 760: 3, 1100: 4, 1400: 5, 1700: 6 }}>
+        <Masonry gutter='2px' className='pb-20 w-full'>
+          {cups.map((cup, index) => (
+            <WorldCup key={cup.id} cup={cup} session={session} />
+          ))}
+        </Masonry>
+      </ResponsiveMasonry>
 
       {isFinished ? (
         <div className='w-full flex items-center justify-center pb-6 flex-col gap-2 mt-20 mb-20'>
