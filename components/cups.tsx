@@ -66,7 +66,7 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
     <section className='sm:px-2 pb-20'>
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 grid-flow-row-dense'>
         {cups.map((cup, index) => {
-          if (index % 6 === 0) {
+          if (index % 16 === 0) {
             return (
               <Fragment key={cup.id}>
                 <GoogleAdsense className='col-span-2 md:col-span-3' />
@@ -80,7 +80,7 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
       </div>
 
       {isFinished ? (
-        <div className='w-full flex items-center justify-center pb-6 flex-col gap-2 mt-20'>
+        <div className='w-full flex items-center justify-center pb-6 flex-col gap-2 mt-20 mb-20'>
           <span className='text-lg font-bold'>{search == null ? '' : `검색어: ${search}`}</span>
           <span>총 {cups.length}개의 컨텐츠 불러오기 완료</span>
         </div>
@@ -89,6 +89,19 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
           <Loader size='md' />
         </div>
       )}
+
+      <div className='flex flex-col md:flex-row p-4 gap-4'>
+        <GoogleAdsense className='border' />
+        <GoogleAdsense className='border' />
+      </div>
+      <div className='flex flex-col md:flex-row p-4 gap-4'>
+        <GoogleAdsense className='border' />
+        <GoogleAdsense className='border' />
+      </div>
+      <div className='flex flex-col md:flex-row p-4 gap-4'>
+        <GoogleAdsense className='border' />
+        <GoogleAdsense className='border' />
+      </div>
     </section>
   )
 }
