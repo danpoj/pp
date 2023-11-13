@@ -64,6 +64,10 @@ export default function SignUp() {
           Ping<span className='bg-fancy text-transparent bg-clip-text font-bold'>Ping</span>은 나만의 이상형 월드컵을
           만들고 사용자들과 공유하는 공간이에요.
         </p>
+
+        <p>
+          랜덤 아바타와 아이디가 부여되어 <span className='font-bold underline text-blue-500'>익명</span>이 보장됩니다.
+        </p>
       </div>
       <Button onClick={loginWithGoogle} isLoading={isGoogleLaoding} className='w-full h-11 font-bold'>
         {isGoogleLaoding ? null : <GoogleIcon className='w-5 h-5 mr-2' />}
