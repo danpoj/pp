@@ -8,14 +8,13 @@ import { cn } from '@/lib/utils'
 import { CupWithUser, TypeCupSearchParams } from '@/types/type'
 import { BarChart, MessageSquare, YoutubeIcon } from 'lucide-react'
 import type { Session } from 'next-auth'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import GoogleAdsense from './adsense/google-adsense'
-import Loader from './loader'
-import dynamic from 'next/dynamic'
 import { ResponsiveMasonry } from 'react-responsive-masonry'
+import Loader from './loader'
 const Masonry = dynamic(() => import('react-responsive-masonry'), {
   ssr: false,
 })
@@ -44,11 +43,10 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
       setIsLoading(true)
 
       const newCups = await fetch(
-        `/api/cup?isLiked=${isLiked}&type=${type}&page=${page.current}&search=${search}`
+        `/api/cup?isLiked=${isLiked}&type=${type}&page=${page.current++}&search=${search}`
       ).then((res) => res.json())
 
       setCups((prev) => [...prev, ...newCups])
-      page.current++
 
       if (cups.length + newCups.length === count) {
         setIsFinished(true)

@@ -25,9 +25,7 @@ export default async function Page({ searchParams }: { searchParams: CupSearchPa
           {
             ...(search !== 'undefined'
               ? {
-                  title: {
-                    contains: search,
-                  },
+                  OR: [{ title: { contains: search } }, { description: { contains: search } }],
                 }
               : {}),
           },

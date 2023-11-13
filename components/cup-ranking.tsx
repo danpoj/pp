@@ -50,6 +50,7 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
   return (
     <div className='flex flex-col pt-10'>
       <span className='mb-4 text-lg font-black'>아래 광고를 클릭하고, 월드컵 결과를 확인해보세요 :) 👏</span>
+      <span className='text-xs mb-2 underline underline-offset-4'>사이트 유지 비용에 큰 도움이 됩니다 😭</span>
       <span className='text-xs mb-2 text-blue-600'>광고가 뜨지않으면 새로고침 해주세요</span>
       <GoogleAdsense className='border h-[18rem] max-w-[24rem]' />
 

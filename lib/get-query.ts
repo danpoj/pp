@@ -13,9 +13,7 @@ export function getQuery({ page, type, search }: { page: number; type?: TypeCupS
         {
           ...(search !== 'undefined'
             ? {
-                title: {
-                  contains: search,
-                },
+                OR: [{ title: { contains: search } }, { description: { contains: search } }],
               }
             : {}),
         },
@@ -24,12 +22,6 @@ export function getQuery({ page, type, search }: { page: number; type?: TypeCupS
           ...(type === 'video' ? { type: 'VIDEO' } : {}),
         },
       ],
-    },
-
-    orderBy: {
-      likes: {
-        _count: 'desc',
-      },
     },
 
     include: {
