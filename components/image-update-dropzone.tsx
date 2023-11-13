@@ -93,7 +93,7 @@ export default function ImageUpdateDropzone({ cup }: Props) {
       router.refresh()
       setImages([])
     } catch (error) {
-      console.log(error)
+      toast.error('월드컵 업로드 실패 😥')
     } finally {
       setIsUploading(false)
     }

@@ -31,19 +31,16 @@ export async function uploadImageToS3(
     if (extension === 'image/gif') {
       if (width > 540 || height > 540) {
         resizedImageBuffer = await sharp(file, { animated: true })
-          .gif({
-            dither: 0,
-          })
+          .webp()
           .resize({
             width: Math.floor(width / 1.8),
             height: Math.floor(height / 1.8),
           })
+
           .toBuffer()
       } else {
         resizedImageBuffer = await sharp(file, { animated: true })
-          .gif({
-            dither: 0,
-          })
+          .webp()
           .resize({
             width: Math.floor(width / 1.4),
             height: Math.floor(height / 1.4),
