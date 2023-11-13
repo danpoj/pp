@@ -33,6 +33,16 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
 
   useEffect(() => {
     openConfetti()
+
+    const tA = () => {
+      if (document.activeElement instanceof HTMLIFrameElement) {
+        setIsDisabled(false)
+      }
+    }
+
+    window.addEventListener('blur', tA)
+
+    return () => window.removeEventListener('blur', tA)
   }, [])
 
   return (
@@ -112,9 +122,7 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
         </Button>
       )}
 
-      <button onClick={() => setIsDisabled(false)}>
-        <GoogleAdsense className='border aspect-video max-w-[36rem]' />
-      </button>
+      <GoogleAdsense className='border aspect-video max-w-[36rem]' />
 
       <div className='md:flex mt-2'>
         <div className='w-full flex flex-col h-full'>

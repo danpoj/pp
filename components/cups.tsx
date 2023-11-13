@@ -79,8 +79,6 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
         })}
       </div>
 
-      <GoogleAdsense className='border mt-20' />
-
       {isFinished ? (
         <div className='w-full flex items-center justify-center pb-6 flex-col gap-2 mt-20 mb-20'>
           <span className='text-lg font-bold'>{search == null ? '' : `검색어: ${search}`}</span>
