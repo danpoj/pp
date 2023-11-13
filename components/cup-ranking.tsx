@@ -68,6 +68,11 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
               isDisabled ? 'pointer-events-none' : 'pointer-events-auto'
             )}
           >
+            {isDisabled && (
+              <div className='absolute inset-0 flex items-center justify-center text-xs text-white font-bold z-50 bg-black/40 pointer-events-none backdrop-blur-sm'>
+                광고 클릭 후, <br /> 결과 확인하기 👏
+              </div>
+            )}
             <Image
               unoptimized
               src={item.publicId ? item.url : item.videoThumbnail!}
