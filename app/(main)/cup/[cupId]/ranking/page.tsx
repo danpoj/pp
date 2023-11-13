@@ -15,8 +15,8 @@ export async function generateMetadata({ params: { cupId } }: Props): Promise<Me
   if (!cup) return
 
   return {
-    title: `pingping 랭킹 ${cup.title}`,
-    description: cup.description,
+    title: `pingping 랭킹 ${cup.title} | pingping 핑핑 이상형 월드컵`,
+    description: `${cup.description} | pingping 핑핑 이상형 월드컵`,
     keywords: ['이상형 월드컵', cup.title, cup.description],
 
     openGraph: {

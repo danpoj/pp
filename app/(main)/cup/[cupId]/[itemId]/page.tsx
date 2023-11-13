@@ -31,8 +31,8 @@ export async function generateMetadata({ params: { itemId } }: Props): Promise<M
   if (!item) return
 
   return {
-    title: `pingping 결과 ${item.description ?? ''}`,
-    description: item.description ?? 'PingPing 이상형 월드컵 이미지 결과페이지',
+    title: `pingping 결과 ${item.description ?? ''} | pingping 핑핑 이상형 월드컵`,
+    description: `${item.description} | pingping 핑핑 이상형 월드컵` ?? 'PingPing 핑핑 이상형 월드컵 이미지 결과페이지',
     keywords: ['이상형 월드컵', item.description ?? '이상형', 'pingping'],
 
     openGraph: {
