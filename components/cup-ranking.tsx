@@ -5,20 +5,20 @@ import CupCommentDeleteButton from '@/components/cup-comment-delete-button'
 import CupCommentForm from '@/components/cup-comment-form'
 import { useConfetti } from '@/components/provider/confetti-provider'
 import { cn } from '@/lib/utils'
+import { motion as m } from 'framer-motion'
 import type { Session } from 'next-auth'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Fragment, useEffect, useState } from 'react'
-import { motion as m } from 'framer-motion'
+import { useEffect, useState } from 'react'
 
 import { CupRankingPage } from '@/types/type'
+import { Item } from '@prisma/client'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ko'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { ChevronDown, ChevronUp } from 'lucide-react'
-import { Button } from './ui/button'
 import GoogleAdsense from './adsense/google-adsense'
-import { Item } from '@prisma/client'
+import { Button } from './ui/button'
 dayjs.extend(relativeTime)
 dayjs.locale('ko')
 
@@ -49,10 +49,13 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
 
   return (
     <div className='flex flex-col pt-10'>
-      <span className='mb-4 text-lg font-bold bg-fancy w-fit text-transparent bg-clip-text'>
-        🥹 아래 광고를 한 번 클릭하면 모든 결과를 볼 수 있습니다. 🥹
+      <span className='mb-4 text-lg font-bold bg-fancy w-fit text-transparent bg-clip-text flex'>
+        ↓ 아래 광고를 한 번 클릭하면 모든 결과를 볼 수 있습니다.
       </span>
       <GoogleAdsense className='border h-[18rem] max-w-[24rem]' />
+      <p className='mb-4 mt-4 text-lg font-bold bg-fancy w-fit text-transparent bg-clip-text'>
+        ↑ 위 광고를 한 번 클릭하면 모든 결과를 볼 수 있습니다.
+      </p>
 
       <m.div
         initial={{ opacity: 0, y: -100 }}
