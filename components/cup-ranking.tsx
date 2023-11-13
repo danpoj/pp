@@ -48,18 +48,26 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
   }, [])
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col pt-10'>
+      <span className='mb-4 text-lg font-bold bg-fancy w-fit text-transparent bg-clip-text'>
+        🥹 아래 광고를 한 번 클릭하면 모든 결과를 볼 수 있습니다. 🥹
+      </span>
+      <GoogleAdsense className='border h-[18rem] max-w-[24rem]' />
+
       <m.div
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className='flex flex-col gap-1 sm:flex-row sm:h-[32rem]'
+        className='flex flex-col gap-1 sm:flex-row sm:h-[32rem] mt-10'
       >
         {cup.items.slice(0, 3).map((item, index) => (
           <Link
             href={`/cup/${cup.id}/${item.id}`}
             key={item.id}
-            className='rounded overflow-hidden relative h-[24rem] sm:h-full sm:w-1/3 flex items-center justify-center hover:opacity-90 transition-opacity'
+            className={cn(
+              'rounded overflow-hidden relative h-[24rem] sm:h-full sm:w-1/3 flex items-center justify-center hover:opacity-90 transition-opacity',
+              isDisabled ? 'pointer-events-none' : 'pointer-events-auto'
+            )}
           >
             <Image
               unoptimized
@@ -67,7 +75,7 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
               alt='cup image'
               width={item.width!}
               height={item.height!}
-              className='object-contain w-full h-full'
+              className={cn('object-contain w-full h-full', isDisabled ? 'blur' : 'blur-0')}
             />
 
             <div
@@ -91,15 +99,11 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
         disabled={isDisabled}
         onClick={() => setIsOpen((prev) => !prev)}
         size='lg'
-        className='mt-20 mb-10 max-w-[18rem]'
+        className='mt-20 mb-10 h-[5rem]'
       >
-        모든 결과 보기 ({cup._count.items - 3}개)
+        모든 결과 보기 🥰 ({cup._count.items - 3}개)
         <ChevronDown className={cn('ml-1 transition duration-300', isOpen ? 'rotate-180' : 'rotate-0')} />
       </Button>
-
-      <span className='mb-10 text-lg font-bold bg-fancy w-fit text-transparent bg-clip-text'>
-        🥹 아래 광고를 한 번 클릭하면 모든 결과를 볼 수 있습니다. 🥹
-      </span>
 
       {isOpen && (
         <m.div
@@ -119,12 +123,10 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
       )}
 
       {isOpen && (
-        <Button onClick={() => setIsOpen((prev) => !prev)} size='lg' className='my-20 max-w-[18rem]'>
+        <Button onClick={() => setIsOpen((prev) => !prev)} size='lg' className='my-20 h-[5rem]'>
           모든 결과 접기 <ChevronUp />
         </Button>
       )}
-
-      <GoogleAdsense className='border aspect-video max-w-[36rem]' />
 
       <div className='md:flex mt-2'>
         <div className='w-full flex flex-col h-full'>
