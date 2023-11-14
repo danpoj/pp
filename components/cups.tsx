@@ -167,8 +167,6 @@ function WorldCup({ cup, session, index }: { cup: CupWithUser; session: Session 
           <LikeButton cup={cup} session={session} className='flex items-center gap-1 flex-1' />
         </div>
       </div>
-
-      <GoogleAdsense />
     </div>
   )
 }
