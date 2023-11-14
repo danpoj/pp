@@ -68,13 +68,16 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
 
   return (
     <section className='sm:px-2 pb-20'>
-      <ResponsiveMasonry
-        className='px-1 w-full'
-        columnsCountBreakPoints={{ 0: 1, 560: 2, 850: 3, 1200: 4, 1500: 5, 1800: 6 }}
-      >
+      <div className='flex flex-col lg:flex-row mb-4'>
+        <GoogleAdsense className='border max-h-[10rem] md:max-h-[10rem]' />
+        <GoogleAdsense className='border max-h-[10rem] md:max-h-[10rem]' />
+        <GoogleAdsense className='border max-h-[10rem] md:max-h-[10rem]' />
+      </div>
+
+      <ResponsiveMasonry className='px-1 w-full' columnsCountBreakPoints={{ 0: 2, 760: 3, 1100: 4, 1400: 5, 1700: 6 }}>
         <Masonry gutter='2px' className='pb-20 w-full'>
           {cups.map((cup, index) => (
-            <WorldCup key={cup.id} cup={cup} session={session} index={index} />
+            <WorldCup key={cup.id} cup={cup} session={session} />
           ))}
         </Masonry>
       </ResponsiveMasonry>
@@ -93,7 +96,7 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
   )
 }
 
-function WorldCup({ cup, session, index }: { cup: CupWithUser; session: Session | null; index: number }) {
+function WorldCup({ cup, session }: { cup: CupWithUser; session: Session | null }) {
   return (
     <div key={cup.id} className='rounded-lg overflow-hidden shadow dark:bg-border/20 border h-fit'>
       <Link target='_blank' prefetch={false} href={`/cup/${cup.id}`} className='hover:opacity-90 transition group'>
