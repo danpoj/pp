@@ -15,6 +15,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { ResponsiveMasonry } from 'react-responsive-masonry'
 import Loader from './loader'
+import GoogleAdsense from './adsense/google-adsense'
 const Masonry = dynamic(() => import('react-responsive-masonry'), {
   ssr: false,
 })
@@ -67,6 +68,11 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
 
   return (
     <section className='sm:px-2 pb-20'>
+      <div className='flex flex-col md:flex-row mb-4'>
+        <GoogleAdsense className='border max-h-[16rem] md:max-h-[32rem]' />
+        <GoogleAdsense className='border max-h-[16rem] md:max-h-[32rem]' />
+      </div>
+
       <ResponsiveMasonry className='px-1 w-full' columnsCountBreakPoints={{ 0: 2, 760: 3, 1100: 4, 1400: 5, 1700: 6 }}>
         <Masonry gutter='2px' className='pb-20 w-full'>
           {cups.map((cup, index) => (
