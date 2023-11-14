@@ -69,11 +69,11 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
 
   return (
     <section className='sm:px-2 pb-20'>
-      <div className='flex flex-col lg:flex-row mb-4 h-96 sm:h-72 lg:h-24'>
+      {/* <div className='flex flex-col lg:flex-row mb-4 h-96 sm:h-72 lg:h-24'>
         <GoogleAdsense className='border max-h-[10rem] md:max-h-[10rem]' />
         <GoogleAdsense className='border max-h-[10rem] md:max-h-[10rem]' />
         <GoogleAdsense className='border max-h-[10rem] md:max-h-[10rem]' />
-      </div>
+      </div> */}
 
       <ResponsiveMasonry className='px-1 w-full' columnsCountBreakPoints={{ 0: 2, 760: 3, 1100: 4, 1400: 5, 1700: 6 }}>
         <Masonry gutter='2px' className='pb-20 w-full'>
