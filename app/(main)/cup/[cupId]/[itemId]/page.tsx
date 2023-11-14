@@ -71,7 +71,7 @@ export default async function Page({ params }: Props) {
   if (!image) notFound()
 
   return (
-    <section className='h-full max-w-5xl mx-auto p-2 flex flex-col lg:flex-row lg:justify-center lg:items-center lg:gap-4 relative'>
+    <section className='h-full max-w-6xl mx-auto p-2 flex flex-col lg:flex-row lg:justify-center lg:items-center lg:gap-4 relative'>
       <PlayConfetti />
 
       {image.cup.type === 'IMAGE' ? (
