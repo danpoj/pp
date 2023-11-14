@@ -62,7 +62,6 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
       >
         {cup.items.slice(0, 3).map((item, index) => (
           <Link
-            target='_blank'
             href={`/cup/${cup.id}/${item.id}`}
             key={item.id}
             className={cn(
@@ -210,7 +209,6 @@ function ResultItem({
 }) {
   return (
     <Link
-      target='_blank'
       href={`/cup/${cupId}/${item.id}`}
       key={item.id}
       className='rounded overflow-hidden relative shrink-0 h-full aspect-square flex items-center justify-center hover:opacity-90 transition-opacity'

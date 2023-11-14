@@ -94,7 +94,7 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
 function WorldCup({ cup, session }: { cup: CupWithUser; session: Session | null }) {
   return (
     <div key={cup.id} className='rounded-lg overflow-hidden shadow dark:bg-border/20 border h-fit'>
-      <Link target='_blank' prefetch={false} href={`/cup/${cup.id}`} className='hover:opacity-90 transition group'>
+      <Link prefetch={false} href={`/cup/${cup.id}`} className='hover:opacity-90 transition group'>
         <div className='relative overflow-hidden flex items-center justify-center max-h-[24rem]'>
           {cup.thumbnail ? (
             <BlurredImage
@@ -152,7 +152,6 @@ function WorldCup({ cup, session }: { cup: CupWithUser; session: Session | null 
 
         <div className='flex items-center gap-1'>
           <Link
-            target='_blank'
             href={`/cup/${cup.id}/ranking`}
             className={cn(buttonVariants({ className: 'text-xs text-[11px] px-2 flex-1', size: 'sm' }), 'h-8')}
           >
