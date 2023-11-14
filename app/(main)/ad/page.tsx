@@ -11,11 +11,14 @@ export default function Page() {
         <GoogleAdsense key={i} className='border aspect-square max-w-[30rem]' />
       ))}
 
-      <GoogleAdsenseHorizontal className='border aspect-square max-w-[42rem]' />
-      <GoogleAdsenseVertical className='border aspect-square max-w-[42rem]' />
-      <GoogleAdsenseHorizontal className='border aspect-square max-w-[42rem]' />
+      <GoogleAdsense className='border aspect-video max-w-[30rem]' />
+      <GoogleAdsense className='border aspect-video max-w-[30rem]' />
+      <GoogleAdsense className='border aspect-video max-w-[30rem]' />
 
-      <GoogleAdsenseVertical className='border aspect-square max-w-[42rem]' />
+      <GoogleAdsense className='border aspect-auto max-w-[22rem]' />
+      <GoogleAdsense className='border aspect-auto max-w-[22rem]' />
+      <GoogleAdsense className='border aspect-auto max-w-[22rem]' />
+      <GoogleAdsense className='border aspect-auto max-w-[22rem]' />
     </div>
   )
 }
