@@ -154,7 +154,7 @@ const Initial = ({
             position: 'LEFT',
           })
         }
-        className='w-full h-1/2 top-0 sm:w-[50%] sm:h-full sm:left-0 absolute pt-16'
+        className='w-full h-1/2 top-0 sm:w-[50%] sm:h-full sm:left-0 absolute mt-20'
       >
         <div className='w-full h-full relative'>
           <Image
@@ -175,7 +175,7 @@ const Initial = ({
             position: 'RIGHT',
           })
         }
-        className='w-full h-1/2 bottom-0 sm:w-[50%] sm:h-full sm:right-0 absolute sm:pt-16'
+        className='w-full h-1/2 bottom-0 sm:w-[50%] sm:h-full sm:right-0 absolute sm:pt-20'
       >
         <div className='w-full h-full relative'>
           <Image

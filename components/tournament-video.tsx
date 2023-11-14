@@ -138,7 +138,7 @@ const Initial = ({
 
   return (
     <div className={cn('w-full h-full', clicked === 'INITIAL' ? 'opacity-100' : 'opacity-0')}>
-      <div className='w-full h-[50%] sm:w-[50%] sm:h-full absolute top-0 sm:left-0'>
+      <div className='w-full h-[50%] sm:w-[50%] sm:h-full absolute top-0 sm:left-0 pt-24'>
         <div className='w-full h-[88%] sm:h-[93%]'>
           <Player url={items[leftIndex].url} width='100%' height='100%' />
         </div>
@@ -157,7 +157,7 @@ const Initial = ({
         <DescriptionText description={items[leftIndex].description} />
       </div>
 
-      <div className='w-full h-[50%] sm:w-[50%] sm:h-full absolute bottom-0 sm:right-0'>
+      <div className='w-full h-[50%] sm:w-[50%] sm:h-full absolute bottom-0 sm:right-0 pt-4 sm:pt-24'>
         <div className='w-full h-[88%] sm:h-[93%]'>
           <Player url={items[rightIndex].url} width='100%' height='100%' />
         </div>
