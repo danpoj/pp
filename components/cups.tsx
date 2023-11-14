@@ -16,6 +16,7 @@ import { useInView } from 'react-intersection-observer'
 import { ResponsiveMasonry } from 'react-responsive-masonry'
 import Loader from './loader'
 import GoogleAdsense from './adsense/google-adsense'
+import GoogleAdsenseHorizontal from './adsense/google-adsense-horizontal'
 const Masonry = dynamic(() => import('react-responsive-masonry'), {
   ssr: false,
 })
@@ -68,10 +69,18 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
 
   return (
     <section className='sm:px-2 pb-20'>
-      <div className='flex flex-col lg:flex-row mb-4'>
+      <div className='flex flex-col lg:flex-row mb-4 h-96 sm:h-72 lg:h-24'>
+        <div className='w-full h-full flex flex-col sm:flex-row'>
+          <GoogleAdsenseHorizontal className='border h-full w-full' />
+          <GoogleAdsenseHorizontal className='border h-full w-full' />
+        </div>
+        <div className='w-full h-full flex flex-col sm:flex-row'>
+          <GoogleAdsenseHorizontal className='border h-full w-full' />
+          <GoogleAdsenseHorizontal className='border h-full w-full' />
+        </div>
+        {/* <GoogleAdsense className='border max-h-[10rem] md:max-h-[10rem]' />
         <GoogleAdsense className='border max-h-[10rem] md:max-h-[10rem]' />
-        <GoogleAdsense className='border max-h-[10rem] md:max-h-[10rem]' />
-        <GoogleAdsense className='border max-h-[10rem] md:max-h-[10rem]' />
+        <GoogleAdsense className='border max-h-[10rem] md:max-h-[10rem]' /> */}
       </div>
 
       <ResponsiveMasonry className='px-1 w-full' columnsCountBreakPoints={{ 0: 2, 760: 3, 1100: 4, 1400: 5, 1700: 6 }}>
