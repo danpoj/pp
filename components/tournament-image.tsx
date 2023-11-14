@@ -92,7 +92,7 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
       transition={{
         duration: 0.3,
       }}
-      className='w-[70%] sm:w-[60%] h-full absolute left-0'
+      className='w-[70%] sm:w-[60%] h-full absolute left-0 pt-20'
     >
       <div className='w-full h-full relative'>
         <Image
@@ -115,7 +115,7 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
       transition={{
         duration: 0.3,
       }}
-      className='w-[70%] sm:w-[60%] h-full absolute right-0'
+      className='w-[70%] sm:w-[60%] h-full absolute right-0 pt-20'
     >
       <div className='w-full h-full relative'>
         <Image
@@ -154,7 +154,7 @@ const Initial = ({
             position: 'LEFT',
           })
         }
-        className='w-full h-1/2 top-0 sm:w-[50%] sm:h-full sm:left-0 absolute'
+        className='w-full h-1/2 top-0 sm:w-[50%] sm:h-full sm:left-0 absolute pt-16'
       >
         <div className='w-full h-full relative'>
           <Image
@@ -175,7 +175,7 @@ const Initial = ({
             position: 'RIGHT',
           })
         }
-        className='w-full h-1/2 bottom-0 sm:w-[50%] sm:h-full sm:right-0 absolute'
+        className='w-full h-1/2 bottom-0 sm:w-[50%] sm:h-full sm:right-0 absolute sm:pt-16'
       >
         <div className='w-full h-full relative'>
           <Image
