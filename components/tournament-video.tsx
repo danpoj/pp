@@ -71,7 +71,13 @@ export default function TournamentVideo({ cup, cupLength, isHidingHeader }: Prop
 
   return (
     <div className='h-full flex items-center justify-center flex-col md:flex-row relative bg-black'>
-      <CupInformation isHidingHeader={isHidingHeader} title={cup.title} limit={limit.current} index={index} />
+      <CupInformation
+        key={index}
+        isHidingHeader={isHidingHeader}
+        title={cup.title}
+        limit={limit.current}
+        index={index}
+      />
       <Initial onClick={onClick} items={items} index={index} clicked={clicked} />
 
       {clicked === 'LEFT' && <Left selectedItem={selectedItem.current!} />}
