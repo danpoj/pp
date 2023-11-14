@@ -11,6 +11,7 @@ import { motion as m } from 'framer-motion'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
+import GoogleAdsense from './adsense/google-adsense'
 
 type Props = {
   cup: Cup & {
@@ -68,7 +69,13 @@ export default function TournamentImage({ cup, cupLength, isHidingHeader }: Prop
 
   return (
     <div className='h-full flex items-center justify-center flex-col md:flex-row relative bg-black w-full'>
-      <CupInformation isHidingHeader={isHidingHeader} title={cup.title} limit={limit.current} index={index} />
+      <CupInformation
+        key={index}
+        isHidingHeader={isHidingHeader}
+        title={cup.title}
+        limit={limit.current}
+        index={index}
+      />
 
       <Initial onClick={onClick} items={items} index={index} clicked={clicked} />
 
