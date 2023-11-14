@@ -1,3 +1,4 @@
+import GoogleAdsense from '@/components/adsense/google-adsense'
 import FilterCups from '@/components/filter-cups'
 import PWAInstallButton from '@/components/pwa-install-button'
 import ScrollTopButton from '@/components/scroll-top-button'
@@ -12,6 +13,11 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <div className='flex flex-col w-full px-2'>
+        <div className='flex flex-col md:flex-row mt-4'>
+          <GoogleAdsense className='border max-h-[16rem] md:max-h-[32rem]' />
+          <GoogleAdsense className='border max-h-[16rem] md:max-h-[32rem]' />
+        </div>
+
         <div className='flex flex-col lg:flex-row items-center justify-center sm:pr-4 py-4 sm:gap-4'>
           <div className='flex items-center gap-2'>
             <div className='flex flex-col gap-2'>
