@@ -17,7 +17,6 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/ko'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { ChevronDown, ChevronUp } from 'lucide-react'
-import GoogleAdsense from './adsense/google-adsense'
 import { Button } from './ui/button'
 dayjs.extend(relativeTime)
 dayjs.locale('ko')
