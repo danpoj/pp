@@ -29,31 +29,25 @@ export type ExtendedCup = CupRankingPage & {
 export default function CupRanking({ session, ...cup }: ExtendedCup) {
   const { open: openConfetti } = useConfetti()
   const [isOpen, setIsOpen] = useState(false)
-  const [isDisabled, setIsDisabled] = useState(true)
 
   useEffect(() => {
     openConfetti()
 
-    const tA = () => {
-      if (document.activeElement instanceof HTMLIFrameElement) {
-        setIsDisabled(false)
-      }
-    }
+    // const tA = () => {
+    //   if (document.activeElement instanceof HTMLIFrameElement) {
+    //     setIsDisabled(false)
+    //   }
+    // }
 
-    window.addEventListener('blur', () => {
-      window.setTimeout(tA, 0)
-    })
+    // window.addEventListener('blur', () => {
+    //   window.setTimeout(tA, 0)
+    // })
 
-    return () => window.removeEventListener('blur', tA)
+    // return () => window.removeEventListener('blur', tA)
   }, [])
 
   return (
     <div className='flex flex-col pt-10'>
-      <span className='mb-4 text-lg font-black'>아래 광고를 클릭하고, 월드컵 결과를 확인해보세요 :) 👏</span>
-      <span className='text-xs mb-2 underline underline-offset-4'>사이트 유지 비용에 큰 도움이 됩니다 😭</span>
-      <span className='text-xs mb-2 text-blue-600'>광고가 뜨지않으면 새로고침 해주세요</span>
-      <GoogleAdsense className='border h-[18rem] max-w-[24rem]' />
-
       <m.div
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
@@ -65,22 +59,16 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
             href={`/cup/${cup.id}/${item.id}`}
             key={item.id}
             className={cn(
-              'rounded overflow-hidden relative h-[24rem] sm:h-full sm:w-1/3 flex items-center justify-center hover:opacity-90 transition-opacity',
-              isDisabled ? 'pointer-events-none' : 'pointer-events-auto'
+              'rounded overflow-hidden relative h-[24rem] sm:h-full sm:w-1/3 flex items-center justify-center hover:opacity-90 transition-opacity'
             )}
           >
-            {isDisabled && (
-              <div className='absolute inset-0 flex items-center justify-center text-xs text-white font-bold z-50 bg-black/40 pointer-events-none backdrop-blur-sm'>
-                광고 클릭 후, <br /> 결과 확인하기 👏
-              </div>
-            )}
             <Image
               unoptimized
               src={item.publicId ? item.url : item.videoThumbnail!}
               alt='cup image'
               width={item.width!}
               height={item.height!}
-              className={cn('object-contain w-full h-full', isDisabled ? 'blur' : 'blur-0')}
+              className={cn('object-contain w-full h-full')}
             />
 
             <div
@@ -100,12 +88,7 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
         ))}
       </m.div>
 
-      <Button
-        disabled={isDisabled}
-        onClick={() => setIsOpen((prev) => !prev)}
-        size='lg'
-        className='mt-20 mb-10 h-[5rem]'
-      >
+      <Button onClick={() => setIsOpen((prev) => !prev)} size='lg' className='mt-20 mb-10 h-[5rem]'>
         모든 결과 보기 🥰 ({cup._count.items - 3}개)
         <ChevronDown className={cn('ml-1 transition duration-300', isOpen ? 'rotate-180' : 'rotate-0')} />
       </Button>
