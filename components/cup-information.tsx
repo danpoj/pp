@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils'
-import GoogleAdsense from './adsense/google-adsense'
 
 export default function CupInformation({
   title,
@@ -19,8 +18,6 @@ export default function CupInformation({
         isHidingHeader ? '' : 'mt-12'
       )}
     >
-      <GoogleAdsense className='h-16 min-w-[260px] max-w-[340px] shrink-0 pointer-events-auto' />
-
       <div className='flex'>
         <h2 className='text-sm sm:text-base truncate shrink'>{title}</h2>
         <p className='text-base sm:text-lg font-semibold ml-2 shrink-0 text-red-200'>

@@ -17,7 +17,6 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/ko'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { notFound } from 'next/navigation'
-import GoogleAdsense from '@/components/adsense/google-adsense'
 dayjs.extend(relativeTime)
 dayjs.locale('ko')
 

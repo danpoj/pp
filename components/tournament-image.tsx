@@ -11,7 +11,6 @@ import { motion as m } from 'framer-motion'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import GoogleAdsense from './adsense/google-adsense'
 
 type Props = {
   cup: Cup & {

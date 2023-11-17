@@ -15,8 +15,6 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { ResponsiveMasonry } from 'react-responsive-masonry'
 import Loader from './loader'
-import GoogleAdsense from './adsense/google-adsense'
-import GoogleAdsenseHorizontal from './adsense/google-adsense-horizontal'
 const Masonry = dynamic(() => import('react-responsive-masonry'), {
   ssr: false,
 })
