@@ -22,7 +22,7 @@ const nextConfig = {
         hostname: '**',
       },
     ],
-    // unoptimized: true,
+    unoptimized: true,
   },
 
   // experimental: {
