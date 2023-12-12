@@ -96,7 +96,6 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
       className='w-full max-w-2xl aspect-video absolute left-0 rounded overflow-hidden'
     >
       <Image
-        unoptimized
         src={selectedItem.videoThumbnail!}
         fill
         alt={selectedItem.description ?? '유튜브 토너먼트 컨텐츠'}
@@ -117,7 +116,6 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
       className='w-full max-w-2xl aspect-video absolute right-0 rounded overflow-hidden'
     >
       <Image
-        unoptimized
         src={selectedItem.videoThumbnail!}
         fill
         alt={selectedItem.description ?? '유튜브 토너먼트 컨텐츠'}

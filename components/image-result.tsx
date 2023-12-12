@@ -23,7 +23,6 @@ export default function ImageResult({ width, height, src, description }: Props) 
   return (
     <div className='relative w-full h-[24rem] shrink-0 lg:shrink lg:h-full'>
       <Image
-        unoptimized
         width={600}
         height={520}
         src={src}

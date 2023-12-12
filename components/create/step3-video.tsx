@@ -215,7 +215,6 @@ export default function ThirdStepYoutube({ cupData }: Props) {
           <div key={`${imageUrl}-${i}`} className='relative group'>
             <Link href={imageUrl} target='_blank' rel='noreferrer noopener' className=' aspect-square'>
               <Image
-                unoptimized
                 src={imageUrl}
                 alt='preview image'
                 width={200}

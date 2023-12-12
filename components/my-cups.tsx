@@ -59,7 +59,6 @@ export default function MyCups({ cups }: Props) {
           <div className='flex gap-3'>
             <Link href={`/cup/${cup.id}`} className='shrink-0'>
               <Image
-                unoptimized
                 src={cup.thumbnail}
                 width={208}
                 height={208}

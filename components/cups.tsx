@@ -8,16 +8,12 @@ import { cn } from '@/lib/utils'
 import { CupWithUser, TypeCupSearchParams } from '@/types/type'
 import { BarChart, MessageSquare, YoutubeIcon } from 'lucide-react'
 import type { Session } from 'next-auth'
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { ResponsiveMasonry } from 'react-responsive-masonry'
-import Loader from './loader'
-const Masonry = dynamic(() => import('react-responsive-masonry'), {
-  ssr: false,
-})
+import LoaderSimple from './loader-simple'
+import MasonryLayout from './masonry-layout'
 
 type Props = {
   count: number
@@ -67,13 +63,11 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
 
   return (
     <section className='sm:px-2 pb-20'>
-      <ResponsiveMasonry className='px-1 w-full' columnsCountBreakPoints={{ 0: 2, 760: 3, 1100: 4, 1400: 5, 1700: 6 }}>
-        <Masonry gutter='2px' className='pb-20 w-full'>
-          {cups.map((cup, index) => (
-            <WorldCup key={cup.id} cup={cup} session={session} />
-          ))}
-        </Masonry>
-      </ResponsiveMasonry>
+      <MasonryLayout>
+        {cups.map((cup) => (
+          <WorldCup key={cup.id} cup={cup} session={session} />
+        ))}
+      </MasonryLayout>
 
       {isFinished ? (
         <div className='w-full flex items-center justify-center pb-6 flex-col gap-2 mt-20 mb-20'>
@@ -81,8 +75,8 @@ export default function Cups({ count, initialCups, session, isLiked = false, typ
           <span>총 {cups.length}개의 컨텐츠 불러오기 완료</span>
         </div>
       ) : (
-        <div ref={ref} className='flex items-center justify-center mx-auto w-fit'>
-          <Loader size='md' />
+        <div ref={ref} className='flex items-center justify-center mx-auto w-fit h-32'>
+          <LoaderSimple />
         </div>
       )}
     </section>
@@ -124,7 +118,6 @@ function WorldCup({ cup, session }: { cup: CupWithUser; session: Session | null 
         <div className='flex items-center gap-1 my-2 px-1'>
           <div className='rounded-full overflow-hidden'>
             <Image
-              unoptimized
               src={cup.user.image!}
               alt='cup author profile image'
               width={18}

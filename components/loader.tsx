@@ -15,7 +15,6 @@ const SIZE = {
 export default function Loader({ size = 'md', className }: Props) {
   return (
     <Image
-      unoptimized
       src='/loader.gif'
       width={SIZE[size]}
       height={SIZE[size]}

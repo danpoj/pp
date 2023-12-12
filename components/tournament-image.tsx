@@ -95,7 +95,6 @@ const Left = ({ selectedItem }: { selectedItem: Item }) => {
     >
       <div className='w-full h-full relative'>
         <Image
-          unoptimized
           className='absolute inset-0 object-contain w-full h-full'
           fill
           src={selectedItem.url!}
@@ -118,7 +117,6 @@ const Right = ({ selectedItem }: { selectedItem: Item }) => {
     >
       <div className='w-full h-full relative'>
         <Image
-          unoptimized
           className='absolute inset-0 object-contain w-full h-full'
           fill
           src={selectedItem.url!}
@@ -157,7 +155,6 @@ const Initial = ({
       >
         <div className='w-full h-full relative'>
           <Image
-            unoptimized
             className='absolute inset-0 object-contain w-full h-full'
             fill
             src={items[leftIndex].url}
@@ -178,7 +175,6 @@ const Initial = ({
       >
         <div className='w-full h-full relative'>
           <Image
-            unoptimized
             className='absolute inset-0 object-contain w-full h-full'
             fill
             src={items[rightIndex].url}

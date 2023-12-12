@@ -117,7 +117,6 @@ export default async function Page({ params }: Props) {
               <div key={comment.id} className='flex flex-col gap-2 break-words'>
                 <div className='flex gap-1 items-center'>
                   <Image
-                    unoptimized
                     src={comment.user.image!}
                     alt='user profile image'
                     width={40}

@@ -24,7 +24,6 @@ export default function CupItemForm({ item, cupType, contentsLength, thumbnail }
             className='hover:opacity-80 rounded overflow-hidden transition-opacity h-full'
           >
             <Image
-              unoptimized
               src={item.url}
               alt={item.description || 'cup item'}
               width={300}
@@ -40,7 +39,6 @@ export default function CupItemForm({ item, cupType, contentsLength, thumbnail }
             className='hover:opacity-80 rounded overflow-hidden transition-opacity h-full'
           >
             <Image
-              unoptimized
               src={item.videoThumbnail!}
               alt={item.description || 'cup item'}
               width={item.width!}

@@ -96,14 +96,7 @@ export default function UserAvatarForm({ user }: Props) {
             {isUploading ? (
               <Loader2 className='animate-spin' />
             ) : (
-              <Image
-                unoptimized
-                width={160}
-                height={160}
-                src={user.image!}
-                alt='user profile image'
-                className='object-cover'
-              />
+              <Image width={160} height={160} src={user.image!} alt='user profile image' className='object-cover' />
             )}
 
             <span className='hidden group-hover:flex bg-black/40 inset-0 absolute rounded-full items-center justify-center'>

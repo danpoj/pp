@@ -26,7 +26,6 @@ export default async function Page({ params: { cupId } }: Props) {
     <div className='h-full max-w-5xl mx-auto p-2 pt-10'>
       <span className='text-2xl font-semibold block mb-10'>월드컵 수정하기</span>
       <Image
-        unoptimized
         src={cup.thumbnail}
         alt='cup thumbnail image'
         width={cup.thumbnailWidth}

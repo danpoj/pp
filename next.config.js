@@ -11,6 +11,7 @@ const withPWA = require('next-pwa')({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    dangerouslyAllowSVG: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -21,6 +22,7 @@ const nextConfig = {
         hostname: '**',
       },
     ],
+    // unoptimized: true,
   },
 
   // experimental: {

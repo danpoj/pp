@@ -149,7 +149,7 @@ export default function Step3Image({ cupData }: Props) {
   //         </span>
   //         <NextImage
   //           src='/loader.gif'
-  //           unoptimized
+  //
   //           width={48}
   //           height={32}
   //           alt='loader image'

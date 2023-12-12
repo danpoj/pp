@@ -24,7 +24,6 @@ export default function CreateCompleteModal() {
         <div className=''>
           <div className='relative h-60 mx-auto rounded overflow-hidden'>
             <Image
-              unoptimized
               width={data?.thumbnailWidth}
               height={data?.thumbnailHeight}
               src={data?.thumbnail!}

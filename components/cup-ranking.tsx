@@ -62,7 +62,6 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
             )}
           >
             <Image
-              unoptimized
               src={item.publicId ? item.url : item.videoThumbnail!}
               alt='cup image'
               width={item.width!}
@@ -122,7 +121,6 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
             <h3 className='text-xs sm:text-sm font-semiboid text-primary/70 my-2'>{cup.description}</h3>
             <div className='flex items-center gap-1 my-2'>
               <Image
-                unoptimized
                 src={cup.user.image!}
                 alt='cup author profile image'
                 width={40}
@@ -149,7 +147,6 @@ export default function CupRanking({ session, ...cup }: ExtendedCup) {
                 <div key={comment.id} className='flex flex-col gap-2 break-words'>
                   <div className='flex gap-1 items-center'>
                     <Image
-                      unoptimized
                       src={comment.user.image!}
                       alt='user profile image'
                       width={40}
@@ -196,7 +193,6 @@ function ResultItem({
       className='rounded overflow-hidden relative shrink-0 h-full aspect-square flex items-center justify-center hover:opacity-90 transition-opacity'
     >
       <Image
-        unoptimized
         src={item.publicId ? item.url : item.videoThumbnail!}
         alt='cup image'
         width={item.width!}

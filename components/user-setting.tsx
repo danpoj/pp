@@ -1,3 +1,5 @@
+'use client'
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,7 +23,6 @@ export default function UserSetting({ session }: Props) {
     <DropdownMenu>
       <DropdownMenuTrigger className='rounded-full select-none group relative overflow-hidden w-7 h-7 outline outline-2 outline-offset-1 outline-primary/70'>
         <Image
-          unoptimized
           src={session.user.image!}
           alt='logged in user image'
           width={40}
@@ -34,7 +35,6 @@ export default function UserSetting({ session }: Props) {
         <DropdownMenuLabel className='flex gap-2 items-center'>
           <div className='relative w-12 h-12 rounded-full overflow-hidden outline outline-2 outline-offset-1 outline-primary/70'>
             <Image
-              unoptimized
               src={session.user.image!}
               alt='logged in user image'
               width={60}

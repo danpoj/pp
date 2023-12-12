@@ -80,7 +80,6 @@ export default function MyComments({ user }: Props) {
           <div className='flex flex-col gap-2 break-words mb-4'>
             <div className='flex gap-1 items-center'>
               <Image
-                unoptimized
                 src={user.image!}
                 alt='user profile image'
                 width={40}
@@ -134,7 +133,6 @@ export default function MyComments({ user }: Props) {
           <div className='flex flex-col gap-2 break-words mb-4'>
             <div className='flex gap-1 items-center'>
               <Image
-                unoptimized
                 src={user.image!}
                 alt='user profile image'
                 width={40}
